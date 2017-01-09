@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="cs">
-<#assign title = "${active_wiki_page_title} - ${website_author}">
+<#assign title = "${active_wiki_page_title} - ${website_full_name}"/>
 <#include "html/html-head.ftl"/>
 <body>
 

@@ -85,9 +85,11 @@ public class Handler implements RequestHandler<GetRecentSongsRequest, GetRecentS
         params.put("show_comments", "false");
         params.put("show_bpm", "false");
         params.put("enable_api", "false");
+        params.put("show_artwork", "false");
+        params.put("hide_related", "true");
         params.put("buying", "true"); // capitalist
         params.put("sharing", "false"); // not a communist
-        params.put("download", "false"); // not a pirate party
+        params.put("download", "false"); // not pirate party
         final String paramsStr = params.entrySet().stream().map(e -> String.format("%s=%s", e.getKey(), e.getValue())).collect(Collectors.joining("&", "&", ""));
         return String.format(SOUNDCLOUD_WIDGET_URL_FORMAT, generateSongUrl(href), paramsStr);
     }

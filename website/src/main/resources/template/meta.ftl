@@ -1,11 +1,6 @@
 <!DOCTYPE HTML>
-<!--
-	Forty by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html lang="cs">
-<#assign title = "${website_author} - ${website_full_description}">
+<#assign title = "${website_full_name} - ${website_full_description}"/>
 <#include "html/html-head.ftl"/>
 <body>
 
