@@ -1,0 +1,1 @@
+## Kódování s fixní délkou

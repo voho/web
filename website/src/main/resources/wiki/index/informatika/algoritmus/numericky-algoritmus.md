@@ -1,0 +1,1 @@
+## Numerický algoritmus

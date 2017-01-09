@@ -1,0 +1,1 @@
+## Vzory pro vytváření (creational patterns)

@@ -1,0 +1,1 @@
+## Důležité konstanty

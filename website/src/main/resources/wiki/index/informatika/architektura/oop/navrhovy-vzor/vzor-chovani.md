@@ -1,0 +1,1 @@
+## Vzory chování (behavioral patterns)

@@ -1,0 +1,1 @@
+## Strukturální vzory (structural patterns)

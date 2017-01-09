@@ -1,0 +1,1 @@
+## Vzorce a výpočetní postupy

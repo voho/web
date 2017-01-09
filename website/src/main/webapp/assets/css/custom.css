@@ -1,0 +1,260 @@
+/* banner transparency hack */
+
+#banner::after {
+    opacity: 0.8 !important;
+}
+
+/* general */
+
+a {
+    border-bottom: solid 1px;
+}
+
+#menu a {
+    border-bottom: 0;
+}
+
+/* inverted colors */
+
+section#wiki-content {
+    background-color: #f6f6f6;
+    color: #24200F;
+}
+
+section#wiki-content strong, section#wiki-content em, section#wiki-content th {
+    color: #24200F;
+}
+
+section#wiki-content h1, section#wiki-content h2, section#wiki-content h3, section#wiki-content h4, section#wiki-content h5, section#wiki-content h6 {
+    color: #2a2f4a;
+    margin-top: 2em;
+}
+
+section#wiki-content a:hover {
+    background-color: #9bf1ff;
+    color: black !important;
+}
+
+section#wiki-content td, section#wiki-content th {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0.25em 1em;
+}
+
+section#wiki-content th {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+section#wiki-content td {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+section#wiki-content thead {
+    border: 0;
+}
+
+section#wiki-content em {
+    background-color: #f3ffd3;
+    border: 1px solid #dfeac0;
+    padding: 1pt 5pt;
+    border-radius: 5pt;
+    font-style: normal;
+    margin-left: 2pt;
+    margin-right: 2pt;
+}
+
+section#wiki-content a {
+    border-bottom-color: #ccc;
+}
+
+/* spacing, dimensions, etc. */
+
+.wiki p {
+    margin-bottom: 1em;
+}
+
+.wiki .hljs {
+    border-radius: 5pt;
+    font-size: 80%;
+    line-height: 1.6;
+    padding: 1em 2em;
+}
+
+.wiki p {
+    text-align: justify;
+}
+
+.wiki table {
+    border-radius: 5pt;
+}
+
+.wiki .figure.uml, .wiki .figure.graph, .wiki .figure.picture {
+    padding: 2em 0;
+    text-align: center;
+}
+
+.wiki .figure.picture p {
+    font-size: 130%;
+    padding-top: 1ex;
+    margin-bottom: 1em;
+    text-align: center;
+    opacity: 0.7;
+}
+
+.tiles article {
+    height: 18vh;
+    min-height: 10em;
+}
+
+.wiki blockquote {
+    border: 0;
+    font-size: 130%;
+    margin: 0;
+    padding: 0;
+}
+
+.wiki blockquote em {
+    white-space: nowrap;
+}
+
+.wiki blockquote em:before {
+    content: '\A― ';
+}
+
+.wiki code {
+    font-family: Monaco, monospace;
+}
+
+/* wiki related pages */
+
+#menu .inner {
+    overflow: auto;
+    width: calc(100% - 1em);
+}
+
+#menu .inner * {
+    text-align: left;
+}
+
+#menu form {
+    margin: 0 auto 4em auto;
+    width: 98%;
+}
+
+.wiki-related-pages.children h4 {
+    margin: 0;
+}
+
+.wiki-related-pages ul li a {
+    border: 0;
+}
+
+.wiki-related-pages.siblings ul {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.wiki-related-pages.siblings ul li {
+    display: inline;
+    list-style: none;
+    padding-left: 0;
+    padding-right: 1em;
+    white-space: nowrap;
+}
+
+.wiki-related-pages.siblings ul li a {
+    border: 0;
+    margin-left: 0.5em;
+    white-space: nowrap;
+}
+
+.wiki-related-pages.children ul li {
+    font-size: 80%;
+    list-style-type: none;
+}
+
+.wiki-related-pages .icon:before {
+    color: #515670;
+}
+
+header.major > :first-child:after {
+    background-color: #515670;
+}
+
+/* wiki cover */
+
+section#wiki-cover {
+    opacity: 0.5;
+}
+
+section#wiki-cover blockquote {
+    font-size: inherit;
+}
+
+section#wiki-cover blockquote em {
+    opacity: 0.4;
+}
+
+section#wiki-cover .inner {
+    padding: 2em 0;
+}
+
+.tiles article:hover:before {
+    opacity: 1;
+}
+
+/* breadcrumbs */
+
+section#breadcrumbs .inner {
+    padding: 1.6em 0 1em 0;
+}
+
+section#breadcrumbs span {
+    color: #515670;
+}
+
+section#breadcrumbs ul {
+    margin: 2em 0 1em 0;
+    padding: 0;
+}
+
+section#breadcrumbs a {
+    border: 0;
+}
+
+section#breadcrumbs p {
+    margin-bottom: 0;
+}
+
+/* button */
+
+.button {
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+/* banner */
+
+#banner > .inner .content p {
+    font-size: 1.3em;
+    font-weight: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
+/* todo */
+
+.todo {
+    margin: 1em 0;
+    background-color: red;
+    color: white;
+    font-weight: 600;
+    padding: 1ex 2em;
+    letter-spacing: 1ex;
+}
+
+/* index */
+
+#main > * > .inner {
+    /*padding-top: 1em;*/
+}
