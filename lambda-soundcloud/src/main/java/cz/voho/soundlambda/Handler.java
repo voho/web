@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  * The main AWS Lambda handler.
  */
 public class Handler implements RequestHandler<GetRecentSongsRequest, GetRecentSongsResponse> {
-    private static final int MINIMAL_GET_TIMEOUT_MS = 2000;
+    private static final int MINIMAL_GET_TIMEOUT_MS = 3000;
     private static final String SONG_HEADER_SELECTOR = "article.audible[itemprop=track]";
     private static final String SONG_LINK_SELECTOR = "h2 a[itemprop=url]";
     private static final String AUTHOR_URL = "https://soundcloud.com/voho/tracks";
