@@ -21,5 +21,7 @@ public class MetaPageServlet extends AbstractMenuPageServlet {
         model.put("quotes", wikiBackend.getCurrentContext().getQuotes());
         model.put("todos", wikiBackend.getCurrentContext().getTodoPages());
         model.put("missing", wikiBackend.getCurrentContext().getMissingPages());
+        model.put("debug_image_cache_size_items", wikiBackend.getImageCacheSizeInItems());
+        model.put("debug_image_cache_size_bytes", wikiBackend.getImageCacheSizeInBytes());
     }
 }

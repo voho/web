@@ -30,7 +30,7 @@
                     <h1>
                         <#if active_wiki_page_parent_id?has_content>
                             <a href="/wiki/${active_wiki_page_parent_id}/" class="icon fa-arrow-left"
-                               title="Zpět na rodičovskou stránku"></a>
+                                    title="Zpět na rodičovskou stránku"></a>
                         </#if>
                     ${active_wiki_page_title}
                     </h1>
@@ -68,17 +68,6 @@
 </div>
 
 <#include "html/html-scripts.ftl"/>
-
-<!--
-
-DEBUG INFORMATION
-=================
-
-Wiki Page origin: ${active_wiki_page_origin}
-Image cache size (bytes): ${debug_image_cache_size_items}
-Image cache size (items): ${debug_image_cache_size_bytes}
-
--->
 
 </body>
 </html>

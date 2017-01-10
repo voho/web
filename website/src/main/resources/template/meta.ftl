@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="cs">
-<#assign title = "${website_full_name} - ${website_full_description}"/>
+<#assign title = "${website_author} (informace o webu)"/>
 <#include "html/html-head.ftl"/>
 <body>
 
@@ -54,6 +54,19 @@
                 </#list>
             </section>
         </#if>
+
+            <section>
+                <header class="major">
+                    <h2>Cache</h2>
+                </header>
+                <ul>
+                    <li>
+                        Velikost cache pro obrázky:
+                        <em>${debug_image_cache_size_bytes} bajtů</em> /
+                        <em>${debug_image_cache_size_items} položek</em>
+                    </li>
+                </ul>
+            </section>
 
         </div>
     </section>

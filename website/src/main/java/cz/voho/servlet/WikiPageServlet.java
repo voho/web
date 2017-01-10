@@ -35,8 +35,6 @@ public class WikiPageServlet extends AbstractMenuPageServlet {
         model.put("active_wiki_page_cover", parsedWikiPage.isCover());
         model.put("active_wiki_page_origin", parsedWikiPage.getSource().getOrigin());
         model.put("active_wiki_page_report_issue", createReportWikiIssueLink(parsedWikiPage));
-        model.put("debug_image_cache_size_items", wikiBackend.getImageCacheSizeInItems());
-        model.put("debug_image_cache_size_bytes", wikiBackend.getImageCacheSizeInBytes());
         model.put("active_wiki_page_outgoing_links", wikiBackend.getLinksFromHere(parsedWikiPage.getSource().getId()));
         model.put("active_wiki_page_incoming_links", wikiBackend.getLinksToHere(parsedWikiPage.getSource().getId()));
 
