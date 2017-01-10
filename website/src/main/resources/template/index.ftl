@@ -47,7 +47,7 @@
                     </div>
                     <div class="3u 12u$(medium)">
                         <header class="major">
-                            <h2>Projects</h2>
+                            <h2>Work</h2>
                         </header>
                         <ul class="vertical actions">
                         <#include "index/actions-projects.ftl"/>

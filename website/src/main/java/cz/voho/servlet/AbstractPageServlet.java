@@ -2,11 +2,7 @@ package cz.voho.servlet;
 
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.ext.servlet.FreemarkerServlet;
-import freemarker.template.Configuration;
-import freemarker.template.ObjectWrapper;
-import freemarker.template.SimpleHash;
-import freemarker.template.TemplateModel;
-import freemarker.template.TemplateModelException;
+import freemarker.template.*;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +33,7 @@ public abstract class AbstractPageServlet extends FreemarkerServlet {
         model.put("social_profile_google", "https://play.google.com/store/music/artist/Vojtech_Hordejcuk?id=Ajqelbv4qqwma7ewjtd6pkmkkie");
         model.put("website_author", "Vojtěch Hordějčuk");
         model.put("website_short_name", "voho");
+        model.put("website_extended_name", "Vojta Hordějčuk");
         model.put("website_full_name", "Vojta Hordějčuk aka voho");
         model.put("website_full_description", "Software Engineer and Bedroom Music Producer");
         model.put("current_year", String.valueOf(LocalDate.now().getYear()));

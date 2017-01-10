@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="cs">
-<#assign title = "${active_wiki_page_title} - ${website_full_name}"/>
+<#assign title = "${active_wiki_page_title} - ${website_author}">
 <#include "html/html-head.ftl"/>
 <body>
 
@@ -57,6 +57,7 @@
         </#if>
 
         <#include "wiki/actions.ftl"/>
+        <#include "wiki/friends.ftl"/>
     </#if>
 
     </div>

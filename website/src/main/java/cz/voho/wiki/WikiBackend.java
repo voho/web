@@ -1,5 +1,6 @@
 package cz.voho.wiki;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import cz.voho.exception.ContentNotFoundException;
 import cz.voho.utility.LambdaClient;
@@ -138,6 +139,22 @@ public class WikiBackend {
         }
 
         return result;
+    }
+
+    public WikiPageReferences getLinksFromHere(final String wikiPageId) {
+        return toRefs(
+                Lists.newArrayList(parsedWikiPageRepository.getCurrentContext().getLinksFromPage(wikiPageId)),
+                true,
+                true
+        );
+    }
+
+    public WikiPageReferences getLinksToHere(final String wikiPageId) {
+        return toRefs(
+                Lists.newArrayList(parsedWikiPageRepository.getCurrentContext().getLinksToPage(wikiPageId)),
+                true,
+                true
+        );
     }
 
     public byte[] generateDotSvg(final String source) throws Exception {
