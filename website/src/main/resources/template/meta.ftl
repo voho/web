@@ -71,7 +71,6 @@
         </div>
     </section>
 
-<#assign footer_icons = true/>
 <#include "common/footer.ftl"/>
 
 </div>

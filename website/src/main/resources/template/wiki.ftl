@@ -56,13 +56,12 @@
             </#if>
         </#if>
 
-        <#include "wiki/actions.ftl"/>
         <#include "wiki/friends.ftl"/>
+        <#include "wiki/actions.ftl"/>
     </#if>
 
     </div>
 
-<#assign footer_icons = true/>
 <#include "common/footer.ftl"/>
 
 </div>

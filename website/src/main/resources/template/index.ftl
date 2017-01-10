@@ -69,7 +69,6 @@
 <#include "index/recent-tracks.ftl"/>
 <#include "index/recent-photos.ftl"/>
 
-<#assign footer_icons = true/>
 <#include "common/footer.ftl"/>
 
 </div>
