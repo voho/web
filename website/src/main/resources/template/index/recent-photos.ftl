@@ -10,7 +10,7 @@
                     <span class="image fit">
                         <a href="${instagram_photo.link}"
                                 title="${instagram_photo.tags?join(', ')}"
-                                onclick="return !window.open(this.href)"><img src="${instagram_photo.images.low_resolution.url}" alt=""/></a>
+                                onclick="return !window.open(this.href)"><img src="${instagram_photo.images.low_resolution.url}" alt="${instagram_photo.tags?join(', ')}"/></a>
                     </span>
                 </div>
             </#list>
