@@ -2,8 +2,8 @@
 
 Hashovací kryptografické funkce mají za úkol ze vstupních dat v **rozumném čase** vytvořit výstup fixní délky. Tomuto výsledku se říká *otisk* či *miniatura* (anglicky *hash*, *digest*, *checksum* nebo *fingerprint*) a má následující vlastnosti:
 
-- z otisku je nemožné (vzhledem k současné technologii a stáří vesmíru) zpětně zrekonstruovat původní data 
-- je nemožné najít dvě různé zprávy se stejným otiskem
+- z otisku je "nemožné" (vzhledem k současné technologii a stáří vesmíru, proto ty uvozovky) zpětně zrekonstruovat původní data 
+- je "nemožné" najít dvě různé zprávy se stejným otiskem
 - otisk je velmi citlivý na změnu vstupních dat
 
 Seznam některých hashovacích algoritmů dostupných ve standardní knihovně jazyka Java:
@@ -37,7 +37,7 @@ private static byte[] toDigest(final byte[] data, final String algorithm) {
 }
 ```
 
-Pro převod binárních dat (pole bajtů) na řetězec lze využít kódování Base64 nebo následující jednoduchou metodu pro převod čísla do hexadecimálním zápisu:
+Pro převod binárních dat (pole bajtů) na řetězec lze využít kódování [Base64](wiki/base64) nebo následující jednoduchou metodu pro převod čísla do hexadecimálním zápisu:
 
 ```java
 String hexString = new BigInteger(1, data).toString(16);
@@ -66,7 +66,6 @@ Zde je vidět, jak změna jednoho jediného bajtu (čísla 18 na 19) způsobí z
 640d8b0f19b27076c9d36a77fa2d0957323df6f81c7c3e75725ce333e67fc947
 393cb74836e5520987119b635ad1d60fba5e94a1aacfe029fb9da6d8ae78c70a
 ```
-
 
 > Domů přijdu dnes večer v 19:21. (sha512):
 
