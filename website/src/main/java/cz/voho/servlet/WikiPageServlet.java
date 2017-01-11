@@ -1,6 +1,6 @@
 package cz.voho.servlet;
 
-import com.google.common.html.HtmlEscapers;
+import com.google.common.net.UrlEscapers;
 import cz.voho.utility.WikiLinkUtility;
 import cz.voho.wiki.WikiBackend;
 import cz.voho.wiki.model.ParsedWikiPage;
@@ -69,9 +69,11 @@ public class WikiPageServlet extends AbstractMenuPageServlet {
     private String createReportWikiIssueLink(final ParsedWikiPage parsedWikiPage) {
         final String title = String.format("%s (Wiki)", parsedWikiPage.getSource().getId());
         final String body = "";
-        return String.format("https://github.com/voho/web/issues/new?title=%s&body=%s",
-                HtmlEscapers.htmlEscaper().escape(title),
-                HtmlEscapers.htmlEscaper().escape(body));
+        return String.format(
+                "https://github.com/voho/web/issues/new?title=%s&body=%s",
+                UrlEscapers.urlFragmentEscaper().escape(title),
+                UrlEscapers.urlFragmentEscaper().escape(body)
+        );
     }
 
     private String resolvePageName(final HttpServletRequest request) {

@@ -31,6 +31,7 @@ public abstract class AbstractPageServlet extends FreemarkerServlet {
         model.put("social_profile_itunes", "https://itunes.apple.com/us/artist/vojtech-hordejcuk/id929462760");
         model.put("social_profile_amazon", "https://www.amazon.com/s/ref=ntt_srch_drd_B00OHRU6TC?ie=UTF8&amp;field-keywords=Vojtech%20Hordejcuk&amp;index=digital-music&amp;search-type=ss");
         model.put("social_profile_google", "https://play.google.com/store/music/artist/Vojtech_Hordejcuk?id=Ajqelbv4qqwma7ewjtd6pkmkkie");
+        model.put("website_external_url", "http://voho.eu/");
         model.put("website_author", "Vojtěch Hordějčuk");
         model.put("website_short_name", "voho");
         model.put("website_extended_name", "Vojta Hordějčuk");

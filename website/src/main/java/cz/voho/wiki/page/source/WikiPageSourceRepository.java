@@ -39,4 +39,8 @@ public interface WikiPageSourceRepository {
     }
 
     WikiPageSource getWikiPageSourceById(String wikiPageId);
+
+    default boolean exists(final String wikiPageId) {
+        return getWikiPageIds().contains(wikiPageId);
+    }
 }

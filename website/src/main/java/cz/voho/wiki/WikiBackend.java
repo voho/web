@@ -111,6 +111,7 @@ public class WikiBackend {
 
         result.setItems(wikiPageIds
                 .stream()
+                .filter(parsedWikiPageRepository::exists)
                 .map(id -> {
                     final WikiPageReference ref = new WikiPageReference();
                     ref.setId(id);
