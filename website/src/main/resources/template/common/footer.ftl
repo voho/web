@@ -7,3 +7,6 @@
         </ul>
     </div>
 </footer>
+
+<!-- extra info for Google -->
+<#include "enrich.ftl"/>
