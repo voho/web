@@ -24,6 +24,8 @@ public class DispatcherServlet extends HttpServlet {
             forwardToAnotherServlet(request, response, "index");
         } else if (isMeta(request)) {
             forwardToAnotherServlet(request, response, "meta");
+        } else if (isSitemap(request)) {
+            forwardToAnotherServlet(request, response, "sitemap");
         } else {
             super.doGet(request, response);
         }
@@ -67,6 +69,12 @@ public class DispatcherServlet extends HttpServlet {
         final String ext = getPath(request);
 
         return ext.equals("meta");
+    }
+
+    private boolean isSitemap(final HttpServletRequest request) {
+        final String ext = getPath(request);
+
+        return ext.equals("sitemap");
     }
 
     private boolean isGenerate(final HttpServletRequest request) {

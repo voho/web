@@ -1,5 +1,6 @@
 package cz.voho.wiki;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import cz.voho.exception.ContentNotFoundException;
@@ -178,6 +179,10 @@ public class WikiBackend {
             return ((CachingWikiImageRepository) wikiImageRepository).getCacheSizeInItems();
         }
         return 0;
+    }
+
+    public ImmutableSet<String> getWikiPageIds() {
+        return parsedWikiPageRepository.getWikiPageIds();
     }
 
     public WikiContext getCurrentContext() {
