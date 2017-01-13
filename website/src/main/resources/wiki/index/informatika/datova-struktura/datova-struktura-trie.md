@@ -32,8 +32,11 @@ A2->O1 [style=dotted,dir=none,len=0];
 
 ### Operace
 
-- **add(key)** - vloží zadaný klíč 
-- **containsPrefix(key)** - ověří, zda se mezi klíči nachází nějaký, který má zadaný klíč jako prefix (například klíč *he* je prefixem klíče *hello*).
+add(*key*)
+: přidá klíč *key*
+ 
+containsPrefix(*key*)
+: ověří, zda se mezi klíči nachází nějaký, který má zadaný klíč jako prefix (například klíč *he* je prefixem klíče *hello*).
 
 ### Implementace
 

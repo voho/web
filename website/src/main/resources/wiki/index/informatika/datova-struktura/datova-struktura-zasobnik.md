@@ -6,9 +6,14 @@ Zásobník je jedna z nejdůležitějších datových struktur v informatice. Po
 
 Zásobník v základní variantě poskytuje tyto funkce:
 
-- *push(a)* = vloží prvek *a* na vrchol zásobníku
-- *pop()* = vrátí vrchol zásobníku a vrchol odebere
-- *peek()* = vrátí vrchol zásobníku (beze změny)
+push(*a*)
+: vloží prvek *a* na vrchol zásobníku
+
+pop()
+: vrátí vrchol zásobníku a vrchol odebere
+
+peek()
+: vrátí vrchol zásobníku (beze změny)
 
 ```dot:digraph
 splines=ortho

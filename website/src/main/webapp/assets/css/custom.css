@@ -68,6 +68,14 @@ section#wiki-content a {
 
 /* spacing, dimensions, etc. */
 
+.wiki dd {
+    margin-bottom: 1em;
+}
+
+.wiki dt {
+    font-size: 150%;
+}
+
 .wiki p {
     margin-bottom: 1em;
 }

@@ -6,8 +6,11 @@ Aby byl nějaký binární strom haldou, musí každý jeho uzel splňovat tzv. 
 
 Základní operace haldy:
 
-- *dequeueMinimum()* = vrátí hodnotu prvku s minimální m(nebo maximálním) klíčem a odebere je
-- *enqueue(key, value)* = přidá prvek se zadaným klíčem 
+dequeueMinimum()
+: vrátí hodnotu prvku s minimální m(nebo maximálním) klíčem a odebere jej
+
+enqueue(*key*, *value*)
+: přidá prvek *value* s klíček *key* 
 
 ### Halda v poli
 
