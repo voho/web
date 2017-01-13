@@ -48,10 +48,12 @@
                     </div>
                 </section>
             </#if>
-        </#if>
 
-        <#include "wiki/friends.ftl"/>
-        <#include "wiki/actions.ftl"/>
+            <#if !active_wiki_page_cover>
+                <#include "wiki/friends.ftl"/>
+                <#include "wiki/actions.ftl"/>
+            </#if>
+        </#if>
     </#if>
 
     </div>
