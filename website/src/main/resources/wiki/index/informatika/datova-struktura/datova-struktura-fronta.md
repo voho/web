@@ -4,8 +4,11 @@ Fronta je lineární datová struktura určená pro ukládání prvků a jejich 
 
 Fronta v základní variantě poskytuje tyto funkce:
 
-- *enqueue(a)* = vloží prvek *a* na konec fronty
-- *dequeue()* = vrátí první (nejstarší) prvek ze začátku fronty a odebere jej
+*enqueue(a)*
+: vloží prvek *a* na konec fronty
+
+*dequeue()*
+: vrátí první (nejstarší) prvek ze začátku fronty a odebere jej
 
 ```dot:digraph
 splines=ortho
