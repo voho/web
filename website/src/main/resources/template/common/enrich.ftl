@@ -4,6 +4,7 @@
   "@type": "Person",
   "name": "${website_author}",
   "url": "${website_external_url}",
+  "homeLocation": "Luxembourg",
   "sameAs": [
     "${social_profile_linkedin}",
     "${social_profile_github}",
