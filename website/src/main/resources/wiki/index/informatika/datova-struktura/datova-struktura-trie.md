@@ -19,7 +19,7 @@ N2 [label="N"];
 M1 [label="M"];
 Y1 [label="Y"];
 O1 [label="O"];
-root [shape=none];
+root [shape=none;fillcolor=transparent];
 root -> B1;
 root -> D1;
 B1->A1->B2->Y1;

@@ -16,7 +16,7 @@ enqueue(*key*, *value*)
 
 Haldu s *n* uzly lze uložit do pole o velikosti *n* tím způsobem, že kořen je uložen v jeho prvním prvku a pak pro něj a pro každý další uzel na indexu € i € platí, že jeho potomci se nachází na indexu € 2i+1 € a € 2i+2 €.
 
-```uml:digraph
+```dot:digraph
 ratio=0.5;
 T -> S [label=" 2*0+1=1"];
 T -> R [label=" 2*0+2=2"];
