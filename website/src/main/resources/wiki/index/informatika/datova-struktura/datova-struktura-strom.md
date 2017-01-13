@@ -21,9 +21,48 @@ Stromem se nazývají souvislé [grafy](wiki/graf), které neobsahují kružnice
   - **podstrom** (subtree) = podgraf stromu, který je také stromem (obecně se nejčastěji setkáváme s podstromy tvořenými tak, že se vezme nějaký uzel stromu jako nový kořen a zbytek struktury se zachová)
   - **větev** (branch) = každá cesta od kořene k listu
 
-![názvosloví stromu 1](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/ds-tree-naming.png)
+```dot:digraph
+"kořen" -> N1;
+"kořen" -> "rodič A";
+"rodič A" -> A;
+"rodič A" -> N2;
+"rodič A" -> N3;
+A -> "1. potomek A";
+A -> "2. potomek A";
+"1. potomek A" -> N4;
+"1. potomek A" -> N5;
+N3 -> N6;
+N3 -> N7;
+N3 -> N8;
+"rodič A" [color=beige];
+A [color=red];
+"1. potomek A" [color=gray];
+"2. potomek A" [color=gray];
+N1 [label=""];
+N2 [label=""];
+N3 [label=""];
+N4 [label=""];
+N5 [label=""];
+N6 [label=""];
+N7 [label=""];
+N8 [label=""];
+```
 
-![názvosloví stromu 2](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/ds-tree-naming-ordered.png)
+```dot:digraph
+"kořen (předchůdce A)" -> "předchůdce A";
+"předchůdce A" -> A;
+"předchůdce A" -> N1;
+A -> "1. následník A";
+A -> "2. následník A";
+"1. následník A" -> "3. následník A";
+"1. následník A" -> "4. následník A";
+A [color=red];
+N1 [label=""];
+"1. následník A" [label="následník A"];
+"2. následník A" [label="následník A"];
+"3. následník A" [label="následník A"];
+"4. následník A" [label="následník A"];
+```
 
 ### Průchody stromem
 

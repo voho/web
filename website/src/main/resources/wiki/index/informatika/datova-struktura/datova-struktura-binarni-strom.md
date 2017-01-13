@@ -31,7 +31,7 @@ Aby byl binární strom při vyhledávání vždy efektivní, je nutné se o ně
 
 ### Asymptotická složitost
 
-| operace | typický případ | nejhorší případ 
+| Operace | Typický případ | Nejhorší případ 
 |---|---|---
 | indexace (náhodný přístup k prvku *i*) | € O(\log(n)) € | € O(n) €
 | vyhledávání prvku | € O(\log(n)) € | € O(n) €

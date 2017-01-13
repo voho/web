@@ -16,7 +16,25 @@ enqueue(*key*, *value*)
 
 Haldu s *n* uzly lze uložit do pole o velikosti *n* tím způsobem, že kořen je uložen v jeho prvním prvku a pak pro něj a pro každý další uzel na indexu € i € platí, že jeho potomci se nachází na indexu € 2i+1 € a € 2i+2 €.
 
-![halda v poli](http://algs4.cs.princeton.edu/24pq/images/heap-representations.png)
+```uml:digraph
+ratio=0.5;
+T -> S [label=" 2*0+1=1"];
+T -> R [label=" 2*0+2=2"];
+S -> P [label=" 2*1+1=3"];
+S -> N [label=" 2*1+2=4"];
+R -> O [label=" 2*2+1=5"];
+R -> A [label=" 2*2+2=6"];
+T[label="T (0)"];
+S[label="S (1)"];
+R[label="R (2)"];
+P[label="P (3)"];
+N[label="N (4)"];
+O[label="O (5)"];
+A[label="A (6)"];
+{rank=same;T}
+{rank=same;S;R;}
+{rank=same;P;N;O;A;}
+```
 
 #### Oprava haldy
 

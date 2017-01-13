@@ -74,6 +74,7 @@ section#wiki-content a {
 
 .wiki dt {
     font-size: 150%;
+    margin-bottom: 1ex;
 }
 
 .wiki p {

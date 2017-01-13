@@ -2,7 +2,7 @@
 
 > Because these data structures are linked lists with extra pointers that skip over intermediate nodes, I named them skip lists. *William Pugh*
 
-Skip list je dynamická datová struktura, kterou v roce 1990 představil William Pugh v článku [Skip Lists: A Probabilistic Alternative to Balanced Trees](ftp://ftp.cs.umd.edu/pub/skipLists/skiplists.pdf). Má podobné uplatnění jako [binární vyhledávací stromy](wiki/datova-struktura-binarni-strom), ale je jednodušší na implementaci a v některých situacích dokonce rychlejší. 
+Skip list je dynamická datová struktura, kterou v roce 1990 představil **William Pugh** v článku [Skip Lists: A Probabilistic Alternative to Balanced Trees](ftp://ftp.cs.umd.edu/pub/skipLists/skiplists.pdf). Má podobné uplatnění jako [binární vyhledávací stromy](wiki/datova-struktura-binarni-strom), ale je jednodušší na implementaci a v některých situacích dokonce rychlejší. 
 
 Tato datová struktura je založena na seřazeném [seznamu](wiki/datova-struktura-seznam), který je možné procházet po několika různých úrovních. Nejnižší úroveň obsahuje všechny prvky. Druhá úroveň jejich podmnožinu, třetí úroveň podmnožinu této podmnožiny, a tak dále, až do nejvyšší úrovně, ve které se nachází pouze relativně malý počet prvků. Čím méně prvků v dané úrovni je, tím větší je rozdíl mezi klíči dvou sousedních prvků. Při vyhledávání tedy lze začít velkými skoky a pak se čím dál menšími skoky přibližovat k požadovanému klíči.
 
