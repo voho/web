@@ -91,12 +91,6 @@ private static void heapsort(final int[] array) {
 }
 ```
 
-### Implementace
-
-#### Pomocí pole
-
-!TODO!
-
 ### Reference
 
 - http://www.cs.cmu.edu/~adamchik/15-121/lectures/Trees/trees.html

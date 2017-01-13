@@ -17,6 +17,9 @@ table [shape=record,label="<b0>1|<b1>0|<b2>0|<b3>0|<b4>0|<b5>1|<b6>1|<b7>0"]
 "hash1(hello)=0"-> table:b0 
 "hash2(hello)=3"-> table:b3 
 "hash3(hello)=7"-> table:b7
+"hash1(hello)=0" [shape=none,fillcolor=transparent]
+"hash2(hello)=3" [shape=none,fillcolor=transparent]
+"hash3(hello)=7" [shape=none,fillcolor=transparent]
 ```
 
 ```dot:digraph
@@ -25,6 +28,9 @@ table2 [shape=record,label="<b0>1|<b1>0|<b2>0|<b3>0|<b4>0|<b5>1|<b6>1|<b7>0"]
 "hash1(world)=1"-> table2:b1
 "hash2(world)=5"-> table2:b5
 "hash3(world)=3"-> table2:b3
+"hash1(world)=1" [shape=none,fillcolor=transparent]
+"hash2(world)=5" [shape=none,fillcolor=transparent]
+"hash3(world)=3" [shape=none,fillcolor=transparent]
 ```
 
 ### Operace
@@ -147,7 +153,7 @@ public class SimpleBloomFilter<T> implements BloomFilter<T> {
 final Function<String, Integer> hash1 = s -> s.toLowerCase().hashCode();
 final Function<String, Integer> hash2 = s -> s.toUpperCase().hashCode();
 final BloomFilter<String> filter = new SimpleBloomFilter<>(10, hash1, hash2);
-    
+
 filter.add("Hello");
 filter.add("World");
 ```

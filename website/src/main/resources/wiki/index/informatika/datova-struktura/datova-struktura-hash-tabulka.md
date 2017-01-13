@@ -30,8 +30,8 @@ Mezi nejčastěji používané hashovací funkce patří **modulo** (zbytek po d
 
 ### Asymptotická složitost
 
-| operace | typický případ | nejhorší případ
-|---
+| Operace | Typický případ | Nejhorší případ
+|---|---|---
 | vyhledávání podle klíče | € O(1) € | € O(n) € 
 | vkládání záznamu | € O(1) € | € O(n) € 
 | mazání záznamu | € O(1) € | € O(n) € 

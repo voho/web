@@ -48,8 +48,8 @@ Pokud poslední prvek seznamu neukazuje do prázdna, ale je napojený opět na z
 
 ### Asymptotická složitost
 
-| typ seznamu | jednosměrně zřetězený | obousměrně zřetězený |
-|---
+| Typ seznamu | Jednosměrně zřetězený | Obousměrně zřetězený |
+|---|---|---
 | přidání prvku | € O(1) € | € O(1) € |
 | mazání prvku | € O(1) € | € O(1) € |
 | indexace (náhodný přístup k prvku č. *i*) | € O(n) € | € O(n) € |

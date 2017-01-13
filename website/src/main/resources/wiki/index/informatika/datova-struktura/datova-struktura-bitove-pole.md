@@ -10,19 +10,19 @@ Parametrem pro čtení hodnoty je její index. Návratovou hodnotou je bit (*0* 
 
 Příklad čtení třetího bitu:
 
-| Popis | Hodnota | Výsledek |
-|---|---|---|
-| buňka bitového pole | `00101001001010100000100100100011` | |
-| maska pro čtení třetího bitu | `00100000000000000000000000000000` | |
-| logický součin buňky a masky pro třetí bit | `00100000000000000000000000000000` | různé od nuly = třetí bit je nastaven |
+| Popis | Hodnota | Výsledek
+|---|---|---
+| buňka bitového pole | `00101001001010100000100100100011` | 
+| maska pro čtení třetího bitu | `00100000000000000000000000000000` | 
+| logický součin buňky a masky pro třetí bit | `00100000000000000000000000000000` | různé od nuly = třetí bit je nastaven 
 
 Příklad čtení čtvrtého bitu:
 
-| Popis | Hodnota | Výsledek |
-|---|---|---|
-| buňka bitového pole | `00101001001010100000100100100011` | |
-| maska pro čtení čtvrtého bitu | `00010000000000000000000000000000` | | 
-| logický součin buňky a masky pro třetí bit | `00000000000000000000000000000000` | nula = čtvrtý bit není nastaven |
+| Popis | Hodnota | Výsledek 
+|---|---|---
+| buňka bitového pole | `00101001001010100000100100100011` | 
+| maska pro čtení čtvrtého bitu | `00010000000000000000000000000000` | 
+| logický součin buňky a masky pro třetí bit | `00000000000000000000000000000000` | nula = čtvrtý bit není nastaven 
 
 #### Nastavení hodnoty
 
@@ -32,20 +32,20 @@ Operace nastavení hodnoty *1* se provádí tak, že se odpovídající buňka l
 
 Příklad zápisu hodnoty *1* na čtvrtý bit:
 
-| Popis | Hodnota |
-|---|---|---|
-| buňka bitového pole | `00101001001010100000100100100011` | 
-| maska pro zápis jedničky do čtvrtého bitu | `00010000000000000000000000000000` | 
-| logický součet buňky a inverzní masky | `00111001001010100000100100100011` |
+| Popis | Hodnota 
+|---|---
+| buňka bitového pole | `00101001001010100000100100100011` 
+| maska pro zápis jedničky do čtvrtého bitu | `00010000000000000000000000000000` 
+| logický součet buňky a inverzní masky | `00111001001010100000100100100011`
 
 Příklad zápisu hodnoty *0* na čtvrtý bit:
 
-| Popis | Hodnota |
-|---|---|---|
-| buňka bitového pole | `00111001001010100000100100100011` | 
-| maska pro zápis nuly do čtvrtého bitu | `00010000000000000000000000000000` | 
-| inverzní maska | `11101111111111111111111111111111` | 
-| logický součin buňky a inverzní masky | `00101001001010100000100100100011` |
+| Popis | Hodnota
+|---|---
+| buňka bitového pole | `00111001001010100000100100100011` 
+| maska pro zápis nuly do čtvrtého bitu | `00010000000000000000000000000000` 
+| inverzní maska | `11101111111111111111111111111111` 
+| logický součin buňky a inverzní masky | `00101001001010100000100100100011`
 
 ### Implementace
 

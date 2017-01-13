@@ -1,6 +1,6 @@
 ## Pole (array)
 
-Pole je nejjednodušší, nejstarší a nejčastěji používaná datová struktura v informatice. V paměti je uloženo jako lineárně uspořádaná posloupnost prvků stejného typu, ke kterým lze přistupovat pomocí tzv. **indexu**. Ten lze chápat jako **vzdálenost** požadovaného prvku od počátku (prvního prvku) pole - tedy jako souřadnici v jednorozměrném prostoru.
+Pole je nejjednodušší, nejstarší a nejčastěji používaná [datová struktura](wiki/datova-struktura) v [informatice](wiki/informatika). V paměti je uloženo jako lineárně uspořádaná posloupnost prvků stejného typu, ke kterým lze přistupovat pomocí tzv. **indexu**. Ten lze chápat jako **vzdálenost** požadovaného prvku od počátku (prvního prvku) pole - tedy jako souřadnici v jednorozměrném prostoru.
 
 Pokud z důvodu přehlednosti či intuitivnosti používáme k adresaci prvku indexů více (třeba *N*), mluvíme o poli N-rozměrném. Počet rozměrů pole odpovídá počtu souřadnic (indexů), kterými je popsáno umístění každého jednotlivého prvku v paměti. V tom případě bývá pole v paměti uloženo jako "pole polí", nebo jako pole jednorozměrné, jehož index je přepočítán ze všech indexů pomocí tzv. **mapovací funkce** (viz níže).
 
@@ -11,13 +11,13 @@ V jednorozměrných polích je každý prvek určen právě jedním indexem (sou
 ```dot:digraph
 table [shape=record,label="<i>5|-24|88|3|922"]
 array -> table:i 
-array [shape=none]
+array [shape=none,fillcolor=transparent]
 ```
 
 #### Situace v paměti
 
 | Adresa paměťové buňky | Index hodnoty | Hodnota
-|---
+|---|---|---
 | proměnná POLE || ukazatel na 0x01A2
 | ... | ... | ... |
 | 0x01A2 | POLE+0 | 5
@@ -51,7 +51,7 @@ p:c->c:a
 #### Situace v paměti
 
 | Adresa paměťové buňky | Index hodnoty | Hodnota
-|---
+|---|---|---
 | proměnná POLE || ukazatel na 0x5A01
 | ... | ... | ... |
 | 0x5A01 | POLE+0 | ukazatel na 0x6122
@@ -96,7 +96,7 @@ Pro převod indexů bude použita tato mapovací funkce (viz níže):
 €€ i = x + 3 \cdot y €€
 
 | Adresa paměťové buňky | Index hodnoty | Hodnota
-|---
+|---|---|---
 | proměnná POLE || ukazatel na 0x5A01
 | ... | ... | ... |
 | 0x5A01 | POLE+0 | 1
@@ -112,13 +112,15 @@ Pro převod indexů bude použita tato mapovací funkce (viz níže):
 
 ### Příklad v jazyce Java
 
-Takto se v Javě pracuje s jednorozměrným polem:
+#### Jednorozměrné pole
 
 ```java
 // deklarace s výchozími hodnotami
 
 int pole1 [] = {1, 0, 5, -4, 55};
+```
 
+```java
 // univerzálnější deklarace
 
 int pole2 [];
@@ -128,11 +130,15 @@ pole2 [1] = 0;
 pole2 [2] = 5;
 pole2 [3] = -4;
 pole2 [4] = 55;
+```
 
+```java
 // výpis jednoho prvku
 
 System.out.println (pole1 [3]);
+```
 
+```java
 // výpis celého pole
 
 for (int i=0; i < pole1.length; i++)
@@ -141,13 +147,15 @@ for (int i=0; i < pole1.length; i++)
 }
 ```
 
-Takto se v Javě pracuje s dvojrozměrným polem:
+#### Dvojrozměrné pole
 
 ```java
 // deklarace s výchozími hodnotami
 
 int matice1 [][] = {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
+```
 
+```java
 // univerzálnější deklarace
 
 int matice2 [][];
@@ -164,11 +172,15 @@ matice2[2] = new int [3];
 matice2[2][0] = 0;
 matice2[2][1] = 0;
 matice2[2][2] = 1;
+```
 
+```java
 // výpis jednoho prvku
 
 System.out.println (matice1 [0][2]);
+```
 
+```java
 // výpis celého pole
 
 for (int r=0; r < matice1.length; r++) {
