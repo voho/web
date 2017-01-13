@@ -4,6 +4,11 @@
   "@type": "Person",
   "name": "${website_author}",
   "url": "${website_external_url}",
+  "honorificPrefix": "Ing.",
+  "givenName": "Vojta",
+  "familyName": "Hordějčuk",
+  "gender: "Male",
+  "email": "vojtech.hordejcuk@gmail.com",
   "homeLocation": "Luxembourg",
   "sameAs": [
     "${social_profile_linkedin}",

@@ -4,7 +4,6 @@ Konečný automat typu Mealy je zobecněním [typu Moore](wiki/moore). Liší se
 
 ```dot:digraph
 rankdir=LR
-ratio=1
 "transition function" [shape=none,fillcolor=transparent]
 "output function" [shape=none,fillcolor=transparent]
 input -> "transition function"
@@ -13,7 +12,7 @@ state -> "transition function"
 state -> "output function"
 input -> "output function"
 "output function" -> output
-state [shape=box3d,fillcolor=khaki]
+state [shape=box3d,fillcolor=beige]
 ```
 
 ### Formální definice

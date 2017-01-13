@@ -4,7 +4,6 @@ Konečný automat typu Moore si lze představit jako jednoduché zařízení s k
 
 ```dot:digraph
 rankdir=LR
-ratio=1
 "transition function" [shape=none,fillcolor=transparent]
 "output function" [shape=none,fillcolor=transparent]
 input -> "transition function"
@@ -14,7 +13,7 @@ state -> "output function"
 "output function" -> output
 input [shape=oval]
 output [shape=oval]
-state [shape=box3d,fillcolor=khaki]
+state [shape=box3d,fillcolor=beige]
 ```
 
 ### Formální definice

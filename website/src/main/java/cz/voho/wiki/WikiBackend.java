@@ -102,11 +102,23 @@ public class WikiBackend {
     }
 
     public WikiPageReferences getBreadCrumbs(final String wikiPageId) {
-        return toRefs(parsedWikiPageRepository.getBreadCrumbs(wikiPageId), false, true);
+        try {
+            return toRefs(parsedWikiPageRepository.getBreadCrumbs(wikiPageId), false, true);
+        } catch (ContentNotFoundException e) {
+            return fallback(wikiPageId);
+        }
     }
 
     public WikiPageReferences getSubPages(final String wikiPageId) {
-        return toRefs(parsedWikiPageRepository.getSubPages(wikiPageId), true, true);
+        try {
+            return toRefs(parsedWikiPageRepository.getSubPages(wikiPageId), true, true);
+        } catch (ContentNotFoundException e) {
+            return fallback(wikiPageId);
+        }
+    }
+
+    private WikiPageReferences fallback(final String wikiPageId) {
+        return new WikiPageReferences();
     }
 
     private WikiPageReferences toRefs(final List<String> wikiPageIds, final boolean sort, final boolean firstLevel) {
@@ -120,13 +132,13 @@ public class WikiBackend {
                     ref.setId(id);
                     try {
                         ref.setTitle(parsedWikiPageRepository.load(id).getTitle());
-                    } catch (Exception e) {
+                    } catch (ContentNotFoundException e) {
                         ref.setTitle("N/A");
                     }
                     try {
                         ref.setChildren(toRefs(parsedWikiPageRepository.getSubPages(id), true, false));
-                    } catch (Exception e) {
-                        ref.setChildren(null);
+                    } catch (ContentNotFoundException e) {
+                        ref.setChildren(fallback(id));
                     }
                     return ref;
                 })

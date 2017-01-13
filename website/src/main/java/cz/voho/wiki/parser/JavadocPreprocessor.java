@@ -14,7 +14,7 @@ public class JavadocPreprocessor implements Preprocessor {
         return rp.replace(source, matchResult -> {
             final String className = matchResult.group(1);
             final String classNameJavadocUrl = String.format("http://grepcode.com/search?query=%s", UrlEscapers.urlFragmentEscaper().escape(className));
-            return String.format("*[%s](%s)*", className, classNameJavadocUrl);
+            return String.format("[%s](%s)", className, classNameJavadocUrl);
         });
     }
 }

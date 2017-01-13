@@ -27,13 +27,7 @@
         <section>
             <div class="inner">
                 <header class="major">
-                    <h1>
-                        <#if active_wiki_page_parent_id?has_content>
-                            <a href="/wiki/${active_wiki_page_parent_id}/" class="icon fa-arrow-left"
-                                    title="Zpět na rodičovskou stránku"></a>
-                        </#if>
-                    ${active_wiki_page_title}
-                    </h1>
+                    <h1>${active_wiki_page_title}</h1>
                 </header>
 
                 <#include "wiki/children.ftl"/>
