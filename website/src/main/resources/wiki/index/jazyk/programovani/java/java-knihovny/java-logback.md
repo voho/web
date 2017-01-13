@@ -16,22 +16,22 @@ Každý logger má unikátní jednoznačný název a je podle něho zařazen do 
 
 ### Vytvoření loggeru
 
-Logback se používá zpravidla tak, že se ve třídě pomocí tovární třídy *org.slf4j.LoggerFactory* vytvoří privátní statická konstanta typu *org.slf4j.Logger*, pomocí které se pak do loggeru přidávají zprávy pocházející z dané třídy. Název loggeru může být libovolný, ovlivňuje však zásadně postavení loggeru v hierarchii a tudíž i jeho konfiguraci.
+Logback se používá zpravidla tak, že se ve třídě pomocí [tovární třídy](wiki/abstract-factory) *javadoc:org.slf4j.LoggerFactory* vytvoří privátní statická konstanta typu *javadoc:org.slf4j.Logger*, pomocí které se pak do loggeru přidávají zprávy pocházející z dané třídy. Název loggeru může být libovolný, ovlivňuje však zásadně postavení loggeru v hierarchii a tudíž i jeho konfiguraci.
 
 ### Použití
 
-Na rozhraní *org.slf4j.Logger* se nachází metody pojmenované podle úrovní logování. Úrovní logování je myšlena závažnost či důležitost dané zprávy. Pokud například dojde k chybě, je to zásadnější než informativní hláška o úspěšně provedené operaci. Úrovně logování od nejméně zásadní až po tu nejdůležitější jsou tyto: *trace*, *debug*, *info*, *warn*, *error*.
+Na rozhraní *javadoc:org.slf4j.Logger* se nachází metody pojmenované podle úrovní logování. Úrovní logování je myšlena závažnost či důležitost dané zprávy. Pokud například dojde k chybě, je to zásadnější než informativní hláška o úspěšně provedené operaci. Úrovně logování od nejméně zásadní až po tu nejdůležitější jsou tyto: *trace*, *debug*, *info*, *warn*, *error*.
 
 ```java
 public class LoggingClass {
-	private static final Logger LOG = LoggerFactory.getLogger(LoggingClass.class);
-	
-	public void test() {
-		LOG.debug("we will tell you the current time");
-		String name = "John";
-		String time = new Date().toString();
-		LOG.info("{} says: the current time is {}", name, time);
-	}
+    private static final Logger LOG = LoggerFactory.getLogger(LoggingClass.class);
+    
+    public void test() {
+        LOG.debug("we will tell you the current time");
+        String name = "John";
+        String time = new Date().toString();
+        LOG.info("{} says: the current time is {}", name, time);
+    }
 }
 ```
 

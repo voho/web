@@ -21,6 +21,7 @@ import cz.voho.wiki.page.source.WikiPageSourceRepository;
 import cz.voho.wiki.parser.CodePreprocessor;
 import cz.voho.wiki.parser.FlexmarkWikiParser;
 import cz.voho.wiki.parser.ImagePreprocessor;
+import cz.voho.wiki.parser.JavadocPreprocessor;
 import cz.voho.wiki.parser.MathPreprocessor;
 import cz.voho.wiki.parser.QuotePreprocessor;
 import cz.voho.wiki.parser.TodoPreprocessor;
@@ -54,7 +55,8 @@ public class WikiBackend {
                 new MathPreprocessor(),
                 new WikiLinkPreprocessor(),
                 new TodoPreprocessor(),
-                new ImagePreprocessor()
+                new ImagePreprocessor(),
+                new JavadocPreprocessor()
         );
 
         final WikiPageSourceRepository wikiPageSourceRepository = new DefaultWikiPageSourceRepository();
@@ -116,8 +118,16 @@ public class WikiBackend {
                 .map(id -> {
                     final WikiPageReference ref = new WikiPageReference();
                     ref.setId(id);
-                    ref.setTitle(parsedWikiPageRepository.load(id).getTitle());
-                    ref.setChildren(toRefs(parsedWikiPageRepository.getSubPages(id), true, false));
+                    try {
+                        ref.setTitle(parsedWikiPageRepository.load(id).getTitle());
+                    } catch (Exception e) {
+                        ref.setTitle("N/A");
+                    }
+                    try {
+                        ref.setChildren(toRefs(parsedWikiPageRepository.getSubPages(id), true, false));
+                    } catch (Exception e) {
+                        ref.setChildren(null);
+                    }
                     return ref;
                 })
                 .collect(Collectors.toList()));
