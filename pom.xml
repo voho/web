@@ -52,17 +52,22 @@
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark</artifactId>
-                <version>0.7.0</version>
+                <version>0.11.1</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-tables</artifactId>
-                <version>0.7.0</version>
+                <version>0.11.1</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-autolink</artifactId>
-                <version>0.7.0</version>
+                <version>0.11.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-ext-definition</artifactId>
+                <version>0.11.1</version>
             </dependency>
             <!-- AWS Client -->
             <dependency>

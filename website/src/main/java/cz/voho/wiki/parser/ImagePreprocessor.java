@@ -1,6 +1,6 @@
 package cz.voho.wiki.parser;
 
-import com.vladsch.flexmark.util.Escaping;
+import com.vladsch.flexmark.util.html.Escaping;
 import cz.voho.utility.ReplacePatternCallback;
 import cz.voho.wiki.model.WikiContext;
 import cz.voho.wiki.model.WikiPageSource;

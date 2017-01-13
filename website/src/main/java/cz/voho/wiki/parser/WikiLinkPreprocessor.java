@@ -5,7 +5,7 @@ import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ast.NodeVisitor;
 import com.vladsch.flexmark.ast.VisitHandler;
 import com.vladsch.flexmark.ast.Visitor;
-import com.vladsch.flexmark.util.sequence.StringSequence;
+import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import cz.voho.utility.WikiLinkUtility;
 import cz.voho.wiki.model.WikiContext;
 import cz.voho.wiki.model.WikiPageSource;
@@ -22,7 +22,7 @@ public class WikiLinkPreprocessor implements Preprocessor {
 
                 if (linkUrl.startsWith("wiki/")) {
                     String targetId = WikiLinkUtility.resolveWikiPageId(linkUrl);
-                    link.setUrl(new StringSequence("/wiki/" + targetId + "/"));
+                    link.setUrl(PrefixedSubSequence.of("/wiki/" + targetId + "/"));
                     context.addLink(sourceId, targetId);
                 }
             }

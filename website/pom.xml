@@ -47,6 +47,10 @@
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-ext-autolink</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-ext-definition</artifactId>
+        </dependency>
         <!-- AWS Client -->
         <dependency>
             <groupId>com.amazonaws</groupId>

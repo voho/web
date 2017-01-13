@@ -5,10 +5,11 @@ import com.vladsch.flexmark.ast.BlockQuote;
 import com.vladsch.flexmark.ast.Heading;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.autolink.AutolinkExtension;
+import com.vladsch.flexmark.ext.definition.DefinitionExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.parser.ParserEmulationFamily;
+import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 import cz.voho.wiki.model.ParsedWikiPage;
@@ -36,8 +37,9 @@ public class FlexmarkWikiParser implements WikiParser {
         final List<Extension> extensions = new LinkedList<>();
         extensions.add(TablesExtension.create());
         extensions.add(AutolinkExtension.create());
+        extensions.add(DefinitionExtension.create());
 
-        options.setFrom(ParserEmulationFamily.COMMONMARK.getOptions())
+        options.setFrom(ParserEmulationProfile.COMMONMARK.getOptions())
                 .set(Parser.EXTENSIONS, extensions)
                 .set(HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_PREFIX, "")
                 .set(HtmlRenderer.SOFT_BREAK, " ")
