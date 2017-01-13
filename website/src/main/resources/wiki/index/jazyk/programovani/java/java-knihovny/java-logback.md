@@ -1,16 +1,16 @@
 ## Logback
 
-Logback je implementace logovacího rozhraní *SLF4J* pro platformu Java, která se konfiguruje pomocí XML souborů. Umožňuje vytvářet tzv. **loggery**, což jsou objekty, do kterých se posílají vlastní logované zprávy. Úroveň a argumenty zprávy jsou pak vyhodnoceny a následně je zpráva podle konfigurace rozeslána do tzv. **appenderů**, které zajistí zpracování zprávy, nejčastěji provedou její výpis na standardní výstup nebo do zadaného souboru. 
+Logback je implementace logovacího rozhraní *SLF4J* pro platformu [Java](wiki/java), která se konfiguruje pomocí XML souborů. Umožňuje vytvářet tzv. **loggery**, což jsou objekty, do kterých se posílají vlastní logované zprávy. Úroveň a argumenty zprávy jsou pak vyhodnoceny a následně je zpráva podle konfigurace rozeslána do tzv. **appenderů**, které zajistí zpracování zprávy, nejčastěji provedou její výpis na standardní výstup nebo do zadaného souboru. 
 
-Každý logger má unikátní jednoznačný název a je podlě něho zařazen do hierarchie, jejímž kořenem je speciální předpřipravený logger, tzv. **root logger**. Jako oddělovač úrovní hierarchie slouží tečka v názvu loggeru, podobně jako to mají balíčky v Javě. Pokud se logger nazývá například *a.b.c.x*, je na stejné úrovni jako *a.b.c.y*. Nadřazeným loggerem těchto dvou jsou loggery  *a.b.c*, dále *a.b*, *a*, **root logger**.
+Každý logger má unikátní jednoznačný název a je podle něho zařazen do hierarchie, jejímž kořenem je speciální předpřipravený logger, tzv. **root logger**. Jako oddělovač úrovní hierarchie slouží tečka v názvu loggeru, podobně jako to mají balíčky v Javě. Pokud se logger nazývá například *a.b.c.x*, je na stejné úrovni jako *a.b.c.y*. Nadřazeným loggerem těchto dvou jsou loggery  *a.b.c*, dále *a.b*, *a*, **root logger**.
 
 ### Závislost (Maven)
 
 ```xml
 <dependency>
-	<groupId>ch.qos.logback</groupId>
-	<artifactId>logback-classic</artifactId>
-	<version>X.X.X</version>
+  <groupId>ch.qos.logback</groupId>
+  <artifactId>logback-classic</artifactId>
+  <version>X.X.X</version>
 </dependency>
 ```
 
@@ -37,7 +37,26 @@ public class LoggingClass {
 
 ### Konfigurace
 
-Logback hledá konfigurace v následujícím pořadí: *logback-test.xml*, *loback.xml*. To umožňuje v unit testech používat jiné nastavení logování než při běžném provozu aplikace (pouze je třeba zajistit, aby byl soubor *logback-test.xml* přítomný na classpath pouze v době testů, například "Maven":[informatika/nastroje/maven] toto zajišťuje automaticky).
+Logback hledá konfigurace v následujícím pořadí: *logback-test.xml*, *loback.xml*. To umožňuje v unit testech používat jiné nastavení logování než při běžném provozu aplikace (pouze je třeba zajistit, aby byl soubor *logback-test.xml* přítomný na classpath pouze v době testů, například [Maven](wiki/maven) toto zajišťuje automaticky).
+
+#### Jednoduchá konfigurace (konzole)
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date %level %logger{10} %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="console"/>
+    </root>
+</configuration>
+```
+
+#### Složitější konfigurace (konzole + soubor)
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
