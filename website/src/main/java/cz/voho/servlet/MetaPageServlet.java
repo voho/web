@@ -1,5 +1,6 @@
 package cz.voho.servlet;
 
+import cz.voho.enrich.MetaDataRoot;
 import cz.voho.wiki.WikiBackend;
 import freemarker.template.SimpleHash;
 
@@ -15,8 +16,8 @@ public class MetaPageServlet extends AbstractMenuPageServlet {
     }
 
     @Override
-    protected void updateModel(final HttpServletRequest request, final SimpleHash model) {
-        super.updateModel(request, model);
+    protected void updateModel(final HttpServletRequest request, final SimpleHash model, final MetaDataRoot metaDataRoot) {
+        super.updateModel(request, model, metaDataRoot);
 
         model.put("quotes", wikiBackend.getCurrentContext().getQuotes());
         model.put("todos", wikiBackend.getCurrentContext().getTodoPages());

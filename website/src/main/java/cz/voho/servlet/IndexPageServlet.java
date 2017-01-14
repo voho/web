@@ -1,5 +1,6 @@
 package cz.voho.servlet;
 
+import cz.voho.enrich.MetaDataRoot;
 import cz.voho.photo.RecentWorkBackend;
 import freemarker.template.SimpleHash;
 
@@ -10,8 +11,8 @@ public class IndexPageServlet extends AbstractMenuPageServlet {
     private final RecentWorkBackend recentWorkBackend = RecentWorkBackend.SINGLETON;
 
     @Override
-    protected void updateModel(HttpServletRequest request, SimpleHash model) {
-        super.updateModel(request, model);
+    protected void updateModel(HttpServletRequest request, SimpleHash model, final MetaDataRoot metaDataRoot) {
+        super.updateModel(request, model, metaDataRoot);
 
         model.put("instagram_photos", recentWorkBackend.getRecentImages());
         model.put("recent_tracks", recentWorkBackend.getRecentTracks());

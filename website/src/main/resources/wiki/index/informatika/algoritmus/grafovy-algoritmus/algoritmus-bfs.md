@@ -31,7 +31,7 @@ C--G
 Algoritmus bude postupovat v následujících krocích:
 
 | Krok | Fronta (první prvek: vlevo) | Navštívené uzly
-|---|---|---
+|---
 | 1 | START | -
 | 2 | E, G | START
 | 3 | G, B, C, D | START, E
@@ -55,7 +55,7 @@ E--C
 D--F
 C--G
 
-START[fillcolor=greenyellow]
+START[fillcolor=khaki]
 ```
 
 ```dot:graph
@@ -70,9 +70,9 @@ E--C
 D--F
 C--G
 
-START[fillcolor=silver]
-E[fillcolor=greenyellow]
-G[fillcolor=greenyellow]
+START[fillcolor=gray]
+E[fillcolor=khaki]
+G[fillcolor=khaki]
 ```
 
 ```dot:graph
@@ -87,12 +87,12 @@ E--C
 D--F
 C--G
 
-START[fillcolor=silver]
-E[fillcolor=silver]
-G[fillcolor=silver]
-D[fillcolor=greenyellow]
-B[fillcolor=greenyellow]
-C[fillcolor=greenyellow]
+START[fillcolor=gray]
+E[fillcolor=gray]
+G[fillcolor=gray]
+D[fillcolor=khaki]
+B[fillcolor=khaki]
+C[fillcolor=khaki]
 ```
 
 ```dot:graph
@@ -107,13 +107,13 @@ E--C
 D--F
 C--G
 
-START[fillcolor=silver]
-E[fillcolor=silver]
-G[fillcolor=silver]
-D[fillcolor=silver]
-B[fillcolor=silver]
-C[fillcolor=silver]
-F[fillcolor=greenyellow]
+START[fillcolor=gray]
+E[fillcolor=gray]
+G[fillcolor=gray]
+D[fillcolor=gray]
+B[fillcolor=gray]
+C[fillcolor=gray]
+F[fillcolor=khaki]
 ```
 
 ```dot:graph
@@ -128,13 +128,13 @@ E--C
 D--F
 C--G
 
-START[fillcolor=silver]
-E[fillcolor=silver]
-G[fillcolor=silver]
-D[fillcolor=silver]
-B[fillcolor=silver]
-C[fillcolor=silver]
-F[fillcolor=silver]
+START[fillcolor=gray]
+E[fillcolor=gray]
+G[fillcolor=gray]
+D[fillcolor=gray]
+B[fillcolor=gray]
+C[fillcolor=gray]
+F[fillcolor=gray]
 ```
 
 ### Složitost

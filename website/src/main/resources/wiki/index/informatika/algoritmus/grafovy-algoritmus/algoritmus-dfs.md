@@ -31,7 +31,7 @@ C--G
 Algoritmus bude postupovat v následujících krocích:
 
 | Krok | Zásobník (vrchol: vlevo) | Navštívené uzly
-|---|---|---
+|---
 | 1 | START | -
 | 2 | G, E | START
 | 3 | C, E | START, G
@@ -55,7 +55,7 @@ E--C
 D--F
 C--G
 
-START[fillcolor=greenyellow]
+START[fillcolor=khaki]
 ```
 
 ```dot:graph
@@ -70,9 +70,9 @@ E--C
 D--F
 C--G
 
-START[fillcolor=silver]
-E[fillcolor=greenyellow]
-G[fillcolor=greenyellow]
+START[fillcolor=gray]
+E[fillcolor=khaki]
+G[fillcolor=khaki]
 ```
 
 ```dot:graph
@@ -87,10 +87,10 @@ E--C
 D--F
 C--G
 
-START[fillcolor=silver]
-G[fillcolor=silver]
-C[fillcolor=greenyellow]
-E[fillcolor=greenyellow]
+START[fillcolor=gray]
+G[fillcolor=gray]
+C[fillcolor=khaki]
+E[fillcolor=khaki]
 ```
 
 ```dot:graph
@@ -105,10 +105,10 @@ E--C
 D--F
 C--G
 
-START[fillcolor=silver]
-G[fillcolor=silver]
-C[fillcolor=silver]
-E[fillcolor=greenyellow]
+START[fillcolor=gray]
+G[fillcolor=gray]
+C[fillcolor=gray]
+E[fillcolor=khaki]
 ```
 
 ```dot:graph
@@ -123,12 +123,12 @@ E--C
 D--F
 C--G
 
-START[fillcolor=silver]
-G[fillcolor=silver]
-C[fillcolor=silver]
-E[fillcolor=silver]
-D[fillcolor=greenyellow]
-B[fillcolor=greenyellow]
+START[fillcolor=gray]
+G[fillcolor=gray]
+C[fillcolor=gray]
+E[fillcolor=gray]
+D[fillcolor=khaki]
+B[fillcolor=khaki]
 ```
 
 ```dot:graph
@@ -143,13 +143,13 @@ E--C
 D--F
 C--G
 
-START[fillcolor=silver]
-G[fillcolor=silver]
-C[fillcolor=silver]
-E[fillcolor=silver]
-D[fillcolor=silver]
-F[fillcolor=greenyellow]
-B[fillcolor=greenyellow]
+START[fillcolor=gray]
+G[fillcolor=gray]
+C[fillcolor=gray]
+E[fillcolor=gray]
+D[fillcolor=gray]
+F[fillcolor=khaki]
+B[fillcolor=khaki]
 ```
 
 ```dot:graph
@@ -164,13 +164,13 @@ E--C
 D--F
 C--G
 
-START[fillcolor=silver]
-G[fillcolor=silver]
-C[fillcolor=silver]
-E[fillcolor=silver]
-D[fillcolor=silver]
-F[fillcolor=silver]
-B[fillcolor=greenyellow]
+START[fillcolor=gray]
+G[fillcolor=gray]
+C[fillcolor=gray]
+E[fillcolor=gray]
+D[fillcolor=gray]
+F[fillcolor=gray]
+B[fillcolor=khaki]
 ```
 
 ```dot:graph
@@ -185,13 +185,13 @@ E--C
 D--F
 C--G
 
-START[fillcolor=silver]
-E[fillcolor=silver]
-G[fillcolor=silver]
-D[fillcolor=silver]
-B[fillcolor=silver]
-C[fillcolor=silver]
-F[fillcolor=silver]
+START[fillcolor=gray]
+E[fillcolor=gray]
+G[fillcolor=gray]
+D[fillcolor=gray]
+B[fillcolor=gray]
+C[fillcolor=gray]
+F[fillcolor=gray]
 ```
 
 ### Složitost

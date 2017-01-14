@@ -1,6 +1,7 @@
 package cz.voho.servlet;
 
 import com.google.common.net.UrlEscapers;
+import cz.voho.enrich.*;
 import cz.voho.utility.WikiLinkUtility;
 import cz.voho.wiki.WikiBackend;
 import cz.voho.wiki.model.ParsedWikiPage;
@@ -11,6 +12,7 @@ import freemarker.template.SimpleHash;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Locale;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class WikiPageServlet extends AbstractMenuPageServlet {
     private final WikiBackend wikiBackend = WikiBackend.SINGLETON;
@@ -21,13 +23,15 @@ public class WikiPageServlet extends AbstractMenuPageServlet {
     }
 
     @Override
-    protected void updateModel(final HttpServletRequest request, final SimpleHash model) {
-        super.updateModel(request, model);
+    protected void updateModel(final HttpServletRequest request, final SimpleHash model, final MetaDataRoot metaDataRoot) {
+        super.updateModel(request, model, metaDataRoot);
 
         final ParsedWikiPage parsedWikiPage = wikiBackend.load(resolvePageName(request));
+        final String externalUrl = "http://voho.eu/wiki/" + parsedWikiPage.getSource().getId() + "/";
+
         model.put("active_wiki_page_id", parsedWikiPage.getSource().getId());
         model.put("active_wiki_page_parent_id", parsedWikiPage.getSource().getParentId());
-        model.put("active_wiki_page_external_url", "http://voho.eu/wiki/" + parsedWikiPage.getSource().getId());
+        model.put("active_wiki_page_external_url", externalUrl);
         model.put("active_wiki_page_github_url", parsedWikiPage.getSource().getGithubUrl());
         model.put("active_wiki_page_github_raw_url", parsedWikiPage.getSource().getGithubRawUrl());
         model.put("active_wiki_page_title", parsedWikiPage.getTitle());
@@ -49,6 +53,18 @@ public class WikiPageServlet extends AbstractMenuPageServlet {
         if (subPages != null && subPages.getItems() != null) {
             if (!subPages.getItems().isEmpty()) {
                 model.put("subPages", subPages);
+
+                metaDataRoot.setArticles(subPages
+                        .getItems()
+                        .stream()
+                        .map(a -> {
+                            Article article = new Article();
+                            article.setUrl("http://voho.eu/wiki/" + a.getId() + "/");
+                            article.setName(a.getTitle());
+                            article.setAuthor("Vojtěch Hordějčuk (voho.eu)");
+                            return article;
+                        })
+                        .toArray(Article[]::new));
             }
         }
 
@@ -62,6 +78,25 @@ public class WikiPageServlet extends AbstractMenuPageServlet {
         if (breadCrumbs != null && breadCrumbs.getItems() != null) {
             if (!breadCrumbs.getItems().isEmpty()) {
                 model.put("breadCrumbs", breadCrumbs);
+
+                AtomicInteger i = new AtomicInteger(1);
+
+                ListItem[] breadcrumbListElements = breadCrumbs.getItems()
+                        .stream()
+                        .map(a -> {
+                            Item item = new Item();
+                            item.setName(a.getTitle());
+                            item.setUrl("http://voho.eu/wiki/" + a.getId() + "/");
+                            ListItem listItem = new ListItem();
+                            listItem.setPosition(i.getAndIncrement());
+                            listItem.setItem(item);
+                            return listItem;
+                        })
+                        .toArray(ListItem[]::new);
+
+                BreadcrumbList breadcrumbList = new BreadcrumbList();
+                breadcrumbList.setItemListElement(breadcrumbListElements);
+                metaDataRoot.setBreadcrumbs(breadcrumbList);
             }
         }
     }

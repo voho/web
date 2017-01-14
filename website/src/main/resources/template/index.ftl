@@ -12,7 +12,7 @@
     <section id="banner" class="major">
         <div class="inner">
             <header class="major">
-                <h1>Hi! my name is Vojta Hordějčuk.</h1>
+                <h1>Hi! My name is Vojta Hordějčuk.</h1>
             </header>
             <div class="content">
                 <p>
