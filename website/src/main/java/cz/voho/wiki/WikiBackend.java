@@ -34,10 +34,12 @@ public class WikiBackend {
     private static final Logger LOG = LoggerFactory.getLogger(WikiBackend.class);
     private static final String MISSING_WIKI_PAGE_ID = "404";
 
+    private final WikiContext wikiContext;
     private final ParsedWikiPageRepository parsedWikiPageRepository;
     private final WikiImageRepository wikiImageRepository;
 
     private WikiBackend() {
+        this.wikiContext = new WikiContext();
         final WikiImageRepository fallbackDelegate = new DummyWikiImageRepository();
         final WikiImageRepository primaryDelegate = new LambdaWikiImageRepository(new LambdaClient());
         final CachingWikiImageRepository cachingWikiImageRepository = new CachingWikiImageRepository(primaryDelegate, fallbackDelegate);
@@ -53,15 +55,12 @@ public class WikiBackend {
                 new JavadocPreprocessor()
         );
 
-        final WikiPageSourceRepository wikiPageSourceRepository = new DefaultWikiPageSourceRepository();
-        final DefaultParsedWikiPageRepository parsedWikiPageRepository = new DefaultParsedWikiPageRepository(wikiParser, wikiPageSourceRepository);
+        final WikiPageSourceRepository wikiPageSourceRepository = new DefaultWikiPageSourceRepository(wikiContext);
+        final DefaultParsedWikiPageRepository parsedWikiPageRepository = new DefaultParsedWikiPageRepository(wikiParser, wikiPageSourceRepository, wikiContext);
 
-        this.parsedWikiPageRepository = new CachingParsedWikiPageRepository(parsedWikiPageRepository);
-    }
-
-    private WikiBackend(final ParsedWikiPageRepository parsedWikiPageRepository, final WikiImageRepository wikiImageRepository) {
-        this.parsedWikiPageRepository = parsedWikiPageRepository;
-        this.wikiImageRepository = wikiImageRepository;
+        CachingParsedWikiPageRepository cachedRepository = new CachingParsedWikiPageRepository(parsedWikiPageRepository);
+        this.parsedWikiPageRepository = cachedRepository;
+        wikiContext.getWikiPageIds().forEach(cachedRepository::refresh);
     }
 
     public String getExternalWikiPageLink(String wikiPageId) {
@@ -83,7 +82,7 @@ public class WikiBackend {
     private String resolveWikiPageFallback(final String missingWikiPageId) {
         final Set<String> candidates = Sets.newHashSet();
 
-        for (final String wikiPageId : parsedWikiPageRepository.getWikiPageIds()) {
+        for (final String wikiPageId : wikiContext.getWikiPageIds()) {
             final boolean containsAsPrefix = wikiPageId.contains(missingWikiPageId + "-");
             final boolean containsAsSuffix = wikiPageId.contains("-" + missingWikiPageId);
 
@@ -101,7 +100,7 @@ public class WikiBackend {
 
     public WikiPageReferences getBreadCrumbs(final String wikiPageId) {
         try {
-            return toRefs(parsedWikiPageRepository.getBreadCrumbs(wikiPageId), false, true);
+            return toRefs(wikiContext.getBreadCrumbs(wikiPageId), false, true);
         } catch (ContentNotFoundException e) {
             return fallback(wikiPageId);
         }
@@ -109,7 +108,7 @@ public class WikiBackend {
 
     public WikiPageReferences getSubPages(final String wikiPageId) {
         try {
-            return toRefs(parsedWikiPageRepository.getSubPages(wikiPageId), true, true);
+            return toRefs(wikiContext.getSubPages(wikiPageId), true, true);
         } catch (ContentNotFoundException e) {
             return fallback(wikiPageId);
         }
@@ -124,7 +123,7 @@ public class WikiBackend {
 
         result.setItems(wikiPageIds
                 .stream()
-                .filter(parsedWikiPageRepository::exists)
+                .filter(wikiContext::exists)
                 .map(id -> {
                     final WikiPageReference ref = new WikiPageReference();
                     ref.setId(id);
@@ -134,7 +133,7 @@ public class WikiBackend {
                         ref.setTitle("N/A");
                     }
                     try {
-                        ref.setChildren(toRefs(parsedWikiPageRepository.getSubPages(id), true, false));
+                        ref.setChildren(toRefs(wikiContext.getSubPages(id), true, false));
                     } catch (ContentNotFoundException e) {
                         ref.setChildren(fallback(id));
                     }
@@ -165,7 +164,7 @@ public class WikiBackend {
 
     public WikiPageReferences getLinksFromHere(final String wikiPageId) {
         return toRefs(
-                Lists.newArrayList(parsedWikiPageRepository.getCurrentContext().getLinksFromPage(wikiPageId)),
+                Lists.newArrayList(wikiContext.getLinksFromPage(wikiPageId)),
                 true,
                 true
         );
@@ -173,7 +172,7 @@ public class WikiBackend {
 
     public WikiPageReferences getLinksToHere(final String wikiPageId) {
         return toRefs(
-                Lists.newArrayList(parsedWikiPageRepository.getCurrentContext().getLinksToPage(wikiPageId)),
+                Lists.newArrayList(wikiContext.getLinksToPage(wikiPageId)),
                 true,
                 true
         );
@@ -202,10 +201,10 @@ public class WikiBackend {
     }
 
     public ImmutableSet<String> getWikiPageIds() {
-        return parsedWikiPageRepository.getWikiPageIds();
+        return wikiContext.getWikiPageIds();
     }
 
     public WikiContext getCurrentContext() {
-        return parsedWikiPageRepository.getCurrentContext();
+        return wikiContext;
     }
 }

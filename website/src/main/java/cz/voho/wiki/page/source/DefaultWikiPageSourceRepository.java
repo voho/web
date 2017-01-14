@@ -2,11 +2,12 @@ package cz.voho.wiki.page.source;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.io.Resources;
 import com.google.common.reflect.ClassPath;
 import cz.voho.exception.ContentNotFoundException;
 import cz.voho.exception.InitializationException;
+import cz.voho.utility.WikiLinkUtility;
+import cz.voho.wiki.model.WikiContext;
 import cz.voho.wiki.model.WikiPageSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,11 +21,14 @@ public class DefaultWikiPageSourceRepository implements WikiPageSourceRepository
     private static final Logger LOG = LoggerFactory.getLogger(DefaultWikiPageSourceRepository.class);
 
     private final Cache<String, WikiPageSource> cache;
+    private final WikiContext wikiContext;
 
-    public DefaultWikiPageSourceRepository() {
+    public DefaultWikiPageSourceRepository(WikiContext wikiContext) {
         cache = CacheBuilder
                 .newBuilder()
                 .build();
+
+        this.wikiContext = wikiContext;
 
         try {
             ClassPath
@@ -33,18 +37,13 @@ public class DefaultWikiPageSourceRepository implements WikiPageSourceRepository
                     .stream()
                     .map(ClassPath.ResourceInfo::getResourceName)
                     .filter(this::isNameOfWikiResource)
-                    .map(this::removeResourceNamePrefix)
+                    .map(WikiLinkUtility::resolveWikiPageId)
                     .forEach(this::precacheResource);
         } catch (IOException e) {
             throw new InitializationException("Error while loading wiki page sources.", e);
         } finally {
             LOG.info("Loaded pages: {}", cache.size());
         }
-    }
-
-    @Override
-    public ImmutableSet<String> getWikiPageIds() {
-        return ImmutableSet.copyOf(cache.asMap().keySet());
     }
 
     @Override
@@ -56,10 +55,6 @@ public class DefaultWikiPageSourceRepository implements WikiPageSourceRepository
         }
 
         return value;
-    }
-
-    private boolean isNameOfWikiResource(final String resourceName) {
-        return resourceName.matches("wiki/(.+)\\.md");
     }
 
     private void precacheResource(final String resourceName) {
@@ -74,10 +69,16 @@ public class DefaultWikiPageSourceRepository implements WikiPageSourceRepository
             page.setGithubRawUrl(getRawRepositoryPath(resourceName));
             page.setOrigin(resolveOrigin(resourceName));
             cache.put(page.getId(), page);
+            wikiContext.addPage(page.getId());
+            wikiContext.setParentPage(page.getId(), page.getParentId());
             LOG.info("Cache updated with node: {}", page);
         } catch (Exception e) {
             LOG.error("Cannot process resource: " + resourceName);
         }
+    }
+
+    private boolean isNameOfWikiResource(final String resourceName) {
+        return resourceName.matches("wiki/(.+)\\.md");
     }
 
     private String resolveOrigin(final String resourceName) {
@@ -122,13 +123,5 @@ public class DefaultWikiPageSourceRepository implements WikiPageSourceRepository
         }
 
         return result;
-    }
-
-    private String removeResourceNamePrefix(final String resourceName) {
-        if (resourceName.startsWith("wiki/")) {
-            return resourceName.substring(5);
-        } else {
-            return resourceName;
-        }
     }
 }

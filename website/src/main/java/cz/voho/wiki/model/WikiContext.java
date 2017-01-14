@@ -1,16 +1,9 @@
 package cz.voho.wiki.model;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimaps;
-import com.google.common.collect.SetMultimap;
-import com.google.common.collect.Sets;
+import com.google.common.collect.*;
+import cz.voho.wiki.page.source.WikiPageSourceRepository;
 
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class WikiContext {
@@ -19,6 +12,7 @@ public class WikiContext {
     private final SetMultimap<String, String> quotesByAuthor;
     private final Set<String> todoPages;
     private final Set<String> allPages;
+    private final Map<String, String> parentPage;
 
     public WikiContext() {
         this.linksToPage = Multimaps.newSortedSetMultimap(Maps.newTreeMap(), TreeSet::new);
@@ -26,10 +20,53 @@ public class WikiContext {
         this.quotesByAuthor = Multimaps.newSortedSetMultimap(Maps.newTreeMap(), TreeSet::new);
         this.todoPages = Sets.newTreeSet();
         this.allPages = Sets.newTreeSet();
+        this.parentPage = Maps.newHashMap();
+    }
+
+    public ImmutableList<String> getBreadCrumbs(final String wikiPageId) {
+        if (wikiPageId.equals(WikiPageSourceRepository.INDEX_PAGE_ID)) {
+            return ImmutableList.of();
+        }
+
+        final List<String> result = Lists.newLinkedList();
+        result.addAll(getParentPages(wikiPageId));
+        return ImmutableList.copyOf(Lists.reverse(result));
+    }
+
+    public List<String> getSubPages(final String wikiPageId) {
+        return parentPage.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue().equals(wikiPageId))
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+    }
+
+    public ImmutableList<String> getParentPages(final String wikiPageId) {
+        final List<String> parents = Lists.newLinkedList();
+
+        String tempId = wikiPageId;
+
+        while (tempId != null) {
+            parents.add(tempId);
+            tempId = parentPage.get(tempId);
+        }
+
+        // remove the current page (which is first)
+        parents.remove(0);
+
+        return ImmutableList.copyOf(parents);
+    }
+
+    public ImmutableSet<String> getWikiPageIds() {
+        return ImmutableSet.copyOf(allPages);
     }
 
     public void addPage(final String wikiPageId) {
         this.allPages.add(wikiPageId);
+    }
+
+    public void setParentPage(String childPageId, String parentPageId) {
+        parentPage.put(childPageId, parentPageId);
     }
 
     public void addLink(final String sourceWikiPageId, final String targetWikiPageId) {
@@ -41,11 +78,11 @@ public class WikiContext {
         linksToPage.put(targetWikiPageId, sourceWikiPageId);
     }
 
-    public Set<String> getLinksFromPage(final String wikiPageId) {
+    public ImmutableSet<String> getLinksFromPage(final String wikiPageId) {
         return nullToEmpty(linksFromPage.get(wikiPageId));
     }
 
-    public Set<String> getLinksToPage(final String wikiPageId) {
+    public ImmutableSet<String> getLinksToPage(final String wikiPageId) {
         return nullToEmpty(linksToPage.get(wikiPageId));
     }
 
@@ -88,12 +125,12 @@ public class WikiContext {
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
-    private Set<String> nullToEmpty(final Set<String> strings) {
+    private ImmutableSet<String> nullToEmpty(final Set<String> strings) {
         if (strings == null) {
-            return Collections.emptySet();
+            return ImmutableSet.of();
         }
 
-        return strings;
+        return ImmutableSet.copyOf(strings);
     }
 
     public void addTodo(final String id) {
@@ -102,5 +139,9 @@ public class WikiContext {
 
     public void addQuote(final String quote, final String author) {
         quotesByAuthor.put(author, quote);
+    }
+
+    public boolean exists(String wikiPageId) {
+        return allPages.contains(wikiPageId);
     }
 }
