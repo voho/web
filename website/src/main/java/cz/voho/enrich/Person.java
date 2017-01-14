@@ -1,21 +1,22 @@
 package cz.voho.enrich;
 
 import com.google.gson.annotations.SerializedName;
+import cz.voho.utility.Constants;
 
 public class Person {
     @SerializedName("@context")
     private String context = "http://schema.org";
     @SerializedName("@type")
     private String type = "Person";
-    private String name = "Vojtěch Hordějčuk";
-    private String url = "http://voho.eu/";
-    private String honorificPrefix = "Ing.";
-    private String givenName = "Vojtěch";
-    private String familyName = "Hordějčuk";
-    private String jobTitle = "Software Engineer";
-    private String gender = "male";
-    private String email = "vojtech.hordejcuk@gmail.com";
-    private String homeLocation = "Luxembourg";
+    private String name = Constants.OFFICIAL_FULL_NAME;
+    private String url = Constants.WEBSITE_URL_WITH_SLASH;
+    private String honorificPrefix = Constants.DEGREE;
+    private String givenName = Constants.OFFICIAL_FIRST_NAME;
+    private String familyName = Constants.OFFICIAL_FAMILY_NAME;
+    private String jobTitle = Constants.JOB_TITLE;
+    private String gender = Constants.GENDER;
+    private String email = Constants.EMAIL;
+    private String homeLocation = Constants.HOME_LOCATION;
     private String[] sameAs;
 
     public String getContext() {

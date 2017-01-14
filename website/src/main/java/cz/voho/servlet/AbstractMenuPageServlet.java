@@ -1,6 +1,7 @@
 package cz.voho.servlet;
 
 import cz.voho.enrich.MetaDataRoot;
+import cz.voho.utility.Constants;
 import cz.voho.wiki.WikiBackend;
 import freemarker.template.SimpleHash;
 
@@ -13,6 +14,6 @@ public abstract class AbstractMenuPageServlet extends AbstractPageServlet {
     protected void updateModel(final HttpServletRequest request, final SimpleHash model, final MetaDataRoot metaDataRoot) {
         super.updateModel(request, model, metaDataRoot);
 
-        model.put("indexSubPages", wikiBackend.getSubPages("index"));
+        model.put("indexSubPages", wikiBackend.getSubPages(Constants.INDEX_WIKI_PAGE_ID));
     }
 }

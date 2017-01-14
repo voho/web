@@ -2,6 +2,7 @@ package cz.voho.servlet;
 
 import com.google.common.net.UrlEscapers;
 import cz.voho.enrich.*;
+import cz.voho.utility.Constants;
 import cz.voho.utility.WikiLinkUtility;
 import cz.voho.wiki.WikiBackend;
 import cz.voho.wiki.model.ParsedWikiPage;
@@ -27,7 +28,7 @@ public class WikiPageServlet extends AbstractMenuPageServlet {
         super.updateModel(request, model, metaDataRoot);
 
         final ParsedWikiPage parsedWikiPage = wikiBackend.load(resolvePageName(request));
-        final String externalUrl = "http://voho.eu/wiki/" + parsedWikiPage.getSource().getId() + "/";
+        final String externalUrl = wikiBackend.getExternalWikiPageLink(parsedWikiPage.getSource().getId());
 
         model.put("active_wiki_page_id", parsedWikiPage.getSource().getId());
         model.put("active_wiki_page_parent_id", parsedWikiPage.getSource().getParentId());
@@ -59,9 +60,9 @@ public class WikiPageServlet extends AbstractMenuPageServlet {
                         .stream()
                         .map(a -> {
                             Article article = new Article();
-                            article.setUrl("http://voho.eu/wiki/" + a.getId() + "/");
+                            article.setUrl(wikiBackend.getExternalWikiPageLink(a.getId()));
                             article.setName(a.getTitle());
-                            article.setAuthor("Vojtěch Hordějčuk (voho.eu)");
+                            article.setAuthor(Constants.NAME_WITH_ALIAS);
                             return article;
                         })
                         .toArray(Article[]::new));
@@ -86,7 +87,7 @@ public class WikiPageServlet extends AbstractMenuPageServlet {
                         .map(a -> {
                             Item item = new Item();
                             item.setName(a.getTitle());
-                            item.setUrl("http://voho.eu/wiki/" + a.getId() + "/");
+                            item.setUrl(wikiBackend.getExternalWikiPageLink(a.getId()));
                             ListItem listItem = new ListItem();
                             listItem.setPosition(i.getAndIncrement());
                             listItem.setItem(item);

@@ -1,15 +1,16 @@
 package cz.voho.enrich;
 
 import com.google.gson.annotations.SerializedName;
+import cz.voho.utility.Constants;
 
 public class WebSite {
     @SerializedName("@context")
     private String context = "http://schema.org";
     @SerializedName("@type")
     private String type = "WebSite";
-    private String name = "Vojta Hordějčuk";
-    private String alternateName = "Vojta Hordějčuk aka voho";
-    private String url = "http://voho.eu/";
+    private String name = Constants.PREFERED_FULL_NAME;
+    private String alternateName = Constants.NAME_WITH_ALIAS;
+    private String url = Constants.WEBSITE_URL_WITH_SLASH;
 
     public String getContext() {
         return context;

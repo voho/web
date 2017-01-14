@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import cz.voho.exception.ContentNotFoundException;
+import cz.voho.utility.Constants;
 import cz.voho.utility.LambdaClient;
 import cz.voho.wiki.image.CachingWikiImageRepository;
 import cz.voho.wiki.image.DummyWikiImageRepository;
@@ -18,14 +19,7 @@ import cz.voho.wiki.page.parsed.DefaultParsedWikiPageRepository;
 import cz.voho.wiki.page.parsed.ParsedWikiPageRepository;
 import cz.voho.wiki.page.source.DefaultWikiPageSourceRepository;
 import cz.voho.wiki.page.source.WikiPageSourceRepository;
-import cz.voho.wiki.parser.CodePreprocessor;
-import cz.voho.wiki.parser.FlexmarkWikiParser;
-import cz.voho.wiki.parser.ImagePreprocessor;
-import cz.voho.wiki.parser.JavadocPreprocessor;
-import cz.voho.wiki.parser.MathPreprocessor;
-import cz.voho.wiki.parser.QuotePreprocessor;
-import cz.voho.wiki.parser.TodoPreprocessor;
-import cz.voho.wiki.parser.WikiLinkPreprocessor;
+import cz.voho.wiki.parser.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,6 +62,10 @@ public class WikiBackend {
     private WikiBackend(final ParsedWikiPageRepository parsedWikiPageRepository, final WikiImageRepository wikiImageRepository) {
         this.parsedWikiPageRepository = parsedWikiPageRepository;
         this.wikiImageRepository = wikiImageRepository;
+    }
+
+    public String getExternalWikiPageLink(String wikiPageId) {
+        return Constants.WEBSITE_URL_WITH_SLASH + "wiki/" + wikiPageId + "/";
     }
 
     public ParsedWikiPage load(final String wikiPageId) {
