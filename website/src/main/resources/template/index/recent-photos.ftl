@@ -6,7 +6,7 @@
         </header>
         <div class="row uniform">
             <#list instagram_photos as instagram_photo>
-                <div class="2u 6u$(large)">
+                <div class="2u 4u$(medium) 6u$(small)">
                     <span class="image fit">
                         <a href="${instagram_photo.link}"
                                 title="${instagram_photo.tags?join(', ')}"

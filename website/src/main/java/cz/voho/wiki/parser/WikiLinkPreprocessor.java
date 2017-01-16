@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ast.Link;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ast.NodeVisitor;
 import com.vladsch.flexmark.ast.VisitHandler;
-import com.vladsch.flexmark.ast.Visitor;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import cz.voho.utility.WikiLinkUtility;
 import cz.voho.wiki.model.WikiContext;
@@ -15,9 +14,10 @@ public class WikiLinkPreprocessor implements Preprocessor {
     public void preprocessNodes(WikiContext context, WikiPageSource source, Node root) {
         String sourceId = source.getId();
 
-        NodeVisitor visitor = new NodeVisitor(new VisitHandler<>(Link.class, new Visitor<Link>() {
-            @Override
-            public void visit(Link link) {
+        if (sourceId != null) {
+            // it can be NULL in tests only (TODO)
+
+            NodeVisitor visitor = new NodeVisitor(new VisitHandler<>(Link.class, link -> {
                 String linkUrl = link.getUrl().toString();
 
                 if (linkUrl.startsWith("wiki/")) {
@@ -25,9 +25,9 @@ public class WikiLinkPreprocessor implements Preprocessor {
                     link.setUrl(PrefixedSubSequence.of("/wiki/" + targetId + "/"));
                     context.addLink(sourceId, targetId);
                 }
-            }
-        }));
+            }));
 
-        visitor.visit(root);
+            visitor.visit(root);
+        }
     }
 }

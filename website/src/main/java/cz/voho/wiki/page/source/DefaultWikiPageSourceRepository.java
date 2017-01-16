@@ -70,7 +70,9 @@ public class DefaultWikiPageSourceRepository implements WikiPageSourceRepository
             page.setOrigin(resolveOrigin(resourceName));
             cache.put(page.getId(), page);
             wikiContext.addPage(page.getId());
-            wikiContext.setParentPage(page.getId(), page.getParentId());
+            if (page.getParentId() != null) {
+                wikiContext.setParentPage(page.getId(), page.getParentId());
+            }
             LOG.info("Cache updated with node: {}", page);
         } catch (Exception e) {
             LOG.error("Cannot process resource: " + resourceName);

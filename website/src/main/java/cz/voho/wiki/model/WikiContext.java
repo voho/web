@@ -1,9 +1,19 @@
 package cz.voho.wiki.model;
 
-import com.google.common.collect.*;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimaps;
+import com.google.common.collect.SetMultimap;
+import com.google.common.collect.Sets;
 import cz.voho.wiki.page.source.WikiPageSourceRepository;
 
-import java.util.*;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class WikiContext {
@@ -65,15 +75,11 @@ public class WikiContext {
         this.allPages.add(wikiPageId);
     }
 
-    public void setParentPage(String childPageId, String parentPageId) {
+    public void setParentPage(final String childPageId, final String parentPageId) {
         parentPage.put(childPageId, parentPageId);
     }
 
     public void addLink(final String sourceWikiPageId, final String targetWikiPageId) {
-        if (sourceWikiPageId == null || targetWikiPageId == null) {
-            // safety for tests TODO
-            return;
-        }
         linksFromPage.put(sourceWikiPageId, targetWikiPageId);
         linksToPage.put(targetWikiPageId, sourceWikiPageId);
     }
@@ -141,7 +147,7 @@ public class WikiContext {
         quotesByAuthor.put(author, quote);
     }
 
-    public boolean exists(String wikiPageId) {
+    public boolean exists(final String wikiPageId) {
         return allPages.contains(wikiPageId);
     }
 }
