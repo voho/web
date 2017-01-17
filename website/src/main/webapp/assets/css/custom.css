@@ -269,6 +269,10 @@ section#breadcrumbs p {
     text-transform: inherit;
 }
 
+#banner {
+    background-image: none !important;
+}
+
 /* todo */
 
 .todo {

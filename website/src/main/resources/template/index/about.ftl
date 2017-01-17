@@ -1,3 +1,3 @@
-I&nbsp;am 28 years old guy living in <strong>Luxembourg</strong>, originally coming from <strong>Czech Republic</strong>.
-I&nbsp;work at <strong>Amazon EU</strong> Headquarters as a <strong>Software Engineer</strong>, focusing on solving the cross-country sourcing and fulfillment challenges.
+I&nbsp;am 28 years old guy living in&nbsp;<strong>Luxembourg</strong>, originally coming from&nbsp;<strong>Czech&nbsp;Republic</strong>.
+I&nbsp;work at&nbsp;<strong>Amazon&nbsp;EU</strong> Headquarters as&nbsp;a&nbsp;<strong>Software&nbsp;Engineer</strong> and I produce strange music in my free time.
 I&nbsp;am married and have one small daughter.
