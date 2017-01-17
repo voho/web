@@ -1,6 +1,6 @@
 ## Bitové pole (bit set)
 
-Bitové pole je [pole](wiki/datova-struktura-pole) bitů, což znamená, že každý prvek tohoto pole může nabývat pouze dvou různých hodnot - například *0*, nebo *1*. V některých programovacích jazycích se kvůli úspoře paměti implementuje nad polem celých čísel s využitím bitových operací, což je zajímavé řešení, které stojí minimálně za zmínku. Jedno celé číslo zde tedy představuje buňku o velikosti 32 nebo 64 bitů (v závislosti na architektuře). Bitové pole jako datová struktura pak navenek poskytuje metody pro zjednodušený přístup k těmto jednotlivým bitům nezávisle na tom, jak jsou jednotlivé bity uloženy.
+Bitové pole je [pole](wiki/datova-struktura-pole) [bitů](wiki/bit), což znamená, že každý prvek tohoto pole může nabývat pouze dvou různých hodnot - například *0*, nebo *1*. V některých [programovacích jazycích](wiki/programovani) se kvůli úspoře paměti implementuje nad polem celých čísel s využitím [bitových operací](wiki/bit), což je zajímavé řešení, které stojí minimálně za zmínku. Jedno celé číslo zde tedy představuje buňku o velikosti 32 nebo 64 bitů (v závislosti na architektuře). Bitové pole jako datová struktura pak navenek poskytuje metody pro zjednodušený přístup k jednotlivým bitům nezávisle na tom, jak jsou jednotlivé bity uloženy.
 
 ### Operace
 
@@ -12,16 +12,16 @@ Příklad čtení třetího bitu:
 
 | Popis | Hodnota | Výsledek
 |---|---|---
-| buňka bitového pole | `00101001001010100000100100100011` | 
-| maska pro čtení třetího bitu | `00100000000000000000000000000000` | 
+| buňka bitového pole | `00101001001010100000100100100011` | | 
+| maska pro čtení třetího bitu | `00100000000000000000000000000000` | | 
 | logický součin buňky a masky pro třetí bit | `00100000000000000000000000000000` | různé od nuly = třetí bit je nastaven 
 
 Příklad čtení čtvrtého bitu:
 
 | Popis | Hodnota | Výsledek 
 |---|---|---
-| buňka bitového pole | `00101001001010100000100100100011` | 
-| maska pro čtení čtvrtého bitu | `00010000000000000000000000000000` | 
+| buňka bitového pole | `00101001001010100000100100100011` | | 
+| maska pro čtení čtvrtého bitu | `00010000000000000000000000000000` | | 
 | logický součin buňky a masky pro třetí bit | `00000000000000000000000000000000` | nula = čtvrtý bit není nastaven 
 
 #### Nastavení hodnoty
