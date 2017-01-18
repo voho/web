@@ -41,4 +41,8 @@ public class WikiPageReference {
 
         return 0;
     }
+
+    public boolean isLeaf() {
+        return getChildrenCount() == 0;
+    }
 }

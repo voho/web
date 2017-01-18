@@ -1,11 +1,16 @@
 package cz.voho.servlet;
 
 import com.google.common.net.UrlEscapers;
-import cz.voho.enrich.*;
+import cz.voho.enrich.Article;
+import cz.voho.enrich.BreadcrumbList;
+import cz.voho.enrich.Item;
+import cz.voho.enrich.ListItem;
+import cz.voho.enrich.MetaDataRoot;
 import cz.voho.utility.Constants;
 import cz.voho.utility.WikiLinkUtility;
 import cz.voho.wiki.WikiBackend;
 import cz.voho.wiki.model.ParsedWikiPage;
+import cz.voho.wiki.model.WikiPageReference;
 import cz.voho.wiki.model.WikiPageReferences;
 import cz.voho.wiki.page.source.WikiPageSourceRepository;
 import freemarker.template.SimpleHash;
@@ -66,12 +71,19 @@ public class WikiPageServlet extends AbstractMenuPageServlet {
                             return article;
                         })
                         .toArray(Article[]::new));
+
+                if (subPages.getItems().stream().allMatch(WikiPageReference::isLeaf)) {
+                    // if all subpages are leaves, we can just display them as siblings
+                    siblingPages = subPages;
+                    model.put("subPages", null);
+                }
             }
         }
 
         if (siblingPages != null && siblingPages.getItems() != null) {
-            siblingPages.getItems().removeIf(a -> a.getId().equals(parsedWikiPage.getSource().getId()));
             if (!siblingPages.getItems().isEmpty()) {
+                siblingPages.getItems().removeIf(a -> a.getId().equals(parsedWikiPage.getSource().getId()));
+
                 model.put("siblingPages", siblingPages);
             }
         }

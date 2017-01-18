@@ -78,6 +78,7 @@ section#wiki-content a {
 
 .wiki p {
     margin-bottom: 1em;
+    text-align: justify;
 }
 
 .wiki .hljs {
@@ -85,10 +86,6 @@ section#wiki-content a {
     font-size: 80%;
     line-height: 1.6;
     padding: 1em 2em;
-}
-
-.wiki p {
-    text-align: justify;
 }
 
 .wiki table {
@@ -109,8 +106,8 @@ section#wiki-content a {
 }
 
 .tiles article {
-    height: 18vh;
-    min-height: 10em;
+    height: 15vh;
+    min-height: 8em;
 }
 
 .wiki blockquote {
@@ -204,6 +201,7 @@ section#wiki-content a {
 
 header.major > :first-child:after {
     background-color: #515670;
+    display: none;
 }
 
 /* wiki cover */
@@ -254,7 +252,7 @@ section#breadcrumbs p {
 /* button */
 
 .button {
-    box-shadow: inset 0 0 20px 5px #515670;
+    box-shadow: inset 0 0 3em 5px #515670;
     text-transform: none;
     letter-spacing: normal;
 }
@@ -295,10 +293,4 @@ section#breadcrumbs p {
 
 ul.icons {
     font-size: 150%;
-}
-
-/* index */
-
-#main > * > .inner {
-    /*padding-top: 1em;*/
 }
