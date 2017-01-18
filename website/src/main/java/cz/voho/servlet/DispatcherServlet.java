@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 public class DispatcherServlet extends HttpServlet {
     @Override
@@ -39,6 +40,18 @@ public class DispatcherServlet extends HttpServlet {
             try {
                 response.setStatus(302);
                 response.sendRedirect(requestUri + "/");
+                return true;
+            } catch (IOException e) {
+                throw new IllegalStateException("Cannot redirect: " + requestUri, e);
+            }
+        }
+
+        String[] parts = requestUri.split(Pattern.quote("/"));
+
+        if (parts.length > 1) {
+            try {
+                response.setStatus(302);
+                response.sendRedirect(parts[parts.length - 1] + "/");
                 return true;
             } catch (IOException e) {
                 throw new IllegalStateException("Cannot redirect: " + requestUri, e);

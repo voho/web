@@ -1,5 +1,7 @@
 package cz.voho.utility;
 
+import java.util.regex.Pattern;
+
 public class WikiLinkUtility {
     public static String stripSlashes(String value) {
         while (value.startsWith("/")) {
