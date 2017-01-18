@@ -101,7 +101,7 @@ D->B [label=" 7"]
 Matice se inicializuje do následující podoby (v řádcích je první uzel, ve sloupcích druhý):
 
 |   | A | B | C | D
-|---
+|---|---|---|---|---
 | **A** | 0 | 1 | - | -
 | **B** | - | 0 | 2 | -
 | **C** | - | - | 0 | 3
@@ -110,7 +110,7 @@ Matice se inicializuje do následující podoby (v řádcích je první uzel, ve
 Po výpočtu vypadá matice takto:
 
 |   | A | B | C | D
-|---
+|---|---|---|---|---
 | **A** | 0 | 1 | 3 | 6
 | **B** | 9 | 0 | 2 | 5
 | **C** | 7 | 8 | 0 | 3
@@ -121,7 +121,7 @@ Z matice lze tedy například přečíst, že nejkratší cesta z uzlu *A* do uz
 Pokud se společně s maticí nejkratších délek udržuje i seznam předchůdců, vypadá takto:
 
 |   | A | B | C | D
-|---
+|---|---|---|---|---
 | **A** | A | A | B | C
 | **B** | D | B | B | C
 | **C** | D | D | C | C

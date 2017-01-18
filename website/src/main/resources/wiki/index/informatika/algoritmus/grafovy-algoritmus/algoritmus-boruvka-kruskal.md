@@ -19,7 +19,7 @@ Borůvkův algoritmus je pojmenovaný po **Otakaru Borůvkovi** (1899-1995), kte
 Nejprve vytvoříme seznam *L* hran vstupního grafu *G* a seřadíme je do neklesajícího pořadí podle ohodnocení hran (pořadí hran se stejným ohodnocením není důležité). Podgraf *S* grafu *G* (označený zelenou barvou) je prázdný, zbývá spojit 6 uzlů.
 
 | D,E (1) | B,C (1) | B,D (2) | B,E (3) | B,F (3) | A,B (5) | D,F (9)
-|---
+|---|---|---|---|---|---|---
 
 ```dot:graph
 rankdir=LR
@@ -39,7 +39,7 @@ B--C [label=" 1"]
 První hrana v seznamu *L* je *(D,E)*. V grafu *S* jejím přidáním nevznikne kružnice, tak ji do něho přidáme. Podgraf *S* obsahuje první hranu, zbývá spojit 4 uzly.
 
 | **D,E (1)** | B,C (1) | B,D (2) | B,E (3) | B,F (3) | A,B (5) | D,F (9)
-|---
+|---|---|---|---|---|---|---
 
 ```dot:graph
 rankdir=LR
@@ -53,8 +53,8 @@ B--C [label=" 1"]
 {rank=same; A;B;C;}
 {rank=same; F;D;}
 
-E[fillcolor=seagreen1]
-D[fillcolor=seagreen1]
+E[fillcolor=beige]
+D[fillcolor=beige]
 ```
 
 #### Krok 2
@@ -62,7 +62,7 @@ D[fillcolor=seagreen1]
 Další hrana v seznamu *L* je *(B,C)*. Jejím přidáním nevznikne v grafu *S* kružnice, tak ji opět přidáme. Podgraf *S* obsahuje dvě hrany, zbývá spojit 2 uzly.
 
 | - | **B,C (1)** | B,D (2) | B,E (3) | B,F (3) | A,B (5) | D,F (9)
-|---
+|---|---|---|---|---|---|---
 
 ```dot:graph
 rankdir=LR
@@ -76,10 +76,10 @@ B--C [label=" 1",color=forestgreen,penwidth=3]
 {rank=same; A;B;C;}
 {rank=same; F;D;}
 
-E[fillcolor=seagreen1]
-D[fillcolor=seagreen1]
-B[fillcolor=seagreen1]
-C[fillcolor=seagreen1]
+E[fillcolor=beige]
+D[fillcolor=beige]
+B[fillcolor=beige]
+C[fillcolor=beige]
 ```
 
 #### Krok 3
@@ -87,7 +87,7 @@ C[fillcolor=seagreen1]
 Další hrana v seznamu *L* je *(B,D)*. Jejím přidáním nevznikne v grafu *S* kružnice, tak ji přidáme. Podgraf *S* obsahuje tři hrany, zbývá spojit 2 uzly.
 
 | - | - | **B,D (2)** | B,E (3) | B,F (3) | A,B (5) | D,F (9)
-|---
+|---|---|---|---|---|---|---
 
 ```dot:graph
 rankdir=LR
@@ -101,17 +101,17 @@ B--C [label=" 1",color=forestgreen,penwidth=3]
 {rank=same; A;B;C;}
 {rank=same; F;D;}
 
-E[fillcolor=seagreen1]
-D[fillcolor=seagreen1]
-B[fillcolor=seagreen1]
-C[fillcolor=seagreen1]
+E[fillcolor=beige]
+D[fillcolor=beige]
+B[fillcolor=beige]
+C[fillcolor=beige]
 ```
 #### Krok 4
 
 Další hrana v seznamu *L* je *(B,E)*. Jejím přidáním by však v grafu *S* vznikla kružnice, tak ji přeskočíme. Podgraf *S* stále obsahuje tři hrany, zbývá spojit 2 uzly
 
 | - | - | - | **B,E (3)** | B,F (3) | A,B (5) | D,F (9)
-|---
+|---|---|---|---|---|---|---
 
 ```dot:graph
 rankdir=LR
@@ -125,10 +125,10 @@ B--C [label=" 1",color=forestgreen,penwidth=3]
 {rank=same; A;B;C;}
 {rank=same; F;D;}
 
-E[fillcolor=seagreen1]
-D[fillcolor=seagreen1]
-B[fillcolor=seagreen1]
-C[fillcolor=seagreen1]
+E[fillcolor=beige]
+D[fillcolor=beige]
+B[fillcolor=beige]
+C[fillcolor=beige]
 ```
 
 #### Krok 5
@@ -136,7 +136,7 @@ C[fillcolor=seagreen1]
 Další hrana v seznamu *L* je *(B,F)*. Jejím přidáním nevznikne v grafu *S* kružnice, tak ji přidáme. Podgraf *S* obsahuje čtyři hrany, zbývá spojit poslední uzel.
 
 | - | - | - | - | **B,F (3)** | A,B (5) | D,F (9)
-|---
+|---|---|---|---|---|---|---
 
 ```dot:graph
 rankdir=LR
@@ -150,11 +150,11 @@ B--C [label=" 1",color=forestgreen,penwidth=3]
 {rank=same; A;B;C;}
 {rank=same; F;D;}
 
-E[fillcolor=seagreen1]
-D[fillcolor=seagreen1]
-B[fillcolor=seagreen1]
-C[fillcolor=seagreen1]
-F[fillcolor=seagreen1]
+E[fillcolor=beige]
+D[fillcolor=beige]
+B[fillcolor=beige]
+C[fillcolor=beige]
+F[fillcolor=beige]
 ```
 
 #### Krok 6
@@ -162,7 +162,7 @@ F[fillcolor=seagreen1]
 Další hrana v seznamu *L* je *(A,B)*. Jejím přidáním nevznikne v grafu *S* kružnice, tak ji přidáme. Podgraf *S* obsahuje pět hran, všechny uzly jsou spojeny!
 
 | - | - | - | - | - | **A,B (5)** | D,F (9)
-|---
+|---|---|---|---|---|---|---
 
 ```dot:graph
 rankdir=LR
@@ -176,12 +176,12 @@ B--C [label=" 1",color=forestgreen,penwidth=3]
 {rank=same; A;B;C;}
 {rank=same; F;D;}
 
-E[fillcolor=seagreen1]
-D[fillcolor=seagreen1]
-B[fillcolor=seagreen1]
-C[fillcolor=seagreen1]
-F[fillcolor=seagreen1]
-A[fillcolor=seagreen1]
+E[fillcolor=beige]
+D[fillcolor=beige]
+B[fillcolor=beige]
+C[fillcolor=beige]
+F[fillcolor=beige]
+A[fillcolor=beige]
 ```
 
 #### Krok 7
@@ -189,7 +189,7 @@ A[fillcolor=seagreen1]
 Poslední hrana v seznamu *L* je *(D,F)*. Jejím přidáním však vznikne v grafu *S* kružnice, tak ji přidat nemůžeme. Kromě toho je již minimální kostra hotová. Podgraf *S* obsahuje stále pět hran, všechny uzly jsou spojeny.
 
 | - | - | - | - | - | - | **D,F (9)**
-|---
+|---|---|---|---|---|---|---
 
 ```dot:graph
 rankdir=LR
@@ -203,12 +203,12 @@ B--C [label=" 1",color=forestgreen,penwidth=3]
 {rank=same; A;B;C;}
 {rank=same; F;D;}
 
-E[fillcolor=seagreen1]
-D[fillcolor=seagreen1]
-B[fillcolor=seagreen1]
-C[fillcolor=seagreen1]
-F[fillcolor=seagreen1]
-A[fillcolor=seagreen1]
+E[fillcolor=beige]
+D[fillcolor=beige]
+B[fillcolor=beige]
+C[fillcolor=beige]
+F[fillcolor=beige]
+A[fillcolor=beige]
 ```
 
 Výpočet je dokončen, vytvořený graf *S* (zelené hrany) je minimální kostra grafu *G*.

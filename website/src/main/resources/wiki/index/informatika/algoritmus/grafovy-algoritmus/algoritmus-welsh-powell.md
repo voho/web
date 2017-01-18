@@ -6,10 +6,10 @@ Algoritmus Welsh-Powell je [grafový algoritmus](wiki/grafovy-algoritmus) slouž
 
 - Inicializuj pracovní seznam *S* = *V* a počítadlo *i* = 1.
 - Dokud není seznam *S* prázdný, opakuj:
- - Seřaď uzly v seznamu *S* do nerostoucí posloupnosti podle jejich stupně.
- - Obarvi první uzel v posloupnosti barvou číslo *i* a stejnou barvu postupně přiřaď i všem dalším uzlům, které s tímto uzlem nesousedí.
- - Ze seznamu *S* odeber všechny právě obarvené uzly.
- - Inkrementuj počítadlo *i*.
+  - Seřaď uzly v seznamu *S* do nerostoucí posloupnosti podle jejich stupně.
+  - Obarvi první uzel v posloupnosti barvou číslo *i* a stejnou barvu postupně přiřaď i všem dalším uzlům, které s tímto uzlem nesousedí.
+  - Ze seznamu *S* odeber všechny právě obarvené uzly.
+  - Inkrementuj počítadlo *i*.
 
 ### Příklad
 
@@ -18,7 +18,7 @@ Algoritmus Welsh-Powell je [grafový algoritmus](wiki/grafovy-algoritmus) slouž
 Na začátku jsou všechny uzly neobarvené (v závorkách jsou uvedeny stupně uzlů). Seznam *S* je naplněn všemi uzly a seřazen do nerostoucí posloupnosti.
 
 | Seznam S | C(5) | E(4) | F(3) | B(2) | G(2) | A(1) | D(1)
-|---
+|---|---|---|---|---|---|---|---
 
 ```dot:graph
 nodesep = 0.3
@@ -41,7 +41,7 @@ rankdir=LR
 V první iteraci je vybrán první uzel (*C*) a spolu s dalšími uzly, které s ním nesousedí (*G*), je obarven barvou číslo *1* (modrá). Poté jsou obarvené uzly odebrány ze seznamu *S*.
 
 | Seznam S | E(4) | F(3) | B(2) | A(1) | D(1)
-|---
+|---|---|---|---|---|---
 
 ```dot:graph
 nodesep = 0.3
@@ -57,8 +57,8 @@ rankdir=LR
 "E(4)" -- "G(2)"
 "F(3)" -- "C(5)"
 "F(3)" -- "G(2)"
-"C(5)" [fillcolor=khaki]
-"G(2)" [fillcolor=khaki]
+"C(5)" [fillcolor=beige]
+"G(2)" [fillcolor=beige]
 ```
 
 #### Krok 2
@@ -66,7 +66,7 @@ rankdir=LR
 Seznam *S* není prázdný, algoritmus pokračuje dál. Ve druhé iteraci je opět vybrán první uzel (*E*) a spolu s dalšími uzly, které s ním nesousedí (*A*, *D*), je obarven barvou číslo *2* (žlutá). Poté jsou obarvené uzly odebrány ze seznamu *S*.
 
 | Seznam S | F(3) | B(2)
-|---
+|---|---|---
 
 ```dot:graph
 nodesep = 0.3
@@ -82,11 +82,11 @@ rankdir=LR
 "E(4)" -- "G(2)"
 "F(3)" -- "C(5)"
 "F(3)" -- "G(2)"
-"C(5)" [fillcolor=khaki]
-"G(2)" [fillcolor=khaki]
-"A(1)" [fillcolor=seagreen1]
-"D(1)" [fillcolor=seagreen1]
-"E(4)" [fillcolor=seagreen1]
+"C(5)" [fillcolor=beige]
+"G(2)" [fillcolor=beige]
+"A(1)" [fillcolor=greenyellow]
+"D(1)" [fillcolor=greenyellow]
+"E(4)" [fillcolor=greenyellow]
 ```
 
 #### Krok 3
@@ -94,7 +94,7 @@ rankdir=LR
 Seznam *S* stále není prázdný, algoritmus pokračuje dál. Ve třetí iteraci je opět vybrán první uzel (*F*) a spolu s dalšími uzly, které s ním nesousedí (*B*), je obarven barvou číslo *3* (zelená). Poté jsou obarvené uzly odebrány ze seznamu *S*.
 
 | Seznam S | (prázdný)
-|---
+|---|---
 
 ```dot:graph
 nodesep = 0.3
@@ -110,11 +110,11 @@ rankdir=LR
 "E(4)" -- "G(2)"
 "F(3)" -- "C(5)"
 "F(3)" -- "G(2)"
-"C(5)" [fillcolor=khaki]
-"G(2)" [fillcolor=khaki]
-"A(1)" [fillcolor=seagreen1]
-"D(1)" [fillcolor=seagreen1]
-"E(4)" [fillcolor=seagreen1]
+"C(5)" [fillcolor=beige]
+"G(2)" [fillcolor=beige]
+"A(1)" [fillcolor=greenyellow]
+"D(1)" [fillcolor=greenyellow]
+"E(4)" [fillcolor=greenyellow]
 "B(2)" [fillcolor=lightblue]
 "F(3)" [fillcolor=lightblue]
 ```

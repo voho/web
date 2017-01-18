@@ -16,7 +16,7 @@ Pořadí cest ve frontě je určeno následující funkcí:
 
 ```dot:graph
 rankdir = LR
-S [fillcolor=khaki]
+S [fillcolor=beige]
 S--A [label=" 1"]
 A--B [label=" 5"]
 B [label="B, h=21"]
@@ -49,8 +49,8 @@ Heuristická funkce vzniká na základě (alespoň hrubé) znalosti struktury pr
 Do množiny cest *F* je vložena cesta nulové délky, která začíná i končí počátečním uzlem *S*. U této cesty nemá smysl počítat jakoukoliv délku, protože je zaručeno, že bude v dalším kroku vybrána.
 
 ```dot:graph
-S[fillcolor=khaki]
-G[fillcolor=khaki]
+S[fillcolor=beige]
+G[fillcolor=beige]
 S--A [label=" 5"]
 S--B [label=" 1"]
 S--C [label=" 10"]
@@ -76,7 +76,7 @@ V tomto ohodnoceném grafu je počátečním uzlem *S* a cílovým *G*.
 U grafu je třeba zkontrolovat, zda je použitá heuristická funkce přípustná. V tomto případě to platí, protože je její hodnota vždy menší než hodnota skutečná.
 
 | Množina cest F | (Délka cesty) + heuristika | Poznámka
-|---
+|---|---|---
 | S | - | -
 
 #### Krok 1
@@ -84,7 +84,7 @@ U grafu je třeba zkontrolovat, zda je použitá heuristická funkce přípustn�
 Z množiny *F* je vybrána jediná cesta, která se v ní nachází. Nekončí v cílovém uzlu, výpočet tedy pokračuje. Z jejího posledního uzlu *S* lze pokračovat do uzlů *A*, *B*, *C*. Nové cesty budou vloženy do množiny *F*.
 
 | Množina cest F | (Délka cesty) + heuristika | Poznámka
-|---
+|---|---|---
 | S - B | (1) + 3 = 4 | -
 | S - A | (5) + 2 = 7 | -
 | S - C | (10) + 1 = 11 | -
@@ -94,7 +94,7 @@ Z množiny *F* je vybrána jediná cesta, která se v ní nachází. Nekončí v
 Z množiny *F* je vybrána nejkratší cesta *S-B*. Nekončí v cílovém uzlu, výpočet tedy pokračuje. Z jejího posledního uzlu *B* lze pokračovat do uzlu *D*. Nová cesta bude vložena do množiny *F*.
 
 | Množina cest F | (Délka cesty) + heuristika | Poznámka
-|---
+|---|---|---
 | S - A | (5) + 2 = 7 | -
 | S - B - D | (1 + 5) + 2 = 8 | -
 | S - C | (10) + 1 = 11 | -
@@ -104,7 +104,7 @@ Z množiny *F* je vybrána nejkratší cesta *S-B*. Nekončí v cílovém uzlu, 
 Z množiny *F* je vybrána nejkratší cesta *S-A*. Nekončí v cílovém uzlu, výpočet tedy pokračuje. Z jejího posledního uzlu *A* lze pokračovat do uzlu *C*. Množina *F* však již cestu končící v uzlu *C* obsahuje, a tak bude zachována jen ta nejkratší z nich. V tomto případě je již známá cesta kratší, takže nebude do množiny *F* přidána.
 
 | Množina cest F | (Délka cesty) + heuristika | Poznámka
-|---
+|---|---|---
 | S - B - D | (1 + 5) + 2 = 8 | -
 | S - C | (10) + 1 = 11 | -
 | S - A - C | (5 + 6) + 1 = 12 | do *C* známe kratší cestu, tuto odebrat
@@ -114,7 +114,7 @@ Z množiny *F* je vybrána nejkratší cesta *S-A*. Nekončí v cílovém uzlu, 
 Z množiny *F* je vybrána nejkratší cesta *S-B-D*. Nekončí v cílovém uzlu, výpočet tedy pokračuje. Z jejího posledního uzlu *D* lze pokračovat do uzlu *C*.Množina *F* však již cesty končící v uzlu *C* obsahuje, a tak bude zachována jen ta nejkratší z nich. V tomto případě je nová cesta kratší, takže bude do množiny *F* vložena, zatímco cesta *S-C* bude z množiny *F* odebrána.
 
 | Množina cest F | (Délka cesty) + heuristika | Poznámka
-|---
+|---|---|---
 | S - B - D - C | (1 + 5 + 1) + 1 = 9 | -
 | S - C | (10) + 1 = 11 | do *C* známe kratší cestu, tuto odebrat
 
@@ -123,7 +123,7 @@ Z množiny *F* je vybrána nejkratší cesta *S-B-D*. Nekončí v cílovém uzlu
 Z množiny *F* je vybrána nejkratší cesta *S-B-D-C*. Nekončí v cílovém uzlu, výpočet tedy pokračuje. Z jejího posledního uzlu *C* lze pokračovat do uzlů *A*, *E*, *G*. Nové cesty budou vloženy do množiny *F*.
 
 | Množina cest F | (Délka cesty) + heuristika | Poznámka
-|---
+|---|---|---
 | S - B - D - C - E | (1 + 5 + 1 + 1) + 1 = 9 | -
 | S - B - D - C - G | (1 + 5 + 1 + 5) + 0 = 12 | -
 | S - B - D - C - A | (1 + 5 + 1 + 6) + 2 = 15 | -
@@ -133,7 +133,7 @@ Z množiny *F* je vybrána nejkratší cesta *S-B-D-C*. Nekončí v cílovém uz
 Z množiny *F* je vybrána nejkratší cesta *S-B-D-C-E*. Nekončí v cílovém uzlu, výpočet tedy pokračuje. Z jejího posledního uzlu *E* lze pokračovat do uzlů *G*. Množina *F* však již cesty končící v uzlu *G* obsahuje, a tak bude zachována jen ta nejkratší z nich. V tomto případě je nová cesta kratší, takže bude do množiny *F* vložena, zatímco cesta *S-B-D-C-G* bude z množiny *F* odebrána.
 
 | Množina cest F | (Délka cesty) + heuristika | Poznámka
-|---
+|---|---|---
 | S - B - D - C - E - G | (1 + 5 + 1 + 1 + 2) + 0 = 10 | -
 | S - B - D - C - G | (1 + 5 + 1 + 5) + 0 = 12 | do *C* známe kratší cestu, tuto odebrat
 | S - B - D - C - A | (1 + 5 + 1 + 6) + 2 = 15 | -
@@ -147,8 +147,8 @@ Z množiny *F* je vybrána nejkratší cesta *S-B-D-C-E-G*. Ta končí v cílov�
 Nejkratší nalezená cesta je *S-B-D-C-E-G* s délkou 10. Tato cesta je výstupem algoritmu.
 
 ```dot:graph
-S[fillcolor=khaki]
-G[fillcolor=khaki]
+S[fillcolor=beige]
+G[fillcolor=beige]
 B[fillcolor=seagreen1]
 D[fillcolor=seagreen1]
 C[fillcolor=seagreen1]
@@ -181,15 +181,15 @@ Asymptotická složitost algoritmu A-Star silně závisí na použité heuristic
 ### Podobnost s ostatními algoritmy
 
 - **Prohledávání do šířky**
- - všechny hrany mají stejné ohodnocení, heuristická funkce je konstantní
- - *h(x)* = C
- - *cost(x,y)* = C
+  - všechny hrany mají stejné ohodnocení, heuristická funkce je konstantní
+  - *h(x)* = C
+  - *cost(x,y)* = C
 - **Uniform Cost Search** 
- - heuristická funkce je konstantní
- - *h(x)* = C
+  - heuristická funkce je konstantní
+  - *h(x)* = C
 - **Greedy Search** 
- - všechny hrany mají stejné ohodnocení
- - *cost(x,y)* = C
+  - všechny hrany mají stejné ohodnocení
+  - *cost(x,y)* = C
 
 ### Reference
 

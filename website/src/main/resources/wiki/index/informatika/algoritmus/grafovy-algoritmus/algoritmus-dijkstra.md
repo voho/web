@@ -8,23 +8,26 @@ Vstupem algoritmu je nezáporně ohodnocený graf a počáteční uzel, výstupe
 
 ### Kroky algoritmu
 
-Vstup: ohodnocený graf *G*, počáteční uzel *s*
-Výstup: asociativní pole *D(u)*, udávající nejkratší vzdálenost mezi uzlem *s* a uzlem *u*
+Vstup
+: ohodnocený graf *G*, počáteční uzel *s*
+
+Výstup
+: asociativní pole *D(u)*, udávající nejkratší vzdálenost mezi uzlem *s* a uzlem *u*
 
 - **INICIALIZACE:**
 - Vytvoř množinu uzlů *X*.
 - Do množiny *X* vlož počáteční uzel *s*.
 - Vytvoř asociativní pole čísel pro každý uzel *D(u)*.
 - Inicializuj hodnoty pole *D* takto:
- - pro počáteční uzel *s* = 0
- - pro každý uzel *u* sousedící s počátečním uzlem *s* = ohodnocení hrany *(s,u)*
- - pro ostatní uzly = nekonečno
+  - pro počáteční uzel *s* = 0
+  - pro každý uzel *u* sousedící s počátečním uzlem *s* = ohodnocení hrany *(s,u)*
+  - pro ostatní uzly = nekonečno
 - **VÝPOČET:**
 - Dokud nejsou v množině *X* všechny uzly grafu *G*, opakuj:
- - Najdi uzel *w* s minimální hodnotou *D(w)*.
- - Přidej uzel *w* do množiny *X*.
- - Pro každý uzel *u* sousedící s uzlem *w* který není v množině *X* proveď:
-  - hodnota *D(u)* je minimum ze stávající hodnoty a *D(w)* plus ohodnocení hrany *(w,u)*.
+  - Najdi uzel *w* s minimální hodnotou *D(w)*.
+  - Přidej uzel *w* do množiny *X*.
+  - Pro každý uzel *u* sousedící s uzlem *w* který není v množině *X* proveď:
+    - hodnota *D(u)* je minimum ze stávající hodnoty a *D(w)* plus ohodnocení hrany *(w,u)*.
 
 ### Příklad
 
@@ -45,7 +48,7 @@ A--C [label=" 3"]
 D--A [label=" 4"]
 D--C [label=" 1"]
 D--F [label=" 7"]
-A [fillcolor=khaki;]
+A [fillcolor=greenyellow]
 ```
 
 #### Všechny kroky v tabulce
@@ -53,7 +56,7 @@ A [fillcolor=khaki;]
 Každý řádek tabulky představuje jeden krok algoritmu, ve sloupcích jsou uzly grafu *G* a množina *X*. Jednotlivé buňky obsahují hodnotu *D(u)* odpovídajícího uzlu *u* ve sloupci. Zkratka "max" označuje nekonečno.
 
 | A | B | C | D | E | F | množina X
-|---
+|---|---|---|---|---|---|---
 | 0 | 10, *A* | 3, *A* | 4, *A* | max | max | A
 | - | 8, *C* | - | 4, *A* | 11, *C* | max | A, C
 | - | 8, *C* | - | - | 11, *C* | 11, *D* | A, C, D
@@ -64,7 +67,7 @@ Každý řádek tabulky představuje jeden krok algoritmu, ve sloupcích jsou uz
 #### Výsledek
 
 | A | B | C | D | E | F
-|---
+|---|---|---|---|---|---
 | 0 | 8, *C* | 3, *A* | 4, *A* | 11, *C* | 11, *D*
 
 ### Složitost

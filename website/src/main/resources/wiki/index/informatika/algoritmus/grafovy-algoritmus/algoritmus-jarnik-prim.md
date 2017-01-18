@@ -7,8 +7,8 @@ Jarníkův-Primův algoritmus je grafový algoritmus pro vyhledávání **minim�
 - Vytvoř prázdný graf *T*.
 - Do grafu *T* vlož libovolný jeden uzel vstupního grafu *G*.
 - Dokud má graf *T* méně uzlů než vstupní graf *G*, opakuj:
- - Najdi hranu s minimálním ohodnocením, spojující graf *T* s rozdílem grafů *G-T*
- - Přidej tuto hranu do grafu *T*.
+  - Najdi hranu s minimálním ohodnocením, spojující graf *T* s rozdílem grafů *G-T*
+  - Přidej tuto hranu do grafu *T*.
 
 ### Příklad
 
@@ -50,7 +50,7 @@ B--G [label=" 3"]
 D--G [label=" 9"]
 {rank=same; A;F;E;}
 {rank=same; B;D;}
-A [fillcolor=khaki]
+A [fillcolor=greenyellow]
 ```
 
 #### Krok 2
@@ -70,8 +70,8 @@ B--G [label=" 3"]
 D--G [label=" 9"]
 {rank=same; A;F;E;}
 {rank=same; B;D;}
-A [fillcolor=seagreen1]
-F [fillcolor=khaki]
+A [fillcolor=beige]
+F [fillcolor=greenyellow]
 ```
 
 #### Krok 3
@@ -91,9 +91,9 @@ B--G [label=" 3"]
 D--G [label=" 9"]
 {rank=same; A;F;E;}
 {rank=same; B;D;}
-A [fillcolor=seagreen1]
-F [fillcolor=seagreen1]
-E [fillcolor=khaki]
+A [fillcolor=beige]
+F [fillcolor=beige]
+E [fillcolor=greenyellow]
 ```
 #### Krok 4
 
@@ -112,10 +112,10 @@ B--G [label=" 3"]
 D--G [label=" 9"]
 {rank=same; A;F;E;}
 {rank=same; B;D;}
-A [fillcolor=seagreen1]
-F [fillcolor=seagreen1]
-E [fillcolor=seagreen1]
-D [fillcolor=khaki]
+A [fillcolor=beige]
+F [fillcolor=beige]
+E [fillcolor=beige]
+D [fillcolor=greenyellow]
 ```
 
 #### Krok 5
@@ -135,11 +135,11 @@ B--G [label=" 3"]
 D--G [label=" 9",penwidth=3,color=blue]
 {rank=same; A;F;E;}
 {rank=same; B;D;}
-A [fillcolor=seagreen1]
-F [fillcolor=seagreen1]
-E [fillcolor=seagreen1]
-D [fillcolor=seagreen1]
-B [fillcolor=khaki]
+A [fillcolor=beige]
+F [fillcolor=beige]
+E [fillcolor=beige]
+D [fillcolor=beige]
+B [fillcolor=greenyellow]
 ```
 
 #### Krok 6
@@ -159,12 +159,12 @@ B--G [label=" 3",penwidth=3,color=blue]
 D--G [label=" 9",penwidth=3,color=blue]
 {rank=same; A;F;E;}
 {rank=same; B;D;}
-A [fillcolor=seagreen1]
-F [fillcolor=seagreen1]
-E [fillcolor=seagreen1]
-D [fillcolor=seagreen1]
-B [fillcolor=seagreen1]
-C [fillcolor=khaki]
+A [fillcolor=beige]
+F [fillcolor=beige]
+E [fillcolor=beige]
+D [fillcolor=beige]
+B [fillcolor=beige]
+C [fillcolor=greenyellow]
 ```
 
 #### Krok 7
@@ -184,13 +184,13 @@ B--G [label=" 3",penwidth=3,color=blue]
 D--G [label=" 9",penwidth=3,color=blue]
 {rank=same; A;F;E;}
 {rank=same; B;D;}
-A [fillcolor=seagreen1]
-F [fillcolor=seagreen1]
-E [fillcolor=seagreen1]
-D [fillcolor=seagreen1]
-B [fillcolor=seagreen1]
-C [fillcolor=seagreen1]
-G [fillcolor=khaki]
+A [fillcolor=beige]
+F [fillcolor=beige]
+E [fillcolor=beige]
+D [fillcolor=beige]
+B [fillcolor=beige]
+C [fillcolor=beige]
+G [fillcolor=greenyellow]
 ```
 
 #### Krok 8
@@ -210,13 +210,13 @@ B--G [label=" 3",penwidth=3,color=forestgreen]
 D--G [label=" 9"]
 {rank=same; A;F;E;}
 {rank=same; B;D;}
-A [fillcolor=seagreen1]
-F [fillcolor=seagreen1]
-E [fillcolor=seagreen1]
-D [fillcolor=seagreen1]
-B [fillcolor=seagreen1]
-C [fillcolor=seagreen1]
-G [fillcolor=seagreen1]
+A [fillcolor=beige]
+F [fillcolor=beige]
+E [fillcolor=beige]
+D [fillcolor=beige]
+B [fillcolor=beige]
+C [fillcolor=beige]
+G [fillcolor=beige]
 ```
 
 ### Časová složitost
