@@ -127,6 +127,8 @@ section#wiki-content a {
 
 .wiki code {
     font-family: Monaco, monospace;
+    padding: 0;
+    margin: 0;
 }
 
 #main .inner.lower {

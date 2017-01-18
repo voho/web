@@ -2,19 +2,28 @@
 
 Zjednodušeně řečeno, v počítači pracuje s binárními čísly procesor. Ten má pevně danou a hlavně omezenou velikost registrů (velmi malá pracovní paměť určená hlavně pro operandy - pro čísla). Tím pádem je omezený i číselný rozsah, který je do každého z nich možné uložit. Abychom mohli toto přesně zdokumentovat, je třeba pro procesor definovat tzv. **binární řádovou mřížku**.
 
+### Binární řádová mřížka
+
 Binární řádová mřížka přesně popisuje **formát** čísel, se kterými dokáže daný procesor pracovat. Mezi její parametry patří:
 
-* délka *l* - počet bitů mřížky, který určuje počet rozlišitelných hodnot
-* jednotka *e* - nejmenší číslo, které LZE v mřížce uložit
-* modul *Z* - nejmenší číslo, které již NELZE v mřížce uložit
-* pozice desetinné čárky - může být pevná či plovoucí (v tomto článku se pracuje pouze s celými čísly, takže je desetinná čárka napevno vždy za posledním bitem vpravo)
+délka *l*
+: počet bitů mřížky, který určuje počet rozlišitelných hodnot
+
+jednotka *e*
+: nejmenší číslo, které LZE v mřížce uložit
+
+modul *Z*
+: nejmenší číslo, které NELZE v mřížce uložit
+
+pozice desetinné čárky
+: může být pevná či plovoucí (v tomto článku se pracuje pouze s celými čísly, takže je desetinná čárka napevno vždy za posledním bitem vpravo)
 
 Příklad binární mřížky s délkou 8 bitů:
 
-| Řád || 7. | 6. | 5. | 4. | 3. | 2. | 1. | 0. ||
+| Řád | | 7. | 6. | 5. | 4. | 3. | 2. | 1. | 0. | |
 |---|---|---|---|---|---|---|---|---|---|---
-| Ukázkové číslo || 0 | 1 | 1 | 0 | 1 | 0 | 0 | 1 | =105
-| Jednotka || 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | =1
+| Příklad | | 0 | 1 | 1 | 0 | 1 | 0 | 0 | 1 | =105
+| Jednotka | | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | =1
 | Modul | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | =256
 
 ### Zápis čísel bez znaménka

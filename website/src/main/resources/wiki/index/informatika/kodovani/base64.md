@@ -1,11 +1,9 @@
 ## Base 64
 
-Base 64 je [kódování](wiki/kodovani), které reprezentuje libovolnou posloupnost bajtů (bajt = 8 bitů) jako [ASCII](wiki/ascii) řetězec s omezenou abecedou.
-V ASCII je 95 tzv. **tisknutelných znaků** (printable characters). To jsou například písmena, čísla a symboly.
-Abeceda použitá tímto kódováním obsahuje 64 znaků, což je nejvyšší mocnina dvou, která lze celá popsat "tisknutelnými znaky" (printable characters), kterých je v ASCII 95.
-Používá se tam, kde je potřeba přenést binární data po kanálu, který podporuje pouze ASCII nebo jiné osmibitové kódování.
-Takovým kanálem může být například e-mail, adresa webové stránky, název souboru v určitém souborovém systému, apod.
-Kódování původně vzniklo proto, aby bylo možné bezpečně přenášet binární data po modemech, které mohly určitou binární posloupnost chápat jako řídící instrukce.
+Base 64 je [kódování](wiki/kodovani), které reprezentuje libovolnou posloupnost bajtů (bajt = 8 bitů) jako [ASCII](wiki/ascii) řetězec.
+
+Kódování Base 64 se používá tam, kde je potřeba přenést binární data po kanálu, který je schopen přenášet ASCII, ale nikoliv libovolná binární data.
+Může to být například proto, že některé posloupnosti bitů mohou být přenosovými komponentami (např. dříve modemy) interpretovány jako speciální instrukce.
 
 Každých 24 bitů (tři bajty) na vstupu je rozděleno na čtyři části po šesti bitech (€24 / 4 = 6€). 
 Každé toto šestibitové číslo v rozsahu 0 (*000000*) až 63 (*111111*) slouží jako index do této tabulky znaků:
@@ -32,12 +30,12 @@ Každé toto šestibitové číslo v rozsahu 0 (*000000*) až 63 (*111111*) slou
 Pokud délka vstupu není dělitelná číslem 24, mohou nastat tyto možnosti:
 
 - zbývající délka je 8 bitů:
-  - binární řetězec se doplní čtyřmi nulami, aby jeho délka byla 12 (€(8+4) / 6 = 2€)
-  - podle tabulky se zakódují dva znaky
+  - binární řetězec se doplní čtyřmi nulami, aby jeho délka byla 12
+  - podle tabulky se zakódují dva znaky: €(8+4) / 6 = 2€
   - zakódovaná čtveřice znaků se doplní dvěmi rovnítky: *==*
 - zbývající délka je 16 bitů:
-  - binární řetězec se doplní dvěma nulami, aby jeho délka byla 18 (€(16+2) / 6 = 3€)
-  - podle tabulky se zakódují tři znaky
+  - binární řetězec se doplní dvěma nulami, aby jeho délka byla 18
+  - podle tabulky se zakódují tři znaky: €(16+2) / 6 = 3€
   - zakódovaná čtveřice znaků se doplní jedním rovnítkem: *=* 
 
 Těmto úpravám se říká "padding" a některé implementace kódování si umí poradit i bez nich, avšak standard je předepisuje.
@@ -47,39 +45,35 @@ Délka v bitech se tedy zvětší zhruba o třetinu.
 
 ### Příklady
 
-#### Kódování '01000010011100100110111001101111'
+#### Kódování "01000010011100100110111001101111"
 
-Nejprve každých 24 bitů (tři bajty) na vstupu rozdělíme na čtyři části po šesti bitech.
-Protože je řetězec dlouhý 32 bitů a není tedy dělitelný číslem 24, zbyde nám 8 bitů.
-Zbývajících osm bitů proto doplníme čtyřmi nulami.
+Nejprve každých 24 bitů na vstupu rozdělíme na čtyři části po šesti bitech.
+Protože je řetězec dlouhý 32 bitů a není dělitelný číslem 24, musíme provést padding.
+To znamená, že zbývajících osm bitů doplníme čtyřmi nulami, abychom mohli použít kódovací tabulku, a rezervujeme místo pro dvě chybějící šestice.
 
-```plain
-010000 100111 001001 101110 011011 11[0000]
+
+```
+010000 100111 001001 101110, 011011 11[0000] [??????] [??????]
 ```
 
-Každou šestici teď zakódujeme pomocí kódovací tabulky:
+Každou šestici teď zakódujeme pomocí kódovací tabulky a poslední dvě chybějící šestice nahradíme rovnítky podle standardu:
 
-```plain
-QnJubw
 ```
-
-Protože jsou výstupem kódování čtveřice bajtů a my jich máme pouze šest, je nutné poslední čtveřici doplnit dvěma rovnítky.
-
-```plain
 QnJubw==
 ```
 
-#### Dekódování 'QnJubw=='
+#### Dekódování "QnJubw=="
 
-Pomocí kódovací tabulky zapíšeme binární hodnoty všech znaků. Rovnítka přeskočíme.
+Pomocí kódovací tabulky zapíšeme binární hodnoty všech znaků. Rovnítka přeskočíme, protože představují chybějící šestice.
 
-```plain
-010000100111001001101110011011110000
+```
+010000 100111 001001 101110 011011 110000
 ```
 
-Protože zakódovaný řetězec končil dvěma rovnítky (*==*), víme, že do původního binárního řetězce byly doplněny čtyři nuly (viz vysvětlení výše). Tyto nuly proto odebereme a získáme původní binární řetězec:
+Jelikož zakódovaný řetězec končil dvěma rovnítky (*==*), lze jednoznačně odvodit, že do původního binárního řetězce byly doplněny čtyři nuly (viz zdůvodnění výše). 
+Tyto nuly proto odebereme a získáme původní binární řetězec:
 
-```plain
+```
 01000010011100100110111001101111
 ```
 

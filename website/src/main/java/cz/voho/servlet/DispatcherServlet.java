@@ -46,12 +46,14 @@ public class DispatcherServlet extends HttpServlet {
             }
         }
 
-        String[] parts = requestUri.split(Pattern.quote("/"));
+        final String[] parts = WikiLinkUtility.resolveWikiPageId(requestUri).split(Pattern.quote("/"));
 
         if (parts.length > 1) {
             try {
                 response.setStatus(302);
-                response.sendRedirect(parts[parts.length - 1] + "/");
+                final String lastWikiPageId = parts[parts.length - 1];
+                final String correctWikiPageUrl = String.format("/wiki/%s/", lastWikiPageId);
+                response.sendRedirect(correctWikiPageUrl);
                 return true;
             } catch (IOException e) {
                 throw new IllegalStateException("Cannot redirect: " + requestUri, e);
