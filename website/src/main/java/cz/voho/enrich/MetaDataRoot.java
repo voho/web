@@ -1,10 +1,10 @@
 package cz.voho.enrich;
 
 public class MetaDataRoot {
-    private Person person;
-    private WebSite webSite;
-    private Article[] articles;
-    private BreadcrumbList breadcrumbs;
+    private Person person = new Person();
+    private WebSite webSite = new WebSite();
+    private Article[] articles = new Article[0];
+    private BreadcrumbList breadcrumbs = new BreadcrumbList();
 
     public Person getPerson() {
         return person;

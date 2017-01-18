@@ -17,7 +17,18 @@ public class Person {
     private String gender = Constants.GENDER;
     private String email = Constants.EMAIL;
     private String homeLocation = Constants.HOME_LOCATION;
-    private String[] sameAs;
+    private String[] sameAs = {
+            Constants.PROFILE_LINKED_IN,
+            Constants.PROFILE_GITHUB,
+            Constants.PROFILE_TWITTER,
+            Constants.PROFILE_INSTAGRAM,
+            Constants.PROFILE_FLICKR,
+            Constants.PROFILE_SOUNDCLOUD,
+            Constants.PROFILE_SPOTIFY,
+            Constants.PROFILE_ITUNES,
+            Constants.PROFILE_AMAZON,
+            Constants.PROFILE_GOOGLE_MUSIC
+    };
 
     public String getContext() {
         return context;

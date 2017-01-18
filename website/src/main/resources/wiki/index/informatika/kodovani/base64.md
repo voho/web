@@ -52,30 +52,22 @@ Protože je řetězec dlouhý 32 bitů a není dělitelný číslem 24, musíme 
 To znamená, že zbývajících osm bitů doplníme čtyřmi nulami, abychom mohli použít kódovací tabulku, a rezervujeme místo pro dvě chybějící šestice.
 
 
-```
-010000 100111 001001 101110, 011011 11[0000] [??????] [??????]
-```
+    010000 100111 001001 101110, 011011 11[0000] [??????] [??????]
 
 Každou šestici teď zakódujeme pomocí kódovací tabulky a poslední dvě chybějící šestice nahradíme rovnítky podle standardu:
 
-```
-QnJubw==
-```
+    QnJubw==
 
 #### Dekódování "QnJubw=="
 
 Pomocí kódovací tabulky zapíšeme binární hodnoty všech znaků. Rovnítka přeskočíme, protože představují chybějící šestice.
 
-```
-010000 100111 001001 101110 011011 110000
-```
+    010000 100111 001001 101110 011011 110000
 
 Jelikož zakódovaný řetězec končil dvěma rovnítky (*==*), lze jednoznačně odvodit, že do původního binárního řetězce byly doplněny čtyři nuly (viz zdůvodnění výše). 
 Tyto nuly proto odebereme a získáme původní binární řetězec:
 
-```
-01000010011100100110111001101111
-```
+    01000010011100100110111001101111
 
 ### Varianty
 

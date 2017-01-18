@@ -2,11 +2,15 @@ package cz.voho.servlet;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import cz.voho.enrich.*;
+import cz.voho.enrich.MetaDataRoot;
 import cz.voho.utility.Constants;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.ext.servlet.FreemarkerServlet;
-import freemarker.template.*;
+import freemarker.template.Configuration;
+import freemarker.template.ObjectWrapper;
+import freemarker.template.SimpleHash;
+import freemarker.template.TemplateModel;
+import freemarker.template.TemplateModelException;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -16,25 +20,12 @@ import java.time.LocalDate;
 import java.util.Locale;
 
 public abstract class AbstractPageServlet extends FreemarkerServlet {
-
     @Override
     protected final TemplateModel createModel(final ObjectWrapper objectWrapper, final ServletContext servletContext, final HttpServletRequest request, final HttpServletResponse response) throws TemplateModelException {
-        MetaDataRoot metaDataRoot = new MetaDataRoot();
+        final MetaDataRoot metaDataRoot = new MetaDataRoot();
         final SimpleHash model = new SimpleHash(objectWrapper);
         updateModel(request, model, metaDataRoot);
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        if (metaDataRoot.getPerson() != null) {
-            model.put("enrich_person", gson.toJson(metaDataRoot.getPerson()));
-        }
-        if (metaDataRoot.getWebSite() != null) {
-            model.put("enrich_website", gson.toJson(metaDataRoot.getWebSite()));
-        }
-        if (metaDataRoot.getArticles() != null) {
-            model.put("enrich_articles", gson.toJson(metaDataRoot.getArticles()));
-        }
-        if (metaDataRoot.getBreadcrumbs() != null) {
-            model.put("enrich_breadcrumbs", gson.toJson(metaDataRoot.getBreadcrumbs()));
-        }
+        updateModelWithMeta(request, model, metaDataRoot);
         return model;
     }
 
@@ -57,24 +48,23 @@ public abstract class AbstractPageServlet extends FreemarkerServlet {
         model.put("website_full_name", Constants.NAME_WITH_ALIAS);
         model.put("website_full_description", Constants.JOB_TITLE);
         model.put("current_year", String.valueOf(LocalDate.now().getYear()));
+    }
 
-        metaDataRoot.setPerson(new Person());
-        metaDataRoot.setWebSite(new WebSite());
-        metaDataRoot.setArticles(new Article[0]);
-        metaDataRoot.setBreadcrumbs(new BreadcrumbList());
+    protected void updateModelWithMeta(final HttpServletRequest request, final SimpleHash model, final MetaDataRoot metaDataRoot) {
+        final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-        metaDataRoot.getPerson().setSameAs(new String[]{
-                Constants.PROFILE_LINKED_IN,
-                Constants.PROFILE_GITHUB,
-                Constants.PROFILE_TWITTER,
-                Constants.PROFILE_INSTAGRAM,
-                Constants.PROFILE_FLICKR,
-                Constants.PROFILE_SOUNDCLOUD,
-                Constants.PROFILE_SPOTIFY,
-                Constants.PROFILE_ITUNES,
-                Constants.PROFILE_AMAZON,
-                Constants.PROFILE_GOOGLE_MUSIC
-        });
+        if (metaDataRoot.getPerson() != null) {
+            model.put("enrich_person", gson.toJson(metaDataRoot.getPerson()));
+        }
+        if (metaDataRoot.getWebSite() != null) {
+            model.put("enrich_website", gson.toJson(metaDataRoot.getWebSite()));
+        }
+        if (metaDataRoot.getArticles() != null) {
+            model.put("enrich_articles", gson.toJson(metaDataRoot.getArticles()));
+        }
+        if (metaDataRoot.getBreadcrumbs() != null) {
+            model.put("enrich_breadcrumbs", gson.toJson(metaDataRoot.getBreadcrumbs()));
+        }
     }
 
     @Override
@@ -82,7 +72,6 @@ public abstract class AbstractPageServlet extends FreemarkerServlet {
         final Configuration config = super.createConfiguration();
         config.setTemplateLoader(new ClassTemplateLoader(Thread.currentThread().getContextClassLoader(), "template/"));
         config.setEncoding(Locale.ROOT, StandardCharsets.UTF_8.name());
-        config.setTemplateUpdateDelayMilliseconds(5000);
         return config;
     }
 }
