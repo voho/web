@@ -7,6 +7,7 @@ import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import cz.voho.wiki.image.WikiImageCacheWarmUp;
 
 import java.nio.charset.StandardCharsets;
@@ -51,7 +52,7 @@ public class CodePreprocessor implements Preprocessor {
 
     private WikiImageCacheWarmUp wikiImageCacheWarmUp;
 
-    public CodePreprocessor(WikiImageCacheWarmUp wikiImageCacheWarmUp) {
+    public CodePreprocessor(final WikiImageCacheWarmUp wikiImageCacheWarmUp) {
         this.wikiImageCacheWarmUp = wikiImageCacheWarmUp;
     }
 
@@ -81,52 +82,48 @@ public class CodePreprocessor implements Preprocessor {
     }
 
     private void sourceCode(final FencedCodeBlock node, final HtmlWriter html) {
-        html.line();
-        html.srcPosWithTrailingEOL(node.getChars()).withAttr().tag("pre").openPre();
-
+        String lang = "nohighlight";
         final BasedSequence info = node.getInfo();
-
         if (info.isNotNull() && !info.isBlank()) {
-            html.attr("class", info.unescape());
+            lang = info.unescape();
         }
-
-        html.srcPosWithEOL(node.getContentChars()).tag("code");
-        html.text(node.getContentChars().normalizeEOL());
-        html.tag("/code");
-        html.tag("/pre").closePre();
+        html.line();
+        html.raw(PrefixedSubSequence.of(String.format("<pre><code class=\"hljs %s\">", lang)));
+        html.rawPre(node.getContentChars());
+        html.raw("</code></pre>");
         html.line();
     }
 
     private void umlSequence(final HtmlWriter html, final String codeSource) {
-        String codeSourceFixed = UML_PREFIX + codeSource + UML_SUFFIX;
+        final String codeSourceFixed = UML_PREFIX + codeSource + UML_SUFFIX;
         wikiImageCacheWarmUp.warmUpCachePlantUmlSvg(codeSourceFixed);
         final String sourceEncoded = encodeForUrl(codeSourceFixed);
         html.raw(String.format("<div class='figure uml'><img src='/generate/svg/uml?data=%s' alt='UML (sekvenční diagram)' /></div>", sourceEncoded));
     }
 
     private void umlActivity(final HtmlWriter html, final String codeSource) {
-        String codeSourceFixed = UML_PREFIX + codeSource + UML_SUFFIX;
+        final String codeSourceFixed = UML_PREFIX + codeSource + UML_SUFFIX;
         wikiImageCacheWarmUp.warmUpCachePlantUmlSvg(codeSourceFixed);
         final String sourceEncoded = encodeForUrl(codeSourceFixed);
         html.raw(String.format("<div class='figure uml'><img src='/generate/svg/uml?data=%s' alt='UML (diagram aktivit)' /></div>", sourceEncoded));
     }
 
     private void umlClass(final HtmlWriter html, final String codeSource) {
-        String codeSourceFixed = UML_PREFIX + codeSource + UML_SUFFIX;
+        final String codeSourceFixed = UML_PREFIX + codeSource + UML_SUFFIX;
         wikiImageCacheWarmUp.warmUpCachePlantUmlSvg(codeSourceFixed);
         final String sourceEncoded = encodeForUrl(codeSourceFixed);
         html.raw(String.format("<div class='figure uml'><img src='/generate/svg/uml?data=%s' alt='UML (diagram tříd)' /></div>", sourceEncoded));
     }
 
     private void dotDigraph(final HtmlWriter html, final String codeSource) {
-        String codeSourceFixed = "digraph {" + DOT_PREFIX + codeSource + "}";
+        final String codeSourceFixed = "digraph {" + DOT_PREFIX + codeSource + "}";
         wikiImageCacheWarmUp.warmUpCacheDotSvg(codeSourceFixed);
         final String sourceEncoded = encodeForUrl(codeSourceFixed);
         html.raw(String.format("<div class='figure graph'><img src='/generate/svg/graph?data=%s' alt='diagram' /></div>", sourceEncoded));
     }
 
     private void dotGraph(final HtmlWriter html, final String codeSource) {
-        String codeSourceFixed = "graph {" + DOT_PREFIX + codeSource + "}";
+        final String codeSourceFixed = "graph {" + DOT_PREFIX + codeSource + "}";
         wikiImageCacheWarmUp.warmUpCacheDotSvg(codeSourceFixed);
         final String sourceEncoded = encodeForUrl(codeSourceFixed);
         html.raw(String.format("<div class='figure graph'><img src='/generate/svg/graph?data=%s' alt='diagram' /></div>", sourceEncoded));
