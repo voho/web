@@ -23,4 +23,5 @@ public class Constants {
     public static final String PROFILE_AMAZON = "https://www.amazon.com/s/ref=ntt_srch_drd_B00OHRU6TC?ie=UTF8&amp;field-keywords=Vojtech%20Hordejcuk&amp;index=digital-music&amp;search-type=ss";
     public static final String PROFILE_GOOGLE_MUSIC = "https://play.google.com/store/music/artist/Vojtech_Hordejcuk?id=Ajqelbv4qqwma7ewjtd6pkmkkie";
     public static final String PROFILE_SPOTIFY = "https://open.spotify.com/artist/02pC7TpobLA5my9tbGgNyl";
+    public static final String PROFILE_YOUTUBE = "https://www.youtube.com/channel/UCmhcw6dUD3J7dQz17l2KmCg";
 }

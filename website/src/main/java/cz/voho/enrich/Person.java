@@ -26,6 +26,7 @@ public class Person {
             Constants.PROFILE_SOUNDCLOUD,
             Constants.PROFILE_SPOTIFY,
             Constants.PROFILE_ITUNES,
+            Constants.PROFILE_YOUTUBE,
             Constants.PROFILE_AMAZON,
             Constants.PROFILE_GOOGLE_MUSIC
     };

@@ -24,6 +24,9 @@
         <a href="${social_profile_itunes}" class="icon fa-apple"><span class="label">iTunes</span></a>
     </li>
     <li>
+        <a href="${social_profile_youtube}" class="icon fa-youtube"><span class="label">YouTube</span></a>
+    </li>
+    <li>
         <a href="${social_profile_amazon}" class="icon fa-amazon"><span class="label">Amazon Music</span></a>
     </li>
     <li>
