@@ -5,11 +5,16 @@
 <!--[if lte IE 8]>
 <script src="/assets/js/ie/respond.min.js"></script>
 <![endif]-->
-<script src="/assets/js/main.js"></script>
 
 <!-- syntax highlighter -->
 <script src="/assets/highlight/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- stupid effects for the intro page -->
+<script src="/assets/js/particles.min.js"></script>
+<script src="/assets/js/typed.min.js"></script>
+
+<!-- everything put together -->
+<script src="/assets/js/main.js"></script>
 
 <!-- Google Analytics -->
 <script>
