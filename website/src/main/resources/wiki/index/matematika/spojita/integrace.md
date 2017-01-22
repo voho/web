@@ -8,38 +8,34 @@ Primitivní funkce k [funkci](wiki/zobrazeni) *f(x)* v intervalu *I* je taková 
 
 Neurčitý integrál funkce *f(x)* je [množina](wiki/mnozina) všech primitivních funkcí k funkci *f(x)*. Postup hledání těchto funkcí se nazývá **integrování** a je to opačný proces k derivování.
 
+Integrace funkce *f* se zapisuje jako €\int f(x) \mathrm{d}x = F(x) €.
+
 ### Tabulkové integrály
 
 #### Polynomy
 
-€€ 
-\begin{align*}
-\int x^c \; \mathrm{d}x &= \frac{x^{c+1}}{c+1} + C, c \neq -1, x > 0 \\
-\int \frac{1}{x} \; \mathrm{d}x &= \ln |x| + C, x \neq 0 \\
-\end{align*}
-€€
+| Funkce | Primitivní funkce
+|---|---
+| €x^c€ | €\frac{x^{c+1}}{c+1} + C, c \neq -1, x > 0€
+| €\frac{1}{x}€ | €\ln \lvert x \rvert + C, x \neq 0€
 
 #### Exponenciály a logaritmy
 
-€€
-\begin{align*}
-\int e^x \; \mathrm{d}x &= e^x + C \\
-\int c^x \; \mathrm{d}x &= \frac{c^x}{\ln c} + C, c > 0, c \neq 1 \\
-\int \log_c x \; \mathrm{d}x &= x \cdot \log_c x - \frac{x}{\ln c} + C \\
-\int \ln x \; \mathrm{d}x &= x \cdot \log_e x - \frac{x}{\ln e} = x \cdot \ln x - x + C \\
-\end{align*}
-€€
+| Funkce | Primitivní funkce
+|---|---
+| €e^x€ | €e^x + C€
+| €c^x€ | €\frac{c^x}{\ln c} + C, c > 0, c \neq 1€
+| €\log_c x€ | €x \cdot \log_c x - \frac{x}{\ln c} + C€
+| €\ln x€ | €x \cdot \log_e x - \frac{x}{\ln e} = x \cdot \ln x - x + C€
 
 #### Goniometrické funkce
 
-€€
-\begin{align*}
-\int \sin x \; \mathrm{d}x &= - \cos x + C \\
-\int \cos x \; \mathrm{d}x &= \sin x + C \\
-\int \sinh x \; \mathrm{d}x &= \cosh x + C \\
-\int \cosh x \; \mathrm{d}x &= \sinh x + C \\
-\end{align*}
-€€
+| Funkce | Primitivní funkce
+|---|---
+| €\sin x€ | €-\cos x + C€
+| €\cos x€ | €\sin x + C€
+| €\sinh x€ | €\cosh x + C€
+| €\cosh x€ | €\sinh x + C€
 
 ### Metody integrování
 

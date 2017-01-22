@@ -12,34 +12,28 @@ f'(x) = \frac{\mathrm{d}x}{\mathrm{d}y} = \lim_{\delta \rightarrow 0} \frac{f(x+
 
 #### Polynomy
 
-€€
-\begin{align*}
-(c)' &= 0 \\
-(x^c)' &= c \cdot x^{c-1}
-\end{align*}
-€€
+| Funkce | Derivace funkce
+|---|---
+| €c€ | €0€
+| €x^c€ | €c \cdot x^{c-1}€
 
 #### Mocniny a logaritmy
 
-€€
-\begin{align*}
-(c^x)' &= c^x \cdot \ln c \\
-(e^x)' &= e^x \cdot \ln e = e^x \\
-(\log_a x)' &= \frac{1}{x \cdot \ln a} \\
-(\ln x)' &= \frac{1}{x \cdot \ln e} = \frac{1}{x}
-\end{align*}
-€€
+| Funkce | Derivace funkce
+|---|---
+| €c^x€ | €c^x \cdot \ln c€
+| €e^x€ | €e^x \cdot \ln e = e^x€
+| €\log_a x€ | €\frac{1}{x \cdot \ln a}€
+| €\ln x€ | €\frac{1}{x \cdot \ln e} = \frac{1}{x}€
 
 #### Goniometrické funkce
 
-€€
-\begin{align*}
-(\sin x)' &= \cos x \\
-(\cos x)' &= -\sin x \\
-(\mathrm{tg}\; x)' &= \frac{1}{\cos^2 x} \\
-(\mathrm{cotg}\; x)' &= -\frac{1}{\sin^2 x} 
-\end{align*}
-€€
+| Funkce | Derivace funkce
+|---|---
+| €\sin x€ | €\cos x€
+| €\cos x€ | €-\sin x€
+| €\mathrm{tg}\; x€ | €\frac{1}{\cos^2 x}€
+| €\mathrm{cotg}\; x€ | €-\frac{1}{\sin^2 x}€
 
 ### Pravidla pro výpočet
 
