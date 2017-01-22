@@ -57,7 +57,7 @@ Monitor je typ zámku, který spojuje koncepty **vlastníka** a **množiny čeka
 
 Příkladem může být implementace monitoru v jazyce Java, znázorněná následujícím obrázkem:
 
-```uml:digraph
+```dot:digraph
 nodesep=1;
 edgesep=5;
 splines=false;
