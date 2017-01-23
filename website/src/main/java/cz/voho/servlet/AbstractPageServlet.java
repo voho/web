@@ -49,6 +49,7 @@ public abstract class AbstractPageServlet extends FreemarkerServlet {
         model.put("website_full_name", Constants.NAME_WITH_ALIAS);
         model.put("website_full_description", Constants.JOB_TITLE);
         model.put("current_year", String.valueOf(LocalDate.now().getYear()));
+        model.put("website_author_age", LocalDate.of(1987, 9, 16).until(LocalDate.now()).getYears());
     }
 
     protected void updateModelWithMeta(final HttpServletRequest request, final SimpleHash model, final MetaDataRoot metaDataRoot) {
