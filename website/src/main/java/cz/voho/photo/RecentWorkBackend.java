@@ -26,28 +26,35 @@ public class RecentWorkBackend {
     private static final int UPDATE_INTERVAL_SECONDS = 300;
 
     private final ScheduledExecutorService scheduledExecutorService;
+    private final LambdaClient lambdaClient;
     private final AtomicReference<GetRecentPhotosResponse> photosCache;
     private final AtomicReference<GetRecentSongsResponse> songsCache;
 
     private RecentWorkBackend(final LambdaClient lambdaClient) {
         this.scheduledExecutorService = ExecutorProvider.INSTAGRAM_UPDATER_EXECUTOR;
+        this.lambdaClient = lambdaClient;
         this.photosCache = new AtomicReference<>(null);
         this.songsCache = new AtomicReference<>(null);
 
         this.scheduledExecutorService.scheduleWithFixedDelay(
-                () -> updateCache(lambdaClient),
+                this::update,
                 0,
                 UPDATE_INTERVAL_SECONDS,
                 TimeUnit.SECONDS
         );
     }
 
-    private void updateCache(final LambdaClient lambdaClient) {
-        updateRecentPhotos(lambdaClient);
-        updateRecentSongs(lambdaClient);
+    @Override
+    protected void finalize() throws Throwable {
+        scheduledExecutorService.shutdown();
     }
 
-    private void updateRecentSongs(final LambdaClient lambdaClient) {
+    private void update() {
+        updateRecentPhotos();
+        updateRecentSongs();
+    }
+
+    private void updateRecentSongs() {
         final GetRecentSongsRequest request = new GetRecentSongsRequest();
         request.setCount(RECENT_SONGS_COUNT);
 
@@ -61,7 +68,7 @@ public class RecentWorkBackend {
         }
     }
 
-    private void updateRecentPhotos(final LambdaClient lambdaClient) {
+    private void updateRecentPhotos() {
         final GetRecentPhotosRequest request = new GetRecentPhotosRequest();
         request.setCount(RECENT_PHOTO_COUNT);
 
@@ -76,16 +83,20 @@ public class RecentWorkBackend {
     }
 
     public List<Song> getRecentTracks() {
-        if (songsCache.get() == null) {
+        final GetRecentSongsResponse latestValue = songsCache.get();
+
+        if (latestValue == null) {
             return Collections.emptyList();
         }
-        return songsCache.get().getSongs().getSongs();
+        return latestValue.getSongs().getSongs();
     }
 
     public List<Image> getRecentImages() {
-        if (photosCache.get() == null) {
+        final GetRecentPhotosResponse latestValue = photosCache.get();
+
+        if (latestValue == null) {
             return Collections.emptyList();
         }
-        return photosCache.get().getRecentItems().getData();
+        return latestValue.getRecentItems().getData();
     }
 }
