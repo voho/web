@@ -1,13 +1,11 @@
 ## Faktoriál
 
-Faktoriál je matematická operace definovaná pro přirozená čísla včetně nuly. Faktoriál čísla *n* se značí jako *n!* a tento zápis se čte se jako "n faktoriál".
-
-Faktoriál čísla *0* je definován jako *1* a pro všechna ostatní přirozená čísla jako součin všech přirozených čísel od jedné až do *n* (včetně).
+Faktoriál je matematická operace definovaná pro všechna přirozená čísla včetně nuly. Faktoriál čísla *n* se značí jako *n!* a tento zápis se čte se jako "n faktoriál". Faktoriál čísla *0* je definován jako *1* a pro každé přirozené číslo *n* jako součin všech přirozených čísel od jedné až do *n* (včetně). Výpočet pro obecný případ lze definovat i rekurentně, a to jako součin *n* a faktoriálu předchozího čísla *n-1*.
 
 €€
 n! = \begin{cases} 
 n = 0 &: 1 \\ 
-n > 0 &: \prod_{k=1}^n k
+n > 0 &: \prod_{k=1}^n k = n \cdot (n-1)!
 \end{cases}
 €€
 
