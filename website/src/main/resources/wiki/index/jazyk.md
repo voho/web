@@ -1,4 +1,4 @@
-## Programovací jazyky
+## Jazyky
 
 > The limits of my language are the limits of my world. *Ludwig Wittgenstein*
 
