@@ -67,7 +67,7 @@ Neuspořádaná dvojice prvků *a* a *b* (zapisovaná jako *{a,b}*) je množina,
 
 ##### Uspořádaná dvojice
 
-Uspořádaná dvojice prvků *a* a *b* (zapisovaná jako *(a,b)*) je množina tvořená neuspořádanou dvojicí *{a,b}* a množinou obsahující právě jeden prvek *a*. Tato definice si zaslouží vysvětlení: množina s jedním prvkem *a* označuje, který prvek je v neuspořádané dvojici *{a,b}* první. Zápis ve tvaru *(a.b)* je pouze zkrácený zápis takto zkonstruované množiny.
+Uspořádaná dvojice prvků *a* a *b* (zapisovaná jako *(a,b)*) je množina tvořená neuspořádanou dvojicí *{a,b}* a množinou obsahující právě jeden prvek *a*. Tato definice si zaslouží vysvětlení: množina s jedním prvkem *a* označuje, který prvek je v neuspořádané dvojici *{a,b}* první. Zápis ve tvaru *(a,b)* je pouze zkrácený zápis takto zkonstruované množiny.
 
 €€
 \begin{align*}

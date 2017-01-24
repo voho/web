@@ -51,7 +51,6 @@ Nejprve každých 24 bitů na vstupu rozdělíme na čtyři části po šesti bi
 Protože je řetězec dlouhý 32 bitů a není dělitelný číslem 24, musíme provést padding.
 To znamená, že zbývajících osm bitů doplníme čtyřmi nulami, abychom mohli použít kódovací tabulku, a rezervujeme místo pro dvě chybějící šestice.
 
-
     010000 100111 001001 101110, 011011 11[0000] [??????] [??????]
 
 Každou šestici teď zakódujeme pomocí kódovací tabulky a poslední dvě chybějící šestice nahradíme rovnítky podle standardu:

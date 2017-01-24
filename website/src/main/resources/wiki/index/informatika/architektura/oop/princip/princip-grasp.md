@@ -7,7 +7,7 @@ Zodpovědností se rozumí podúloha, kterou má třída nebo skupina tříd ře
 ### Rychlý přehled
 
 | Název | Popis
-|---
+|---|---
 | **Information Expert** | rozdělení zodpovědnosti na základě přístupu k informací
 | **Creator** | nalezení vhodného místa k vytváření instancí 
 | **Controller** | realizace uživatelské akce

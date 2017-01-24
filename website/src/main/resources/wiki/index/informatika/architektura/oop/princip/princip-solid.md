@@ -5,7 +5,7 @@ SOLID (single responsibility, open-closed, Liskov substitution, interface segreg
 ### Rychlý přehled
 
 | Zkratka | Název | Popis
-|---
+|---|---|---
 | **S** | Single responsibility principle | Každá třída má právě jednu zodpovědnost.
 | **O** | Open/Closed principle | Funkcionalitu třídy lze rozšířit bez nutnosti její modifikace.
 | **L** | Liskov substitution principle | Třídy musí být plně nahraditelné svými potomky.
