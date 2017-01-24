@@ -89,7 +89,9 @@ public class CodePreprocessor implements Preprocessor {
         }
         html.line();
         html.raw(PrefixedSubSequence.of(String.format("<pre><code class=\"hljs %s\">", lang)));
-        html.rawPre(node.getContentChars());
+        html.openPre();
+        html.text(node.getContentChars());
+        html.closePre();
         html.raw("</code></pre>");
         html.line();
     }

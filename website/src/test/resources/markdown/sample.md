@@ -23,6 +23,40 @@ ConcreteFactory2 .up.|> Factory
 ConcreteProduct2 .up.|> Product
 ```
 
+### Graph 1
+
+```dot:graph
+rankdir=LR
+A--F [label=" 1"]
+{rank=same; A;F;E;}
+{rank=same; B;D;}
+```
+
+## Graph 2
+
+```dot:digraph
+rankdir=LR
+A->F [label=" 1"]
+{rank=same; A;F;E;}
+{rank=same; B;D;}
+```
+
+### Kód bez ničeho 1
+
+Každou šestici teď zakódujeme pomocí kódovací tabulky a poslední dvě chybějící šestice nahradíme rovnítky podle standardu:
+
+    QnJubw==
+
+A ještě.
+
+    hello <world>
+    
+### Kód bez ničeho 2
+
+```
+hello <world>
+```
+
 ### Příklad
 
 #### Rozhraní produktů
@@ -33,9 +67,10 @@ ConcreteProduct2 .up.|> Product
  *
  * @author Vojtěch Hordějčuk
  */
-public interface Vehicle
+public interface Vehicle<T>
 {
   // ...
+  List<Integer> getCosts();
 }
 ```
 
@@ -47,7 +82,7 @@ public interface Vehicle
  *
  * @author Vojtěch Hordějčuk
  */
-public class Car implements Vehicle
+public class Car<T> implements Vehicle<T>
 {
   // ...
 }
@@ -61,116 +96,46 @@ public class Truck implements Vehicle
 {
   // ...
 }
-
-/**
- * Malá loďka.
- *
- * @author Vojtěch Hordějčuk
- */
-public class Boat implements Vehicle
-{
-  // ...
-}
-
-/**
- * Trajekt.
- *
- * @author Vojtěch Hordějčuk
- */
-public class Ferry implements Vehicle
-{
-  // ...
-}
 ```
 
-#### Rozhraní továrních tříd
+### Definition lists
 
-```java
-/**
- * Rozhraní tovární třídy pro vytváření vozidel.
- *
- * @author Vojtěch Hordějčuk
- */
-public interface VehicleFactory
-{
-  /**
-   * Vytvoří malé vozidlo.
-   *
-   * @return malé vozidlo
-   */
-  public Vehicle createSmallVehicle();
+Something
+: def1
+: def2
 
-  /**
-   * Vytvoří velké vozidlo.
-   *
-   * @return velké vozidlo
-   */
-  public Vehicle createBigVehicle();
-}
-```
+### Images
 
-#### Tovární třídy
+Hello, some paragraph.
+![image floating left](https://placekitten.com/g/200/300){.left}
+Hello, some paragraph.
+![image floating right](https://placekitten.com/g/200/300){.right}
 
-```java
-/**
- * Tovární třída, která vytváří instance automobilů.
- *
- * @author Vojtěch Hordějčuk
- */
-public class CarFactory implements VehicleFactory
-{
-  @Override
-  public Vehicle createBigVehicle()
-  {
-    return new Truck();
-  }
+### Just figures
 
-  @Override
-  public Vehicle createSmallVehicle()
-  {
-    return new Car();
-  }
-}
+![This is a simple figure.](https://placekitten.com/g/200/300)
 
-/**
- * Tovární třída, která vytváří instance lodí.
- *
- * @author Vojtěch Hordějčuk
- */
-public class ShipFactory implements VehicleFactory
-{
-  @Override
-  public Vehicle createBigVehicle()
-  {
-    return new Ferry();
-  }
+### Links
 
-  @Override
-  public Vehicle createSmallVehicle()
-  {
-    return new Boat();
-  }
-}
-```
+Hello, go to [this wiki](wiki/something).
+Normal link [[TEXT|url]].
+And [this is normal link](something).
 
-#### Použití
+### Tables
 
-```java
-public static void main(String[] args)
-{
-  // vytvořit tovární třídy
+| hello | world
+|---|---
+| hello | world
+| hello | world
+| hello | world
 
-  VehicleFactory carFactory = new CarFactory();
-  VehicleFactory shipFactory = new ShipFactory();
+### Quotes
 
-  // požádat tovární třídu o vytvoření produktů
+blablabla
 
-  Vehicle smallCar = carFactory.createSmallVehicle();
-  Vehicle bigCar = carFactory.createBigVehicle();
-  Vehicle smallShip = shipFactory.createSmallVehicle();
-  Vehicle bigShip = shipFactory.createBigVehicle();
-}
-```
+> This is the dummies code ever. *Wojtek*
+
+blablabla
 
 ### Reference
 

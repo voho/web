@@ -23,22 +23,6 @@
             $header = $('#header'),
             $banner = $('#banner');
 
-        // Disable animations/transitions until the page has loaded.
-        $body.addClass('is-loading');
-
-        $window.on('load pageshow', function () {
-            window.setTimeout(function () {
-                $body.removeClass('is-loading');
-            }, 100);
-        });
-
-        // Clear transitioning state on unload/hide.
-        $window.on('unload pagehide', function () {
-            window.setTimeout(function () {
-                $('.is-transitioning').removeClass('is-transitioning');
-            }, 250);
-        });
-
         // Fix: Enable IE-only tweaks.
         if (skel.vars.browser == 'ie' || skel.vars.browser == 'edge')
             $body.addClass('is-ie');
@@ -54,14 +38,9 @@
             );
         });
 
-        // Scrolly.
-        $('.scrolly').scrolly({
-            offset: function () {
-                return $header.height() - 2;
-            }
+        $('.hljs').each(function(i, block) {
+            hljs.highlightBlock(block);
         });
-
-        hljs.initHighlightingOnLoad();
 
         var $typed = $("#typed");
 
