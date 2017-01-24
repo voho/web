@@ -1,5 +1,6 @@
 package cz.voho.servlet;
 
+import cz.voho.utility.Constants;
 import cz.voho.utility.WikiLinkUtility;
 
 import javax.servlet.RequestDispatcher;
@@ -8,9 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class DispatcherServlet extends HttpServlet {
+    private static final int HTTP_CODE_SEE_OTHER = 303;
+    private static final int HTTP_CODE_MOVED_PERMANENTLY = 301;
+
     @Override
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         if (isStatic(request)) {
@@ -28,39 +33,59 @@ public class DispatcherServlet extends HttpServlet {
         } else if (isSitemap(request)) {
             forwardToAnotherServlet(request, response, "sitemap");
         } else {
-            super.doGet(request, response);
+            if (!processLegacyRedirect(request, response)) {
+                super.doGet(request, response);
+            }
+        }
+    }
+
+    private boolean processLegacyRedirect(final HttpServletRequest request, final HttpServletResponse response) {
+        final String requestUri = request.getRequestURI();
+
+        if (!requestUri.endsWith("/")) {
+            return redirect(response, HTTP_CODE_MOVED_PERMANENTLY, requestUri + "/");
+        }
+
+        final String[] parts = WikiLinkUtility.stripSlashes(requestUri).split(Pattern.quote("/"));
+        final String firstPart = parts[0];
+
+        if (firstPart.equals("cv") || firstPart.equals("zivotopis")) {
+            return redirect(response, HTTP_CODE_SEE_OTHER, Constants.PROFILE_LINKED_IN);
+        } else if (firstPart.equals("hudba")) {
+            return redirect(response, HTTP_CODE_SEE_OTHER, Constants.PROFILE_SOUNDCLOUD);
+        } else if (firstPart.equals("blog") || firstPart.startsWith("blog/")) {
+            return redirect(response, HTTP_CODE_SEE_OTHER, Constants.PROFILE_TWITTER);
+        } else {
+            return false;
         }
     }
 
     private boolean processWikiRedirect(final HttpServletRequest request, final HttpServletResponse response) {
         final String requestUri = request.getRequestURI();
-        // TODO add redirect on missing pages or something
 
         if (!requestUri.endsWith("/")) {
-            try {
-                response.setStatus(302);
-                response.sendRedirect(requestUri + "/");
-                return true;
-            } catch (IOException e) {
-                throw new IllegalStateException("Cannot redirect: " + requestUri, e);
-            }
+            return redirect(response, HTTP_CODE_MOVED_PERMANENTLY, requestUri + "/");
         }
 
         final String[] parts = WikiLinkUtility.resolveWikiPageId(requestUri).split(Pattern.quote("/"));
 
         if (parts.length > 1) {
-            try {
-                response.setStatus(302);
-                final String lastWikiPageId = parts[parts.length - 1];
-                final String correctWikiPageUrl = String.format("/wiki/%s/", lastWikiPageId);
-                response.sendRedirect(correctWikiPageUrl);
-                return true;
-            } catch (IOException e) {
-                throw new IllegalStateException("Cannot redirect: " + requestUri, e);
-            }
+            final String lastWikiPageId = parts[parts.length - 1];
+            final String correctWikiPageUrl = String.format("/wiki/%s/", lastWikiPageId);
+            return redirect(response, HTTP_CODE_MOVED_PERMANENTLY, correctWikiPageUrl);
         }
 
         return false;
+    }
+
+    private boolean redirect(final HttpServletResponse response, final int statusCode, final String newUrl) {
+        try {
+            response.setStatus(statusCode);
+            response.sendRedirect(newUrl);
+            return true;
+        } catch (IOException e) {
+            throw new IllegalStateException("Cannot redirect to: " + newUrl, e);
+        }
     }
 
     private void forwardToAnotherServlet(final HttpServletRequest request, final HttpServletResponse response, final String servletName) throws ServletException, IOException {

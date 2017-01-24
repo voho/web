@@ -13,11 +13,13 @@ public class WikiLinkUtility {
         return value;
     }
 
-    public static String resolveWikiPageId(String link) {
+    public static String resolveWikiPageId(final String link) {
         String result = stripSlashes(link);
+
         if (result.startsWith("wiki/")) {
             result = result.substring(5);
         }
+
         return result;
     }
 
