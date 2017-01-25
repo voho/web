@@ -12,7 +12,7 @@ System.out.println("Výsledek je " + vysledek + ".");
 
 #### Standardní vstup
 
-Pro jednoduché načítání dat ze standardního vstupu *System.in* lze využít třídu *Scanner*, která v konstruktoru obdrží libovolný "vstupní proud":[informatika/jazyk/java/stream], v tomto případě standardní vstup. Potom je schopná z tohoto proudu načítat tokeny zadaného typu. V případě, že se *Scanner* nachází na konci proudu, aktuální vlákno se zablokuje a *Scanner* čeká na další data. V případě chybných dat nebo uzavření toku dojde k výjimce.
+Pro jednoduché načítání dat ze standardního vstupu *System.in* lze využít třídu *Scanner*, která v konstruktoru obdrží libovolný [vstupní proud](wiki/java-stream), v tomto případě standardní vstup. Potom je schopná z tohoto proudu načítat tokeny zadaného typu. V případě, že se *Scanner* nachází na konci proudu, aktuální vlákno se zablokuje a *Scanner* čeká na další data. V případě chybných dat nebo uzavření toku dojde k výjimce.
 
 ```java
 Scanner scanner = new Scanner(System.in);

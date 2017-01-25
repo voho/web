@@ -5,7 +5,7 @@
 Trvalé úložiště dat obsahuje entity, jejichž obrazy se vytváří v aplikaci. Tyto entity jsou rozlišeny klíčem. Pod trvalým úložištěm si lze představit například databázi, pod entitami zákazníky a pod klíčem jejich ID.
 Problém
 
-Nic nebrání tomu, aby aplikace volně vytvářela instance entit a ty rozesílala do různých částí programu. Případná změna jedné takové instance se neprojeví v ostatních instancích a dojde k porušení "principu SSOT":[informatika/oop/princip-ssot]. Také je nutné při každém požadavku na entitu načítat aktuální data z trvalého úložiště, což je zbytečné, pokud se uložená instance mezitím nezměnila.
+Nic nebrání tomu, aby aplikace volně vytvářela instance entit a ty rozesílala do různých částí programu. Případná změna jedné takové instance se neprojeví v ostatních instancích a dojde k porušení [principu SSOT](wiki/princip-ssot). Také je nutné při každém požadavku na entitu načítat aktuální data z trvalého úložiště, což je zbytečné, pokud se uložená instance mezitím nezměnila.
 
 ```java
 public Customer getCustomer(long id)
