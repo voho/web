@@ -10,7 +10,7 @@ Výhodou neměnnosti je spolehlivost, stabilita a implicitní vláknová bezpeč
 
 Nevýhodou je naopak nutnost vytvářet mnoho instancí velmi malých objektů. S tím ale moderní platformy nemají žádný větší problém.
 
-Neměnné třídy často obsahují různé "tovární metody":[informatika/oop/navrhovy-vzor/factory-method], které vytváří odvozené instance, ve kterých jsou provedeny požadované změny nebo představují výsledek provedené operace. Atributy původní instance neměnné třídy se přitom nikdy nemění.
+Neměnné třídy často obsahují různé [tovární metody](factory-method), které vytváří odvozené instance, ve kterých jsou provedeny požadované změny nebo představují výsledek provedené operace. Atributy původní instance neměnné třídy se přitom nikdy nemění.
 
 ### Postup implementace neměnné třídy
 
