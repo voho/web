@@ -1,12 +1,12 @@
 ## Teorie grafů
 
-Teorie grafů je matematická disciplína, která zkoumá vlastnosti struktur zvaných **grafy**. Graf je definován velmi obecně, a to jako dvojice disjunktních množin **uzlů** (vrcholů, vertex-vertices) a **hran** (edge-edges), přičemž hrana vždy spojuje právě dva uzly (které nemusí být různé). Teorie neříká vůbec nic o tom, co přesně uzly a hrany jsou - jejich interpretace je určena až problémem, který se pomocí teorie grafů řeší. To umožňuje práci ve velmi obecné rovině a možnost využití obecných poznatků získaných při řešení jednoho problému v úloze jiné.
+Teorie grafů je [matematická](wiki/matematika) disciplína, která zkoumá vlastnosti struktur zvaných **grafy**. Graf je definován velmi obecně, a to jako dvojice disjunktních [množin](wiki/mnozina) **uzlů** (vrcholů, vertex-vertices) a **hran** (edge-edges), přičemž hrana vždy spojuje právě dva uzly (které nemusí být různé). Teorie neříká vůbec nic o tom, co přesně uzly a hrany jsou - jejich interpretace je určena až problémem, který se pomocí teorie grafů řeší. To umožňuje práci ve velmi obecné rovině a možnost využití obecných poznatků získaných při řešení jednoho problému v úloze jiné.
 
-Grafy se široce uplatňují při modelování a studiu různých problémů, například ve výpočetní technice či sociologii. V informatice se používají jako datové struktury modelující entity a vztahy mezi nimi. Algoritmy, které s nimi pracují, se nazývají grafové algoritmy.
+Grafy se široce uplatňují při modelování a studiu různých problémů, například ve výpočetní technice či sociologii. V [informatice](wiki/informatika) se používají jako [datové struktury](wiki/datova-struktura) modelující entity a vztahy mezi nimi. [Algoritmy](wiki/algoritmus), které s nimi pracují, se nazývají [grafové algoritmy](wiki/grafovy-algoritmus).
 
 ### Historie
 
-První úlohou, která se zapsala do historie teorie grafů, bylo **sedm mostů města Královce** (Königsberg). Otázkou bylo, zda je možné projít každým mostem ve městě právě jednou a vrátit se zpět do původního místa. Úspěšným řešitelem byl až **Leonhard Euler** (1707-1783), který v roce 1736 matematicky dokázal, že to možné není.
+První úlohou, která se zapsala do historie teorie grafů, bylo **sedm mostů města Královce** (Königsberg). Otázkou bylo, zda je možné projít každým mostem ve městě právě jednou a vrátit se zpět do původního místa. Úspěšným řešitelem byl až **Leonhard Euler** (1707-1783), který v roce 1736 [matematicky dokázal](http://eulerarchive.maa.org//docs/originals/E053.pdf), že to možné není.
 
 ![sedm mostů města Královce jako mapa](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/konigsberg.gif)
 
@@ -234,3 +234,4 @@ E -> A
 - http://www.cam.zcu.cz/~ryjacek/students/DMA/skripta/
 - http://mathworld.wolfram.com/Graph.html
 - http://teorie-grafu.elfineer.cz/
+- http://eulerarchive.maa.org//docs/originals/E053.pdf
