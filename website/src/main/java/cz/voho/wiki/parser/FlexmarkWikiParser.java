@@ -7,6 +7,7 @@ import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.autolink.AutolinkExtension;
 import com.vladsch.flexmark.ext.definition.DefinitionExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
+import com.vladsch.flexmark.ext.toc.TocExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
@@ -38,12 +39,12 @@ public class FlexmarkWikiParser implements WikiParser {
         extensions.add(TablesExtension.create());
         extensions.add(AutolinkExtension.create());
         extensions.add(DefinitionExtension.create());
+        extensions.add(TocExtension.create());
 
         options.setFrom(ParserEmulationProfile.COMMONMARK.getOptions())
                 .set(Parser.EXTENSIONS, extensions)
                 .set(HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_PREFIX, "")
-                .set(HtmlRenderer.SOFT_BREAK, " ")
-        ;
+                .set(HtmlRenderer.SOFT_BREAK, " ");
 
         Collections.addAll(extensions, preprocessors);
 
