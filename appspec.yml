@@ -1,11 +1,11 @@
 version: 0.0
 os: linux
 files:
-  - source: /
-    destination: /tmp/staging/
+  - source: /website.war
+    destination: /usr/share/tomcat8/webapps/ROOT.war
 hooks:
-  ApplicationStop:
-    - location: application_stop.sh
+  BeforeInstall:
+    - location: before_install.sh
       timeout: 60
   ApplicationStart:
     - location: application_start.sh
