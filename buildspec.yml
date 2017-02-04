@@ -8,5 +8,5 @@ artifacts:
   files:
     - website/target/website.war
     - website/scripts/*.sh
-    - *.yml
+    - appspec.yml
   discard-paths: yes
