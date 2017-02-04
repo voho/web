@@ -7,4 +7,5 @@ phases:
 artifacts:
   files:
     - website/target/website.war
+    - website/scripts/*.sh
   discard-paths: yes

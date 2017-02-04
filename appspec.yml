@@ -1,0 +1,14 @@
+version: 0.0
+os: linux
+files:
+  - source: website.war
+    destination: /tmp/codedeploy-deployment-staging-area/
+hooks:
+  ApplicationStop:
+    - location: application_stop.sh
+      timeout: 60
+  ApplicationStart:
+    - location: application_start.sh
+      timeout: 300
+  ValidateService:
+    - location:health_check.sh
