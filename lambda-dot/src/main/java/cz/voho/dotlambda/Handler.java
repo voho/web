@@ -9,11 +9,7 @@ import cz.voho.web.lambda.model.generate.GenerateImageRequest;
 import cz.voho.web.lambda.model.generate.GenerateImageResponse;
 import cz.voho.web.lambda.utility.generate.ExecutableBinaryFile;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Set;
 
@@ -60,9 +56,11 @@ public class Handler implements RequestHandler<GenerateImageRequest, GenerateIma
 
                 return response;
             } else {
+                log(context, "Invalid exit value (%d) for input: %s", process.exitValue(), request.getSource());
                 throw new IllegalStateException("Invalid exit value: " + process.exitValue() + " / Source = " + request.getSource());
             }
         } catch (Exception e) {
+            log(context, "Internal error (%s) for input: %s", e.toString(), request.getSource());
             throw new RuntimeException("Internal error / Source = " + request.getSource(), e);
         }
     }
@@ -116,6 +114,12 @@ public class Handler implements RequestHandler<GenerateImageRequest, GenerateIma
 
         if (!SUPPORTED_FORMATS.contains(format)) {
             throw new IllegalArgumentException("Unsupported format. Try using one of these: " + SUPPORTED_FORMATS);
+        }
+    }
+
+    private void log(Context context, String messageFormat, Object... arguments) {
+        if (context != null) {
+            context.getLogger().log(String.format(messageFormat, arguments));
         }
     }
 }

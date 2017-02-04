@@ -51,6 +51,7 @@ public class Handler implements RequestHandler<GetRecentSongsRequest, GetRecentS
 
             return toResponse(listOfSongs);
         } catch (Exception e) {
+            log(context, "Internal error: %s", e.toString());
             throw new RuntimeException(e);
         }
     }
@@ -92,5 +93,11 @@ public class Handler implements RequestHandler<GetRecentSongsRequest, GetRecentS
         params.put("download", "false"); // not pirate party
         final String paramsStr = params.entrySet().stream().map(e -> String.format("%s=%s", e.getKey(), e.getValue())).collect(Collectors.joining("&", "&", ""));
         return String.format(SOUNDCLOUD_WIDGET_URL_FORMAT, generateSongUrl(href), paramsStr);
+    }
+
+    private void log(Context context, String messageFormat, Object... arguments) {
+        if (context != null) {
+            context.getLogger().log(String.format(messageFormat, arguments));
+        }
     }
 }

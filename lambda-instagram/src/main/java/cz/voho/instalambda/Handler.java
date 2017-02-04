@@ -32,6 +32,7 @@ public class Handler implements RequestHandler<GetRecentPhotosRequest, GetRecent
             response.setRecentItems(fetch(request.getCount(), context));
             return response;
         } catch (Exception e) {
+            log(context, "Internal error: %s", e.toString());
             throw new RuntimeException(e);
         }
     }
@@ -61,5 +62,11 @@ public class Handler implements RequestHandler<GetRecentPhotosRequest, GetRecent
 
     private static String generateUrl(final int count) {
         return String.format(INSTAGRAM_URI_FORMAT, INSTAGRAM_TOKEN, count);
+    }
+
+    private void log(Context context, String messageFormat, Object... arguments) {
+        if (context != null) {
+            context.getLogger().log(String.format(messageFormat, arguments));
+        }
     }
 }

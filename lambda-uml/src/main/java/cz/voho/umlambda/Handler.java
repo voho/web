@@ -62,6 +62,7 @@ public class Handler implements RequestHandler<GenerateImageRequest, GenerateIma
                 return response;
             }
         } catch (Exception e) {
+            log(context, "Internal error (%s) for input: %s", e.toString(), request.getSource());
             throw new RuntimeException("Internal error / Source = " + request.getSource(), e);
         }
     }
@@ -84,6 +85,12 @@ public class Handler implements RequestHandler<GenerateImageRequest, GenerateIma
 
         if (!SUPPORTED_FORMATS.contains(format)) {
             throw new IllegalArgumentException("Unsupported format. Try using one of these: " + SUPPORTED_FORMATS);
+        }
+    }
+
+    private void log(Context context, String messageFormat, Object... arguments) {
+        if (context != null) {
+            context.getLogger().log(String.format(messageFormat, arguments));
         }
     }
 }
