@@ -6,7 +6,7 @@ phases:
       - mvn package
   post-build:
     commands:
-      - mv website/target/*.war ./
+      - mv website/target/website.war website.war
 artifacts:
   files:
-    - *.war
+    - website.war
