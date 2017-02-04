@@ -38,7 +38,7 @@
             );
         });
 
-        $('.hljs').each(function(i, block) {
+        $('.hljs').each(function (i, block) {
             hljs.highlightBlock(block);
         });
 

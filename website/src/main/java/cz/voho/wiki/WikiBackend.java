@@ -10,7 +10,10 @@ import cz.voho.wiki.image.CachingWikiImageRepository;
 import cz.voho.wiki.image.DummyWikiImageRepository;
 import cz.voho.wiki.image.LambdaWikiImageRepository;
 import cz.voho.wiki.image.WikiImageRepository;
-import cz.voho.wiki.model.*;
+import cz.voho.wiki.model.ParsedWikiPage;
+import cz.voho.wiki.model.WikiContext;
+import cz.voho.wiki.model.WikiPageReference;
+import cz.voho.wiki.model.WikiPageReferences;
 import cz.voho.wiki.page.parsed.CachingParsedWikiPageRepository;
 import cz.voho.wiki.page.parsed.DefaultParsedWikiPageRepository;
 import cz.voho.wiki.page.parsed.ParsedWikiPageRepository;
@@ -23,6 +26,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class WikiBackend {
@@ -204,5 +208,12 @@ public class WikiBackend {
 
     public WikiContext getCurrentContext() {
         return wikiContext;
+    }
+
+    public ImmutableSet<String> getWikiPageAutoCompleteValues() {
+        Set<String> values = new TreeSet<>();
+        values.addAll(wikiContext.getWikiPageIds());
+        values.addAll(wikiContext.getWikiPageIds().stream().map(parsedWikiPageRepository::load).map(ParsedWikiPage::getTitle).collect(Collectors.toSet()));
+        return ImmutableSet.copyOf(values);
     }
 }
