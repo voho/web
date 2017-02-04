@@ -4,9 +4,9 @@ files:
   - source: /website.war
     destination: /usr/share/tomcat8/webapps/ROOT.war
 hooks:
-  BeforeInstall:
-    - location: before_install.sh
-      timeout: 60
+  ApplicationStop:
+    - location: application_stop.sh
+      timeout: 120
   ApplicationStart:
     - location: application_start.sh
-      timeout: 60
+      timeout: 120
