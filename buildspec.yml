@@ -5,6 +5,6 @@ phases:
     commands:
       - mvn package
 artifacts:
-  discard-paths: yes
   files:
     - website/target/*.war
+  discard-paths: yes
