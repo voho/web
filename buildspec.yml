@@ -4,7 +4,9 @@ phases:
   build:
     commands:
       - mvn package
+  post-build:
+    commands:
+      - mv website/target/*.war ./
 artifacts:
   files:
-    - website/target/*.war
-  discard-paths: yes
+    - *.war
