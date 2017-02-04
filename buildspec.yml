@@ -1,11 +1,9 @@
 version: 0.1
 
 phases:
-  build:
-    commands:
-      - mvn package
   post-build:
     commands:
+      - mvn package
       - mv website/target/website.war website.war
 artifacts:
   files:
