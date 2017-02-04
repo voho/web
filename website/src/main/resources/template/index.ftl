@@ -19,7 +19,8 @@
                 <#include "index/about.ftl"/>
                 </p>
                 <ul class="vertical actions">
-                    <li><a href="#what_i_do" class="button next scrolly">See what I do</a></li>
+                    <li><a href="#what_i_do" class="big button next">See what I do</a></li>
+                    <li><a href="${social_profile_linkedin}" class="button">Contact me</a></li>
                 </ul>
             </div>
         </div>

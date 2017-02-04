@@ -1,11 +1,7 @@
 package cz.voho.servlet;
 
 import com.google.common.net.UrlEscapers;
-import cz.voho.enrich.Article;
-import cz.voho.enrich.BreadcrumbList;
-import cz.voho.enrich.Item;
-import cz.voho.enrich.ListItem;
-import cz.voho.enrich.MetaDataRoot;
+import cz.voho.enrich.*;
 import cz.voho.utility.Constants;
 import cz.voho.utility.WikiLinkUtility;
 import cz.voho.wiki.WikiBackend;
@@ -44,6 +40,7 @@ public class WikiPageServlet extends AbstractMenuPageServlet {
         model.put("active_wiki_page_content", parsedWikiPage.getHtml());
         model.put("active_wiki_page_cover", parsedWikiPage.isCover());
         model.put("active_wiki_page_origin", parsedWikiPage.getSource().getOrigin());
+        model.put("active_wiki_page_toc", wikiBackend.getCurrentContext().getNonTrivialToc(parsedWikiPage.getSource().getId()));
         model.put("active_wiki_page_report_issue", createReportWikiIssueLink(parsedWikiPage));
         model.put("active_wiki_page_outgoing_links", wikiBackend.getLinksFromHere(parsedWikiPage.getSource().getId()));
         model.put("active_wiki_page_incoming_links", wikiBackend.getLinksToHere(parsedWikiPage.getSource().getId()));

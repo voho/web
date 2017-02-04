@@ -10,10 +10,7 @@ import cz.voho.wiki.image.CachingWikiImageRepository;
 import cz.voho.wiki.image.DummyWikiImageRepository;
 import cz.voho.wiki.image.LambdaWikiImageRepository;
 import cz.voho.wiki.image.WikiImageRepository;
-import cz.voho.wiki.model.ParsedWikiPage;
-import cz.voho.wiki.model.WikiContext;
-import cz.voho.wiki.model.WikiPageReference;
-import cz.voho.wiki.model.WikiPageReferences;
+import cz.voho.wiki.model.*;
 import cz.voho.wiki.page.parsed.CachingParsedWikiPageRepository;
 import cz.voho.wiki.page.parsed.DefaultParsedWikiPageRepository;
 import cz.voho.wiki.page.parsed.ParsedWikiPageRepository;
@@ -52,7 +49,8 @@ public class WikiBackend {
                 new WikiLinkPreprocessor(),
                 new TodoPreprocessor(),
                 new ImagePreprocessor(),
-                new JavadocPreprocessor()
+                new JavadocPreprocessor(),
+                new TocPreprocessor()
         );
 
         final WikiPageSourceRepository wikiPageSourceRepository = new DefaultWikiPageSourceRepository(wikiContext);

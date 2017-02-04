@@ -44,6 +44,8 @@ public class FlexmarkWikiParser implements WikiParser {
         options.setFrom(ParserEmulationProfile.COMMONMARK.getOptions())
                 .set(Parser.EXTENSIONS, extensions)
                 .set(HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_PREFIX, "")
+                .set(HtmlRenderer.GENERATE_HEADER_ID, false)
+                .set(HtmlRenderer.RENDER_HEADER_ID, false)
                 .set(HtmlRenderer.SOFT_BREAK, " ");
 
         Collections.addAll(extensions, preprocessors);

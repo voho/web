@@ -48,7 +48,7 @@
             // on intro page
 
             $typed.typed({
-                strings: ["Hi! My name is Vojta Hordějčuk.", "Ing. Vojtěch Hordějčuk"],
+                strings: ["Ing. Vojtěch Hordějčuk", "Hi! My name is Vojta Hordějčuk."],
                 loop: true,
                 typeSpeed: 100
             });
@@ -123,7 +123,7 @@
                     }
                 },
                 "interactivity": {
-                    "detect_on": "canvas",
+                    "detect_on": "window",
                     "events": {
                         "onhover": {
                             "enable": true,

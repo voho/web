@@ -1,19 +1,9 @@
 package cz.voho.wiki.model;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimaps;
-import com.google.common.collect.SetMultimap;
-import com.google.common.collect.Sets;
+import com.google.common.collect.*;
 import cz.voho.wiki.page.source.WikiPageSourceRepository;
 
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class WikiContext {
@@ -23,6 +13,7 @@ public class WikiContext {
     private final Set<String> todoPages;
     private final Set<String> allPages;
     private final Map<String, String> parentPage;
+    private final Map<String, Toc> pageToc;
 
     public WikiContext() {
         this.linksToPage = Multimaps.newSortedSetMultimap(Maps.newTreeMap(), TreeSet::new);
@@ -31,6 +22,7 @@ public class WikiContext {
         this.todoPages = Sets.newTreeSet();
         this.allPages = Sets.newTreeSet();
         this.parentPage = Maps.newHashMap();
+        this.pageToc = Maps.newHashMap();
     }
 
     public ImmutableList<String> getBreadCrumbs(final String wikiPageId) {
@@ -82,6 +74,14 @@ public class WikiContext {
     public void addLink(final String sourceWikiPageId, final String targetWikiPageId) {
         linksFromPage.put(sourceWikiPageId, targetWikiPageId);
         linksToPage.put(targetWikiPageId, sourceWikiPageId);
+    }
+
+    public Toc getNonTrivialToc(final String wikiPageId) {
+        Toc toc= pageToc.get(wikiPageId);
+        if (toc.isTrivial()) {
+            return null;
+        }
+        return toc;
     }
 
     public ImmutableSet<String> getLinksFromPage(final String wikiPageId) {
@@ -149,5 +149,9 @@ public class WikiContext {
 
     public boolean exists(final String wikiPageId) {
         return allPages.contains(wikiPageId);
+    }
+
+    public void addToc(final String wikiPageId, Toc toc) {
+        this.pageToc.put(wikiPageId, toc);
     }
 }

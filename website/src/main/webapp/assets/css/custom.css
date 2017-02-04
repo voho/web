@@ -135,6 +135,39 @@ section#wiki-content a {
     padding: 1em 0;
 }
 
+dl dt em {
+    background-color: transparent;
+    color: #00f;
+    font-family: Monaco, monospace;
+    font-size: 120%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* wiki TOC */
+
+#toc {
+    background-color: #515670;
+    border-radius: 5pt;
+    padding: 1em;
+    margin: 0 0 1em 0;
+}
+
+#toc ul {
+    margin: 0;
+}
+
+#toc ul li {
+    line-height: 1.3;
+    list-style: none;
+    padding: 0;
+}
+
+#toc ul li a {
+    border: 0;
+    font-size: 80%;
+}
+
 /* wiki related pages */
 
 #menu .inner {
@@ -254,7 +287,8 @@ section#breadcrumbs p {
 /* button */
 
 .button {
-    box-shadow: inset 0 0 3em 5px #515670;
+    box-shadow: inset 0 0 4em 5px #515670;
+    border-radius: 5pt;
     text-transform: none;
     letter-spacing: normal;
 }
@@ -270,6 +304,44 @@ section#breadcrumbs p {
 
 #banner {
     background-image: none !important;
+}
+
+/* wiki tree */
+
+section#tree p {
+    padding: 0;
+    margin: 0;
+    line-height: 1.3;
+}
+
+section#tree .level1 a {
+    font-size: 2em;
+    border: 0;
+    text-decoration: none;
+}
+
+section#tree .level2 a {
+    font-size: 1.3em;
+}
+
+section#tree .level3 a {
+    font-size: 0.9em;
+}
+
+section#tree .level1 {
+    padding-bottom: 2em;
+    padding-top: 2em;
+    border-top: 2px solid rgba(255, 255, 255, 0.25);
+}
+
+section#tree .level2 {
+    padding-bottom: 1em;
+    padding-top: 1em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+section#tree .level2:last-child {
+    border: 0;
 }
 
 /* todo */
@@ -308,24 +380,45 @@ ul.icons {
 
 /* typed */
 
-.typed-cursor{
+.typed-cursor {
     opacity: 1;
     -webkit-animation: blink 0.7s infinite;
     -moz-animation: blink 0.7s infinite;
     animation: blink 0.7s infinite;
 }
-@keyframes blink{
-    0% { opacity:1; }
-    50% { opacity:0; }
-    100% { opacity:1; }
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
-@-webkit-keyframes blink{
-    0% { opacity:1; }
-    50% { opacity:0; }
-    100% { opacity:1; }
+
+@-webkit-keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
-@-moz-keyframes blink{
-    0% { opacity:1; }
-    50% { opacity:0; }
-    100% { opacity:1; }
+
+@-moz-keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
