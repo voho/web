@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /
+    destination: /tmp/staging/
 hooks:
   ApplicationStop:
     - location: application_stop.sh
