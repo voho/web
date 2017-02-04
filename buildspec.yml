@@ -1,7 +1,7 @@
 version: 0.1
 
 phases:
-  post-build:
+  build:
     commands:
       - mvn package
 artifacts:
