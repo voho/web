@@ -1,0 +1,11 @@
+version: 1
+
+phases:
+  build:
+    commands:
+      - mvn package
+
+artifacts:
+  files:
+    - website/target/*.war
+    discard-paths: yes
