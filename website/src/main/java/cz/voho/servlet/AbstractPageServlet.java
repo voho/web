@@ -6,20 +6,25 @@ import cz.voho.enrich.MetaDataRoot;
 import cz.voho.utility.Constants;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.ext.servlet.FreemarkerServlet;
-import freemarker.template.Configuration;
-import freemarker.template.ObjectWrapper;
-import freemarker.template.SimpleHash;
-import freemarker.template.TemplateModel;
-import freemarker.template.TemplateModelException;
+import freemarker.template.*;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.Locale;
 
 public abstract class AbstractPageServlet extends FreemarkerServlet {
+    @Override
+    protected boolean preprocessRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        return super.preprocessRequest(request, response);
+    }
+
     @Override
     protected final TemplateModel createModel(final ObjectWrapper objectWrapper, final ServletContext servletContext, final HttpServletRequest request, final HttpServletResponse response) throws TemplateModelException {
         final MetaDataRoot metaDataRoot = new MetaDataRoot();
@@ -74,6 +79,7 @@ public abstract class AbstractPageServlet extends FreemarkerServlet {
         final Configuration config = super.createConfiguration();
         config.setTemplateLoader(new ClassTemplateLoader(Thread.currentThread().getContextClassLoader(), "template/"));
         config.setEncoding(Locale.ROOT, StandardCharsets.UTF_8.name());
+        config.setDefaultEncoding("UTF-8");
         return config;
     }
 }
