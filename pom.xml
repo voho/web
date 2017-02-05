@@ -8,6 +8,12 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <properties>
+        <project.java.version>1.8</project.java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
     <modules>
         <module>website</module>
         <module>lambda-common</module>
@@ -16,7 +22,7 @@
         <module>lambda-instagram</module>
         <module>lambda-soundcloud</module>
     </modules>
-
+    
     <dependencyManagement>
         <dependencies>
             <!-- custom -->
