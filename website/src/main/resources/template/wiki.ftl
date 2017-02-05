@@ -32,13 +32,13 @@
             <div class="inner">
                 <#if active_wiki_page_toc?has_content && !active_wiki_page_cover>
                     <div class="row">
-                        <div class="8u">
+                        <div class="8u 12u$(small)">
                             <header class="major">
                                 <h1>${active_wiki_page_title}</h1>
                             </header>
                             <#include "wiki/children.ftl"/>
                         </div>
-                        <div class="4u">
+                        <div class="4u 12u$(small)">
                             <div id="toc">
                                 <h4>Obsah</h4>
                                 <#assign toc = active_wiki_page_toc.children/>
