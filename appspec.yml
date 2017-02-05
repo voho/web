@@ -1,8 +1,8 @@
 version: 0.0
 os: linux
 files:
-  - source: /website.war
-    destination: /usr/share/tomcat8/webapps/ROOT.war
+  - source: /ROOT.war
+    destination:  /var/lib/tomcat8/webapps/
 hooks:
   ApplicationStop:
     - location: application_stop.sh

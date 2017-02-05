@@ -6,7 +6,7 @@ phases:
       - mvn package
 artifacts:
   files:
-    - website/target/website.war
+    - website/target/ROOT.war
     - website/scripts/*.sh
     - appspec.yml
   discard-paths: yes
