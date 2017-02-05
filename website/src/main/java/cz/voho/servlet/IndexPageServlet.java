@@ -1,7 +1,7 @@
 package cz.voho.servlet;
 
 import cz.voho.enrich.MetaDataRoot;
-import cz.voho.photo.RecentWorkBackend;
+import cz.voho.work.RecentWorkBackend;
 import freemarker.template.SimpleHash;
 
 import javax.servlet.ServletException;
@@ -14,7 +14,7 @@ public class IndexPageServlet extends AbstractMenuPageServlet {
     protected void updateModel(HttpServletRequest request, SimpleHash model, final MetaDataRoot metaDataRoot) {
         super.updateModel(request, model, metaDataRoot);
 
-        model.put("instagram_photos", recentWorkBackend.getRecentImages());
+        model.put("recent_photos", recentWorkBackend.getRecentPhotos());
         model.put("recent_tracks", recentWorkBackend.getRecentTracks());
     }
 

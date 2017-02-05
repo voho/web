@@ -1,9 +1,20 @@
 package cz.voho.wiki.model;
 
-import com.google.common.collect.*;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimaps;
+import com.google.common.collect.SetMultimap;
+import com.google.common.collect.Sets;
 import cz.voho.wiki.page.source.WikiPageSourceRepository;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class WikiContext {
@@ -77,7 +88,7 @@ public class WikiContext {
     }
 
     public Toc getNonTrivialToc(final String wikiPageId) {
-        Toc toc= pageToc.get(wikiPageId);
+        Toc toc = pageToc.get(wikiPageId);
         if (toc.isTrivial()) {
             return null;
         }
@@ -117,6 +128,7 @@ public class WikiContext {
                     q.setText(a.getValue());
                     return q;
                 })
+                .sorted(Comparator.comparing(Quote::getAuthor))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 

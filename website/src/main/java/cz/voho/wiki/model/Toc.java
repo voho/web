@@ -6,6 +6,6 @@ public class Toc extends TocItem {
     }
 
     public boolean isTrivial() {
-        return size() < 2;
+        return size() < 3;
     }
 }

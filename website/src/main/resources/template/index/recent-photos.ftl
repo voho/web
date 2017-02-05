@@ -5,12 +5,12 @@
             <h2>Recent Photos</h2>
         </header>
         <div class="row uniform">
-            <#list instagram_photos as instagram_photo>
+            <#list recent_photos as recent_photo>
                 <div class="2u 4u(medium) 6u(small)">
                     <span class="image fit">
-                        <a href="${instagram_photo.link}"
-                                title="${instagram_photo.tags?join(', ')}"
-                                onclick="return !window.open(this.href)"><img src="${instagram_photo.images.low_resolution.url}" alt="${instagram_photo.tags?join(', ')}"/></a>
+                        <a href="${recent_photo.link}"
+                                title="${recent_photo.tags?join(', ')}"
+                                onclick="return !window.open(this.href)"><img src="${recent_photo.images.low_resolution.url}" alt="${recent_photo.tags?join(', ')}"/></a>
                     </span>
                 </div>
             </#list>

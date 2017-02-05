@@ -1,4 +1,4 @@
-## Návrhový vzor
+## Návrhové vzory
 
 > Humans are pattern-seeking story-telling animals, and we are quite adept at telling stories about patterns, whether they exist or not. *Michael Shermer*
 

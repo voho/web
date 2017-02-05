@@ -1,4 +1,4 @@
-package cz.voho.photo;
+package cz.voho.work;
 
 import cz.voho.utility.ExecutorProvider;
 import cz.voho.utility.LambdaClient;
@@ -91,7 +91,7 @@ public class RecentWorkBackend {
         return latestValue.getSongs().getSongs();
     }
 
-    public List<Image> getRecentImages() {
+    public List<Image> getRecentPhotos() {
         final GetRecentPhotosResponse latestValue = photosCache.get();
 
         if (latestValue == null) {

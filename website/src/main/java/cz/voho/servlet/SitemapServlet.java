@@ -1,6 +1,7 @@
 package cz.voho.servlet;
 
 import com.google.common.collect.Sets;
+import cz.voho.utility.Constants;
 import cz.voho.wiki.WikiBackend;
 
 import javax.servlet.ServletException;
@@ -16,20 +17,20 @@ public class SitemapServlet extends HttpServlet {
 
     @Override
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
-        resp.setHeader("Content-Type", "text/plain");
+        resp.setContentType("text/plain");
 
         final Set<String> urls = Sets.newTreeSet();
 
-        urls.add("/meta");
-        urls.add("/");
+        urls.add("meta");
+        urls.add("");
 
         wikiBackend.getWikiPageIds().forEach(wikiPageId -> {
-            urls.add("/wiki/" + wikiPageId + "/");
+            urls.add("wiki/" + wikiPageId + "/");
         });
 
         try (PrintWriter writer = resp.getWriter()) {
             urls.forEach(relativeUrl -> {
-                writer.println("http://voho.eu" + relativeUrl);
+                writer.println(Constants.WEBSITE_URL_WITH_SLASH + relativeUrl);
             });
         }
     }

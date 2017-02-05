@@ -4,11 +4,11 @@
         <#if root.children?has_content && root.children.items?has_content && level < max_level>
 
         <div class="row level${level}">
-            <div class="4u">
+            <div class="4u 12u$(small)">
                 <a href="/wiki/${root.id}/">${root.title}</a>
             </div>
 
-            <div class="8u$">
+            <div class="8u$ 12u$(small)">
                 <#list root.children.items as pageRef>
                     <@print_wiki_tree pageRef level+1 max_level/>
                 </#list>
