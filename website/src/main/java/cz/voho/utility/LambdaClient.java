@@ -1,9 +1,9 @@
 package cz.voho.utility;
 
-import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.lambda.AWSLambda;
 import com.amazonaws.services.lambda.AWSLambdaClientBuilder;
@@ -12,7 +12,6 @@ import com.amazonaws.services.lambda.model.InvokeRequest;
 import com.amazonaws.services.lambda.model.InvokeResult;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import cz.voho.exception.InitializationException;
 import cz.voho.web.lambda.model.generate.GenerateImageRequest;
 import cz.voho.web.lambda.model.generate.GenerateImageResponse;
 import cz.voho.web.lambda.model.photo.GetRecentPhotosRequest;
@@ -46,19 +45,19 @@ public class LambdaClient {
     }
 
     private static AWSLambda createDefaultLambdaClient() {
-        if (AWS_KEY == null || AWS_SECRET == null) {
-            throw new InitializationException("AWS credentials are not setup correctly.");
-        }
-
-        final AWSCredentials credentials = new BasicAWSCredentials(AWS_KEY, AWS_SECRET);
-
-        final AWSCredentialsProvider provider = new AWSStaticCredentialsProvider(credentials);
-
         return AWSLambdaClientBuilder
                 .standard()
-                .withCredentials(provider)
+                .withCredentials(credentials())
                 .withRegion(Regions.EU_WEST_1)
                 .build();
+    }
+
+    private static AWSCredentialsProvider credentials() {
+        if (AWS_KEY == null || AWS_SECRET == null) {
+            return new DefaultAWSCredentialsProviderChain();
+        } else {
+            return new AWSStaticCredentialsProvider(new BasicAWSCredentials(AWS_KEY, AWS_SECRET));
+        }
     }
 
     public GenerateImageResponse callPlantUmlLambda(final GenerateImageRequest request) {
