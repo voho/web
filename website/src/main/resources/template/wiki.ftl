@@ -40,6 +40,7 @@
                         </div>
                         <div class="4u">
                             <div id="toc">
+                                <h4>Obsah</h4>
                                 <#assign toc = active_wiki_page_toc.children/>
                                 <#include "wiki/toc.ftl"/>
                             </div>
