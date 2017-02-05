@@ -14,23 +14,6 @@ a_{m,1} & \ldots & a_{m,n} \\
 
 Jako **hlavní diagonála** matice se označují všechny její prvky € a(i,j) €, kde € i = j €. Je to tedy první prvek prvního řádku, druhý prvek druhého řádku, a tak dále.
 
-### Transpozice
-
-Nechť *A* je matice s prvky € a(i,j) €. Jako **transponovaná matice** k matici *A* se označuje matice € A^T € s prvky € a^T(j,i) €. Transponovat matici tedy znamená zaměnit její řádky a sloupce.
-
-€€
-A = \begin{pmatrix}
-1 & 2 & 3 \\
-10 & 20 & 30 \\
-\end{pmatrix},
-\; \; \;
-A^T = \begin{pmatrix}
-1 & 10 \\
-2 & 20 \\
-3 & 30\\
-\end{pmatrix}
-€€
-
 ### Druhy matic
 
 Matice typu € (m,n) €, kde € m = n €, se označuje jako **čtvercová matice**.
@@ -114,6 +97,23 @@ Jako **diagonální matice** se označuje taková matice, jejíž prvky € a(i,
 
 ### Operace
 
+#### Transpozice
+
+Nechť *A* je matice s prvky € a(i,j) €. Jako **transponovaná matice** k matici *A* se označuje matice € A^T € s prvky € a^T(j,i) €. Transponovat matici tedy znamená zaměnit její řádky a sloupce.
+
+€€
+A = \begin{pmatrix}
+1 & 2 & 3 \\
+10 & 20 & 30 \\
+\end{pmatrix},
+\; \; \;
+A^T = \begin{pmatrix}
+1 & 10 \\
+2 & 20 \\
+3 & 30\\
+\end{pmatrix}
+€€
+
 #### Sčítání
 
 Sčítat lze pouze dvě matice *A*, *B* stejného typu € (m,n) €. Výsledná matice *C* je opět stejného typu a každý její prvek je roven součtu odpovídajících prvků obou matic *A* a *B*, tedy € c(i,j) = a(i,j) + b(i,j) €.
@@ -138,7 +138,7 @@ a_{m,1}+b_{m,1} & \ldots & a_{m,n}+b_{m,n} \\
 \end{pmatrix}
 €€
 
-#### Násobení matice konstantou
+#### Násobení konstantou
 
 Matice se násobí konstantou tak, že se tou samou konstantou vynásobí každý její prvek. Násobením matice s prvky € a(i,j) € konstantou *gamma* tedy vznikne matice s prvky € \gamma \cdot a(i,j) €.
 
@@ -157,7 +157,7 @@ a_{m,1} & \ldots & a_{m,n} \\
 \end{pmatrix}
 €€
 
-#### Násobení matice maticí
+#### Násobení maticí
 
 Matici *A* typu € (r,s) € lze násobit pouze s libovolnou maticí *B* typu € (s,t) €, kde € r,s,t \in N €. Vzniklá matice bude typu € (r,t) €, bude tedy mít tolik řádků jako první matice *A* a tolik sloupců jako druhá matice *B*. Operace násobení matic není komutativní.
 
