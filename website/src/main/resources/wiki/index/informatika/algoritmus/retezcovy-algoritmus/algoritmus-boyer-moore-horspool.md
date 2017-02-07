@@ -19,9 +19,18 @@ Tabulka se vyplní podle následujících pravidel:
 
 Pokud například vyhledáváme v dekadickém čísle posloupnost *01214*, bude posunovací tabulka vypadat následovně:
 
-| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
-|---|---|---|---|---|---|---|---|---|---
-| 4 | 1 | 2 | 5 | 0 | 5 | 5 | 5 | 5 | 5
+| Index znaku | Posun | Vysvětlení
+|---|---|---
+| 0 | 4 | číslo "0" je čtvrtý znak po posledním znaku řetězce, čteme-li jej zprava (4-121*0*)
+| 1 | 1 | číslo "1" je první znak po posledním znaku řetězce, čteme-li jej zprava (4-*1*)
+| 2 | 2 | číslo "2" je druhý znak po posledním znaku řetězce, čteme-li jej zprava (4-1*2*)
+| 3 | 5 | číslo "3" se ve vyhledávaném řetězci nevyskytuje
+| 4 | 0 | číslo "4" je poslední znak řetězce
+| 5 | 5 | číslo "5" se ve vyhledávaném řetězci nevyskytuje
+| 6 | 5 | číslo "6" se ve vyhledávaném řetězci nevyskytuje
+| 7 | 5 | číslo "7" se ve vyhledávaném řetězci nevyskytuje
+| 8 | 5 | číslo "8" se ve vyhledávaném řetězci nevyskytuje
+| 9 | 5 | číslo "9" se ve vyhledávaném řetězci nevyskytuje
 
 ```java
 private static int[] createJumpTable(final char[] needle) {
