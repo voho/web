@@ -252,6 +252,22 @@ for IX in $(seq 1 $X); do
 done
 ```
 
+#### Seznam otevřených portů pro java
+
+```bash
+sudo netstat -plnt | grep 'java'
+```
+
+#### Parametry určitého procesu
+
+```bash
+ps -fp 125788
+```
+
+```bash
+cat /proc/125788/cmdline
+```
+
 ### Reference
 
 - http://linux.die.net/man/1/bash
