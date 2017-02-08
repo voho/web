@@ -79,7 +79,6 @@ B -> C [color=gray]
   
 B -> A [color=forestgreen,penwidth=2]
 C -> B [color=forestgreen,penwidth=2]
-}
 ```
 
 #### Antisymetrie
