@@ -161,7 +161,7 @@ C -> D [color=gray]
 ```
 
 ```dot:digraph
-{rank=same;A;B;C;D;}
+{rank=same;A;B;}
 nodesep=0.5
 A -> B [color=gray]
 B -> C [color=gray]
