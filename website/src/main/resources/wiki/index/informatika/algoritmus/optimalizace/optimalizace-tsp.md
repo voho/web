@@ -22,13 +22,23 @@ Algoritmy používající "hrubou sílu" k nalezení optimálního řešení jso
 
 #### Heuristika
 
-!TODO!
+Pokud z různých důvodů nepotřebujeme najít optimální řešení, ale stačí nám nějaké "dostatečně dobré", lze použít některé heuristické metody, které jsou šak o to rychlejší.
 
-#### Optimalizace
+Nejbližší soused
+: Začíná se v náhodně zvoleném městě. Potom se opakovaně volí takové nenavštívené město, které je nejblíž k tomu aktuálnímu. Po navštívení všech měst se cesta uzavře návratem k prvnímu městu.
 
-!TODO!
+Hladový algoritmus
+: Nejprve se všechny dvojice měst seřadí podle vzdálenosti od nejkratší k nejdelší. Tyto hrany se potom postupně přidávají k výsledné cestě, přičemž se přeskakují ty, které by vytvořily "cyklus" nebo "křižovatku" (v [grafové terminologii](wiki/graf) tedy kružnici nebo uzel se stupněm vyšším než dva).
+
+Vkládání nejbližšího
+: Cesta je zpočátku tvořena pouze hranou mezi dvěma uzly, které k sobě mají nejblíž. V každém dalším kroce se vybere takové nenavštívené město, které má nejmenší vzdálenost k libovolnému navštívenému městu. Toto město se potom vloží mezi dvě již navštívená města vybraná tak, aby celková délka nově vzniklé cesty byla co nejmenší.
+
+Vkládání nejvzdálenějšího
+: Podobný postup jako u "vkládání nejbližšího", ale pro maximální vzdálenosti. Cesta je zpočátku tvořena pouze hranou mezi dvěma uzly, které k sobě mají nejdál. V každém dalším kroce se vybere takové nenavštívené město, které má největší vzdálenost k libovolnému navštívenému městu. Toto město se potom vloží mezi dvě již navštívená města vybraná tak, aby celková délka nově vzniklé cesty byla co nejmenší (podobně jako u vkládání nejbližšího).
 
 ### Reference
 
 - http://gebweb.net/optimap/
 - http://www.math.uwaterloo.ca/tsp/world/
+- http://faculty.washington.edu/jtenenbg/courses/342/f08/sessions/tsp.html
+- https://web.tuke.sk/fei-cit/butka/hop/htsp.pdf
