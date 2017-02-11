@@ -10,13 +10,13 @@ Návrhový vzor MVC rozděluje program do tří hlavních částí:
 
 Rozdělení do těchto tří částí přitom nemusí být pouze na jedné úrovni – i jednotlivé podprogramy mohou mít své mikroarchitektury založeny na MVC.
 
-![Model-View-Controller](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/mvc1.png)
+![Model-View-Controller](mvc1.png)
 
 Je-li potřeba, aby program komunikoval s okolním světem (například pracoval s databází), je nutné program rozšířit o součást, která tuto komunikaci zajistí a poskytne tuto funkcionalitu i ostatním součástem systému. Tato součást nesmí být součástí modelu, aby jejich funkce zůstaly jasně vymezeny, proto se do vzoru přidává jako samostatná vrstva.
 
 Tato nová vrstva se nazývá servisní vrstva. Ta může (ale neměla by) mít přímou referenci na model. Výhodou servisní vrstvy je možnost jejího snadného nahrazení zástupným „mock“ objektem, což se s úspěchem využívá při jednotkovém testování. Vzniklý model se někdy označuje jako Model-View-Controller-Service (MVCS).
 
-![Model-View-Controller-Service](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/mvc2.png)
+![Model-View-Controller-Service](mvc2.png)
 
 ```uml:seq
 User -> View : perform action via UI

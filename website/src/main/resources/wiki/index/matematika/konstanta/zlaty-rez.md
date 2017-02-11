@@ -14,7 +14,7 @@ Zlatý řez se nejčastěji značí řeckým písmenem € \phi € (fí) na pam
 
 Představme si následující situaci:
 
-![rozdělení úsečky zlatým řezem](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/phi_basic.png)
+![rozdělení úsečky zlatým řezem](phi_basic.png)
 
 Úsečku délky *a + b* rozdělíme na dvě části *a* a *b* tak, aby byl poměr mezi celkovou délkou *a + b* a větší částí *a* stejný jako poměr větší částí *a* a menší části *b*. Když tento požadavek vyjádříme matematicky, dostaneme následující rovnici:
 
@@ -58,7 +58,7 @@ Zlatý řez je číslo iracionální, nelze jej tedy zapsat konečným počtem �
 
 Nyní se podíváme na možnost geometrické konstrukce zlatého řezu, která se nazývá Herónova.
 
-![Herónova konstrukce zlatého řezu](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/phi_heron.png)
+![Herónova konstrukce zlatého řezu](phi_heron.png)
 
 1. Sestrojíme úsečku *AB*, kterou chceme rozdělit zlatým řezem.
 1. Z bodu *B* vztyčíme kolmici o délce poloviny *|AB|*.
@@ -76,7 +76,7 @@ Existují však i jiné metody geometrické konstrukce.
 
 Zlatý obdélník je obdélník, jehož strany jsou v poměru zlatého řezu. Každý obdélník lze rozdělit na čtverec a další zlatý obdélník. Zlatý obdélník můžeme ze čtverce zkonstruovat takto:
 
-![konstrukce zlatého obdélníku](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/phi_rectangle.png)
+![konstrukce zlatého obdélníku](phi_rectangle.png)
 
 1. Sestrojíme čtverec *ABCD*, který chceme rozšířit na zlatý obdélník.
 1. Úsečku *AB* prodloužíme na polopřímku.
@@ -95,7 +95,7 @@ Pravidelný pětiúhelník jistě každý zná. Jedná se o pravidelný mnohoúh
 
 S pravidelným pětiúhelníkem se můžeme setkat i při zavazování obyčejných tkaniček u bot. Pozorujte následující obrázek:
 
-![pětiúhelník při zavazování tkaniček](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/phi_pentagon.gif)
+![pětiúhelník při zavazování tkaniček](phi_pentagon.gif)
 
 Zlatý řez se v pravidelném pětiúhelníku vyskytuje například zde:
 
@@ -107,14 +107,14 @@ Zlatý řez se v pravidelném pětiúhelníku vyskytuje například zde:
 
 Se zlatým poměrem se setkáváme všude v přírodě, aniž bychom si to uvědomovali. Přijde nám totiž přirozený. Těla živočichů, rostlin, schránky mořských korýšů… tam všude můžeme zlatý poměr najít. Z nějakého důvodu se jím příroda "řídí".
 
-![hlava kočky](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/phi_nature1.gif)
-![lidská tvář](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/phi_nature2.gif)
+![hlava kočky](phi_nature1.gif)
+![lidská tvář](phi_nature2.gif)
 
 #### Zlatý řez ve vesmíru
 
 Vesmír je na rozdíl od fauny a flóry skryt našim zrakům. To však neznamená, že by zde příroda zapomněla projevit svůj skrytý řád.
 
-![planeta Saturn a její prstence](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/phi_nature3.gif)
+![planeta Saturn a její prstence](phi_nature3.gif)
 
 | Planeta | Střední vzdálenost od Slunce | Relativní hodnota k předchozí planetě
 |---
@@ -138,15 +138,15 @@ Je sice otázkou, zda se v naší soustavě vyskytují ještě další objekty a
 
 Díky tomu, že známe zlatý poměr z přírody, vnímáme jej instinktivně jako krásný. Jsme na něj zkrátka zvyklí. Proto má zlatý řez široké využití v kompozici, designu, fotografii a architektuře. Umělci zlatý řez používají často i neúmyslně.
 
-![Leonardo da Vinci: Dáma s hranostajem](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/phi_art1.gif)
-![Leonardo da Vinci: Poslední večeře](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/phi_art2.gif)
+![Leonardo da Vinci: Dáma s hranostajem](phi_art1.gif)
+![Leonardo da Vinci: Poslední večeře](phi_art2.gif)
 
 #### Zlatý řez v architektuře
 
 Zlaté číslo se již velmi dlouho používá v architektuře. Proporce ve zlatém poměru můžeme najít téměř ve všech významných stavbách po celém světě. Využívá se například základny ve tvaru zlatého obdélníku, okna a dvěře se rozmisťuji dle zlatého poměru, apod.
 
-![Taj Mahal](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/phi_art3.gif)
-![Akropolis](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/phi_art4.gif)
+![Taj Mahal](phi_art3.gif)
+![Akropolis](phi_art4.gif)
 
 ### Fibonacciho posloupnost
 

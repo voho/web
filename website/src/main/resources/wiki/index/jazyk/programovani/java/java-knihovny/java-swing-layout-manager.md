@@ -40,7 +40,7 @@ public class FlowLayoutDemo extends JFrame {
 }
 ```
 
-![FlowLayout](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/FlowLayout.png)
+![FlowLayout](FlowLayout.png)
 
 #### BorderLayout
 
@@ -64,7 +64,7 @@ public class BorderLayoutDemo extends JFrame {
 }
 ```
 
-![BorderLayout](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/BorderLayout.png)
+![BorderLayout](BorderLayout.png)
 
 #### GridLayout
 
@@ -89,7 +89,7 @@ public class GridLayoutDemo extends JFrame {
 }
 ```
 
-![GridLayout](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/GridLayout.png)
+![GridLayout](GridLayout.png)
 
 #### GridBagLayout
 
@@ -182,7 +182,7 @@ public class GridBagLayoutDemo extends JFrame {
 }
 ```
 
-![GridBagLayout](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/GridBagLayout.png)
+![GridBagLayout](GridBagLayout.png)
 
 ### Reference
 

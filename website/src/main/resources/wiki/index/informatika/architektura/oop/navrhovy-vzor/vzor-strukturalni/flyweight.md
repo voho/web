@@ -4,7 +4,7 @@ Návrhový vzor Flyweight (muší váha) umožňuje v některých případech u�
 
 Pokud máme například mapu skládající se z různých druhů políček, lze každý druh reprezentovat jednou instancí obsahující společné vlastnosti celého druhu.
 
-![příklad použití ve hře](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/flyweight.png)
+![příklad použití ve hře](flyweight.png)
 
 Dalším příkladem může být reprezentace dokumentu v textovém editoru. Pokud například dokument obsahuje tisíc znaků *A*, není nutné uchovávat tisíc obrázků písmena *A* pro jeho vykreslení. Obrázek stačí načíst pouze jednou a potom se něj odkazovat.
 

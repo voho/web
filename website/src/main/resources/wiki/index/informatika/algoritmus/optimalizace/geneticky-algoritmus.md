@@ -81,13 +81,13 @@ Pro kódování založená na posloupnosti symbolů se používají tyto operát
 - **vícebodové** (01101101 + ABBBAABA = 01.BBA.10.A)
 - **uniformní** (01101101 + ABBBAABA = 0.B.1.0.1.A.0.1)
 
-![operátor křížení](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/ga_crossover.png)
+![operátor křížení](ga_crossover.png)
 
 #### Operátor mutace (mutation operator)
 
 Mutace obecně je (obvykle malá) změna v genetickém kódu jedince, která zapříčíni viditelnou nebo neviditelnou změnu v jeho struktuře. Mutace někdy přinese nečekané zlepšení, ale také může jedince poškodit. Většina biologů věří, že právě mutace je oním hnacím motorem evoluce, v níž nové vlastnosti jinak než mutací vzniknout nemohou.
 
-![operátor mutace](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/ga_mutation.png)
+![operátor mutace](ga_mutation.png)
 
 #### Ohodnocovací funkce (fitness function)
 

@@ -75,11 +75,11 @@ Zbývající kombinace vstupů (logická *1* na vstupech *R* i *S*) vede k tzv. 
 
 ##### Schéma zapojení
 
-![schéma zapojení z hradel NOR](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/latch_rs.png)
+![schéma zapojení z hradel NOR](latch_rs.png)
 
 Klopný obvod lze sestavit i z [logických hradel](wiki/logicke-hradlo) NAND. Prostým nahrazením hradel NOR hradly NAND vznikne varianta s negovanými vstupy a výstupy.
 
-![schéma zapojení z hradel NAND](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/latch_rs_nand.png)
+![schéma zapojení z hradel NAND](latch_rs_nand.png)
 
 ##### Vstupy a výstupy
 
@@ -118,11 +118,11 @@ Vstup *D* je přiveden na vstup *S* vnořeného klopného obvodu typu RS a jeho 
 
 ##### Schéma zapojení
 
-![schéma zapojení založené na synchronním klopném obvodu typu RS](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/latch_d_using_rs.png)
+![schéma zapojení založené na synchronním klopném obvodu typu RS](latch_d_using_rs.png)
 
-![rozkreslené schéma zapojení](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/latch_d.png)
+![rozkreslené schéma zapojení](latch_d.png)
 
-![alternativní zapojení s hradly NAND](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/latch_d_nand.png)
+![alternativní zapojení s hradly NAND](latch_d_nand.png)
 
 ##### Vstupy a výstupy
 
@@ -162,7 +162,7 @@ Vstup *J* (jump) lze tedy do jisté míry připodobnit ke vstupu *S* (set) a vst
 
 ##### Schéma zapojení
 
-![schéma zapojení založené na synchronním klopném obvodu typu RS](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/latch_jk_using_rs.png)
+![schéma zapojení založené na synchronním klopném obvodu typu RS](latch_jk_using_rs.png)
 
 ##### Vstupy a výstupy
 
@@ -213,11 +213,11 @@ Nulování je řízeno speciálním vstupem *C* (hodinový vstup, clock input), 
 
 ##### Schéma zapojení
 
-![schéma zapojení z hradel NOR a AND](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/latch_rs_sync.png)
+![schéma zapojení z hradel NOR a AND](latch_rs_sync.png)
 
 Opět lze místo hradel AND a NOR využít hradla NAND, přičemž jedinou změnou je prohození výstupů.
 
-![schéma zapojení z hradel NAND](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/latch_rs_sync_nand.png)
+![schéma zapojení z hradel NAND](latch_rs_sync_nand.png)
 
 ##### Vstupy a výstupy
 
@@ -266,7 +266,7 @@ Využitím konceptu master-slave lze úrovní řízený klopný obvod předělat
 
 ##### Schéma zapojení
 
-![schéma zapojení hranou řízeného klopného obvodu typu RS (master-slave)](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/latch_rs_master_slave.png)
+![schéma zapojení hranou řízeného klopného obvodu typu RS (master-slave)](latch_rs_master_slave.png)
 
 #### Klopný obvod typu T (synchronní)
 
@@ -274,9 +274,9 @@ Synchronní klopný obvod typu T je založený na synchronním klopném obvodu t
 
 ##### Schéma zapojení
 
-![schéma zapojení založené na synchronním klopném obvodu typu RS](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/latch_t_using_rs.png)
+![schéma zapojení založené na synchronním klopném obvodu typu RS](latch_t_using_rs.png)
 
-![schéma zapojení založené na synchronním klopném obvodu typu JK](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/latch_t_using_jk.png)
+![schéma zapojení založené na synchronním klopném obvodu typu JK](latch_t_using_jk.png)
 
 ##### Vstupy a výstupy
 

@@ -14,7 +14,7 @@ Nechť *T* je [těleso](wiki/teleso). Vektor dimenze *n* nad tělesem *T* je usp
 
 Geometricky si lze dvourozměrný vektor představit jako orientovanou úsečku z bodu *A* do bodu *B*. Orientace vektoru je vyjádřena umístěním šipky. Vede-li šipka do bodu *B*, bod *A* se označuje jako **počáteční**, zatímco bod *B* jako **koncový**. Délka úsečky odpovídá délce vektoru. Vektor se dá (stejně jako úsečka) zapsat ve tvaru *|AB|*.
 
-![geometrický význam dvourozměrného vektoru](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/vector.png)
+![geometrický význam dvourozměrného vektoru](vector.png)
 
 ### Operace s vektorem
 

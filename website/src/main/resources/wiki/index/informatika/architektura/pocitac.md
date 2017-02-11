@@ -21,13 +21,13 @@ Počítač slouží jako fyzická platforma pro vykonávání [programů](wiki/a
 
 Von Neumannovská (někdy také Stanfordská) architektura je pojmenovaná podle slavného američana maďarského původu **Johna von Neumanna**. V této architektuře jsou instrukce i data uloženy v téže paměti a nejsou nijak explicitně rozlišeny. Paměť je organizována lineárně na buňky stejné velikosti, které jsou adresovatelné celými čísly. Data jsou reprezentována binárně a jejich datové typy se implicitně nerozlišují. Instrukce se provádí jednotlivě a to postupně tak, jak jsou zapsány v paměťi, dokud není toto pořadí ovlivněno speciální instrukcí (např. skoky). Von Neumannovská architektura najde využití všude tam, kde je požadována univerzálnost a jednoduchost.
 
-![von Neumannovská architektura](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/arch_neumann.png)
+![von Neumannovská architektura](arch_neumann.png)
 
 #### Harvardská architektura
 
 Hlavním rysem harvardské architektury je fyzické oddělení dat a instrukcí. Proto Harvardská architektura umožňuje, aby data i instrukce měly různou reprezentaci a implementaci. Paměť obsahující instrukce se často realizuje jako **ROM**, tedy paměť určená pouze pro čtení. Výhodou této architektury je také možnost přistupovat do obou paměti současně. Harvardská architektura se používá hlavně tam, kde se program téměř nikdy nemění (např. malá věstavěná zařízení).
 
-![Harvardská architektura](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/arch_harvard.png)
+![Harvardská architektura](arch_harvard.png)
 
 ### Reference
 

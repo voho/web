@@ -8,7 +8,7 @@ Grafy se široce uplatňují při modelování a studiu různých problémů, na
 
 První úlohou, která se zapsala do historie teorie grafů, bylo **sedm mostů města Královce** (Königsberg). Otázkou bylo, zda je možné projít každým mostem ve městě právě jednou a vrátit se zpět do původního místa. Úspěšným řešitelem byl až **Leonhard Euler** (1707-1783), který v roce 1736 [matematicky dokázal](http://eulerarchive.maa.org//docs/originals/E053.pdf), že to možné není.
 
-![sedm mostů města Královce jako mapa](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/konigsberg.gif)
+![sedm mostů města Královce jako mapa](konigsberg.gif)
 
 ```dot:graph
 {rank=same;1;2;3;}

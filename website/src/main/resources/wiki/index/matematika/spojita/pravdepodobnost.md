@@ -33,17 +33,17 @@ Pro jevy platí vše, co platí pro množiny a lze s nimi provádět množinové
 
 Pojmy si ukážeme na známém příkladu - hodu kostkou. Množina elementárních jevů *omega* obsahuje prvky **{1, 2, 3, 4, 5, 6}**. Každé toto číslo je elementární jev.
 
-![množina elementárních jevů pro hod kostkou](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/omega1.png)
+![množina elementárních jevů pro hod kostkou](omega1.png)
 
 Jev "padlo sudé číslo" je podle definice podmnožina množiny *omega* a obsahuje prvky **{2, 4, 6}**. Padne-li jedno z těchto čísel, jev "padlo sudé číslo" nastal. Padne-li jiné číslo, jev nenastal.
 
-![jev "padlo sudé číslo" (A)](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/omega2.png)
+![jev "padlo sudé číslo" (A)](omega2.png)
 
 Definujeme další jev "padl násobek tří", který obsahuje prvky **{3, 6}**. Všimněte si, že elementární jev *6* se nachází v obou jevech. Pokud tedy na kostce padne číslo *6*, nastaly oba jevy současně. Je tomu tak, protože elementární jev *6* leží v **průniku** obou jevů. A podobně, pokud padne některé z čísel **{2, 3, 4, 6}**, můžeme prohlásit, že nastal alespoň jeden z jevů. To proto, že tyto elementární jevy leží ve **sjednocení** obou jevů.
 
 Jestliže padne některé z čísel **{1, 5}**, nenastal ani jeden z uvedených jevů.
 
-![jev "padlo sudé číslo" (A) a jev "padl násobek tří" (B)](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/omega3.png)
+![jev "padlo sudé číslo" (A) a jev "padl násobek tří" (B)](omega3.png)
 
 ### Základní pravděpodobnostní modely
 
@@ -181,7 +181,7 @@ Rozlišuje se neslučitelnost podvojná a vzájemná.
 
 Jevy *A1* až *An* tvoří systém neslučitelných jevů, mají-li všechny dvojice dvou různých jevů prázdný průnik. Tento systém se nazývá **úplný**, právě když jejich sjednocením vznikne celá množina *omega*.
 
-![systém neslučitelných jevů](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/omega4.png)
+![systém neslučitelných jevů](omega4.png)
 
 #### Benferroniho nerovnost
 

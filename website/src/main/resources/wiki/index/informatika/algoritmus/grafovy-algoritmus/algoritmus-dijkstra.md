@@ -1,6 +1,6 @@
 ## Algoritmus Dijkstra
 
-![Edsger Dijkstra (1969)](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/dijkstra.jpg){.right}
+![Edsger Dijkstra (1969)](dijkstra.jpg){.right}
 
 Dijkstrův algoritmus je grafový algoritmus vytvořený nizozemským vědcem **Edsgerem Wybem Dijkstrou** (1930-2002). Slouží k vyhledání **nejkratší cesty** z počátečního uzlu do všech ostatních uzlů **ohodnoceného grafu**. Poradí si však jen s nezáporným ohodnocením hran. Často se používá v **routovacích protokolech**, například v algoritmu OSPF (Open Shortest Path First).
 

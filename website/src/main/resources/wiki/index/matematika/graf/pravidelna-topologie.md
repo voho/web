@@ -17,7 +17,7 @@ Hyperkrychle (hypercube) je regulární graf s logaritmických stupněm uzlů.
 | bipartitní | ano
 | hiearchicky rekurzivní | ano
 
-![Q(4)](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/topo_q4.png)
+![Q(4)](topo_q4.png)
 
 #### Množina uzlů a hran
 
@@ -42,7 +42,7 @@ Mřížka je zobecněním hyperkrychle. Narozdíl od ní může mít v každé d
 | bipartitní | ano
 | hiearchicky rekurzivní | ano
 
-![M(4,3,2)](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/topo_m432.png)
+![M(4,3,2)](topo_m432.png)
 
 #### Množina uzlů a hran
 
@@ -79,7 +79,7 @@ Kružnice propojené krychlí (cube conencted cycles) patří mezi řídké hype
 | bipartitní | ano
 | hiearchicky rekurzivní | ne
 
-![CCC(3)](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/topo_ccc3.png)
+![CCC(3)](topo_ccc3.png)
 
 #### Množina uzlů a hran
 
@@ -133,7 +133,7 @@ Obyčejný motýlek (ordinary butterfly) patří mezi řídké hyperkubické top
 | bipartitní | ano
 | hiearchicky rekurzivní | ano
 
-![oBF(3)](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/topo_obf3.png)
+![oBF(3)](topo_obf3.png)
 
 #### Množina uzlů a hran
 

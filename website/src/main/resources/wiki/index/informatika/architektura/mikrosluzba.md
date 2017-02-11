@@ -10,9 +10,9 @@ Tento druh návrhu není nikterak nový či převratný - objevuje se již při 
 
 Je to podobné paradigma, jakým je například [objektově orientované programování](wiki/oop). Objekty zde však netvoří nějaké struktury v paměti, ale koncepčně obecnější **služby**, a klasické volání metody v rámci jednoho procesu (například pomocí zásobníku a skoku) nahrazuje volání mezi procesy.
 
-![typická architektura monolitické aplikace](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/ms_monolith_arch.png)
+![typická architektura monolitické aplikace](ms_monolith_arch.png)
 
-![typická architektura aplikace složené z mikroslužeb](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/ms_uservice_arch.png)
+![typická architektura aplikace složené z mikroslužeb](ms_uservice_arch.png)
 
 ### Základní rysy
 
@@ -52,9 +52,9 @@ Mikroslužby se často dávají do kontrastu s velkými monolitickými aplikacem
 - každá chyba může teoreticky způsobit nefunkčnost celé aplikace
 - velké množství komponent a tříd vede ke zpomalení vývojových nástrojů (IDE)
 
-![škálování monolitických aplikací](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/ms_monolith_deploy.png)
+![škálování monolitických aplikací](ms_monolith_deploy.png)
 
-![škálování mikroslužeb](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/ms_uservice_deploy.png)
+![škálování mikroslužeb](ms_uservice_deploy.png)
 
 Funkcionalita se k monolitickým aplikacím postupně "lepí", protože funkcionalita přitahuje další funkcionalitu.
 

@@ -19,7 +19,7 @@ Nejjednodušším hradlem je invertor. Jedná se o prvek, který obrátí logick
 | 0 | 1
 | 1 | 0
 
-![invertor](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/gates_invertor.png)
+![invertor](gates_invertor.png)
 
 ### Hradlo AND (konjunkce)
 
@@ -32,11 +32,11 @@ Hradlo AND vrací na výstupu logickou 1 právě tehdy, když jsou na všech vst
 | 1 | 0 | 0
 | 1 | 1 | 1
 
-![hradlo AND](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/gates_and.png)
+![hradlo AND](gates_and.png)
 
 Hradlo AND si můžeme představit jako obvod se zdrojem, žárovkou a dvěma sériově zapojenými tlačítky, kde logická 1 na vstupu znamená stisknutí tlačítka a svítící žárovka indikuje logickou 1 na výstupu. Jestliže stiskneme obě tlačítka najednou (na obou vstupech jsou logické 1), žárovka se rozsvítí. Pokud jakékoliv z nich pustíme (na libovolném vstupu se objeví logická 0), žárovka zhasne.
 
-![vysvětlení funkce hradla AND pomocí analogie](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/gates_and_explain.png)
+![vysvětlení funkce hradla AND pomocí analogie](gates_and_explain.png)
 
 ### Hradlo NAND (negace konjunkce)
 
@@ -49,7 +49,7 @@ Hradlo NAND se chová stejně jako hradlo AND s invertovaným výstupem. Narozd�
 | 1 | 0 | 1
 | 1 | 1 | 0
 
-![hradlo NAND](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/gates_nand.png)
+![hradlo NAND](gates_nand.png)
 
 ### Hradlo OR (disjunkce)
 
@@ -62,11 +62,11 @@ Hradlo OR má na výstupu logickou 1 právě tehdy, když je logická 1 na libov
 | 1 | 0 | 1
 | 1 | 1 | 1
 
-![hradlo OR](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/gates_or.png)
+![hradlo OR](gates_or.png)
 
 Hradlo OR si můžeme představit jako obvod se zdrojem, žárovkou a dvěma paralelně zapojenými tlačítky, kde logická 1 na vstupu znamená stisknutí tlačítka a svítící žárovka indikuje logickou 1 na výstupu. Jestliže stiskneme jedno z tlačítek (na libovolném vstupu se objeví logická 1), žárovka se rozsvítí. Stejný výsledek dostaneme i tehdy, když zmáčkneme obě najednou (dvě logické 1 na vstupu). Aby žárovka zhasla, musíme pustit obě dvě tlačítka (na obou vstupech se objeví logická 0).
 
-![vysvětlení funkce hradla OR pomocí analogie](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/gates_or_explain.png)
+![vysvětlení funkce hradla OR pomocí analogie](gates_or_explain.png)
 
 ### Hradlo NOR (negace disjunkce)
 
@@ -79,7 +79,7 @@ Hradlo NOR se chová stejně jako hradlo OR s invertovaným výstupem. Podobně 
 | 1 | 0 | 0
 | 1 | 1 | 0
 
-![hradlo NOR](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/gates_nor.png)
+![hradlo NOR](gates_nor.png)
 
 ### Hradlo XOR (negace ekvivalence)
 
@@ -92,10 +92,10 @@ Hradlo XOR má na výstupu logickou 1 právě tehdy, když jsou jeho vstupy růz
 | 1 | 0 | 1
 | 1 | 1 | 0
 
-![hradlo XOR](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/gates_xor.png)
+![hradlo XOR](gates_xor.png)
 
 ### Realizace vícevstupých hradel
 
 Každé hradlo můžeme nakreslit s libovolným počtem vstupů – vícevstupé hradlo lze realizovat třeba jako kaskádu dvouvstupých hradel. Strom hradel by měl být co nejvíce vyvážený, aby bylo zpoždění minimální. Velký počet různých zapojení (se stejnou funkčností) je odůvodnitelný zákonem asociativity v Booleově algebře. Na obrázku je uvedena jedna možná realizace sedmivstupého hradla NAND:
 
-![realizace sedmivstupého hradla NAND](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/gates_nand_7.png)
+![realizace sedmivstupého hradla NAND](gates_nand_7.png)

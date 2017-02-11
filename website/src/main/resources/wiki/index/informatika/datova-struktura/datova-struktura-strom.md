@@ -2,7 +2,7 @@
 
 Stromem se nazývají souvislé [grafy](wiki/graf), které neobsahují kružnice. Strom je tedy minimální souvislý graf na daných vrcholech. Stromy se v informatice velmi často vyskytují, protože reprezentují základní koncept, kterým je **hierarchie**. Se stromy se setkáme všude tam, kde je potřeba rychle vyhledávat, reprezentovat strukturovaná data nebo rozhodovat. Strom je i přirozeným modelem **rekurze**.
 
-![vznik označení "strom"](https://dl.dropboxusercontent.com/u/5942837/voho.cz/image-wiki/ds-tree-intro.png)
+![vznik označení "strom"](ds-tree-intro.png)
 
 ### Názvosloví
 
