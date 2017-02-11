@@ -5,6 +5,9 @@ import cz.voho.utility.ReplacePatternCallback;
 import cz.voho.wiki.model.WikiContext;
 import cz.voho.wiki.model.WikiPageSource;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 
@@ -12,22 +15,30 @@ public class ImagePreprocessor implements Preprocessor {
     @Override
     public String preprocessSource(WikiContext context, WikiPageSource wikiPageSource, String source) {
         String result = source;
-        result = preprocessFloatingImage(result, "left");
-        result = preprocessFloatingImage(result, "right");
-        result = preprocessImageFigure(result);
+        result = preprocessFloatingImage(context, wikiPageSource, result, "left");
+        result = preprocessFloatingImage(context, wikiPageSource, result, "right");
+        result = preprocessImageFigure(context, wikiPageSource, result);
         return result;
     }
 
-    private String preprocessImageFigure(String source) {
+    private String preprocessImageFigure(WikiContext context, WikiPageSource wikiPageSource, String source) {
         final ReplacePatternCallback rp = new ReplacePatternCallback(Pattern.compile("^!\\[(.+)\\]\\((.+)\\)$", Pattern.MULTILINE));
         return rp.replace(source, matchResult -> {
             final String alt = Escaping.escapeHtml(matchResult.group(1), true);
-            final String src = Escaping.escapeHtml(matchResult.group(2), true);
+            final String src = Escaping.escapeHtml(resolveImageSrc(matchResult.group(2)), true);
             return String.format("<div class='figure picture'><img src='%s' alt='%s' /><p>%s</p></div>", src, alt, alt);
         });
     }
 
-    private String preprocessFloatingImage(String source, String direction) {
+    private String resolveImageSrc(String src) {
+        if (src.startsWith("http://") || src.startsWith("https://")) {
+            return src;
+        } else {
+            return "/assets/images/" + src;
+        }
+    }
+
+    private String preprocessFloatingImage(WikiContext context, WikiPageSource wikiPageSource, String source, String direction) {
         final ReplacePatternCallback callback = getFloatingImagePattern(direction);
         return callback.replace(source, matchResult -> getReplacement(direction, matchResult));
     }
