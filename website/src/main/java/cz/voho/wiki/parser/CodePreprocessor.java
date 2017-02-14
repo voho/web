@@ -12,9 +12,98 @@ import cz.voho.wiki.image.WikiImageCacheWarmUp;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.BitSet;
 import java.util.Set;
 
 public class CodePreprocessor implements Preprocessor {
+
+    public static void main(String[] args) {
+        String v = "hello world";
+        String p = "llo";
+        System.out.println(find(v.toCharArray(), p.toCharArray()));
+    }
+
+    private static int bitapx(char[] text, char[] pattern) {
+        int m = pattern.length;
+        BitSet patternDiffRev = new BitSet(m + 1);
+        // patternDiffRev[0] = 1
+        // patternDiffRev[1..m] = 0
+        patternDiffRev.set(0);
+        for (int iText = 0; iText < text.length; iText++) {
+            for (int iPattern = m; iPattern >= 1; iPattern--) {
+                // bitový posuv + AND
+                boolean diffBitPrev = patternDiffRev.get(iPattern - 1);
+                boolean diffBitCurrent = text[iText] == pattern[iPattern - 1];
+                patternDiffRev.set(iPattern, diffBitPrev && diffBitCurrent);
+            }
+            if (patternDiffRev.get(m)) {
+                // nalezeno
+                return iText - m + 1;
+            }
+        }
+        // nenalezeno
+        return -1;
+    }
+
+    /**
+     * Bitap search
+     **/
+    private static int bitap_search(char[] text, char[] pattern) {
+        int m = pattern.length;
+        if (m == 0 || m > 63) {
+            throw new IllegalArgumentException("Pattern has to be 1-63 characters long.");
+        }
+        long pattern_mask[] = new long[Character.MAX_VALUE + 1];
+        // = 1...1110
+        long patternDiffRev = ~1;
+        // = 0...010...0
+        long lastPatternBit = 1L << m;
+        // inicializace bitových masek masky pro všechny znaky
+        for (int iChar = 0; iChar <= Character.MAX_VALUE; ++iChar)
+            pattern_mask[iChar] = ~0;
+        for (int iPattern = 0; iPattern < m; ++iPattern) {
+            // = 0...010...0
+            char patternChar = pattern[iPattern];
+            pattern_mask[patternChar] &= ~(1L << iPattern);
+        }
+        for (int iText = 0; iText < text.length; ++iText) {
+            /** Update the bit array **/
+            patternDiffRev |= pattern_mask[text[iText]];
+            // bitový posuv vlevo o jeden bit
+            patternDiffRev <<= 1;
+            if ((patternDiffRev & lastPatternBit) == 0) {
+                // nalezeno
+                return iText - m + 1;
+            }
+        }
+        // nenalezeno
+        return -1;
+    }
+
+    public static int find(char[] text, char[] pattern) {
+        // 0...0001
+        BitSet patternDiffRev = new BitSet(pattern.length + 1);
+        patternDiffRev.set(0);
+
+        for (int iText = 0; iText < text.length; iText++) {
+            // pro všechny znaky textu:
+            for (int iPattern = pattern.length; iPattern >= 1; iPattern--) {
+                // pro všechny znaky vyhledávaného řetězce zprava doleva:
+                int iPatternNextChar = iPattern - 1;
+                boolean nextCharDiff = patternDiffRev.get(iPatternNextChar);
+                boolean currentCharDiff = text[iText] == pattern[iPatternNextChar];
+                patternDiffRev.set(iPattern, nextCharDiff && currentCharDiff);
+            }
+            if (patternDiffRev.get(pattern.length)) {
+                // nalezeno
+                return iText - pattern.length + 1;
+            }
+        }
+        // nenalezeno
+        return -1;
+    }
+
+
     private static final String DOT_GRAPH = "dot:graph";
     private static final String DOT_DIGRAPH = "dot:digraph";
     private static final String UML_CLASS = "uml:class";

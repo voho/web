@@ -1,0 +1,3 @@
+## Algoritmus Karp-Rabin
+
+!TODO!
