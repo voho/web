@@ -48,7 +48,7 @@
             // on intro page
 
             $typed.typed({
-                strings: ["Ing. Vojtěch Hordějčuk", "Hi! My name is Vojta Hordějčuk."],
+                strings: ["Ing. Vojta Hordějčuk", "Hi! My name is Vojta."],
                 loop: true,
                 typeSpeed: 100
             });
