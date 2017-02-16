@@ -100,8 +100,6 @@ public int find(char[] text, char[] pattern) {
 
 #### Vyhledávání vzoru "NANA" v textu "BANANA"
 
-| z | `0000000000000000000000000000000000000000000000000000000000010000`
-
                z = 0000000000000000000000000000000000000000000000000000000000010000
 
 | Proměnná | Hodnota
