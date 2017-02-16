@@ -21,8 +21,8 @@
             <div class="inner">
                 <#include "wiki/tree.ftl"/>
                 <#list indexSubPages.items as pageRef>
-                    <@print_wiki_tree pageRef 1 3/>
-                </#list>
+                <@print_wiki_tree pageRef 1 3/>
+            </#list>
             </div>
         </section>
 
@@ -31,21 +31,16 @@
         <section>
             <div class="inner">
                 <#if active_wiki_page_toc?has_content && !active_wiki_page_cover>
-                    <div class="row">
-                        <div class="8u 12u$(small)">
-                            <header class="major">
-                                <h1>${active_wiki_page_title}</h1>
-                            </header>
-                            <#include "wiki/children.ftl"/>
+                    <header class="major">
+                        <h1>${active_wiki_page_title}</h1>
+                        <a onclick="$('#toc').slideToggle();" class="button icon fa-bars">Obsah</a>
+                        <div id="toc">
+                            <h4>Obsah</h4>
+                            <#assign toc = active_wiki_page_toc.children/>
+                            <#include "wiki/toc.ftl"/>
                         </div>
-                        <div class="4u 12u$(small)">
-                            <div id="toc">
-                                <h4>Obsah</h4>
-                                <#assign toc = active_wiki_page_toc.children/>
-                                <#include "wiki/toc.ftl"/>
-                            </div>
-                        </div>
-                    </div>
+                    </header>
+                    <#include "wiki/children.ftl"/>
                 <#else>
                     <header class="major">
                         <h1>${active_wiki_page_title}</h1>

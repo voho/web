@@ -241,6 +241,10 @@ header.major > :first-child:after {
 
 /* wiki cover */
 
+#toc {
+    display: none;
+}
+
 section#wiki-cover {
     opacity: 0.5;
 }
