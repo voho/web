@@ -63,7 +63,7 @@ public class TocPreprocessor implements Preprocessor {
 
     private String generateIdFromTitle(String title, Node root) {
         counters.putIfAbsent(root, Maps.newHashMap());
-        String result = title.toLowerCase().replaceAll("\\s+", "-");
+        String result = title.toLowerCase().replaceAll("\\s+", "-").replace("\"", "");
         counters.get(root).putIfAbsent(result, 1);
         int current = counters.get(root).get(result);
         counters.get(root).put(result, current + 1);
