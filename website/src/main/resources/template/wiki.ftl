@@ -35,7 +35,6 @@
                         <h1>${active_wiki_page_title}</h1>
                         <a onclick="$('#toc').slideToggle();" class="button icon fa-bars">Obsah</a>
                         <div id="toc">
-                            <h4>Obsah</h4>
                             <#assign toc = active_wiki_page_toc.children/>
                             <#include "wiki/toc.ftl"/>
                         </div>
