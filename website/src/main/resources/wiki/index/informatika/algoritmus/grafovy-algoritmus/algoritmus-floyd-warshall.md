@@ -1,6 +1,6 @@
 ## Algoritmus Floyd-Warshall
 
-![Stephen Warshall (1969)](warshall.jpg){.right}
+![Stephen Warshall (1969)](warshall.png){.right}
 
 Grafový algoritmus Floyd-Warshall slouží k nalezení nejkratších cest mezi všemi dvojicemi uzlů. Během roku 1962 byl v různých podobách představen několika na sobě nezávislými autory. Princip algoritmu však lze vysledovat až do roku 1956 (Kleenův algoritmus). 
 
