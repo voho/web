@@ -49,7 +49,7 @@ public class ImagePreprocessor implements Preprocessor {
 
     private String getReplacement(String cssClass, MatchResult matchResult) {
         final String alt = Escaping.escapeHtml(matchResult.group(1), true);
-        final String src = Escaping.escapeHtml(matchResult.group(2), true);
+        final String src = Escaping.escapeHtml(resolveImageSrc(matchResult.group(2)), true);
         return String.format("<span class='image " + cssClass + "'><img src='%s' alt='%s' /></span>", src, alt);
     }
 }

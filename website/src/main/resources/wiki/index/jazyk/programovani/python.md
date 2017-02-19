@@ -1,6 +1,6 @@
 ## Python 3
 
-![Guido van Rossum (2006)](van_rossum.png) {.right}
+![Guido van Rossum (2006)](van_rossum.png){.right}
 
 Python je interpretovaný programovací jazyk zaměřený na čitelnost výsledného kódu.
 Například pro oddělování syntaktických celků se místo tradičních závorek používá odsazení a jazyk je velmi expresivní, s množstvím syntaktických zkratek.

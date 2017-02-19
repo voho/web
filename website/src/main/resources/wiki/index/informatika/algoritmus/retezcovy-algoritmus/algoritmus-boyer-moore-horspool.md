@@ -1,6 +1,6 @@
 ## Algoritmus Boyer-Moore-Horspool
 
-![Nigel Horspool](horspool.png) {.right}
+![Nigel Horspool](horspool.png){.right}
 
 Tento algoritmus pro vyhledávání řetězce představil v roce 1980 **Nigel Horspool** (Kanada) a vznikl zjednodušením algoritmu Boyer-Moore (autor jej také původně pojmenoval SBM - Simplified Boyer-Moore). Za toto zjednodušení platí využitím většího množství paměti a v některých situacích i poněkud horším výkonem, ale v mnoha praktických situacích se vlastnosti obou algoritmů podobají.
 

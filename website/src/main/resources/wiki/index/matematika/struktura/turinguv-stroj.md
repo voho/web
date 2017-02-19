@@ -1,6 +1,6 @@
 ## Turingův stroj
 
-![Alan Turing (1951)](photo_alan_turing.jpg) {.right}
+![Alan Turing (1951)](photo_alan_turing.jpg){.right}
 
 Turingův stroj je jednoduché abstraktní výpočetní zařízení, které se používá ke studiu **vypočitatelnosti** - tedy ke zjištění, které problémy s jeho použitím vyřešit lze a které ne. V roce 1937 jej definoval původem anglický filozof, matematik a kryptograf **Alan Mathison Turing**.
 
