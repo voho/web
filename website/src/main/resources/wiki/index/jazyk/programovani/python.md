@@ -1,14 +1,14 @@
 ## Python 3
 
-![Guido van Rossum (2006)](van_rossum.png){.right}
+![Guido van Rossum (2006)](van_rossum.png) {.right}
 
 Python je interpretovaný programovací jazyk zaměřený na čitelnost výsledného kódu.
 Například pro oddělování syntaktických celků se místo tradičních závorek používá odsazení a jazyk je velmi expresivní, s množstvím syntaktických zkratek.
-Jazyk je to dynamicky typovaný s automatickou správou paměti
 
-Jazyk Python vytvořil *Guido van Rossum* začátkem devadesátých let 20. století a od komunity dostal titul "benevolentní doživotní diktátor" (Benevolent Dictator For Life).
+Jazyk Python vytvořil *Guido van Rossum* začátkem devadesátých let 20. století. 
+Autor od komunity obdržel titul "benevolentní doživotní diktátor" (Benevolent Dictator For Life), což znamená, že se dále o rozvoj jazyka stará a rozhoduje o jeho dalším osudu.
 
-> Readability is often enhanced by reducing unnecessary variability. When possible, there's a single, obvious way to code a particular construct. This reduces the number of choices facing the programmer who is writing the code, and increases the chance that will appear familiar to a second programmer reading it. Yet another contribution to Python's readability is the choice to use punctuation mostly in a conservative, conventional manner. Most operator symbols are familiar to anyone with even a vague recollection of high school math, and no new meanings have to be learned for comic strip curse characters like @&$!. *- Guido van Rossum*
+> Readability is often enhanced by reducing unnecessary variability. When possible, there's a single, obvious way to code a particular construct. This reduces the number of choices facing the programmer who is writing the code, and increases the chance that will appear familiar to a second programmer reading it. Yet another contribution to Python's readability is the choice to use punctuation mostly in a conservative, conventional manner. Most operator symbols are familiar to anyone with even a vague recollection of high school math, and no new meanings have to be learned for comic strip curse characters like @&$!. *Guido van Rossum*
 
 !TODO!
 

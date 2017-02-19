@@ -1,5 +1,7 @@
 ## Algoritmus Jarník-Prim
 
+![Prof. RNDr. Vojtěch Jarník, DrSc.](jarnik.png) {.right}
+
 Jarníkův-Primův algoritmus je grafový algoritmus pro vyhledávání **minimální kostry souvislého ohodnoceného grafu**. Je pojmenovaný podle českého matematika **Vojtěcha Jarníka** (1897-1970) a amerického matematika **Roberta Claye Prima** (narozen 1921). Oba tento algoritmus sice popsali nezávisle na sobě, ale první byl Jarník (1930).
 
 ### Kroky algoritmu
