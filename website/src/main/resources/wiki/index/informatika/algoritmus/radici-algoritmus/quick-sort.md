@@ -1,6 +1,6 @@
 ## Quick sort (rychlé řazení)
 
-![Charles Hoare (1968)](hoare.jpg){.right}
+![Charles Hoare (1968)](hoare.jpg) {.right}
 
 Quick sort je řadící algoritmus, inspirovaný přístupem "rozděl a panuj" (divide et impera). V roce 1962 jej popsal sir **Charles Antony Richard Hoare**.
 
