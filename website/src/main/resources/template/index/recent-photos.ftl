@@ -17,7 +17,7 @@
         </div>
         <div class="row uniform">
             <ul class="actions">
-                <#include "actions-photos.ftl"/>
+                <#include "../common/menu/actions-photos.ftl"/>
             </ul>
         </div>
     </div>

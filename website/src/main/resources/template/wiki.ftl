@@ -17,9 +17,6 @@
 
         <section id="tree">
             <div class="inner">
-                <#include "common/search.ftl"/>
-            </div>
-            <div class="inner">
                 <#include "wiki/tree.ftl"/>
                 <#list indexSubPages.items as pageRef>
                 <@print_wiki_tree pageRef 1 3/>

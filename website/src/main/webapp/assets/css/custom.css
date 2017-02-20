@@ -152,15 +152,17 @@ dl dt em {
 
 #toc {
     background-color: #515670;
+    display: none;
     padding: 1em;
     margin: 0 0 1em 0;
+    min-width: 20em;
     position: fixed;
     right: 0;
     z-index: 99999;
 }
 
 #toc ul {
-    margin: 0;
+    margin: 0 2em 0 0;
 }
 
 #toc ul li {
@@ -246,10 +248,6 @@ header.major > :first-child:after {
 }
 
 /* wiki cover */
-
-#toc {
-    display: none;
-}
 
 section#wiki-cover {
     opacity: 0.5;
@@ -351,6 +349,10 @@ section#tree .level2 {
 }
 
 section#tree .level2:last-child {
+    border: 0;
+}
+
+section#tree .level1:first-child {
     border: 0;
 }
 

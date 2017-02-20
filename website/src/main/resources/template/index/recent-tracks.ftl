@@ -13,7 +13,7 @@
         </div>
         <div class="row uniform">
             <ul class="actions">
-                <#include "actions-music.ftl"/>
+                <#include "../common/menu/actions-music.ftl"/>
             </ul>
         </div>
     </div>

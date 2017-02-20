@@ -15,9 +15,12 @@
     <a href="/" class="logo"><strong>${website_short_name}</strong> <span> = ${website_extended_name}</span></a>
     <nav>
         <a href="#menu">Menu</a>
-        <#if active_wiki_page_toc?has_content && !active_wiki_page_cover>
-            <a onclick="$('#toc').fadeToggle();" class="icon fa-map-o">Obsah</a>
-        </#if>
+    <#if active_wiki_page_toc?has_content && !active_wiki_page_cover>
+        <a onclick="$('#toc').fadeToggle();" class="icon fa-map-o">Obsah</a>
+    </#if>
     </nav>
 </header>
+<nav id="menu">
+<#include "search.ftl"/>
 <#include "menu.ftl"/>
+</nav>
