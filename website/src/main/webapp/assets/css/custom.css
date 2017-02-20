@@ -14,6 +14,10 @@ a {
     border-bottom: 0;
 }
 
+nav a {
+    cursor: pointer;
+}
+
 /* inverted colors */
 
 section#wiki-content {
@@ -148,9 +152,11 @@ dl dt em {
 
 #toc {
     background-color: #515670;
-    border-radius: 5pt;
     padding: 1em;
     margin: 0 0 1em 0;
+    position: fixed;
+    right: 0;
+    z-index: 99999;
 }
 
 #toc ul {

@@ -10,6 +10,7 @@
 
     <div id="main">
 
+    <#include "wiki/toc-wrapper.ftl"/>
     <#include "wiki/breadcrumbs.ftl"/>
 
     <#if active_wiki_page_id == 'index'>
@@ -30,22 +31,10 @@
 
         <section>
             <div class="inner">
-                <#if active_wiki_page_toc?has_content && !active_wiki_page_cover>
-                    <header class="major">
-                        <h1>${active_wiki_page_title}</h1>
-                        <a onclick="$('#toc').slideToggle();" class="button icon fa-bars">Obsah</a>
-                        <div id="toc">
-                            <#assign toc = active_wiki_page_toc.children/>
-                            <#include "wiki/toc.ftl"/>
-                        </div>
-                    </header>
-                    <#include "wiki/children.ftl"/>
-                <#else>
-                    <header class="major">
-                        <h1>${active_wiki_page_title}</h1>
-                    </header>
-                    <#include "wiki/children.ftl"/>
-                </#if>
+                <header class="major">
+                    <h1>${active_wiki_page_title}</h1>
+                </header>
+                <#include "wiki/children.ftl"/>
             </div>
         </section>
 
