@@ -338,3 +338,4 @@ public class DefaultSkipList<K extends Comparable<? super K>, V> implements Skip
 - [ftp://ftp.cs.umd.edu/pub/skipLists/skiplists.pdf](ftp://ftp.cs.umd.edu/pub/skipLists/skiplists.pdf)
 - http://www.cs.tau.ac.il/~shanir/nir-pubs-web/Papers/OPODIS2006-BA.pdf
 - http://grepcode.com/file/repository.grepcode.com/java/root/jdk/openjdk/8u40-b25/java/util/concurrent/ConcurrentSkipListMap.java/
+- http://ticki.github.io/blog/skip-lists-done-right/
