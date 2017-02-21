@@ -1,8 +1,8 @@
 ## Hashovací tabulka (hash table)
 
-Hashovací tabulka je datová struktura pro ukládání dvojic **(klíč, hodnota)** nabízející dobrý kompromis mezi rychlostí vyhledávání a paměťovou náročností. Princip vyhledávání v hashovací tabulce je podobné vyhledávání dokumentů v uklizené kanceláři: pokud chci například najít určitou fakturu, klíčem bude její číslo 20150715, z klíče vydedukuji, že je to faktura z roku 2015, určitě jí tedy najdu v zásuvce nadepsané "faktury 2015". Hashovací tabulka v podstatě dělá něco podobného - automaticky pro každý klíč určí jeho kategorii a hledá již jen v těch kategoriích, ve kterých by se daný klíč mohl nacházet. Tímto způsobem lze ušetřit čas za podmínky, že je kategorizace záznamu dostatečně rychlá.
+Hashovací tabulka (popř. hašovací či hešovací tabulka) je [datová struktura](wiki/datova-struktura) pro ukládání dvojic **(klíč, hodnota)** nabízející dobrý kompromis mezi rychlostí vyhledávání a paměťovou náročností. Princip vyhledávání v hashovací tabulce je podobné vyhledávání dokumentů v uklizené kanceláři: pokud chci například najít určitou fakturu, klíčem bude její číslo 20150715. Z klíče odvodím, že je to faktura z roku 2015, určitě jí tedy najdu v zásuvce nadepsané "faktury 2015". Hashovací tabulka dělá něco podobného - automaticky pro každý klíč určí jeho kategorii a hledá v přihrádkách, ve kterých by se daný klíč mohl nacházet. Tímto způsobem lze ušetřit čas za podmínky, že je kategorizace záznamu dostatečně rychlá a přehledná.
 
-Obecně řečeno, hashovací tabulka je datová struktura se schopností efektivně vkládat, mazat a hledat záznamy **podle klíče**.
+Obecně řečeno, hashovací tabulka je datová struktura se schopností efektivně vkládat, mazat a hledat datové záznamy **podle klíče**.
 
 Pokud bychom měli celočíselné klíče dlouhé 32 bitů a chtěli bychom maximalizovat rychlost vyhledávání, ukládali bychom všechny záznamy do [pole](wiki/datova-struktura-pole), ve kterém by klíč byl zároveň indexem záznamu. Takto by však docházelo k obrovskému plýtvání pamětí v případě, že by bylo obsazeno jen několik klíčů.
 
@@ -23,7 +23,7 @@ Hashovací tabulka uvnitř obsahuje pole tzv. **slotů**, do kterých lze uklád
 
 Převod klíče na index slotu realizuje tzv. **hashovací funkce**. Toto [zobrazení](wiki/zobrazeni) nemusí být injektivní, ale mělo by mít následující vlastnosti:
 
-- ideálně by mělo vracet různé sloty s rovnoměrnou pravděpodobností
+- ideálně by mělo vracet různé sloty s rovnoměrnou [pravděpodobností](wiki/pravdepodobnost)
 - mělo by být velmi rychle vypočitatelné
 
 Mezi nejčastěji používané hashovací funkce patří **modulo** (zbytek po dělení) nebo násobení klíče prvočíslem a následná normalizace na počet slotů, tedy € h(k) = p \cdot k \bmod m €, kde €k€ je celočíselný klíč, €p€ je prvočíslo a €m€ je počet slotů (velikost pole se sloty).
