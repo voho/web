@@ -14,12 +14,34 @@ Hashovací tabulka za cenu určitého kompromisu spojuje výhody pole a spojové
 
 ### Princip fungování
 
-![hashovací tabulka](http://upload.wikimedia.org/wikipedia/commons/7/7d/Hash_table_3_1_1_0_1_0_0_SP.svg)
-
 Hashovací tabulka uvnitř obsahuje pole tzv. **slotů**, do kterých lze ukládat záznamy. Hashovací tabulka v podstatě dělá jen to, že na základě klíče vybere vhodný slot a operaci provede v něm. Abychom docílili efektivity, snažíme se, aby všechny sloty byly využity rovnoměrně, tedy aby různé klíče ideálně padaly do různých slotů. Samozřejmě to není zcela možné, protože množina klíčů je mnohem větší než počet slotů. Takové situaci říkáme **kolize** a existují různé metody, jak tyto kolize řešit:
 
 - **zřetězení záznamů** (separate chaining) - každý slot obsahuje spojový seznam, do kterého se postupně řetězí prvky patřící do stejného slotu
 - **otevřená adresace** (open addressing) - obsah všech slotů je umístěn v jednom poli a tak mohou data z jednoho slotu "přetékat" i do jiných slotů a tím zabírat volné místo pro jejich budoucí prvky, což se minimalizuje různými dalšími technikami (linear probing, double hashing...)
+
+```dot:digraph
+splines=false
+subgraph cluster0 {
+  John;Adele;Eve;Adam;Jack;
+  label="keys"
+  style=filled
+  fillcolor=lightgray
+}
+subgraph cluster1 {
+  J;A;E; 
+  label="clusters"
+  style=filled
+  fillcolor=yellowgreen
+  J [shape=house, label="J: John, Jack"]
+  A [shape=house, label="A: Adele, Adam"]
+  E [shape=house, label="E: Eve"]
+}
+Jack->J [ arrowhead=none]
+John->J [ arrowhead=none]
+Adele->A [ arrowhead=none]
+Adam->A [arrowhead=none]
+Eve->E [ arrowhead=none]
+```
 
 Převod klíče na index slotu realizuje tzv. **hashovací funkce**. Toto [zobrazení](wiki/zobrazeni) nemusí být injektivní, ale mělo by mít následující vlastnosti:
 
@@ -157,7 +179,6 @@ public class MyArrayBasedHashTable<DATA> {
         return (key % table.length);
     }
 }
-
 ```
 
 #### Pomocí pole a spojového seznamu
@@ -303,7 +324,6 @@ public class MyHashTableWithLinkedListSlots<VALUE> {
         return key % slots.length;
     }
 }
-
 ```
 
 ### Reference
