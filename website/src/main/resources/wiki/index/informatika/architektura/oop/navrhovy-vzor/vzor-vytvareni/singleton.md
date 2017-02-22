@@ -28,66 +28,107 @@ end note
 
 ### Implementace
 
-#### Singleton
+Správná implementace singletonu je závislá na jazyku, který použijeme. 
+Je nutné zjistit, jak v daném jazyce korektně implementovat následující požadavky:
+
+* vláknová bezpečnost (aby dvě různá vlákna v jeden okamžik nevytvářela dvě různé instance singletonu)
+* efektivita (aby se při získávání již existující instance singletonu neprováděly zbytečné operace)
+* volitelně i líná inicializace (aby se singleton vytvořil až v případě potřeby) 
+* odolnost vůči zničení či změně existující instance pomocí reflexe
+* možnost serializace singletonu
+
+V jazyce Java existuje několik způsobů, jak toto zajistit.
+
+#### Singleton (jednoduchý)
+
+Jedinou nevýhodou tohoto jednoduchého přístupu je, že neumožňuje línou inicializaci. 
+To však nemusí vadit.
 
 ```java
-/**
- * Třída, která má globálně nejvýše jednu instanci.
- *
- * @author Vojtěch Hordějčuk
- */
-public class Singleton
-{
-  /**
-   * jedinečná globální instance třídy
-   */
-  private static Singleton instance = null;
-
-  /**
-   * Vrátí jedinečnou globální instanci této třídy. Pokud instance neexistuje,
-   * bude vytvořena. Aby byla metoda bezpečná, je nutné přidat kvalifikátor
-   * "synchronized".
-   *
-   * @return jedinečná globální instance třídy
-   */
-  public synchronized static Singleton getInstance()
-  {
-    if (Singleton.instance == null)
-    {
-      // globální instance neexistuje, je třeba ji vytvořit
-
-      Singleton.instance = new Singleton();
+public final class Singleton {
+    public static final Singleton INSTANCE = new Singleton();
+    
+    private Singleton() {
+        // ...
     }
-
-    return Singleton.instance;
-  }
-
-  /**
-   * Konstruktor nesmí být veřejný, aby jej nebylo možné volat, a tak obcházet
-   * výchozí mechanismus.
-   */
-  private Singleton()
-  {
-    // ...
-  }
 }
 ```
 
-#### Test
+#### Singleton (realizace s použitím dvojité kontroly)
+
+Tento postup umožňuje línou inicializaci za cenu mírně nepřehledné metody pro získání instance.
+Tento přístup je však nutné pro zajištění vláknové bezpečnosti.
 
 ```java
-public static void main(String[] args)
-{
-  // získat globální instanci třídy a vykonat akci
-
-  Singleton.getInstance().doSomething();
+public final class Singleton {
+    private static Singleton INSTANCE = null;
+    
+    private Singleton() {
+        // ...
+    }
+    
+    public static Singleton getInstance() {
+        if (INSTANCE == null) {
+            synchronized (Singleton.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = new Singleton();
+                }
+            }
+        }
+        
+        return INSTANCE;
+    }
 }
+```
+
+#### Singleton (realizace vnitřní pomocnou třídou)
+
+V této implementaci je instance singletonu vytvořena classloaderem, protože je navázána na vnitřní třídu.
+Líná inicializace není zajištěna, ale singleton se inicializuje až při načtení třídy.
+Původním autorem techniky je zřejmě [Bill Pugh](http://www.cs.umd.edu/~pugh/).
+
+```java
+public final class Singleton {
+    private Singleton() {
+        // ...
+    }
+    
+    public static Singleton getInstance() {
+        return SingletonHolder.INSTANCE;
+    }
+    
+    private static class SingletonHolder {
+        private static Singleton INSTANCE = new Singleton();
+    }
+}
+```
+
+#### Singleton (realizace výčtovým typem)
+
+Tuto techniku doporučuje [Joshua Bloch](https://en.wikipedia.org/wiki/Joshua_Bloch) ve [své přednášce](http://www.youtube.com/watch?v=pi_I7oD_uGI#t=28m50s).
+Podle něj se jedná o nejlepší a nejrobustnější implementaci, která implementuje všechny rozumné požadavky, které na singleton můžeme mít.
+
+> This approach is functionally equivalent to the public field approach, except that it is more concise, provides the serialization machinery for free, and provides an ironclad guarantee against multiple instantiation, even in the face of sophisticated serialization or reflection attacks. While this approach has yet to be widely adopted, a single-element enum type is the best way to implement a singleton. *Joshua Bloch*
+
+```java
+public enum Singleton {
+    INSTANCE;
+    
+    // ...
+}
+```
+
+#### Použití
+
+```java
+Singleton.getInstance().doSomething();
 ```
 
 ### Reference
 
 - předmět X36ASS na FEL ČVUT
 - předmět X36OBP na FEL ČVUT
+- http://stackoverflow.com/questions/70689/what-is-an-efficient-way-to-implement-a-singleton-pattern-in-java
 - http://www.oodesign.com/singleton-pattern.html
 - http://objekty.vse.cz/Objekty/Vzory-Singleton
 - http://sourcemaking.com/design_patterns/singleton
