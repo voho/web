@@ -13,6 +13,9 @@
 <script src="/assets/js/particles.min.js"></script>
 <script src="/assets/js/typed.min.js"></script>
 
+<!-- autocomplete -->
+<script src="/assets/autocomplete/jquery.auto-complete.min.js"></script>
+
 <!-- everything put together -->
 <script src="/assets/js/main.js"></script>
 
@@ -26,4 +29,21 @@
     ga('create', 'UA-1921641-7', 'auto');
     ga('send', 'pageview');
 
+</script>
+
+<script>
+    $("#wiki-search").autoComplete({
+        minChars: 1,
+        source: function (term, suggest) {
+            var choices = ${wikiPagesAutoCompleteJson};
+            var matches = [];
+            term = term.toLowerCase();
+            for (i = 0; i < choices.length; i++)
+                if (~choices[i].toLowerCase().indexOf(term)) matches.push(choices[i]);
+            suggest(matches);
+        },
+        onSelect: function (e, term, item) {
+            $("#wiki-search").text(term);
+        }
+    });
 </script>

@@ -112,7 +112,7 @@ public class WikiPageServlet extends AbstractMenuPageServlet {
     }
 
     private String createReportWikiIssueLink(final ParsedWikiPage parsedWikiPage) {
-        final String title = String.format("%s (Wiki)", parsedWikiPage.getSource().getId());
+        final String title = String.format("%s (chyba na Wiki)", parsedWikiPage.getSource().getId());
         final String body = "";
         return String.format(
                 "https://github.com/voho/web/issues/new?title=%s&body=%s",
