@@ -6,9 +6,13 @@ V systému má existovat třída, která může mít nejvýše jednu globálně 
 
 ### Řešení
 
-Teoreticky je možné vytvořit instanci libovolné třídy na libovolném místě. Toto chování však není žádoucí u třídy, u které požadujeme omezenit počet instancí na jednu, centrálně spravovanou.
+Správná implementace singletonu silně závisí na jazyku, který použijeme, protože každý z nich nabízí jiné prostředky a konstrukce. Na implementaci máme následující požadavky:
 
-V třídě samé tedy zavedeme novou soukromou statickou proměnnou, která bude obsahovat jedinou existující a globálně sdílenou instanci dané třídy. Tuto instanci lze buď vytvořit ihned při inicializaci třídy (princip **eager loading**), nebo až v případě potřeby (princip **lazy loading**). Ve druhém případě je třeba dávat pozor na řízení přístupu více vláken. Abychom dále omezili možnost vytvářet instance této třídy, měl by se skrýt její konstruktor.
+* nesmí být možné vytvářet instance singletonu jinde, než v singletonu samém
+* vytváření singletonu musí proběhnout nejvýše jednou, a proto je nutné zajistit vláknovou bezpečnost, aby dvě různá vlákna v jeden okamžik nevytvářela dvě různé instance singletonu
+* při získávání již existující instance singletonu se nesmí provádět žádné zbytečné operace
+* nemělo by být možné použít reflexi a zničit či zaměnit instanci singletonu během vykonávání programu
+* instance singletonu by měla být serializovatelná
 
 ```uml:class
 class EagerSingleton {
@@ -26,23 +30,13 @@ note bottom of LazySingleton
 end note
 ```
 
-### Implementace
+### Implementace (Java)
 
-Správná implementace singletonu je závislá na jazyku, který použijeme. 
-Je nutné zjistit, jak v daném jazyce korektně implementovat následující požadavky:
-
-* vláknová bezpečnost (aby dvě různá vlákna v jeden okamžik nevytvářela dvě různé instance singletonu)
-* efektivita (aby se při získávání již existující instance singletonu neprováděly zbytečné operace)
-* volitelně i líná inicializace (aby se singleton vytvořil až v případě potřeby) 
-* odolnost vůči zničení či změně existující instance pomocí reflexe
-* možnost serializace singletonu
-
-V jazyce Java existuje několik způsobů, jak toto zajistit.
+V jazyce Java existuje několik způsobů, jak uvedené požadavky zajistit.
 
 #### Singleton (jednoduchý)
 
-Jedinou nevýhodou tohoto jednoduchého přístupu je, že neumožňuje línou inicializaci. 
-To však nemusí vadit.
+Tento postup je velmi jednoduchý, ale zároveň neimplementuje všechny požadavky. Je však vláknově bezpečný a efektivní.
 
 ```java
 public final class Singleton {
@@ -56,8 +50,7 @@ public final class Singleton {
 
 #### Singleton (realizace s použitím dvojité kontroly)
 
-Tento postup umožňuje línou inicializaci za cenu mírně nepřehledné metody pro získání instance.
-Tento přístup je však nutné pro zajištění vláknové bezpečnosti.
+Tento postup umožňuje línou inicializaci za cenu mírně nepřehledné metody pro získání instance. Je vláknově bezpečný.
 
 ```java
 public final class Singleton {
@@ -83,9 +76,7 @@ public final class Singleton {
 
 #### Singleton (realizace vnitřní pomocnou třídou)
 
-V této implementaci je instance singletonu vytvořena classloaderem, protože je navázána na vnitřní třídu.
-Líná inicializace není zajištěna, ale singleton se inicializuje až při načtení třídy.
-Původním autorem techniky je zřejmě [Bill Pugh](http://www.cs.umd.edu/~pugh/).
+V této implementaci je instance singletonu vytvořena classloaderem během načítání třídy. Původním autorem techniky je zřejmě [Bill Pugh](http://www.cs.umd.edu/~pugh/).
 
 ```java
 public final class Singleton {
