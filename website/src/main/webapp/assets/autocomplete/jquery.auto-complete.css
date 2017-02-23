@@ -9,7 +9,8 @@
     position: fixed;
     display: none;
     z-index: 11000;
-    max-height: 254px;
+    min-height: 250px;
+    max-height: 20vh;
     overflow: hidden;
     overflow-y: auto;
     padding: 1ex;
