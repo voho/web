@@ -59,6 +59,7 @@ Součin vektoru dimenze *n* nad tělesem *T* s prvkem *a* z tělesa *T* je defin
 Součin vektoru dimenze *n* nad tělesem *T* a prvku *a* z tělesa *T* je tedy opět vektor stejné dimenze nad stejným tělesem. Pokud je prvek *a* záporný, orientace vektoru se změní.
 
 ![násobení vektoru skalárem](http://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/VectorCalculations_6.png/175px-VectorCalculations_6.png)
+
 #### Skalární součin
 
 Skalární (vnitřní) součin je funkce, která dvojici vektorů *x* a *y* přiřazuje skalár *a*. Je-li výsledný skalár roven nule, oba vektory *x* a *y* jsou na sebe navzájem **kolmé**. V **ortonormální bázi** se dá skalární součin dvou vektorů *x* a *y* vypočítat takto:
@@ -72,6 +73,8 @@ Vektorový (vnější) součin je definován pouze ve **třírozměrném prostor
 €€ \overline{x} \times \overline{y} = (a_2 \cdot b_3-a_3 \cdot b_2,a_3 \cdot b_1-a_1 \cdot b_3,a_1 \cdot b_2-a_2 \cdot b_1) €€
 
 Výsledný vektor *z* je kolmý na oba vektory *x* a *y* a jeho norma odpovídá obsahu rovnoběžníku ohraničeného vektory *x* a *y*.
+
+![http://study.com/cimages/multimages/16/256px-cross_product_parallelogram.svg.png](vektorový součin)
 
 #### Operátor DEL
 
