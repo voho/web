@@ -56,7 +56,7 @@ public class GenerateServlet extends HttpServlet {
     }
 
     private String getPath(final HttpServletRequest request) {
-        String url = request.getRequestURI().toString();
+        String url = request.getRequestURI();
         while (url.startsWith("/")) {
             url = url.substring(1);
         }

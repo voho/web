@@ -10,11 +10,10 @@
         <welcome-file>/</welcome-file>
     </welcome-file-list>
 
-    <servlet>
-        <servlet-name>dispatcher</servlet-name>
-        <servlet-class>cz.voho.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/assets/*</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>generate</servlet-name>
@@ -22,11 +21,21 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
+    <servlet-mapping>
+        <servlet-name>generate</servlet-name>
+        <url-pattern>/generate/*</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>meta</servlet-name>
         <servlet-class>cz.voho.servlet.MetaPageServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+
+    <servlet-mapping>
+        <servlet-name>meta</servlet-name>
+        <url-pattern>/meta/</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>index</servlet-name>
@@ -34,11 +43,21 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
+    <servlet-mapping>
+        <servlet-name>index</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>wiki</servlet-name>
         <servlet-class>cz.voho.servlet.WikiPageServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+
+    <servlet-mapping>
+        <servlet-name>wiki</servlet-name>
+        <url-pattern>/wiki/*</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>sitemap</servlet-name>
@@ -47,8 +66,18 @@
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>dispatcher</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <servlet-name>sitemap</servlet-name>
+        <url-pattern>/sitemap/</url-pattern>
     </servlet-mapping>
+
+    <filter>
+        <filter-name>slash</filter-name>
+        <filter-class>cz.voho.filter.TrailingSlashAppendingFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>slash</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
 </web-app>
