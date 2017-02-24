@@ -11,9 +11,6 @@
     <!-- syntax highlighter -->
     <link rel="stylesheet" href="/assets/highlight/vs.css">
 
-    <!-- autocomplete -->
-    <link rel="stylesheet" href="/assets/autocomplete/jquery.auto-complete.css">
-
     <!--[if lte IE 9]>
     <link rel="stylesheet" href="/assets/css/ie9.css"/>
     <![endif]-->

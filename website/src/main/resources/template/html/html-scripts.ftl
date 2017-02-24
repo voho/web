@@ -13,9 +13,6 @@
 <script src="/assets/js/particles.min.js"></script>
 <script src="/assets/js/typed.min.js"></script>
 
-<!-- autocomplete -->
-<script src="/assets/autocomplete/jquery.auto-complete.min.js"></script>
-
 <!-- everything put together -->
 <script src="/assets/js/main.js"></script>
 
