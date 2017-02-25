@@ -44,8 +44,8 @@ public class BinaryTreeNode implements Cloneable {
     final BinaryTreeNode clone = (BinaryTreeNode) super.clone();
     // nyní: clone.left == this.left
     // nyní: clone.right == this.right
-    clone.left = (BinaryTreeNode) this.left.clone();
-    clone.right = (BinaryTreeNode) this.right.clone();
+    clone.left = this.left == null ? null : (BinaryTreeNode) this.left.clone();
+    clone.right = this.right == null ? null : (BinaryTreeNode) this.right.clone();
     // nyní: clone.left != this.left
     // nyní: clone.right != this.right
     return clone;
