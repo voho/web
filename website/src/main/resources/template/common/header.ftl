@@ -21,6 +21,5 @@
     </nav>
 </header>
 <nav id="menu">
-<#include "search.ftl"/>
 <#include "menu.ftl"/>
 </nav>

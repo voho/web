@@ -27,7 +27,8 @@
     <#else>
 
         <section>
-            <div class="inner">
+            <div class="inner search">
+                <#include "common/search.ftl"/>
                 <header class="major">
                     <h1>${active_wiki_page_title}</h1>
                 </header>

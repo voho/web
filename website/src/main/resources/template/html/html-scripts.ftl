@@ -27,20 +27,3 @@
     ga('send', 'pageview');
 
 </script>
-
-<script>
-    $("#wiki-search").autoComplete({
-        minChars: 1,
-        source: function (term, suggest) {
-            var choices = ${wikiPagesAutoCompleteJson};
-            var matches = [];
-            term = term.toLowerCase();
-            for (i = 0; i < choices.length; i++)
-                if (~choices[i].toLowerCase().indexOf(term)) matches.push(choices[i]);
-            suggest(matches);
-        },
-        onSelect: function (e, term, item) {
-            $("#wiki-search").text(term);
-        }
-    });
-</script>

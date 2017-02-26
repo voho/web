@@ -56,6 +56,18 @@ section#wiki-content thead {
     border: 0;
 }
 
+#main > * > .inner.search {
+    padding-top: 0;
+}
+
+#main > * > .inner.search form {
+    margin: 1ex 0;
+}
+
+#main > * > .inner.search form input {
+    font-size: 80%;
+}
+
 section#wiki-content em {
     background-color: #fffa96;
     padding: 1px 5pt;
@@ -164,10 +176,6 @@ dl dt em {
     position: fixed;
     right: 0;
     z-index: 12000;
-}
-
-#wiki-search {
-    z-index: 11100;
 }
 
 #toc ul {
