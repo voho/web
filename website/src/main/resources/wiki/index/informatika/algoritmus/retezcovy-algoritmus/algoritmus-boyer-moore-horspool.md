@@ -2,9 +2,9 @@
 
 ![Nigel Horspool](horspool.png){.right}
 
-Tento algoritmus pro vyhledávání řetězce představil v roce 1980 **Nigel Horspool** (Kanada) a vznikl zjednodušením algoritmu Boyer-Moore (autor jej také původně pojmenoval SBM - Simplified Boyer-Moore). Za toto zjednodušení platí využitím většího množství paměti a v některých situacích i poněkud horším výkonem, ale v mnoha praktických situacích se vlastnosti obou algoritmů podobají.
+Tento algoritmus pro vyhledávání řetězců představil v roce 1980 **Nigel Horspool** (Kanada) a vznikl zjednodušením algoritmu Boyer-Moore (autor jej také původně pojmenoval SBM - Simplified Boyer-Moore). Za toto zjednodušení platí využitím většího množství paměti a v některých situacích i horším výkonem. V praktických aplikacích se vlastnosti obou algoritmů podobají.
 
-Algoritmus je vhodné použít v situacích, kdy je abeceda v porovnání s typickou délkou vyhledávaného řetězce velká. To může být případ běžných textových editorů, kde se typicky pracuje s mezinárodními znakovými sadami a vyhledávají se jen krátká slova či spojení.
+Algoritmus je vhodné použít v situacích, kdy je abeceda v porovnání s typickou délkou vyhledávaného řetězce velká. To může být případ textových editorů, ve kterých se běžně pracuje s mezinárodními znakovými sadami a vyhledávají se jen krátká slova či jejich spojení.
 
 ### Kroky algoritmu
 
@@ -81,7 +81,7 @@ private static int strpos(final char[] needle, final char[] haystack) {
 
 ### Složitost
 
-Teoretická [asymptotická složitost](wiki/asymptoticka-slozitost) algoritmu je stejná jako u naivního algoritmu, a sice € O(m \cdot n) €, kde €m€ je délka vyhledávaného řetězce a €n€ délka řetězce, ve kterém vyhledávání probíhá. Naštěstí však v běžných případech dosahuje algoritmus až lineární složitosti € O(n) €.
+Teoretická [asymptotická složitost](wiki/asymptoticka-slozitost) algoritmu je stejná jako u naivního algoritmu, a sice € O(m \cdot n) €, kde €m€ je délka vyhledávaného řetězce a €n€ délka řetězce, ve kterém vyhledávání probíhá. V běžných případech však složitost klesá až k lineární € O(n) €.
 
 ### Reference
 
