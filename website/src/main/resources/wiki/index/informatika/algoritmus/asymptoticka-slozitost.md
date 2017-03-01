@@ -12,7 +12,7 @@ Množina Omega funkce *f* je množina všech funkcí, které mají "stejný" neb
 
 Prohlásíme-li, že složitost algoritmu leží v množině Omega funkce *f*, znamená to, že bude **náročnost algoritmu růst vždy stejně nebo více** než funkce *f*. Notaci Omega lze tedy chápat jako vyjádření "nejlepšího případu".
 
-![notace Omega omezuje řád růstu náročnosti zdola](https://s3.amazonaws.com/ka-cs-algorithms/Omega_fn.png)
+![notace Omega omezuje řád růstu náročnosti zdola](bigo_omega.png)
 
 #### Formální definice
 
@@ -28,7 +28,7 @@ Množina Omikron funkce *f* je množina všech funkcí, které mají "stejný" n
 
 Prohlásíme-li, že složitost algoritmu leží v množině Omikron funkce *f*, znamená to, že bude **náročnost algoritmu růst vždy stejně nebo méně** než funkce *f*. Notaci Omikron tedy lze chápat jako vyjádření "nejhoršího případu".
 
-![notace Omega omezuje řád růstu náročnosti shora](https://s3.amazonaws.com/ka-cs-algorithms/O_fn.png)
+![notace Omega omezuje řád růstu náročnosti shora](bigo_omicron.png)
 
 #### Formální definice
 
@@ -46,7 +46,7 @@ Prohlásíme-li, že složitost algoritmu leží v množině Theta funkce *f*, z
 
 U některých algoritmů však nelze složitost pomocí množiny Theta specifikovat.
 
-![notace Omega omezuje řád růstu náročnosti z obou směrů](https://s3.amazonaws.com/ka-cs-algorithms/theta_fn.png)
+![notace Omega omezuje řád růstu náročnosti z obou směrů](bigo_theta.png)
 
 #### Formální definice
 
