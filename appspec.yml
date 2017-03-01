@@ -4,14 +4,9 @@ files:
   - source: /ROOT.war
     destination: /var/lib/tomcat8/webapps/
 hooks:
-  BeforeInstall:
-    - location: deregister_from_elb.sh
-      timeout: 400
   ApplicationStop:
     - location: application_stop.sh
       timeout: 120
   ApplicationStart:
     - location: application_start.sh
       timeout: 120
-    - location: register_with_elb.sh
-      timeout: 400
