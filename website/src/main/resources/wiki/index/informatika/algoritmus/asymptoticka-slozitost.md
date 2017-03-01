@@ -75,7 +75,7 @@ f(x) \in \Theta(g(x)) \rightarrow f(x) \in O(g(x)) \land f(x) \in \Omega(g(x))
 | exponenciální | € O(k^n), k \in R € | |
 | faktoriálová | € O(n!) € | Typicky vyhodnocování všech možných permutací € n € prvků, například v brute-force algoritmech. |
 
-![porovnání složitostí](http://bigocheatsheet.com/img/big-o-complexity.png)
+![porovnání složitostí](bigo.png)
 
 ### Reference
 
