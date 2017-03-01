@@ -13,13 +13,14 @@ Za cenu další obsazené paměti a složitějších operací lze jednoduché sp
 - Pro snadné přidávání prvků na konec seznamu je vhodné zavést ukazatel na konec seznamu, tzv. **patičku** (*tail*).
 - Pro efektivní obousměrný průchod lze prvky zřetězit i zpětně, takže kromě ukazatele na následující prvek (*next*) bude každý prvek ukazovat i na prvek předchozí (*prev*).
 
-Podle počtu zřetězení lze odlišit **jednosměrně zřetězené spojové seznamy** a **obousměrně zřetězené spojové seznamy**. Odkaz na patičku se téměř vždy vyplatí, protože se do seznamů často přidává.
+### Jednosměrně zřetězené seznamy
+
+V jednosměrně zřetězených seznamech mají prvky pouze jeden ukazatel, a to na následující prvek.
 
 ```dot:digraph
-node [shape=rectangle]
-nodesep=0.5
-head -> "item 1" [label=" head"]
-tail -> "item 3" [label=" tail"]
+ratio=0.3
+head -> "item 1" [label="  head"]
+tail -> "item 3" [label="  tail"]
 head [shape=none,label="",style=invisible]
 tail [shape=none,label="",style=invisible]
 null [shape=none,fillcolor=transparent]
@@ -28,9 +29,12 @@ null [shape=none,fillcolor=transparent]
 {rank=same;"item 1";"item 2";"item 3";null}
 ```
 
+#### Obousměrně zřetězené seznamy
+
+V obousměrně zřetězených seznamech mají prvky dva ukazatele: jeden na prvek následující a druhý na prvek předchozí.
+
 ```dot:digraph
-node [shape=rectangle]
-nodesep=0.6
+ratio=0.5
 head -> "item 1" [label=" head"]
 tail -> "item 3" [label=" tail"]
 head [shape=none,label="",style=invisible]
@@ -44,7 +48,21 @@ null2 [shape=plaintext,label="null",fillcolor=transparent]
 {rank=same;"item 1";"item 2";"item 3";}
 ```
 
-Pokud poslední prvek seznamu neukazuje do prázdna, ale je napojený opět na začátek seznamu, jedná se o tzv. **cyklicky zřetězený spojový seznam**.
+#### Cyklicky zřetězený seznam
+
+Pokud poslední prvek seznamu neukazuje do prázdna, ale je napojený opět na začátek seznamu, jedná se o tzv. **cyklicky zřetězený seznam**.
+
+```dot:digraph
+{rank=same;head;tail;}
+{rank=same;"item 1";"item 2";"item 3"}
+ratio=0.3
+head -> "item 1" [label="  head"]
+tail -> "item 3" [label="  tail"]
+head [shape=none,label="",style=invisible]
+tail [shape=none,label="",style=invisible]
+"item 1" -> "item 2" -> "item 3" [label=" next"]
+"item 3" -> "item 1"
+```
 
 ### Asymptotická složitost
 
