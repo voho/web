@@ -16,7 +16,8 @@
     <#if active_wiki_page_id == 'index'>
 
         <section id="tree">
-            <div class="inner">
+            <div class="inner search">
+                <#include "common/search.ftl"/>
                 <#include "wiki/tree.ftl"/>
                 <#list indexSubPages.items as pageRef>
                 <@print_wiki_tree pageRef 1 3/>
