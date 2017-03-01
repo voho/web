@@ -16,8 +16,7 @@
     <#if active_wiki_page_id == 'index'>
 
         <section id="tree">
-            <div class="inner search">
-                <#include "common/search.ftl"/>
+            <div class="inner">
                 <#include "wiki/tree.ftl"/>
                 <#list indexSubPages.items as pageRef>
                 <@print_wiki_tree pageRef 1 3/>
@@ -28,8 +27,7 @@
     <#else>
 
         <section>
-            <div class="inner search">
-                <#include "common/search.ftl"/>
+            <div class="inner">
                 <header class="major">
                     <h1>${active_wiki_page_title}</h1>
                 </header>

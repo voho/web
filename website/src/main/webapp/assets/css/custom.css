@@ -56,16 +56,16 @@ section#wiki-content thead {
     border: 0;
 }
 
-#main > * > .inner.search {
-    padding-top: 0;
+#header input {
+    height: inherit;
+    line-height: inherit;
+    font-size: 90%;
 }
 
-#main > * > .inner.search form {
-    margin: 1ex 0;
-}
-
-#main > * > .inner.search form input {
-    font-size: 80%;
+#header input:focus {
+    background-color: #9bf1ff;
+    color: black !important;
+    font-weight: bold;
 }
 
 section#wiki-content em {
