@@ -19,7 +19,15 @@ import cz.voho.wiki.page.parsed.DefaultParsedWikiPageRepository;
 import cz.voho.wiki.page.parsed.ParsedWikiPageRepository;
 import cz.voho.wiki.page.source.DefaultWikiPageSourceRepository;
 import cz.voho.wiki.page.source.WikiPageSourceRepository;
-import cz.voho.wiki.parser.*;
+import cz.voho.wiki.parser.CodePreprocessor;
+import cz.voho.wiki.parser.FlexmarkWikiParser;
+import cz.voho.wiki.parser.ImagePreprocessor;
+import cz.voho.wiki.parser.JavadocPreprocessor;
+import cz.voho.wiki.parser.MathPreprocessor;
+import cz.voho.wiki.parser.QuotePreprocessor;
+import cz.voho.wiki.parser.TocPreprocessor;
+import cz.voho.wiki.parser.TodoPreprocessor;
+import cz.voho.wiki.parser.WikiLinkPreprocessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,6 +35,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class WikiBackend {
@@ -60,12 +69,12 @@ public class WikiBackend {
         final WikiPageSourceRepository wikiPageSourceRepository = new DefaultWikiPageSourceRepository(wikiContext);
         final DefaultParsedWikiPageRepository parsedWikiPageRepository = new DefaultParsedWikiPageRepository(wikiParser, wikiPageSourceRepository, wikiContext);
 
-        CachingParsedWikiPageRepository cachedRepository = new CachingParsedWikiPageRepository(parsedWikiPageRepository);
+        final CachingParsedWikiPageRepository cachedRepository = new CachingParsedWikiPageRepository(parsedWikiPageRepository);
         this.parsedWikiPageRepository = cachedRepository;
         wikiContext.getWikiPageIds().forEach(cachedRepository::refresh);
     }
 
-    public String getExternalWikiPageLink(String wikiPageId) {
+    public String getExternalWikiPageLink(final String wikiPageId) {
         return Constants.WEBSITE_URL_WITH_SLASH + "wiki/" + wikiPageId + "/";
     }
 
@@ -76,28 +85,9 @@ public class WikiBackend {
             if (wikiPageId.equals(MISSING_WIKI_PAGE_ID)) {
                 throw e;
             } else {
-                return load(resolveWikiPageFallback(wikiPageId));
+                return load(MISSING_WIKI_PAGE_ID);
             }
         }
-    }
-
-    private String resolveWikiPageFallback(final String missingWikiPageId) {
-        final Set<String> candidates = Sets.newHashSet();
-
-        for (final String wikiPageId : wikiContext.getWikiPageIds()) {
-            final boolean containsAsPrefix = wikiPageId.contains(missingWikiPageId + "-");
-            final boolean containsAsSuffix = wikiPageId.contains("-" + missingWikiPageId);
-
-            if (containsAsPrefix || containsAsSuffix) {
-                candidates.add(wikiPageId);
-            }
-        }
-
-        if (candidates.size() == 1) {
-            return candidates.iterator().next();
-        }
-
-        return MISSING_WIKI_PAGE_ID;
     }
 
     public WikiPageReferences getBreadCrumbs(final String wikiPageId) {
@@ -211,9 +201,42 @@ public class WikiBackend {
     }
 
     public ImmutableSet<String> getWikiPageAutoCompleteValues() {
-        Set<String> values = new TreeSet<>();
+        final Set<String> values = new TreeSet<>();
         values.addAll(wikiContext.getWikiPageIds());
         values.addAll(wikiContext.getWikiPageIds().stream().map(parsedWikiPageRepository::load).map(ParsedWikiPage::getTitle).collect(Collectors.toSet()));
         return ImmutableSet.copyOf(values);
+    }
+
+    public String resolveWikiPageId(final String path) {
+        String result = path;
+
+        // multi-part wiki page
+
+        final String[] parts = result.split(Pattern.quote("/"));
+
+        if (parts.length > 1) {
+            result = parts[parts.length - 1];
+        }
+
+        // wiki page suffix
+
+        if (!getCurrentContext().exists(result)) {
+            final Set<String> candidates = Sets.newHashSet();
+
+            for (final String wikiPageId : wikiContext.getWikiPageIds()) {
+                final boolean containsAsPrefix = wikiPageId.contains(result + "-");
+                final boolean containsAsSuffix = wikiPageId.contains("-" + result);
+
+                if (containsAsPrefix || containsAsSuffix) {
+                    candidates.add(wikiPageId);
+                }
+            }
+
+            if (candidates.size() == 1) {
+                result = candidates.iterator().next();
+            }
+        }
+
+        return result;
     }
 }

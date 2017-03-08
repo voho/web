@@ -21,7 +21,7 @@ public class WikiLinkPreprocessor implements Preprocessor {
                 String linkUrl = link.getUrl().toString();
 
                 if (linkUrl.startsWith("wiki/")) {
-                    String targetId = WikiLinkUtility.resolveWikiPageId(linkUrl);
+                    String targetId = WikiLinkUtility.stripSlashesAndWikiPrefix(linkUrl);
                     link.setUrl(PrefixedSubSequence.of("/wiki/" + targetId + "/"));
                     context.addLink(sourceId, targetId);
                 }

@@ -71,6 +71,16 @@
     </servlet-mapping>
 
     <filter>
+        <filter-name>wiki</filter-name>
+        <filter-class>cz.voho.filter.InvalidWikiPageRedirectionFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>wiki</filter-name>
+        <url-pattern>/wiki/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
         <filter-name>slash</filter-name>
         <filter-class>cz.voho.filter.TrailingSlashAppendingFilter</filter-class>
     </filter>

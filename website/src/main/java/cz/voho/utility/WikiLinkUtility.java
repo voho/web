@@ -13,7 +13,7 @@ public class WikiLinkUtility {
         return value;
     }
 
-    public static String resolveWikiPageId(final String link) {
+    public static String stripSlashesAndWikiPrefix(final String link) {
         String result = stripSlashes(link);
 
         if (result.startsWith("wiki/")) {

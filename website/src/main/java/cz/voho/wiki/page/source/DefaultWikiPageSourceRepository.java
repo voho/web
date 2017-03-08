@@ -37,7 +37,7 @@ public class DefaultWikiPageSourceRepository implements WikiPageSourceRepository
                     .stream()
                     .map(ClassPath.ResourceInfo::getResourceName)
                     .filter(this::isNameOfWikiResource)
-                    .map(WikiLinkUtility::resolveWikiPageId)
+                    .map(WikiLinkUtility::stripSlashesAndWikiPrefix)
                     .forEach(this::precacheResource);
         } catch (IOException e) {
             throw new InitializationException("Error while loading wiki page sources.", e);
