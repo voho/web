@@ -3,6 +3,11 @@
 Pro generování a čtení čárových a QR kódů v Javě doporučuji knihovnu [ZXing](https://github.com/zxing/zxing).
 Knihovna je velmi univerzální a podporuje řadu formátů. Zde se zaměříme na QR kódy.
 
+Pro použití příkladů potřebujete následující knihovny:
+
+* http://repo1.maven.org/maven2/com/google/zxing/core/
+* http://repo1.maven.org/maven2/com/google/zxing/javase/
+
 ### Generování QR kódu
 
 #### Generování matice QR kódu
