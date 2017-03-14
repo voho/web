@@ -18,6 +18,7 @@ public abstract class AbstractMenuPageServlet extends AbstractPageServlet {
         super.updateModel(request, model, metaDataRoot);
 
         model.put("indexSubPages", wikiBackend.getSubPages(WikiPageSourceRepository.INDEX_PAGE_ID));
+        model.put("recentlyChangedPages", wikiBackend.getRecentlyChangedPages());
         model.put("wikiPagesAutoCompleteJson", GSON.toJson(wikiBackend.getWikiPageAutoCompleteValues()));
     }
 }

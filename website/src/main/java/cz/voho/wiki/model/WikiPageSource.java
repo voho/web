@@ -1,5 +1,7 @@
 package cz.voho.wiki.model;
 
+import java.time.LocalDateTime;
+
 public class WikiPageSource {
     private String id;
     private String parentId;
@@ -7,6 +9,15 @@ public class WikiPageSource {
     private String githubRawUrl;
     private String githubUrl;
     private String origin;
+    private LocalDateTime updated;
+
+    public LocalDateTime getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(LocalDateTime updated) {
+        this.updated = updated;
+    }
 
     public String getOrigin() {
         return origin;

@@ -14,6 +14,7 @@ import cz.voho.wiki.model.ParsedWikiPage;
 import cz.voho.wiki.model.WikiContext;
 import cz.voho.wiki.model.WikiPageReference;
 import cz.voho.wiki.model.WikiPageReferences;
+import cz.voho.wiki.model.WikiPageSource;
 import cz.voho.wiki.page.parsed.CachingParsedWikiPageRepository;
 import cz.voho.wiki.page.parsed.DefaultParsedWikiPageRepository;
 import cz.voho.wiki.page.parsed.ParsedWikiPageRepository;
@@ -238,5 +239,18 @@ public class WikiBackend {
         }
 
         return result;
+    }
+
+    public WikiPageReferences getRecentlyChangedPages() {
+        return toRefs(
+                getWikiPageIds()
+                        .stream()
+                        .map(this::load)
+                        .map(ParsedWikiPage::getSource)
+                        .sorted(Comparator.comparing(WikiPageSource::getUpdated).reversed())
+                        .limit(20)
+                        .map(WikiPageSource::getId)
+                        .collect(Collectors.toList()), false, true
+        );
     }
 }

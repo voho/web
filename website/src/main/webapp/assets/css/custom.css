@@ -331,44 +331,25 @@ section#breadcrumbs p {
 
 /* wiki tree */
 
+section#tree h2 {
+    border-bottom: 2px solid #515670;
+    font-weight: normal;
+    font-size: 2em;
+}
+
 section#tree p {
     padding: 0;
     margin: 0;
     line-height: 1.3;
 }
 
-section#tree .level1 a {
-    font-size: 1.8em;
+section#tree p a {
     border: 0;
-    text-decoration: none;
-}
-
-section#tree .level2 a {
-    font-size: 1.3em;
-}
-
-section#tree .level3 a {
     font-size: 0.8em;
 }
 
-section#tree .level1 {
-    padding-bottom: 2em;
-    padding-top: 2em;
-    border-top: 2px solid rgba(255, 255, 255, 0.25);
-}
-
-section#tree .level2 {
-    padding-bottom: 1em;
-    padding-top: 1em;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-section#tree .level2:last-child {
-    border: 0;
-}
-
-section#tree .level1:first-child {
-    border: 0;
+section#tree p:last-child {
+    margin-bottom: 2em;
 }
 
 /* todo */

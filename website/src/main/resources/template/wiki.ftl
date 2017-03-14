@@ -17,10 +17,22 @@
 
         <section id="tree">
             <div class="inner">
-                <#include "wiki/tree.ftl"/>
-                <#list indexSubPages.items as pageRef>
-                <@print_wiki_tree pageRef 1 3/>
-            </#list>
+                <#include "macro/print_wiki_tree.ftl"/>
+                <div class="row">
+                    <div class="8u">
+                        <#list indexSubPages.items as pageRef>
+                            <@print_wiki_tree pageRef/>
+                        </#list>
+                    </div>
+                    <div class="4u">
+                        <div class="box">
+                            <h3>Poslední úpravy</h3>
+                            <#list recentlyChangedPages.items as pageRef>
+                                <p><a href="/wiki/${pageRef.id}/">${pageRef.title}</a></p>
+                            </#list>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
