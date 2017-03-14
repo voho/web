@@ -6,36 +6,25 @@ import com.google.common.collect.Sets;
 import cz.voho.exception.ContentNotFoundException;
 import cz.voho.utility.Constants;
 import cz.voho.utility.LambdaClient;
+import cz.voho.web.lambda.model.github.CommitMeta;
 import cz.voho.wiki.image.CachingWikiImageRepository;
 import cz.voho.wiki.image.DummyWikiImageRepository;
 import cz.voho.wiki.image.LambdaWikiImageRepository;
 import cz.voho.wiki.image.WikiImageRepository;
-import cz.voho.wiki.model.ParsedWikiPage;
-import cz.voho.wiki.model.WikiContext;
-import cz.voho.wiki.model.WikiPageReference;
-import cz.voho.wiki.model.WikiPageReferences;
-import cz.voho.wiki.model.WikiPageSource;
+import cz.voho.wiki.model.*;
 import cz.voho.wiki.page.parsed.CachingParsedWikiPageRepository;
 import cz.voho.wiki.page.parsed.DefaultParsedWikiPageRepository;
 import cz.voho.wiki.page.parsed.ParsedWikiPageRepository;
 import cz.voho.wiki.page.source.DefaultWikiPageSourceRepository;
 import cz.voho.wiki.page.source.WikiPageSourceRepository;
-import cz.voho.wiki.parser.CodePreprocessor;
-import cz.voho.wiki.parser.FlexmarkWikiParser;
-import cz.voho.wiki.parser.ImagePreprocessor;
-import cz.voho.wiki.parser.JavadocPreprocessor;
-import cz.voho.wiki.parser.MathPreprocessor;
-import cz.voho.wiki.parser.QuotePreprocessor;
-import cz.voho.wiki.parser.TocPreprocessor;
-import cz.voho.wiki.parser.TodoPreprocessor;
-import cz.voho.wiki.parser.WikiLinkPreprocessor;
+import cz.voho.wiki.parser.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -219,8 +208,6 @@ public class WikiBackend {
             result = parts[parts.length - 1];
         }
 
-        // wiki page suffix
-
         if (!getCurrentContext().exists(result)) {
             final Set<String> candidates = Sets.newHashSet();
 
@@ -241,16 +228,41 @@ public class WikiBackend {
         return result;
     }
 
-    public WikiPageReferences getRecentlyChangedPages() {
-        return toRefs(
-                getWikiPageIds()
-                        .stream()
-                        .map(this::load)
-                        .map(ParsedWikiPage::getSource)
-                        .sorted(Comparator.comparing(WikiPageSource::getUpdated).reversed())
-                        .limit(20)
-                        .map(WikiPageSource::getId)
-                        .collect(Collectors.toList()), false, true
-        );
+    public List<WikiPageCommit> enrichCommits(List<CommitMeta> recentWikiChanges) {
+        return recentWikiChanges
+                .stream()
+                .map(c -> {
+                    List<WikiPageCommit> results = new LinkedList<WikiPageCommit>();
+                    LocalDateTime date = LocalDateTime.parse(c.getIsoTime(), DateTimeFormatter.ISO_DATE_TIME);
+                    String formattedDate = date.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
+                    String shaLinkUrl = String.format("https://github.com/voho/web/commit/%s", c.getSha());
+
+                    for (String filename : c.getFilenames()) {
+                        String id = filename;
+
+                        if (id.startsWith("website/src/main/resources/")) {
+                            id = id.substring("website/src/main/resources/".length());
+                        }
+
+                        if (id.endsWith(".md")) {
+                            id = id.substring(0, id.length() - ".md".length());
+                        }
+
+                        id = resolveWikiPageId(id);
+
+                        WikiPageCommit result = new WikiPageCommit();
+                        String title = load(id).getTitle();
+                        result.setMessage(c.getMessage());
+                        result.setFormattedDate(formattedDate);
+                        result.setId(id);
+                        result.setTitle(title);
+                        result.setUrl(shaLinkUrl);
+                        results.add(result);
+                    }
+
+                    return results;
+                })
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
     }
 }

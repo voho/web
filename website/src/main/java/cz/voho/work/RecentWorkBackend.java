@@ -2,6 +2,9 @@ package cz.voho.work;
 
 import cz.voho.utility.ExecutorProvider;
 import cz.voho.utility.LambdaClient;
+import cz.voho.web.lambda.model.github.CommitMeta;
+import cz.voho.web.lambda.model.github.LatestCommitsRequest;
+import cz.voho.web.lambda.model.github.LatestCommitsResponse;
 import cz.voho.web.lambda.model.photo.GetRecentPhotosRequest;
 import cz.voho.web.lambda.model.photo.GetRecentPhotosResponse;
 import cz.voho.web.lambda.model.photo.Image;
@@ -24,17 +27,21 @@ public class RecentWorkBackend {
     private static final int RECENT_PHOTO_COUNT = 6;
     private static final int RECENT_SONGS_COUNT = 4;
     private static final int UPDATE_INTERVAL_SECONDS = 300;
+    private static final String WIKI_COMMIT_PATH = "website/src/main/resources/wiki/";
+    private static final int RECENT_WIKI_UPDATES_COUNT = 10;
 
     private final ScheduledExecutorService scheduledExecutorService;
     private final LambdaClient lambdaClient;
     private final AtomicReference<GetRecentPhotosResponse> photosCache;
     private final AtomicReference<GetRecentSongsResponse> songsCache;
+    private final AtomicReference<LatestCommitsResponse> recentWikiChangesCache;
 
     private RecentWorkBackend(final LambdaClient lambdaClient) {
         this.scheduledExecutorService = ExecutorProvider.INSTAGRAM_UPDATER_EXECUTOR;
         this.lambdaClient = lambdaClient;
         this.photosCache = new AtomicReference<>(null);
         this.songsCache = new AtomicReference<>(null);
+        this.recentWikiChangesCache = new AtomicReference<>(null);
 
         this.scheduledExecutorService.scheduleWithFixedDelay(
                 this::update,
@@ -50,8 +57,25 @@ public class RecentWorkBackend {
     }
 
     private void update() {
+        LOG.info("Updating...");
         updateRecentPhotos();
         updateRecentSongs();
+        updateRecentWikiChanges();
+        LOG.info("Updating complete.");
+    }
+
+    private void updateRecentWikiChanges() {
+        final LatestCommitsRequest request = new LatestCommitsRequest();
+        request.setPath(WIKI_COMMIT_PATH);
+
+        final LatestCommitsResponse response = lambdaClient.callGitHubLambda(request);
+
+        if (response != null && response.getCommits() != null && !response.getCommits().isEmpty()) {
+            LOG.info("Updating recent wiki changes cache.");
+            recentWikiChangesCache.set(response);
+        } else {
+            LOG.warn("Could not upgrade recent wiki changes cacheł.");
+        }
     }
 
     private void updateRecentSongs() {
@@ -88,6 +112,7 @@ public class RecentWorkBackend {
         if (latestValue == null) {
             return Collections.emptyList();
         }
+
         return latestValue.getSongs().getSongs();
     }
 
@@ -97,6 +122,17 @@ public class RecentWorkBackend {
         if (latestValue == null) {
             return Collections.emptyList();
         }
+
         return latestValue.getRecentItems().getData();
+    }
+
+    public List<CommitMeta> getRecentWikiChanges() {
+        final LatestCommitsResponse latestValue = recentWikiChangesCache.get();
+
+        if (latestValue == null) {
+            return Collections.emptyList();
+        }
+
+        return latestValue.getCommits().subList(0, RECENT_WIKI_UPDATES_COUNT);
     }
 }

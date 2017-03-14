@@ -352,6 +352,12 @@ section#tree p:last-child {
     margin-bottom: 2em;
 }
 
+section#tree small {
+    font-size: 0.75em;
+    font-weight: bold;
+    color: #515670;
+}
+
 /* todo */
 
 .todo {

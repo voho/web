@@ -122,6 +122,7 @@ public class WikiPageServlet extends AbstractMenuPageServlet {
     }
 
     private String resolvePageName(final HttpServletRequest request) {
+        // TODO unify with WikiLinkUtility
         String path = WikiLinkUtility.copyValidChars(request.getPathInfo());
         if (path.startsWith("wiki")) {
             path = path.substring("wiki".length());

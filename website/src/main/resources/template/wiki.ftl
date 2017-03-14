@@ -26,9 +26,12 @@
                     </div>
                     <div class="4u">
                         <div class="box">
-                            <h3>Poslední úpravy</h3>
-                            <#list recentlyChangedPages.items as pageRef>
-                                <p><a href="/wiki/${pageRef.id}/">${pageRef.title}</a></p>
+                            <h3>Poslední změny</h3>
+                            <#list recentlyChangedPages as page>
+                                <p>
+                                    <small title="${page.message}">${page.formattedDate}</small><br/>
+                                    <a href="/wiki/${page.id}/">${page.title}</a>
+                                </p>
                             </#list>
                         </div>
                     </div>
