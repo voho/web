@@ -21,8 +21,9 @@
         <module>lambda-uml</module>
         <module>lambda-instagram</module>
         <module>lambda-soundcloud</module>
+        <module>lambda-github</module>
     </modules>
-    
+
     <dependencyManagement>
         <dependencies>
             <!-- custom -->
@@ -53,6 +54,11 @@
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
                 <version>2.8.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jayway.jsonpath</groupId>
+                <artifactId>json-path</artifactId>
+                <version>2.2.0</version>
             </dependency>
             <!-- Flexmark = Markdown parser -->
             <dependency>

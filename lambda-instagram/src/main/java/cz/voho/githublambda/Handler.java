@@ -1,4 +1,4 @@
-package cz.voho.instalambda;
+package cz.voho.githublambda;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
