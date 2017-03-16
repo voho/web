@@ -6,7 +6,6 @@ import com.google.common.collect.Sets;
 import cz.voho.exception.ContentNotFoundException;
 import cz.voho.utility.Constants;
 import cz.voho.utility.LambdaClient;
-import cz.voho.web.lambda.model.github.CommitMeta;
 import cz.voho.wiki.image.CachingWikiImageRepository;
 import cz.voho.wiki.image.DummyWikiImageRepository;
 import cz.voho.wiki.image.LambdaWikiImageRepository;
@@ -228,37 +227,34 @@ public class WikiBackend {
         return result;
     }
 
-    public List<WikiPageCommit> enrichCommits(List<CommitMeta> recentWikiChanges) {
+    public List<WikiPageCommit> enrichCommits(List<WikiPageCommitGroup> recentWikiChanges) {
         return recentWikiChanges
                 .stream()
                 .map(c -> {
                     List<WikiPageCommit> results = new LinkedList<WikiPageCommit>();
-                    LocalDateTime date = LocalDateTime.parse(c.getIsoTime(), DateTimeFormatter.ISO_DATE_TIME);
-                    String formattedDate = date.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
-                    String shaLinkUrl = String.format("https://github.com/voho/web/commit/%s", c.getSha());
+                    LocalDateTime date = LocalDateTime.parse(c.getLatestDate(), DateTimeFormatter.ISO_DATE_TIME);
+                    String formattedDate = date.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withLocale(new Locale("cs", "CZ")));
+                    String shaLinkUrl = String.format("https://github.com/voho/web/commit/%s", c.getLatestCommitSha());
+                    String id = c.getFilename();
 
-                    for (String filename : c.getFilenames()) {
-                        String id = filename;
-
-                        if (id.startsWith("website/src/main/resources/")) {
-                            id = id.substring("website/src/main/resources/".length());
-                        }
-
-                        if (id.endsWith(".md")) {
-                            id = id.substring(0, id.length() - ".md".length());
-                        }
-
-                        id = resolveWikiPageId(id);
-
-                        WikiPageCommit result = new WikiPageCommit();
-                        String title = load(id).getTitle();
-                        result.setMessage(c.getMessage());
-                        result.setFormattedDate(formattedDate);
-                        result.setId(id);
-                        result.setTitle(title);
-                        result.setUrl(shaLinkUrl);
-                        results.add(result);
+                    if (id.startsWith("website/src/main/resources/")) {
+                        id = id.substring("website/src/main/resources/".length());
                     }
+
+                    if (id.endsWith(".md")) {
+                        id = id.substring(0, id.length() - ".md".length());
+                    }
+
+                    id = resolveWikiPageId(id);
+
+                    WikiPageCommit result = new WikiPageCommit();
+                    String title = load(id).getTitle();
+                    result.setMessage(c.getLatestCommitMessage());
+                    result.setFormattedDate(formattedDate);
+                    result.setId(id);
+                    result.setTitle(title);
+                    result.setUrl(shaLinkUrl);
+                    results.add(result);
 
                     return results;
                 })

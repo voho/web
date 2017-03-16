@@ -1,5 +1,7 @@
 package cz.voho.work;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.SetMultimap;
 import cz.voho.utility.ExecutorProvider;
 import cz.voho.utility.LambdaClient;
 import cz.voho.web.lambda.model.github.CommitMeta;
@@ -11,11 +13,13 @@ import cz.voho.web.lambda.model.photo.Image;
 import cz.voho.web.lambda.model.sound.GetRecentSongsRequest;
 import cz.voho.web.lambda.model.sound.GetRecentSongsResponse;
 import cz.voho.web.lambda.model.sound.Song;
+import cz.voho.wiki.model.WikiPageCommitGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Collections;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
@@ -126,13 +130,43 @@ public class RecentWorkBackend {
         return latestValue.getRecentItems().getData();
     }
 
-    public List<CommitMeta> getRecentWikiChanges() {
+    public List<WikiPageCommitGroup> getRecentWikiChanges() {
         final LatestCommitsResponse latestValue = recentWikiChangesCache.get();
 
         if (latestValue == null) {
             return Collections.emptyList();
         }
 
-        return latestValue.getCommits().subList(0, RECENT_WIKI_UPDATES_COUNT);
+        SetMultimap<String, CommitMeta> filesToSortedCommits = HashMultimap.create();
+
+        for (CommitMeta commit : latestValue.getCommits()) {
+            for (String filename : commit.getFilenames()) {
+                if (filename.contains("wiki/") && filename.endsWith(".md")) {
+                    filesToSortedCommits.put(filename, commit);
+                }
+            }
+        }
+
+        List<WikiPageCommitGroup> groups = new LinkedList<>();
+
+        filesToSortedCommits.asMap().entrySet().forEach(entry -> {
+            WikiPageCommitGroup group = new WikiPageCommitGroup();
+            group.setFilename(entry.getKey());
+            List<CommitMeta> commits = new ArrayList<>(entry.getValue());
+            Collections.sort(commits, (o1, o2) -> {
+                LocalDateTime o1d = LocalDateTime.parse(o1.getIsoTime(), DateTimeFormatter.ISO_DATE_TIME);
+                LocalDateTime o2d = LocalDateTime.parse(o2.getIsoTime(), DateTimeFormatter.ISO_DATE_TIME);
+                return o1d.compareTo(o2d);
+            });
+            CommitMeta newest = commits.iterator().next();
+            group.setLatestDate(newest.getIsoTime());
+            group.setLatestCommitSha(newest.getSha());
+            group.setLatestCommitMessage(newest.getMessage());
+            groups.add(group);
+        });
+
+        Collections.sort(groups, Comparator.comparing(WikiPageCommitGroup::getLatestDate).reversed());
+
+        return groups.subList(0, RECENT_WIKI_UPDATES_COUNT);
     }
 }

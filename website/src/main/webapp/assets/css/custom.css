@@ -1,3 +1,12 @@
+/*
+
+next theme:
+light: #baefff
+links: #0089b3
+font: raleway
+
+*/
+
 /* banner transparency hack */
 
 #banner::after {
@@ -145,7 +154,8 @@ section#wiki-content blockquote p {
 }
 
 .wiki code {
-    font-family: Monaco, monospace;
+    font-family: Monaco, consolas, monospace;
+    letter-spacing: 0;
     padding: 0;
     margin: 0;
 }
