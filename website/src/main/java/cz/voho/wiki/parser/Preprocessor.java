@@ -6,7 +6,7 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
-import cz.voho.wiki.model.WikiContext;
+import cz.voho.wiki.page.parsed.WikiContext;
 import cz.voho.wiki.model.WikiPageSource;
 
 import java.util.Set;

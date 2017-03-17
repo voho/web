@@ -14,7 +14,7 @@ import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 import cz.voho.wiki.model.ParsedWikiPage;
-import cz.voho.wiki.model.WikiContext;
+import cz.voho.wiki.page.parsed.WikiContext;
 import cz.voho.wiki.model.WikiPageSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

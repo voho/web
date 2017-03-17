@@ -13,6 +13,7 @@ import cz.voho.wiki.model.*;
 import cz.voho.wiki.page.parsed.CachingParsedWikiPageRepository;
 import cz.voho.wiki.page.parsed.DefaultParsedWikiPageRepository;
 import cz.voho.wiki.page.parsed.ParsedWikiPageRepository;
+import cz.voho.wiki.page.parsed.WikiContext;
 import cz.voho.wiki.page.source.DefaultWikiPageSourceRepository;
 import cz.voho.wiki.page.source.WikiPageSourceRepository;
 import cz.voho.wiki.parser.*;

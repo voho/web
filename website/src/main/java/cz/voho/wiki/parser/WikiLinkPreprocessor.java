@@ -6,7 +6,7 @@ import com.vladsch.flexmark.ast.NodeVisitor;
 import com.vladsch.flexmark.ast.VisitHandler;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import cz.voho.common.utility.WikiLinkUtility;
-import cz.voho.wiki.model.WikiContext;
+import cz.voho.wiki.page.parsed.WikiContext;
 import cz.voho.wiki.model.WikiPageSource;
 
 public class WikiLinkPreprocessor implements Preprocessor {

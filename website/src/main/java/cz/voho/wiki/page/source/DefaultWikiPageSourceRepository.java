@@ -7,7 +7,7 @@ import com.google.common.reflect.ClassPath;
 import cz.voho.common.exception.ContentNotFoundException;
 import cz.voho.common.exception.InitializationException;
 import cz.voho.common.utility.WikiLinkUtility;
-import cz.voho.wiki.model.WikiContext;
+import cz.voho.wiki.page.parsed.WikiContext;
 import cz.voho.wiki.model.WikiPageSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

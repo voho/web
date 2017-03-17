@@ -24,8 +24,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class RecentWorkBackend {
-    private static final Logger LOG = LoggerFactory.getLogger(RecentWorkBackend.class);
+public class RecentBackend {
+    private static final Logger LOG = LoggerFactory.getLogger(RecentBackend.class);
     private static final int RECENT_PHOTO_COUNT = 6;
     private static final int RECENT_SONGS_COUNT = 4;
     private static final int UPDATE_INTERVAL_SECONDS = 300;
@@ -38,7 +38,7 @@ public class RecentWorkBackend {
     private final AtomicReference<GetRecentSongsResponse> songsCache;
     private final AtomicReference<LatestCommitsResponse> recentWikiChangesCache;
 
-    RecentWorkBackend(final LambdaClient lambdaClient) {
+    RecentBackend(final LambdaClient lambdaClient) {
         this.scheduledExecutorService = ExecutorProvider.INSTAGRAM_UPDATER_EXECUTOR;
         this.lambdaClient = lambdaClient;
         this.photosCache = new AtomicReference<>(null);

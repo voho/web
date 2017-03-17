@@ -1,7 +1,6 @@
 package cz.voho.wiki.page.parsed;
 
 import cz.voho.wiki.model.ParsedWikiPage;
-import cz.voho.wiki.model.WikiContext;
 import cz.voho.wiki.page.source.WikiPageSourceRepository;
 import cz.voho.wiki.parser.WikiParser;
 

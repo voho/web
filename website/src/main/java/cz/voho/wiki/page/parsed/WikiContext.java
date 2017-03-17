@@ -1,4 +1,4 @@
-package cz.voho.wiki.model;
+package cz.voho.wiki.page.parsed;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -7,6 +7,10 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
+import cz.voho.wiki.model.Missing;
+import cz.voho.wiki.model.Quote;
+import cz.voho.wiki.model.Toc;
+import cz.voho.wiki.model.Todo;
 import cz.voho.wiki.page.source.WikiPageSourceRepository;
 
 import java.util.Comparator;

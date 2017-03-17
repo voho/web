@@ -2,7 +2,7 @@ package cz.voho.wiki.parser;
 
 import com.vladsch.flexmark.util.html.Escaping;
 import cz.voho.common.utility.ReplacePatternCallback;
-import cz.voho.wiki.model.WikiContext;
+import cz.voho.wiki.page.parsed.WikiContext;
 import cz.voho.wiki.model.WikiPageSource;
 
 import java.util.regex.MatchResult;
