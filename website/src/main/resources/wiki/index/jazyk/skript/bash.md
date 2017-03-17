@@ -51,7 +51,9 @@ touch FILE
 Vytvoření nového adresáře:
 
 ```bash
-mkdir FILE
+mkdir PATH
+# verbose + create all missing parents
+mkdir -pv PATH
 ```
 
 Přesun souboru:
@@ -88,6 +90,8 @@ Hledání určitého textu v souborech pomocí regulárního výrazu:
 
 ```bash
 grep 'result: OK' *.log
+# alternative using pipes
+cat something.log | grep 'result: OK' 
 ```
 
 Opakování příkazu každých 5 sekund:
@@ -157,7 +161,7 @@ První řádek souboru může obsahovat tzv. **hashbang**, což je sekvence znak
 #!/bin/bash
 ```
 
-### Proměnné
+#### Proměnné
 
 Proměnné v jazyce BASH nemají žádný datový typ. Deklarují se takto:
 
@@ -176,17 +180,27 @@ SERVER='localhost'
 URL="http://$SERVER:$PORT/some/path"
 ```
 
-### Podmínky
+#### Podmínky
 
 !TODO!
 
-### Cykly
+#### Cykly
 
 !TODO!
 
-### Podprogramy
+#### Podprogramy
 
-!TODO!
+K argumentům se podprogram dostane pomocí speciálních proměnných *$1* (první argument), *$2* (druhý argument), apod.
+Pokud chceme pole všech argumentů, lze použít *$@*.
+
+```bash
+print_message() {
+    NAME="$1"
+    echo "Hello, $NAME!"
+}
+
+print_message "world"
+```
 
 ### Spouštění skriptů
 
@@ -212,6 +226,23 @@ Pokud se při vykonávání skriptu narazí na chybu, nepovedený příkaz se p�
 
 ```bash
 set -e
+```
+
+Deaktivace se provede plusem (podobně i pro všechny následující příznaky):
+
+```bash
+set +x
+```
+
+Další doporučená nastavení pro zvýšení robustnosti skriptu:
+
+```bash
+# causes the shell to treat unset variables as an error and exit immediatelly
+set -u
+# causes the shell to look at exit codes of all commands in a pipeline, not just the last
+set -o pipefail
+# print every command
+set -x
 ```
 
 Pokud takto chceme kontrolovat pouze některé příkazy, lze použít následující konstrukci, která využivá toho, že výsledek provedení posledního příkazu je vždy uložen v systémové proměnné *$?*:
@@ -268,7 +299,26 @@ ps -fp 125788
 cat /proc/125788/cmdline
 ```
 
+#### Simulace selhání externího skriptu
+
+```bash
+sh -c 'exit 1'
+```
+
+#### Spuštění příkazu v určitém adresáři
+
+```bash
+(cd /some/dir && script)
+```
+
+#### Přesměrování standardních výstupů
+
+```bash
+script >> stdout.txt 2>> stderr.txt
+```
+
 ### Reference
 
 - http://linux.die.net/man/1/bash
+- https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
 - http://stackoverflow.com/questions/5725296/difference-between-sh-and-bash
