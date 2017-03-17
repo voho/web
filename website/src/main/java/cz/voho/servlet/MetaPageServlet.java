@@ -1,6 +1,7 @@
 package cz.voho.servlet;
 
-import cz.voho.enrich.MetaDataRoot;
+import cz.voho.common.model.enrich.MetaDataRoot;
+import cz.voho.facade.Backend;
 import cz.voho.facade.WikiBackend;
 import freemarker.template.SimpleHash;
 
@@ -8,7 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 public class MetaPageServlet extends AbstractMenuPageServlet {
-    private final WikiBackend wikiBackend = WikiBackend.SINGLETON;
+    private final WikiBackend wikiBackend = Backend.SINGLETON.getWikiBackend();
 
     @Override
     protected String requestUrlToTemplatePath(final HttpServletRequest request) throws ServletException {

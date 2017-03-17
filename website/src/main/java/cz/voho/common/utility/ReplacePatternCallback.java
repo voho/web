@@ -1,4 +1,4 @@
-package cz.voho.utility;
+package cz.voho.common.utility;
 
 import java.util.function.Function;
 import java.util.regex.MatchResult;

@@ -2,8 +2,8 @@ package cz.voho.facade;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
-import cz.voho.utility.ExecutorProvider;
-import cz.voho.utility.LambdaClient;
+import cz.voho.common.utility.ExecutorProvider;
+import cz.voho.common.utility.LambdaClient;
 import cz.voho.web.lambda.model.github.CommitMeta;
 import cz.voho.web.lambda.model.github.LatestCommitsRequest;
 import cz.voho.web.lambda.model.github.LatestCommitsResponse;
@@ -25,8 +25,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class RecentWorkBackend {
-    public static final RecentWorkBackend SINGLETON = new RecentWorkBackend(new LambdaClient());
-
     private static final Logger LOG = LoggerFactory.getLogger(RecentWorkBackend.class);
     private static final int RECENT_PHOTO_COUNT = 6;
     private static final int RECENT_SONGS_COUNT = 4;
@@ -40,7 +38,7 @@ public class RecentWorkBackend {
     private final AtomicReference<GetRecentSongsResponse> songsCache;
     private final AtomicReference<LatestCommitsResponse> recentWikiChangesCache;
 
-    private RecentWorkBackend(final LambdaClient lambdaClient) {
+    RecentWorkBackend(final LambdaClient lambdaClient) {
         this.scheduledExecutorService = ExecutorProvider.INSTAGRAM_UPDATER_EXECUTOR;
         this.lambdaClient = lambdaClient;
         this.photosCache = new AtomicReference<>(null);

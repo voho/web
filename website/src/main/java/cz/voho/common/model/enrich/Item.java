@@ -1,4 +1,4 @@
-package cz.voho.enrich;
+package cz.voho.common.model.enrich;
 
 public class Item {
     private String name;

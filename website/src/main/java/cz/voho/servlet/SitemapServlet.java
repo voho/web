@@ -1,7 +1,8 @@
 package cz.voho.servlet;
 
 import com.google.common.collect.Sets;
-import cz.voho.utility.Constants;
+import cz.voho.common.utility.Constants;
+import cz.voho.facade.Backend;
 import cz.voho.facade.WikiBackend;
 
 import javax.servlet.ServletException;
@@ -13,7 +14,7 @@ import java.io.PrintWriter;
 import java.util.Set;
 
 public class SitemapServlet extends HttpServlet {
-    private final WikiBackend wikiBackend = WikiBackend.SINGLETON;
+    private final WikiBackend wikiBackend = Backend.SINGLETON.getWikiBackend();
 
     @Override
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {

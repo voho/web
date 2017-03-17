@@ -1,4 +1,4 @@
-package cz.voho.exception;
+package cz.voho.common.exception;
 
 public class InitializationException extends RuntimeException {
     public InitializationException(String message) {

@@ -1,4 +1,4 @@
-package cz.voho.utility;
+package cz.voho.common.utility;
 
 public class Constants {
     public static final String OFFICIAL_FULL_NAME = "Vojtěch Hordějčuk";

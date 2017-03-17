@@ -1,4 +1,4 @@
-package cz.voho.enrich;
+package cz.voho.common.model.enrich;
 
 import com.google.gson.annotations.SerializedName;
 

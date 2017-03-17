@@ -5,7 +5,7 @@ import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ast.NodeVisitor;
 import com.vladsch.flexmark.ast.VisitHandler;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
-import cz.voho.utility.WikiLinkUtility;
+import cz.voho.common.utility.WikiLinkUtility;
 import cz.voho.wiki.model.WikiContext;
 import cz.voho.wiki.model.WikiPageSource;
 

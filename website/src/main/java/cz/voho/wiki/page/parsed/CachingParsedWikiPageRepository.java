@@ -3,7 +3,7 @@ package cz.voho.wiki.page.parsed;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import cz.voho.exception.ContentNotFoundException;
+import cz.voho.common.exception.ContentNotFoundException;
 import cz.voho.wiki.model.ParsedWikiPage;
 
 public class CachingParsedWikiPageRepository implements ParsedWikiPageRepository {

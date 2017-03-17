@@ -1,16 +1,21 @@
-package cz.voho.filter;
+package cz.voho.servlet.filter;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public abstract class AbstractRedirectingFilter implements Filter {
+abstract class AbstractRedirectingFilter implements Filter {
+    @Override
+    public void init(final FilterConfig filterConfig) throws ServletException {
+        // NOP
+    }
+
+    @Override
+    public void destroy() {
+        // NOP
+    }
+
     @Override
     public void doFilter(final ServletRequest servletRequest, final ServletResponse servletResponse, final FilterChain filterChain) throws IOException, ServletException {
         if (servletRequest instanceof HttpServletRequest && servletResponse instanceof HttpServletResponse) {
@@ -27,16 +32,6 @@ public abstract class AbstractRedirectingFilter implements Filter {
     }
 
     protected abstract boolean doCustomFilter(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse);
-
-    @Override
-    public void init(final FilterConfig filterConfig) throws ServletException {
-        // NOP
-    }
-
-    @Override
-    public void destroy() {
-        // NOP
-    }
 
     protected boolean redirect(final HttpServletResponse response, final int statusCode, final String newUrl) {
         try {

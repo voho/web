@@ -3,11 +3,10 @@ package cz.voho.facade;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import cz.voho.exception.ContentNotFoundException;
-import cz.voho.utility.Constants;
-import cz.voho.utility.LambdaClient;
+import cz.voho.common.exception.ContentNotFoundException;
+import cz.voho.common.utility.Constants;
+import cz.voho.common.utility.LambdaClient;
 import cz.voho.wiki.image.CachingWikiImageRepository;
-import cz.voho.wiki.image.DummyWikiImageRepository;
 import cz.voho.wiki.image.LambdaWikiImageRepository;
 import cz.voho.wiki.image.WikiImageRepository;
 import cz.voho.wiki.model.*;
@@ -28,8 +27,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class WikiBackend {
-    public static final WikiBackend SINGLETON = new WikiBackend();
-
     private static final Logger LOG = LoggerFactory.getLogger(WikiBackend.class);
     private static final String MISSING_WIKI_PAGE_ID = "404";
 
@@ -37,11 +34,9 @@ public class WikiBackend {
     private final ParsedWikiPageRepository parsedWikiPageRepository;
     private final WikiImageRepository wikiImageRepository;
 
-    private WikiBackend() {
+    WikiBackend() {
         this.wikiContext = new WikiContext();
-        final WikiImageRepository fallbackDelegate = new DummyWikiImageRepository();
-        final WikiImageRepository primaryDelegate = new LambdaWikiImageRepository(new LambdaClient());
-        final CachingWikiImageRepository cachingWikiImageRepository = new CachingWikiImageRepository(primaryDelegate, fallbackDelegate);
+        final CachingWikiImageRepository cachingWikiImageRepository = new CachingWikiImageRepository(new LambdaWikiImageRepository(new LambdaClient()));
         this.wikiImageRepository = cachingWikiImageRepository;
 
         final FlexmarkWikiParser wikiParser = new FlexmarkWikiParser(

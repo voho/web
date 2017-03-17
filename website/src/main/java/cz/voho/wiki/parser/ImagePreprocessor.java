@@ -1,13 +1,10 @@
 package cz.voho.wiki.parser;
 
 import com.vladsch.flexmark.util.html.Escaping;
-import cz.voho.utility.ReplacePatternCallback;
+import cz.voho.common.utility.ReplacePatternCallback;
 import cz.voho.wiki.model.WikiContext;
 import cz.voho.wiki.model.WikiPageSource;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 

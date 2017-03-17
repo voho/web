@@ -1,7 +1,7 @@
-package cz.voho.enrich;
+package cz.voho.common.model.enrich;
 
 import com.google.gson.annotations.SerializedName;
-import cz.voho.utility.Constants;
+import cz.voho.common.utility.Constants;
 
 public class Person {
     @SerializedName("@context")

@@ -1,7 +1,7 @@
 package cz.voho.wiki.image;
 
 import com.google.common.base.Strings;
-import cz.voho.utility.LambdaClient;
+import cz.voho.common.utility.LambdaClient;
 import cz.voho.web.lambda.model.generate.GenerateImageFormat;
 import cz.voho.web.lambda.model.generate.GenerateImageRequest;
 import cz.voho.web.lambda.model.generate.GenerateImageResponse;

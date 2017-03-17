@@ -1,4 +1,4 @@
-package cz.voho.enrich;
+package cz.voho.common.model.enrich;
 
 public class MetaDataRoot {
     private Person person = new Person();

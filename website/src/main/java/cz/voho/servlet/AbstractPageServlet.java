@@ -2,8 +2,8 @@ package cz.voho.servlet;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import cz.voho.enrich.MetaDataRoot;
-import cz.voho.utility.Constants;
+import cz.voho.common.model.enrich.MetaDataRoot;
+import cz.voho.common.utility.Constants;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.ext.servlet.FreemarkerServlet;
 import freemarker.template.*;
@@ -18,10 +18,12 @@ import java.time.LocalDate;
 import java.util.Locale;
 
 public abstract class AbstractPageServlet extends FreemarkerServlet {
+    private static final String UTF_8 = "UTF-8";
+
     @Override
     protected boolean preprocessRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setCharacterEncoding("UTF-8");
-        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding(UTF_8);
+        request.setCharacterEncoding(UTF_8);
         return super.preprocessRequest(request, response);
     }
 
@@ -30,7 +32,7 @@ public abstract class AbstractPageServlet extends FreemarkerServlet {
         final MetaDataRoot metaDataRoot = new MetaDataRoot();
         final SimpleHash model = new SimpleHash(objectWrapper);
         updateModel(request, model, metaDataRoot);
-        updateModelWithMeta(request, model, metaDataRoot);
+        updateModelMeta(request, model, metaDataRoot);
         return model;
     }
 
@@ -57,7 +59,7 @@ public abstract class AbstractPageServlet extends FreemarkerServlet {
         model.put("website_author_age", LocalDate.of(1987, 9, 16).until(LocalDate.now()).getYears());
     }
 
-    protected void updateModelWithMeta(final HttpServletRequest request, final SimpleHash model, final MetaDataRoot metaDataRoot) {
+    protected void updateModelMeta(final HttpServletRequest request, final SimpleHash model, final MetaDataRoot metaDataRoot) {
         final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         if (metaDataRoot.getPerson() != null) {
@@ -79,7 +81,7 @@ public abstract class AbstractPageServlet extends FreemarkerServlet {
         final Configuration config = super.createConfiguration();
         config.setTemplateLoader(new ClassTemplateLoader(Thread.currentThread().getContextClassLoader(), "template/"));
         config.setEncoding(Locale.ROOT, StandardCharsets.UTF_8.name());
-        config.setDefaultEncoding("UTF-8");
+        config.setDefaultEncoding(UTF_8);
         return config;
     }
 }

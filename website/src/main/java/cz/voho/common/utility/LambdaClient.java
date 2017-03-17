@@ -1,4 +1,4 @@
-package cz.voho.utility;
+package cz.voho.common.utility;
 
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;

@@ -1,23 +1,22 @@
 package cz.voho.servlet;
 
 import com.google.common.net.UrlEscapers;
-import cz.voho.enrich.*;
-import cz.voho.utility.Constants;
-import cz.voho.utility.WikiLinkUtility;
+import cz.voho.common.model.enrich.*;
+import cz.voho.common.utility.Constants;
+import cz.voho.common.utility.WikiLinkUtility;
+import cz.voho.facade.Backend;
 import cz.voho.facade.WikiBackend;
 import cz.voho.wiki.model.ParsedWikiPage;
 import cz.voho.wiki.model.WikiPageReference;
 import cz.voho.wiki.model.WikiPageReferences;
-import cz.voho.wiki.page.source.WikiPageSourceRepository;
 import freemarker.template.SimpleHash;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Locale;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class WikiPageServlet extends AbstractMenuPageServlet {
-    private final WikiBackend wikiBackend = WikiBackend.SINGLETON;
+    private final WikiBackend wikiBackend = Backend.SINGLETON.getWikiBackend();
 
     @Override
     protected String requestUrlToTemplatePath(final HttpServletRequest request) throws ServletException {
@@ -28,7 +27,7 @@ public class WikiPageServlet extends AbstractMenuPageServlet {
     protected void updateModel(final HttpServletRequest request, final SimpleHash model, final MetaDataRoot metaDataRoot) {
         super.updateModel(request, model, metaDataRoot);
 
-        final ParsedWikiPage parsedWikiPage = wikiBackend.load(resolvePageName(request));
+        final ParsedWikiPage parsedWikiPage = wikiBackend.load(WikiLinkUtility.resolveWikiPageId(request.getRequestURI()));
         final String externalUrl = wikiBackend.getExternalWikiPageLink(parsedWikiPage.getSource().getId());
 
         model.put("active_wiki_page_id", parsedWikiPage.getSource().getId());
@@ -119,19 +118,5 @@ public class WikiPageServlet extends AbstractMenuPageServlet {
                 UrlEscapers.urlFragmentEscaper().escape(title),
                 UrlEscapers.urlFragmentEscaper().escape(body)
         );
-    }
-
-    private String resolvePageName(final HttpServletRequest request) {
-        // TODO unify with WikiLinkUtility
-        String path = WikiLinkUtility.copyValidChars(request.getPathInfo());
-        if (path.startsWith("wiki")) {
-            path = path.substring("wiki".length());
-        }
-        path = WikiLinkUtility.stripSlashes(path);
-        if (path.isEmpty()) {
-            path = WikiPageSourceRepository.INDEX_PAGE_ID;
-        }
-        path = path.toLowerCase(Locale.ROOT);
-        return path;
     }
 }

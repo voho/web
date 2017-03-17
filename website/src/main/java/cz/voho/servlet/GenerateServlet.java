@@ -1,5 +1,7 @@
 package cz.voho.servlet;
 
+import cz.voho.common.utility.WikiLinkUtility;
+import cz.voho.facade.Backend;
 import cz.voho.facade.WikiBackend;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,11 +18,11 @@ import java.util.Objects;
 public class GenerateServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(GenerateServlet.class);
 
-    private final WikiBackend wikiBackend = WikiBackend.SINGLETON;
+    private final WikiBackend wikiBackend = Backend.SINGLETON.getWikiBackend();
 
     @Override
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
-        final String path = getPath(request);
+        final String path = WikiLinkUtility.stripSlashes(request.getRequestURI());
 
         try {
             if (path.contains("generate/svg/graph")) {
@@ -39,11 +41,10 @@ public class GenerateServlet extends HttpServlet {
                 throw new IllegalStateException("Unsupported generator.");
             }
         } catch (Exception e) {
-            // TODO for dev only
             LOG.warn("Error while generating image.", e);
             response.setHeader("Content-Type", "text/plain");
             response.setStatus(500);
-            response.getWriter().write(e.getClass().getName());
+            e.printStackTrace(response.getWriter());
         }
     }
 
@@ -53,16 +54,5 @@ public class GenerateServlet extends HttpServlet {
         response.setHeader("Pragma", "no-cache, must-revalidate");
         response.setStatus(200);
         response.getWriter().write(new String(data, StandardCharsets.UTF_8));
-    }
-
-    private String getPath(final HttpServletRequest request) {
-        String url = request.getRequestURI();
-        while (url.startsWith("/")) {
-            url = url.substring(1);
-        }
-        while (url.endsWith("/")) {
-            url = url.substring(0, url.length() - 1);
-        }
-        return url;
     }
 }

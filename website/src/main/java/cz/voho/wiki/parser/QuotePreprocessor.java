@@ -1,6 +1,6 @@
 package cz.voho.wiki.parser;
 
-import cz.voho.utility.ReplacePatternCallback;
+import cz.voho.common.utility.ReplacePatternCallback;
 import cz.voho.wiki.model.WikiContext;
 import cz.voho.wiki.model.WikiPageSource;
 
