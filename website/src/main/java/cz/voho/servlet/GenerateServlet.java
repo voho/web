@@ -1,6 +1,6 @@
 package cz.voho.servlet;
 
-import cz.voho.wiki.WikiBackend;
+import cz.voho.facade.WikiBackend;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

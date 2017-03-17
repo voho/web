@@ -3,9 +3,9 @@ package cz.voho.servlet;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import cz.voho.enrich.MetaDataRoot;
-import cz.voho.wiki.WikiBackend;
+import cz.voho.facade.WikiBackend;
 import cz.voho.wiki.page.source.WikiPageSourceRepository;
-import cz.voho.work.RecentWorkBackend;
+import cz.voho.facade.RecentWorkBackend;
 import freemarker.template.SimpleHash;
 
 import javax.servlet.http.HttpServletRequest;

@@ -1,4 +1,4 @@
-package cz.voho.work;
+package cz.voho.facade;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;

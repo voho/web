@@ -1,4 +1,4 @@
-package cz.voho.wiki;
+package cz.voho.facade;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;

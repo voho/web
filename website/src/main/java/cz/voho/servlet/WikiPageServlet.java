@@ -4,7 +4,7 @@ import com.google.common.net.UrlEscapers;
 import cz.voho.enrich.*;
 import cz.voho.utility.Constants;
 import cz.voho.utility.WikiLinkUtility;
-import cz.voho.wiki.WikiBackend;
+import cz.voho.facade.WikiBackend;
 import cz.voho.wiki.model.ParsedWikiPage;
 import cz.voho.wiki.model.WikiPageReference;
 import cz.voho.wiki.model.WikiPageReferences;

@@ -1,7 +1,7 @@
 package cz.voho.servlet;
 
 import cz.voho.enrich.MetaDataRoot;
-import cz.voho.work.RecentWorkBackend;
+import cz.voho.facade.RecentWorkBackend;
 import freemarker.template.SimpleHash;
 
 import javax.servlet.ServletException;

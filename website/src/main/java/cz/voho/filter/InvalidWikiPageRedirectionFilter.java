@@ -1,7 +1,7 @@
 package cz.voho.filter;
 
 import cz.voho.utility.WikiLinkUtility;
-import cz.voho.wiki.WikiBackend;
+import cz.voho.facade.WikiBackend;
 import org.apache.http.HttpStatus;
 
 import javax.servlet.http.HttpServletRequest;

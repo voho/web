@@ -2,7 +2,7 @@ package cz.voho.servlet;
 
 import com.google.common.collect.Sets;
 import cz.voho.utility.Constants;
-import cz.voho.wiki.WikiBackend;
+import cz.voho.facade.WikiBackend;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
