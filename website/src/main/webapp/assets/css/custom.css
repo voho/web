@@ -155,6 +155,9 @@ section#wiki-content blockquote p {
 
 section#wiki-content blockquote em {
     background: none transparent;
+    font-weight: normal;
+    font-family: inherit;
+    font-size: 0.8em;
 }
 
 .wiki blockquote em:before {
