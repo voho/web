@@ -10,14 +10,6 @@ public class WikiLinkUtility {
         return wikiParts.split(stripWikiPrefixSuffix(stripSlashes(Pattern.quote("/"))));
     }
 
-    public static String lastWikiPart(final String[] wikiParts) {
-        if (wikiParts.length > 0) {
-            return wikiParts[wikiParts.length - 1];
-        } else {
-            return "";
-        }
-    }
-
     public static String resolveWikiPageId(String value) {
         value = value.toLowerCase(Locale.ROOT);
         value = stripWikiPrefixSuffix(stripSlashes(value));
@@ -59,6 +51,10 @@ public class WikiLinkUtility {
         return value;
     }
 
+    public static boolean isValidWikiPageSource(String filename) {
+        return filename.contains("wiki/") && filename.endsWith(".md");
+    }
+
     private static String copyValidChars(final String pathInfo) {
         if (pathInfo == null) {
             return "";
@@ -77,8 +73,12 @@ public class WikiLinkUtility {
         return sb.toString();
     }
 
-    public static boolean isValidWikiPageSource(String filename) {
-        return filename.contains("wiki/") && filename.endsWith(".md");
+    private static String lastWikiPart(final String[] wikiParts) {
+        if (wikiParts.length > 0) {
+            return wikiParts[wikiParts.length - 1];
+        } else {
+            return "";
+        }
     }
 
     private static boolean isValidChar(final char c) {
