@@ -52,6 +52,9 @@ public class DefaultWikiPageSourceRepository implements WikiPageSourceRepository
     }
 
     private WikiPageSource load(String resourceName) {
+        if (resourceName.startsWith("webapps/WEB-INF/classes/")) {
+            resourceName = resourceName.substring("webapps/WEB-INF/classes/".length());
+        }
         WikiPageSource page = new WikiPageSource();
         page.setId(extractId(resourceName));
         page.setParentId(extractParentId(resourceName));
@@ -83,7 +86,7 @@ public class DefaultWikiPageSourceRepository implements WikiPageSourceRepository
 
     private String getRepositoryPath(final String resourceName) {
         return String.format(
-                "https://github.com/voho/web/blob/master/website/src/main/resources/wiki/%s",
+                "https://github.com/voho/web/blob/master/website/src/main/resources/%s",
                 resourceName
         );
     }
