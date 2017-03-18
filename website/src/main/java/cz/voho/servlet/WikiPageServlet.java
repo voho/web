@@ -9,6 +9,7 @@ import cz.voho.facade.WikiBackend;
 import cz.voho.wiki.model.ParsedWikiPage;
 import cz.voho.wiki.model.WikiPageReference;
 import cz.voho.wiki.model.WikiPageReferences;
+import cz.voho.wiki.model.WikiPageSource;
 import freemarker.template.SimpleHash;
 
 import javax.servlet.ServletException;
@@ -27,7 +28,8 @@ public class WikiPageServlet extends AbstractMenuPageServlet {
     protected void updateModel(final HttpServletRequest request, final SimpleHash model, final MetaDataRoot metaDataRoot) {
         super.updateModel(request, model, metaDataRoot);
 
-        final ParsedWikiPage parsedWikiPage = wikiBackend.load(WikiLinkUtility.resolveWikiPageId(request.getRequestURI()));
+        String requestUri = WikiLinkUtility.resolveWikiPageId(request.getRequestURI());
+        final ParsedWikiPage parsedWikiPage = wikiBackend.load(requestUri);
         final String externalUrl = wikiBackend.getExternalWikiPageLink(parsedWikiPage.getSource().getId());
 
         model.put("active_wiki_page_id", parsedWikiPage.getSource().getId());
@@ -38,9 +40,8 @@ public class WikiPageServlet extends AbstractMenuPageServlet {
         model.put("active_wiki_page_title", parsedWikiPage.getTitle());
         model.put("active_wiki_page_content", parsedWikiPage.getHtml());
         model.put("active_wiki_page_cover", parsedWikiPage.isCover());
-        model.put("active_wiki_page_origin", parsedWikiPage.getSource().getOrigin());
         model.put("active_wiki_page_toc", wikiBackend.getCurrentContext().getNonTrivialToc(parsedWikiPage.getSource().getId()));
-        model.put("active_wiki_page_report_issue", createReportWikiIssueLink(parsedWikiPage));
+        model.put("active_wiki_page_report_issue", parsedWikiPage.getSource().getGithubIssueUrl());
         model.put("active_wiki_page_outgoing_links", wikiBackend.getLinksFromHere(parsedWikiPage.getSource().getId()));
         model.put("active_wiki_page_incoming_links", wikiBackend.getLinksToHere(parsedWikiPage.getSource().getId()));
 
@@ -108,15 +109,5 @@ public class WikiPageServlet extends AbstractMenuPageServlet {
                 metaDataRoot.setBreadcrumbs(breadcrumbList);
             }
         }
-    }
-
-    private String createReportWikiIssueLink(final ParsedWikiPage parsedWikiPage) {
-        final String title = String.format("%s (chyba na Wiki)", parsedWikiPage.getSource().getId());
-        final String body = "";
-        return String.format(
-                "https://github.com/voho/web/issues/new?title=%s&body=%s",
-                UrlEscapers.urlFragmentEscaper().escape(title),
-                UrlEscapers.urlFragmentEscaper().escape(body)
-        );
     }
 }

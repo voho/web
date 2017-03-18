@@ -1,27 +1,13 @@
 package cz.voho.wiki.page.parsed;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimaps;
-import com.google.common.collect.SetMultimap;
-import com.google.common.collect.Sets;
-import cz.voho.wiki.model.Missing;
-import cz.voho.wiki.model.Quote;
-import cz.voho.wiki.model.Toc;
-import cz.voho.wiki.model.Todo;
+import com.google.common.collect.*;
+import cz.voho.wiki.model.*;
 import cz.voho.wiki.page.source.WikiPageSourceRepository;
 
-import java.util.Comparator;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
-public class WikiContext {
+public class WikiParsingContext {
     private final SetMultimap<String, String> linksToPage;
     private final SetMultimap<String, String> linksFromPage;
     private final SetMultimap<String, String> quotesByAuthor;
@@ -29,8 +15,9 @@ public class WikiContext {
     private final Set<String> allPages;
     private final Map<String, String> parentPage;
     private final Map<String, Toc> pageToc;
+    private final Map<String, ParsedWikiPage> parsedWikiPages;
 
-    public WikiContext() {
+    public WikiParsingContext() {
         this.linksToPage = Multimaps.newSortedSetMultimap(Maps.newTreeMap(), TreeSet::new);
         this.linksFromPage = Multimaps.newSortedSetMultimap(Maps.newTreeMap(), TreeSet::new);
         this.quotesByAuthor = Multimaps.newSortedSetMultimap(Maps.newTreeMap(), TreeSet::new);
@@ -38,6 +25,7 @@ public class WikiContext {
         this.allPages = Sets.newTreeSet();
         this.parentPage = Maps.newHashMap();
         this.pageToc = Maps.newHashMap();
+        this.parsedWikiPages = Maps.newHashMap();
     }
 
     public ImmutableList<String> getBreadCrumbs(final String wikiPageId) {
@@ -50,12 +38,12 @@ public class WikiContext {
         return ImmutableList.copyOf(Lists.reverse(result));
     }
 
-    public List<String> getSubPages(final String wikiPageId) {
-        return parentPage.entrySet()
+    public ImmutableList<String> getSubPages(final String wikiPageId) {
+        return ImmutableList.copyOf(parentPage.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().equals(wikiPageId))
                 .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     public ImmutableList<String> getParentPages(final String wikiPageId) {
@@ -76,19 +64,6 @@ public class WikiContext {
 
     public ImmutableSet<String> getWikiPageIds() {
         return ImmutableSet.copyOf(allPages);
-    }
-
-    public void addPage(final String wikiPageId) {
-        this.allPages.add(wikiPageId);
-    }
-
-    public void setParentPage(final String childPageId, final String parentPageId) {
-        parentPage.put(childPageId, parentPageId);
-    }
-
-    public void addLink(final String sourceWikiPageId, final String targetWikiPageId) {
-        linksFromPage.put(sourceWikiPageId, targetWikiPageId);
-        linksToPage.put(targetWikiPageId, sourceWikiPageId);
     }
 
     public Toc getNonTrivialToc(final String wikiPageId) {
@@ -155,6 +130,19 @@ public class WikiContext {
         return ImmutableSet.copyOf(strings);
     }
 
+    public void addLink(final String sourceWikiPageId, final String targetWikiPageId) {
+        linksFromPage.put(sourceWikiPageId, targetWikiPageId);
+        linksToPage.put(targetWikiPageId, sourceWikiPageId);
+    }
+
+    public void addParsedPage(final String wikiPageId, ParsedWikiPage parsedWikiPage) {
+        this.allPages.add(wikiPageId);
+        if (parsedWikiPage.getSource().getParentId() != null) {
+            parentPage.put(parsedWikiPage.getSource().getId(), parsedWikiPage.getSource().getParentId());
+        }
+        parsedWikiPages.put(wikiPageId, parsedWikiPage);
+    }
+
     public void addTodo(final String id) {
         todoPages.add(id);
     }
@@ -169,5 +157,9 @@ public class WikiContext {
 
     public void addToc(final String wikiPageId, Toc toc) {
         this.pageToc.put(wikiPageId, toc);
+    }
+
+    public ParsedWikiPage getPage(String wikiPageId) {
+        return parsedWikiPages.get(wikiPageId);
     }
 }

@@ -14,7 +14,7 @@ import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 import cz.voho.wiki.model.ParsedWikiPage;
-import cz.voho.wiki.page.parsed.WikiContext;
+import cz.voho.wiki.page.parsed.WikiParsingContext;
 import cz.voho.wiki.model.WikiPageSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,7 +56,7 @@ public class FlexmarkWikiParser implements WikiParser {
     }
 
     @Override
-    public ParsedWikiPage parse(final WikiContext context, final WikiPageSource source) {
+    public ParsedWikiPage parse(final WikiParsingContext context, final WikiPageSource source) {
         LOG.debug("Parsing the wiki page: {}", source);
         final ParsedWikiPage page = new ParsedWikiPage();
         page.setSource(source);
@@ -71,13 +71,13 @@ public class FlexmarkWikiParser implements WikiParser {
         return page;
     }
 
-    private void preprocessNodes(final WikiContext context, final WikiPageSource wikiPageSource, final Node pageRootNode) {
+    private void preprocessNodes(final WikiParsingContext context, final WikiPageSource wikiPageSource, final Node pageRootNode) {
         for (final Preprocessor p : preprocessors) {
             p.preprocessNodes(context, wikiPageSource, pageRootNode);
         }
     }
 
-    private String preprocessSource(final WikiContext context, final WikiPageSource wikiPageSource, final String source) {
+    private String preprocessSource(final WikiParsingContext context, final WikiPageSource wikiPageSource, final String source) {
         String result = source;
 
         for (final Preprocessor p : preprocessors) {

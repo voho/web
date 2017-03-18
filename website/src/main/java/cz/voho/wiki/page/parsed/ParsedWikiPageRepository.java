@@ -2,6 +2,10 @@ package cz.voho.wiki.page.parsed;
 
 import cz.voho.wiki.model.ParsedWikiPage;
 
+import java.util.Set;
+
 public interface ParsedWikiPageRepository {
-    ParsedWikiPage load(String wikiPageId);
+    Set<String> getWikiPageIds();
+
+    ParsedWikiPage getParsedWikiPageById(String wikiPageId);
 }

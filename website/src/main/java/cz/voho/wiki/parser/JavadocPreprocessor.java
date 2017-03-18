@@ -2,14 +2,14 @@ package cz.voho.wiki.parser;
 
 import com.google.common.net.UrlEscapers;
 import cz.voho.common.utility.ReplacePatternCallback;
-import cz.voho.wiki.page.parsed.WikiContext;
+import cz.voho.wiki.page.parsed.WikiParsingContext;
 import cz.voho.wiki.model.WikiPageSource;
 
 import java.util.regex.Pattern;
 
 public class JavadocPreprocessor implements Preprocessor {
     @Override
-    public String preprocessSource(final WikiContext context, final WikiPageSource wikiPageSource, final String source) {
+    public String preprocessSource(final WikiParsingContext context, final WikiPageSource wikiPageSource, final String source) {
         final ReplacePatternCallback rp = new ReplacePatternCallback(Pattern.compile("\\*javadoc:(.+?)\\*"));
         return rp.replace(source, matchResult -> {
             final String className = matchResult.group(1);

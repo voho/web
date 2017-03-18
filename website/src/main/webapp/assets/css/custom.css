@@ -72,15 +72,16 @@ section#wiki-content thead {
 }
 
 #header input:focus {
-    background-color: #2a2f4a;
-    font-weight: bold;
+    background-color: #9bf1ff;
 }
 
 section#wiki-content em {
-    background-color: #ffffff;
+    background-color: #aaffdd;
     padding: 1px 5pt;
     border-radius: 3pt;
     font-style: normal;
+    font-size: 90%;
+    font-family: monospace;
     margin-left: 2pt;
     margin-right: 2pt;
 }

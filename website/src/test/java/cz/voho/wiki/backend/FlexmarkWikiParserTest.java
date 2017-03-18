@@ -3,7 +3,7 @@ package cz.voho.wiki.backend;
 import com.google.common.io.Resources;
 import cz.voho.wiki.image.WikiImageCacheWarmUp;
 import cz.voho.wiki.model.ParsedWikiPage;
-import cz.voho.wiki.page.parsed.WikiContext;
+import cz.voho.wiki.page.parsed.WikiParsingContext;
 import cz.voho.wiki.model.WikiPageSource;
 import cz.voho.wiki.parser.*;
 import org.junit.Test;
@@ -39,7 +39,7 @@ public class FlexmarkWikiParserTest {
         final String sample = Resources.toString(getClass().getResource("/markdown/sample.md"), StandardCharsets.UTF_8);
         final WikiPageSource src = new WikiPageSource();
         src.setSource(sample);
-        final ParsedWikiPage page = toTest.parse(new WikiContext(), src);
+        final ParsedWikiPage page = toTest.parse(new WikiParsingContext(), src);
         System.out.println(page.getHtml());
     }
 }

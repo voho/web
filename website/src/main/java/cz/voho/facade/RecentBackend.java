@@ -4,6 +4,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
 import cz.voho.common.utility.ExecutorProvider;
 import cz.voho.common.utility.LambdaClient;
+import cz.voho.common.utility.WikiLinkUtility;
 import cz.voho.web.lambda.model.github.CommitMeta;
 import cz.voho.web.lambda.model.github.LatestCommitsRequest;
 import cz.voho.web.lambda.model.github.LatestCommitsResponse;
@@ -28,9 +29,9 @@ public class RecentBackend {
     private static final Logger LOG = LoggerFactory.getLogger(RecentBackend.class);
     private static final int RECENT_PHOTO_COUNT = 6;
     private static final int RECENT_SONGS_COUNT = 4;
+    private static final int RECENT_WIKI_UPDATES_COUNT = 10;
     private static final int UPDATE_INTERVAL_SECONDS = 300;
     private static final String WIKI_COMMIT_PATH = "website/src/main/resources/wiki/";
-    private static final int RECENT_WIKI_UPDATES_COUNT = 10;
 
     private final ScheduledExecutorService scheduledExecutorService;
     private final LambdaClient lambdaClient;
@@ -76,7 +77,7 @@ public class RecentBackend {
             LOG.info("Updating recent wiki changes cache.");
             recentWikiChangesCache.set(response);
         } else {
-            LOG.warn("Could not upgrade recent wiki changes cacheł.");
+            LOG.warn("Could not upgrade recent wiki changes cache.");
         }
     }
 
@@ -139,7 +140,7 @@ public class RecentBackend {
 
         for (CommitMeta commit : latestValue.getCommits()) {
             for (String filename : commit.getFilenames()) {
-                if (filename.contains("wiki/") && filename.endsWith(".md")) {
+                if (WikiLinkUtility.isValidWikiPageSource(filename)) {
                     filesToSortedCommits.put(filename, commit);
                 }
             }

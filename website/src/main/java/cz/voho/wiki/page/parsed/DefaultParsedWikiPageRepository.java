@@ -4,19 +4,26 @@ import cz.voho.wiki.model.ParsedWikiPage;
 import cz.voho.wiki.page.source.WikiPageSourceRepository;
 import cz.voho.wiki.parser.WikiParser;
 
+import java.util.Set;
+
 public class DefaultParsedWikiPageRepository implements ParsedWikiPageRepository {
     private final WikiParser wikiParser;
     private final WikiPageSourceRepository wikiPageSourceRepository;
-    private final WikiContext wikiContext;
+    private final WikiParsingContext wikiParsingContext;
 
-    public DefaultParsedWikiPageRepository(WikiParser wikiParser, WikiPageSourceRepository wikiPageSourceRepository, WikiContext wikiContext) {
+    public DefaultParsedWikiPageRepository(WikiParser wikiParser, WikiPageSourceRepository wikiPageSourceRepository, WikiParsingContext wikiParsingContext) {
         this.wikiParser = wikiParser;
         this.wikiPageSourceRepository = wikiPageSourceRepository;
-        this.wikiContext = wikiContext;
+        this.wikiParsingContext = wikiParsingContext;
     }
 
     @Override
-    public ParsedWikiPage load(final String wikiPageId) {
-        return wikiParser.parse(wikiContext, wikiPageSourceRepository.getWikiPageSourceById(wikiPageId));
+    public Set<String> getWikiPageIds() {
+        return wikiPageSourceRepository.getWikiPageIds();
+    }
+
+    @Override
+    public ParsedWikiPage getParsedWikiPageById(final String wikiPageId) {
+        return wikiParser.parse(wikiParsingContext, wikiPageSourceRepository.getWikiPageSourceById(wikiPageId));
     }
 }
