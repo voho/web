@@ -1,7 +1,7 @@
-package cz.voho.wiki.page.parsed;
+package cz.voho.wiki.repository.parsed;
 
 import cz.voho.wiki.model.ParsedWikiPage;
-import cz.voho.wiki.page.source.WikiPageSourceRepository;
+import cz.voho.wiki.repository.source.WikiPageSourceRepository;
 import cz.voho.wiki.parser.WikiParser;
 
 import java.util.Set;

@@ -1,4 +1,4 @@
-package cz.voho.wiki.image;
+package cz.voho.wiki.repository.image;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;

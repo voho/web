@@ -1,6 +1,5 @@
-package cz.voho.wiki.page.source;
+package cz.voho.wiki.repository.source;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.io.Resources;
 import com.google.common.net.UrlEscapers;
@@ -9,8 +8,6 @@ import cz.voho.common.exception.ContentNotFoundException;
 import cz.voho.common.exception.InitializationException;
 import cz.voho.common.utility.WikiLinkUtility;
 import cz.voho.wiki.model.WikiPageSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,8 +16,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class DefaultWikiPageSourceRepository implements WikiPageSourceRepository {
-    private static final Logger LOG = LoggerFactory.getLogger(DefaultWikiPageSourceRepository.class);
-
     private final Map<String, WikiPageSource> wikiPageIdToResourceName;
 
     public DefaultWikiPageSourceRepository() {
@@ -32,9 +27,7 @@ public class DefaultWikiPageSourceRepository implements WikiPageSourceRepository
                     .getResources()
                     .stream()
                     .map(ClassPath.ResourceInfo::getResourceName)
-                    .filter(this::isNameOfWikiResource)
-                    .map(WikiLinkUtility::stripSlashes)
-                    .map(WikiLinkUtility::stripWikiPrefix)
+                    .filter(WikiLinkUtility::isValidWikiPageSource)
                     .map(this::load)
                     .forEach(wikiPageSource -> wikiPageIdToResourceName.put(wikiPageSource.getId(), wikiPageSource));
         } catch (IOException e) {
@@ -63,18 +56,12 @@ public class DefaultWikiPageSourceRepository implements WikiPageSourceRepository
         return page;
     }
 
-    private boolean isNameOfWikiResource(final String resourceName) {
-        return resourceName.matches("wiki/(.+)\\.md");
-    }
-
     private String extractId(final String resourceName) {
-        final String[] exploded = explodeResourceName(resourceName);
-        Preconditions.checkState(exploded.length > 0);
-        return exploded[exploded.length - 1];
+        return WikiLinkUtility.resolveWikiPageId(resourceName);
     }
 
     private String extractParentId(final String resourceName) {
-        final String[] exploded = explodeResourceName(resourceName);
+        final String[] exploded = WikiLinkUtility.splitWikiParts(resourceName);
         if (exploded.length > 1) {
             return exploded[exploded.length - 2];
         }
@@ -82,8 +69,7 @@ public class DefaultWikiPageSourceRepository implements WikiPageSourceRepository
     }
 
     private String loadSource(final String resourceName) {
-        LOG.info("Loading from local resource: {}", resourceName);
-        final URL resource = Resources.getResource("wiki/" + resourceName);
+        final URL resource = Resources.getResource(resourceName);
 
         try {
             return Resources.toString(resource, StandardCharsets.UTF_8);
@@ -106,20 +92,5 @@ public class DefaultWikiPageSourceRepository implements WikiPageSourceRepository
                 UrlEscapers.urlFragmentEscaper().escape(String.format("%s (chyba na Wiki)", resourceName)),
                 UrlEscapers.urlFragmentEscaper().escape("")
         );
-    }
-
-    private String[] explodeResourceName(final String resourceName) {
-        final String[] result = WikiLinkUtility.splitWikiParts(resourceName);
-
-        if (result.length > 0) {
-            final String lastResult = result[result.length - 1];
-            final int split = lastResult.lastIndexOf('.');
-
-            if (split != -1) {
-                result[result.length - 1] = lastResult.substring(0, split);
-            }
-        }
-
-        return result;
     }
 }

@@ -1,8 +1,8 @@
-package cz.voho.wiki.page.parsed;
+package cz.voho.wiki.repository.parsed;
 
 import com.google.common.collect.*;
 import cz.voho.wiki.model.*;
-import cz.voho.wiki.page.source.WikiPageSourceRepository;
+import cz.voho.wiki.repository.source.WikiPageSourceRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;

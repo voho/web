@@ -1,12 +1,17 @@
 package cz.voho.common.utility;
 
+import java.time.LocalDate;
+import java.util.Locale;
+
 public class Constants {
     public static final String OFFICIAL_FULL_NAME = "Vojtěch Hordějčuk";
+    public static final String GOOGLE_SITE_SEARCH = "https://www.google.cz/?gws_rd=ssl#q=site:voho.eu+%s&*";
     public static final String WEBSITE_URL_WITH_SLASH = "http://voho.eu/";
     public static final String DEGREE = "Ing.";
     public static final String OFFICIAL_FIRST_NAME = "Vojtěch";
     public static final String OFFICIAL_FAMILY_NAME = "Hordějčuk";
     public static final String JOB_TITLE = "Software Engineer and Bedroom Music Producer";
+    public static final LocalDate AUTHOR_BIRTH_DATE = LocalDate.of(1987, 9, 16);
     public static final String GENDER = "male";
     public static final String EMAIL = "vojtech.hordejcuk@gmail.com";
     public static final String HOME_LOCATION = "Luxembourg";
@@ -24,4 +29,5 @@ public class Constants {
     public static final String PROFILE_GOOGLE_MUSIC = "https://play.google.com/store/music/artist/Vojtech_Hordejcuk?id=Ajqelbv4qqwma7ewjtd6pkmkkie";
     public static final String PROFILE_SPOTIFY = "https://open.spotify.com/artist/02pC7TpobLA5my9tbGgNyl";
     public static final String PROFILE_YOUTUBE = "https://www.youtube.com/channel/UCmhcw6dUD3J7dQz17l2KmCg";
+    public static final Locale CZECH_LOCALE = new Locale("cs", "CZ");
 }

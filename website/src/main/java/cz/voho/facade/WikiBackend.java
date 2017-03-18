@@ -2,18 +2,17 @@ package cz.voho.facade;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import cz.voho.common.exception.ContentNotFoundException;
 import cz.voho.common.utility.Constants;
 import cz.voho.common.utility.LambdaClient;
 import cz.voho.common.utility.WikiLinkUtility;
-import cz.voho.wiki.image.CachingWikiImageRepository;
-import cz.voho.wiki.image.LambdaWikiImageRepository;
-import cz.voho.wiki.image.WikiImageRepository;
 import cz.voho.wiki.model.*;
-import cz.voho.wiki.page.parsed.WikiParsingContext;
-import cz.voho.wiki.page.total.DefaultTotalWikiPageRepository;
-import cz.voho.wiki.page.total.TotalWikiPageRepository;
+import cz.voho.wiki.repository.image.CachingWikiImageRepository;
+import cz.voho.wiki.repository.image.LambdaWikiImageRepository;
+import cz.voho.wiki.repository.image.WikiImageRepository;
+import cz.voho.wiki.repository.parsed.WikiParsingContext;
+import cz.voho.wiki.repository.total.DefaultTotalWikiPageRepository;
+import cz.voho.wiki.repository.total.TotalWikiPageRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,17 +22,15 @@ import java.time.format.FormatStyle;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static cz.voho.wiki.page.source.WikiPageSourceRepository.MISSING_PAGE_ID;
+import static cz.voho.wiki.repository.source.WikiPageSourceRepository.MISSING_PAGE_ID;
 
+// TODO improve code
 public class WikiBackend {
-    private static final Logger LOG = LoggerFactory.getLogger(WikiBackend.class);
-
-    private final TotalWikiPageRepository totalWikiPageRepository;
-    private WikiParsingContext wikiParsingContext;
-    private WikiImageRepository wikiImageRepository;
+    private final WikiParsingContext wikiParsingContext;
+    private final WikiImageRepository wikiImageRepository;
 
     WikiBackend() {
-        totalWikiPageRepository = new DefaultTotalWikiPageRepository();
+        TotalWikiPageRepository totalWikiPageRepository = new DefaultTotalWikiPageRepository();
         wikiParsingContext = totalWikiPageRepository.createContext();
         wikiImageRepository = new CachingWikiImageRepository(new LambdaWikiImageRepository(new LambdaClient()));
     }
@@ -50,7 +47,7 @@ public class WikiBackend {
         }
 
         if (wikiPageId.equals(MISSING_PAGE_ID)) {
-            throw new ContentNotFoundException("No error page found.");
+            throw new ContentNotFoundException("No error page found: " + wikiPageId);
         } else {
             return load(MISSING_PAGE_ID);
         }
@@ -166,38 +163,15 @@ public class WikiBackend {
         return wikiParsingContext;
     }
 
-    public String resolveWikiPageId(final String uri) {
-        String result = WikiLinkUtility.lastWikiPart(WikiLinkUtility.splitWikiParts(WikiLinkUtility.stripWikiResourcePrefixSuffix(uri)));
-
-        if (!getCurrentContext().exists(result)) {
-            final Set<String> candidates = Sets.newHashSet();
-
-            for (final String wikiPageId : getWikiPageIds()) {
-                final boolean containsAsPrefix = wikiPageId.contains(result + "-");
-                final boolean containsAsSuffix = wikiPageId.contains("-" + result);
-
-                if (containsAsPrefix || containsAsSuffix) {
-                    candidates.add(wikiPageId);
-                }
-            }
-
-            if (candidates.size() == 1) {
-                result = candidates.iterator().next();
-            }
-        }
-
-        return result;
-    }
-
     public List<WikiPageCommit> enrichCommits(List<WikiPageCommitGroup> recentWikiChanges) {
         return recentWikiChanges
                 .stream()
                 .map(c -> {
                     List<WikiPageCommit> results = new LinkedList<WikiPageCommit>();
                     LocalDateTime date = LocalDateTime.parse(c.getLatestDate(), DateTimeFormatter.ISO_DATE_TIME);
-                    String formattedDate = date.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withLocale(new Locale("cs", "CZ")));
+                    String formattedDate = date.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withLocale(Constants.CZECH_LOCALE));
                     String shaLinkUrl = String.format("https://github.com/voho/web/commit/%s", c.getLatestCommitSha());
-                    String id = resolveWikiPageId(c.getFilename());
+                    String id = WikiLinkUtility.resolveWikiPageId(c.getFilename());
 
                     ParsedWikiPage parsedWikiPage = load(id);
 

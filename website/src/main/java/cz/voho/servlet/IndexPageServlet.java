@@ -8,7 +8,7 @@ import freemarker.template.SimpleHash;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-public class IndexPageServlet extends AbstractMenuPageServlet {
+public class IndexPageServlet extends AbstractPageServlet {
     private final RecentBackend recentBackend = Backend.SINGLETON.getRecentBackend();
 
     @Override

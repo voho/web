@@ -37,6 +37,7 @@ public abstract class AbstractPageServlet extends FreemarkerServlet {
     }
 
     protected void updateModel(final HttpServletRequest request, final SimpleHash model, final MetaDataRoot metaDataRoot) {
+        LocalDate now = LocalDate.now();
         model.put("social_profile_email", "mailto:" + Constants.EMAIL);
         model.put("social_profile_linkedin", Constants.PROFILE_LINKED_IN);
         model.put("social_profile_github", Constants.PROFILE_GITHUB);
@@ -55,8 +56,8 @@ public abstract class AbstractPageServlet extends FreemarkerServlet {
         model.put("website_extended_name", Constants.PREFERED_FULL_NAME);
         model.put("website_full_name", Constants.NAME_WITH_ALIAS);
         model.put("website_full_description", Constants.JOB_TITLE);
-        model.put("current_year", String.valueOf(LocalDate.now().getYear()));
-        model.put("website_author_age", LocalDate.of(1987, 9, 16).until(LocalDate.now()).getYears());
+        model.put("current_year", String.valueOf(now.getYear()));
+        model.put("website_author_age", Constants.AUTHOR_BIRTH_DATE.until(now).getYears());
     }
 
     protected void updateModelMeta(final HttpServletRequest request, final SimpleHash model, final MetaDataRoot metaDataRoot) {

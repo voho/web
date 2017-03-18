@@ -1,9 +1,9 @@
 package cz.voho.wiki.backend;
 
 import com.google.common.io.Resources;
-import cz.voho.wiki.image.WikiImageCacheWarmUp;
+import cz.voho.wiki.repository.image.WikiImageCacheWarmUp;
 import cz.voho.wiki.model.ParsedWikiPage;
-import cz.voho.wiki.page.parsed.WikiParsingContext;
+import cz.voho.wiki.repository.parsed.WikiParsingContext;
 import cz.voho.wiki.model.WikiPageSource;
 import cz.voho.wiki.parser.*;
 import org.junit.Test;

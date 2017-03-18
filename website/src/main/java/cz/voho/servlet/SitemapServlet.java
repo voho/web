@@ -22,8 +22,9 @@ public class SitemapServlet extends HttpServlet {
 
         final Set<String> urls = Sets.newTreeSet();
 
-        urls.add("meta");
         urls.add("");
+        urls.add("meta");
+        urls.add("sitemap");
 
         wikiBackend.getWikiPageIds().forEach(wikiPageId -> {
             urls.add("wiki/" + wikiPageId + "/");

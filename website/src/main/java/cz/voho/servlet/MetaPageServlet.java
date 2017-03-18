@@ -8,7 +8,7 @@ import freemarker.template.SimpleHash;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-public class MetaPageServlet extends AbstractMenuPageServlet {
+public class MetaPageServlet extends AbstractPageServlet {
     private final WikiBackend wikiBackend = Backend.SINGLETON.getWikiBackend();
 
     @Override

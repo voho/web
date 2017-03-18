@@ -8,7 +8,7 @@ import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
-import cz.voho.wiki.image.WikiImageCacheWarmUp;
+import cz.voho.wiki.repository.image.WikiImageCacheWarmUp;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;

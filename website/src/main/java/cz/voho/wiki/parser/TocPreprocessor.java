@@ -10,7 +10,7 @@ import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import cz.voho.wiki.model.Toc;
 import cz.voho.wiki.model.TocItem;
-import cz.voho.wiki.page.parsed.WikiParsingContext;
+import cz.voho.wiki.repository.parsed.WikiParsingContext;
 import cz.voho.wiki.model.WikiPageSource;
 
 import java.util.Map;

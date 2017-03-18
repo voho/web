@@ -1,4 +1,4 @@
-package cz.voho.wiki.image;
+package cz.voho.wiki.repository.image;
 
 import com.google.common.base.Strings;
 import cz.voho.common.utility.LambdaClient;

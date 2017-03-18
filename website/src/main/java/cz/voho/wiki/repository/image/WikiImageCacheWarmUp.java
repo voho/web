@@ -1,4 +1,4 @@
-package cz.voho.wiki.image;
+package cz.voho.wiki.repository.image;
 
 public interface WikiImageCacheWarmUp {
     void warmUpCacheDotSvg(String source);

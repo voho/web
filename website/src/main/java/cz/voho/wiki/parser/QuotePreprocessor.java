@@ -1,7 +1,7 @@
 package cz.voho.wiki.parser;
 
 import cz.voho.common.utility.ReplacePatternCallback;
-import cz.voho.wiki.page.parsed.WikiParsingContext;
+import cz.voho.wiki.repository.parsed.WikiParsingContext;
 import cz.voho.wiki.model.WikiPageSource;
 
 import java.util.regex.Pattern;

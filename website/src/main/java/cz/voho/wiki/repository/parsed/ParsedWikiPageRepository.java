@@ -1,4 +1,4 @@
-package cz.voho.wiki.page.parsed;
+package cz.voho.wiki.repository.parsed;
 
 import cz.voho.wiki.model.ParsedWikiPage;
 

@@ -1,23 +1,25 @@
 package cz.voho.servlet;
 
-import com.google.common.net.UrlEscapers;
 import cz.voho.common.model.enrich.*;
 import cz.voho.common.utility.Constants;
 import cz.voho.common.utility.WikiLinkUtility;
 import cz.voho.facade.Backend;
+import cz.voho.facade.RecentBackend;
 import cz.voho.facade.WikiBackend;
 import cz.voho.wiki.model.ParsedWikiPage;
 import cz.voho.wiki.model.WikiPageReference;
 import cz.voho.wiki.model.WikiPageReferences;
-import cz.voho.wiki.model.WikiPageSource;
+import cz.voho.wiki.repository.source.WikiPageSourceRepository;
 import freemarker.template.SimpleHash;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class WikiPageServlet extends AbstractMenuPageServlet {
+// TODO improve code
+public class WikiPageServlet extends AbstractPageServlet {
     private final WikiBackend wikiBackend = Backend.SINGLETON.getWikiBackend();
+    private final RecentBackend recentBackend = Backend.SINGLETON.getRecentBackend();
 
     @Override
     protected String requestUrlToTemplatePath(final HttpServletRequest request) throws ServletException {
@@ -28,13 +30,11 @@ public class WikiPageServlet extends AbstractMenuPageServlet {
     protected void updateModel(final HttpServletRequest request, final SimpleHash model, final MetaDataRoot metaDataRoot) {
         super.updateModel(request, model, metaDataRoot);
 
-        String requestUri = WikiLinkUtility.resolveWikiPageId(request.getRequestURI());
-        final ParsedWikiPage parsedWikiPage = wikiBackend.load(requestUri);
-        final String externalUrl = wikiBackend.getExternalWikiPageLink(parsedWikiPage.getSource().getId());
+        final ParsedWikiPage parsedWikiPage = wikiBackend.load(WikiLinkUtility.resolveWikiPageId(request.getRequestURI()));
 
         model.put("active_wiki_page_id", parsedWikiPage.getSource().getId());
         model.put("active_wiki_page_parent_id", parsedWikiPage.getSource().getParentId());
-        model.put("active_wiki_page_external_url", externalUrl);
+        model.put("active_wiki_page_external_url", wikiBackend.getExternalWikiPageLink(parsedWikiPage.getSource().getId()));
         model.put("active_wiki_page_github_url", parsedWikiPage.getSource().getGithubUrl());
         model.put("active_wiki_page_github_raw_url", parsedWikiPage.getSource().getGithubRawUrl());
         model.put("active_wiki_page_title", parsedWikiPage.getTitle());
@@ -44,15 +44,23 @@ public class WikiPageServlet extends AbstractMenuPageServlet {
         model.put("active_wiki_page_report_issue", parsedWikiPage.getSource().getGithubIssueUrl());
         model.put("active_wiki_page_outgoing_links", wikiBackend.getLinksFromHere(parsedWikiPage.getSource().getId()));
         model.put("active_wiki_page_incoming_links", wikiBackend.getLinksToHere(parsedWikiPage.getSource().getId()));
+        model.put("indexSubPages", wikiBackend.getSubPages(WikiPageSourceRepository.INDEX_PAGE_ID));
+        model.put("recentlyChangedPages", wikiBackend.enrichCommits(recentBackend.getRecentWikiChanges()));
 
-        final WikiPageReferences subPages = wikiBackend.getSubPages(parsedWikiPage.getSource().getId());
-        final WikiPageReferences breadCrumbs = wikiBackend.getBreadCrumbs(parsedWikiPage.getSource().getId());
         WikiPageReferences siblingPages = null;
 
         if (parsedWikiPage.getSource().getParentId() != null) {
             siblingPages = wikiBackend.getSubPages(parsedWikiPage.getSource().getParentId());
         }
 
+        final WikiPageReferences subPages = wikiBackend.getSubPages(parsedWikiPage.getSource().getId());
+        updateModelWithSubAndSiblingPages(model, metaDataRoot, parsedWikiPage, subPages, siblingPages);
+
+        final WikiPageReferences breadCrumbs = wikiBackend.getBreadCrumbs(parsedWikiPage.getSource().getId());
+        updateModelWithBreadCrumbs(model, metaDataRoot, breadCrumbs);
+    }
+
+    private void updateModelWithSubAndSiblingPages(SimpleHash model, MetaDataRoot metaDataRoot, ParsedWikiPage parsedWikiPage, WikiPageReferences subPages, WikiPageReferences siblingPages) {
         if (subPages != null && subPages.getItems() != null) {
             if (!subPages.getItems().isEmpty()) {
                 model.put("subPages", subPages);
@@ -70,7 +78,7 @@ public class WikiPageServlet extends AbstractMenuPageServlet {
                         .toArray(Article[]::new));
 
                 if (subPages.getItems().stream().allMatch(WikiPageReference::isLeaf)) {
-                    // if all subpages are leaves, we can just display them as siblings
+                    // if all sub-pages are leaves, we can just display them as siblings
                     siblingPages = subPages;
                     model.put("subPages", null);
                 }
@@ -84,7 +92,9 @@ public class WikiPageServlet extends AbstractMenuPageServlet {
                 model.put("siblingPages", siblingPages);
             }
         }
+    }
 
+    private void updateModelWithBreadCrumbs(SimpleHash model, MetaDataRoot metaDataRoot, WikiPageReferences breadCrumbs) {
         if (breadCrumbs != null && breadCrumbs.getItems() != null) {
             if (!breadCrumbs.getItems().isEmpty()) {
                 model.put("breadCrumbs", breadCrumbs);
