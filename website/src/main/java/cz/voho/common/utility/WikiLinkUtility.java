@@ -25,6 +25,14 @@ public class WikiLinkUtility {
         return value;
     }
 
+    public static String resolveParentWikiPageId(String resourceName) {
+        final String[] exploded = WikiLinkUtility.splitWikiParts(resourceName);
+        if (exploded.length > 1) {
+            return exploded[exploded.length - 2];
+        }
+        return null;
+    }
+
     public static String stripSlashes(String value) {
         while (value.startsWith("/")) {
             value = value.substring(1);

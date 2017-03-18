@@ -2,9 +2,7 @@ package cz.voho.wiki.parser;
 
 import com.google.common.collect.Sets;
 import com.vladsch.flexmark.ast.FencedCodeBlock;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
@@ -58,25 +56,22 @@ public class CodePreprocessor implements Preprocessor {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        return Sets.newHashSet(new NodeRenderingHandler<>(FencedCodeBlock.class, new CustomNodeRenderer<FencedCodeBlock>() {
-            @Override
-            public void render(final FencedCodeBlock node, final NodeRendererContext nodeRendererContext, final HtmlWriter html) {
-                final String codeLang = node.getInfo().toString();
-                final String codeSource = node.getContentChars().toString();
+        return Sets.newHashSet(new NodeRenderingHandler<>(FencedCodeBlock.class, (node, nodeRendererContext, html) -> {
+            final String codeLang = node.getInfo().toString();
+            final String codeSource = node.getContentChars().toString();
 
-                if (codeLang.equalsIgnoreCase(DOT_GRAPH)) {
-                    dotGraph(html, codeSource);
-                } else if (codeLang.equalsIgnoreCase(DOT_DIGRAPH)) {
-                    dotDigraph(html, codeSource);
-                } else if (codeLang.equalsIgnoreCase(UML_CLASS)) {
-                    umlClass(html, codeSource);
-                } else if (codeLang.equalsIgnoreCase(UML_ACTIVITY)) {
-                    umlActivity(html, codeSource);
-                } else if (codeLang.equalsIgnoreCase(UML_SEQUENCE)) {
-                    umlSequence(html, codeSource);
-                } else {
-                    sourceCode(node, html);
-                }
+            if (codeLang.equalsIgnoreCase(DOT_GRAPH)) {
+                dotGraph(html, codeSource);
+            } else if (codeLang.equalsIgnoreCase(DOT_DIGRAPH)) {
+                dotDigraph(html, codeSource);
+            } else if (codeLang.equalsIgnoreCase(UML_CLASS)) {
+                umlClass(html, codeSource);
+            } else if (codeLang.equalsIgnoreCase(UML_ACTIVITY)) {
+                umlActivity(html, codeSource);
+            } else if (codeLang.equalsIgnoreCase(UML_SEQUENCE)) {
+                umlSequence(html, codeSource);
+            } else {
+                sourceCode(node, html);
             }
         }));
     }

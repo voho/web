@@ -2,17 +2,17 @@ package cz.voho.wiki.parser;
 
 import cz.voho.common.utility.ReplacePatternCallback;
 import cz.voho.wiki.model.ParsedWikiPage;
-import cz.voho.wiki.model.WikiPageSource;
 
 import java.util.regex.Pattern;
 
 public class TodoPreprocessor implements Preprocessor {
     @Override
-    public String preprocessSource(ParsedWikiPage context, WikiPageSource wikiPageSource, String source) {
+    public void preprocessSource(ParsedWikiPage context) {
         final ReplacePatternCallback rp = new ReplacePatternCallback(Pattern.compile("!TODO!", Pattern.MULTILINE));
-        return rp.replace(source, matchResult -> {
+        String sourceFixed = rp.replace(context.getSource().getMarkdownSource(), matchResult -> {
             context.setTodo(true);
             return "<span class='todo'>TODO</span>";
         });
+        context.getSource().setMarkdownSource(sourceFixed);
     }
 }

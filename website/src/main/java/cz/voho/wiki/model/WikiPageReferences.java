@@ -13,9 +13,4 @@ public class WikiPageReferences {
     public void setItems(final List<WikiPageReference> items) {
         this.items = items;
     }
-
-    @Override
-    public String toString() {
-        return items.toString();
-    }
 }

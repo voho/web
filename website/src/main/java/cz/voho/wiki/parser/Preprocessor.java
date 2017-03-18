@@ -7,16 +7,15 @@ import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 import cz.voho.wiki.model.ParsedWikiPage;
-import cz.voho.wiki.model.WikiPageSource;
 
 import java.util.Set;
 
 public interface Preprocessor extends NodeRenderer, HtmlRenderer.HtmlRendererExtension {
-    default String preprocessSource(ParsedWikiPage context, WikiPageSource wikiPageSource, String source) {
-        return source;
+    default void preprocessSource(ParsedWikiPage context) {
+        // NOP
     }
 
-    default void preprocessNodes(ParsedWikiPage context, WikiPageSource source, Node root) {
+    default void preprocessNodes(ParsedWikiPage context, Node root) {
         // NOP
     }
 

@@ -21,11 +21,6 @@ public class WikiPageReference {
         this.title = title;
     }
 
-    @Override
-    public String toString() {
-        return String.format("%s (%s)", id, title);
-    }
-
     public WikiPageReferences getChildren() {
         return children;
     }

@@ -77,11 +77,6 @@ public class ParsedWikiPage {
         this.quotes = quotes;
     }
 
-    @Override
-    public String toString() {
-        return String.format("Parsed wiki page %s (parent = %s)", source.getId(), source.getParentId());
-    }
-
     public void addQuote(String quote, String author) {
         Quote q = new Quote();
         q.setAuthor(author);

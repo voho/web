@@ -8,7 +8,6 @@ import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import cz.voho.wiki.model.ParsedWikiPage;
 import cz.voho.wiki.model.Toc;
 import cz.voho.wiki.model.TocItem;
-import cz.voho.wiki.model.WikiPageSource;
 
 import java.util.Map;
 import java.util.Set;
@@ -17,7 +16,7 @@ public class TocPreprocessor implements Preprocessor {
     private final Map<Node, Map<String, Integer>> counters = Maps.newHashMap();
 
     @Override
-    public void preprocessNodes(ParsedWikiPage context, WikiPageSource source, Node root) {
+    public void preprocessNodes(ParsedWikiPage context, Node root) {
         Toc toc = new Toc("toc", "Obsah", 0);
         TocItem[] lastByLevel = new TocItem[10];
         lastByLevel[0] = toc;

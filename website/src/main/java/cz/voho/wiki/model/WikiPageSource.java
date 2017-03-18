@@ -3,7 +3,7 @@ package cz.voho.wiki.model;
 public class WikiPageSource {
     private String id;
     private String parentId;
-    private String source;
+    private String markdownSource;
     private String githubRawUrl;
     private String githubUrl;
     private String githubIssueUrl;
@@ -49,12 +49,12 @@ public class WikiPageSource {
         this.parentId = parentId;
     }
 
-    public String getSource() {
-        return source;
+    public String getMarkdownSource() {
+        return markdownSource;
     }
 
-    public void setSource(final String source) {
-        this.source = source;
+    public void setMarkdownSource(final String markdownSource) {
+        this.markdownSource = markdownSource;
     }
 
     public String getGithubHistoryUrl() {
@@ -63,10 +63,5 @@ public class WikiPageSource {
 
     public void setGithubHistoryUrl(String githubHistoryUrl) {
         this.githubHistoryUrl = githubHistoryUrl;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("Source for wiki page %s (parent = %s)", id, parentId);
     }
 }

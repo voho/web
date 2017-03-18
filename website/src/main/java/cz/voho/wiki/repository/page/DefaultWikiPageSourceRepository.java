@@ -55,7 +55,7 @@ public class DefaultWikiPageSourceRepository implements WikiPageSourceRepository
         WikiPageSource page = new WikiPageSource();
         page.setId(extractId(resourceName));
         page.setParentId(extractParentId(resourceName));
-        page.setSource(loadSource(resourceName) + "\r\n\r\n");
+        page.setMarkdownSource(loadSource(resourceName) + "\r\n\r\n");
         page.setGithubUrl(getRepositoryPath(resourceName));
         page.setGithubRawUrl(getRawRepositoryPath(resourceName));
         page.setGithubIssueUrl(getIssueRepositoryPath(resourceName));
@@ -68,11 +68,7 @@ public class DefaultWikiPageSourceRepository implements WikiPageSourceRepository
     }
 
     private String extractParentId(final String resourceName) {
-        final String[] exploded = WikiLinkUtility.splitWikiParts(resourceName);
-        if (exploded.length > 1) {
-            return exploded[exploded.length - 2];
-        }
-        return null;
+       return WikiLinkUtility.resolveParentWikiPageId(resourceName);
     }
 
     private String loadSource(final String resourceName) {

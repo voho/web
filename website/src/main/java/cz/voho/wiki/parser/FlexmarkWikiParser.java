@@ -38,7 +38,6 @@ public class FlexmarkWikiParser implements WikiParser {
         extensions.add(TablesExtension.create());
         extensions.add(AutolinkExtension.create());
         extensions.add(DefinitionExtension.create());
-        extensions.add(TocExtension.create());
 
         options.setFrom(ParserEmulationProfile.COMMONMARK.getOptions())
                 .set(Parser.EXTENSIONS, extensions)
@@ -56,12 +55,12 @@ public class FlexmarkWikiParser implements WikiParser {
 
     @Override
     public ParsedWikiPage parse(final WikiPageSource source) {
-        LOG.debug("Parsing the wiki page: {}", source);
+        LOG.debug("Parsing the wiki page: {}", source.getId());
         final ParsedWikiPage page = new ParsedWikiPage();
         page.setSource(source);
-        final String processedSource = preprocessSource(page, source, source.getSource());
-        final Node pageRootNode = parser.parse(processedSource);
-        preprocessNodes(page, source, pageRootNode);
+        preprocessSource(page);
+        final Node pageRootNode = parser.parse(page.getSource().getMarkdownSource());
+        preprocessNodes(page, pageRootNode);
         final String firstHeading = findFirstHeadingAndRemove(pageRootNode);
         page.setTitle(firstHeading);
         final String parsedSource = renderer.render(pageRootNode);
@@ -70,20 +69,16 @@ public class FlexmarkWikiParser implements WikiParser {
         return page;
     }
 
-    private void preprocessNodes(final ParsedWikiPage context, final WikiPageSource wikiPageSource, final Node pageRootNode) {
+    private void preprocessNodes(final ParsedWikiPage context, final Node pageRootNode) {
         for (final Preprocessor p : preprocessors) {
-            p.preprocessNodes(context, wikiPageSource, pageRootNode);
+            p.preprocessNodes(context, pageRootNode);
         }
     }
 
-    private String preprocessSource(final ParsedWikiPage context, final WikiPageSource wikiPageSource, final String source) {
-        String result = source;
-
+    private void preprocessSource(final ParsedWikiPage context) {
         for (final Preprocessor p : preprocessors) {
-            result = p.preprocessSource(context, wikiPageSource, result);
+            p.preprocessSource(context);
         }
-
-        return result;
     }
 
     private String findFirstHeadingAndRemove(final Node pageRootNode) {

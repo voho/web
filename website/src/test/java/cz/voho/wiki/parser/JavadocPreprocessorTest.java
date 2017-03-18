@@ -1,5 +1,7 @@
 package cz.voho.wiki.parser;
 
+import cz.voho.wiki.model.ParsedWikiPage;
+import cz.voho.wiki.model.WikiPageSource;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -10,7 +12,7 @@ public class JavadocPreprocessorTest {
     @Test
     public void noMatch() {
         String source = "Hello, there is no link here.";
-        String actual = toTest.preprocessSource(null, null, source);
+        String actual = parseSource(source);
         String expected = source;
         assertEquals(expected, actual);
     }
@@ -18,7 +20,7 @@ public class JavadocPreprocessorTest {
     @Test
     public void singleUnmatch() {
         String source = "*Hello*, there is no *link* here.";
-        String actual = toTest.preprocessSource(null, null, source);
+        String actual = parseSource(source);
         String expected = source;
         assertEquals(expected, actual);
     }
@@ -26,7 +28,7 @@ public class JavadocPreprocessorTest {
     @Test
     public void singleMatch() {
         String source = "Here is the link: *javadoc:org.slf4j.Logger* and that is it!";
-        String actual = toTest.preprocessSource(null, null, source);
+        String actual = parseSource(source);
         String expected = "Here is the link: [org.slf4j.**Logger**](http://grepcode.com/search?query=org.slf4j.Logger) and that is it!";
         assertEquals(expected, actual);
     }
@@ -34,7 +36,7 @@ public class JavadocPreprocessorTest {
     @Test
     public void multiMatch() {
         String source = "Here is the *link*: *javadoc:org.slf4j.Logger* and that is it! Maybe one more: *javadoc:org.slf4j.Logger*";
-        String actual = toTest.preprocessSource(null, null, source);
+        String actual = parseSource(source);
         String expected = "Here is the *link*: [org.slf4j.**Logger**](http://grepcode.com/search?query=org.slf4j.Logger) and that is it! Maybe one more: [org.slf4j.**Logger**](http://grepcode.com/search?query=org.slf4j.Logger)";
         assertEquals(expected, actual);
     }
@@ -42,8 +44,16 @@ public class JavadocPreprocessorTest {
     @Test
     public void mixedMatch() {
         String source = "Here is the *link*: *javadoc:org.slf4j.Logger* and that is it!";
-        String actual = toTest.preprocessSource(null, null, source);
+        String actual = parseSource(source);
         String expected = "Here is the *link*: [org.slf4j.**Logger**](http://grepcode.com/search?query=org.slf4j.Logger) and that is it!";
         assertEquals(expected, actual);
+    }
+
+    private String parseSource(String source) {
+        ParsedWikiPage page = new ParsedWikiPage();
+        page.setSource(new WikiPageSource());
+        page.getSource().setMarkdownSource(source);
+        toTest.preprocessSource(page);
+        return page.getSource().getMarkdownSource();
     }
 }

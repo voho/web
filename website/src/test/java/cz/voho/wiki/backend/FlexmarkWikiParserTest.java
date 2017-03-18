@@ -25,7 +25,7 @@ public class FlexmarkWikiParserTest {
     public void parse() throws Exception {
         final String sample = Resources.toString(getClass().getResource("/markdown/sample.md"), StandardCharsets.UTF_8);
         final WikiPageSource src = new WikiPageSource();
-        src.setSource(sample);
+        src.setMarkdownSource(sample);
         final ParsedWikiPage page = toTest.parse(src);
         System.out.println(page.getHtml());
     }

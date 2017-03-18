@@ -24,11 +24,14 @@ public class LambdaWikiImageRepository implements WikiImageRepository {
         final GenerateImageRequest request = new GenerateImageRequest();
         request.setFormat(GenerateImageFormat.FORMAT_SVG);
         request.setSource(source);
+
         final GenerateImageResponse response = lambdaClient.callDotLambda(request);
+
         if (response == null || Strings.isNullOrEmpty(response.getTextData())) {
             LOG.warn("No response for DOT image: {}", source);
             return null;
         }
+
         return response.getTextData().getBytes(StandardCharsets.UTF_8);
     }
 
@@ -37,11 +40,14 @@ public class LambdaWikiImageRepository implements WikiImageRepository {
         final GenerateImageRequest request = new GenerateImageRequest();
         request.setFormat(GenerateImageFormat.FORMAT_SVG);
         request.setSource(source);
+
         final GenerateImageResponse response = lambdaClient.callPlantUmlLambda(request);
+
         if (response == null || Strings.isNullOrEmpty(response.getTextData())) {
             LOG.warn("No response for Plant UML image: {}", source);
             return null;
         }
+
         return response.getTextData().getBytes(StandardCharsets.UTF_8);
     }
 
