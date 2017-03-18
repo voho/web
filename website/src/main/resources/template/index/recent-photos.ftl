@@ -1,4 +1,4 @@
-<#if instagram_photos?has_content>
+<#if recent_photos?has_content>
 <section>
     <div class="inner">
         <header class="major">
