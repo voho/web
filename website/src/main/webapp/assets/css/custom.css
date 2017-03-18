@@ -141,9 +141,12 @@ section#wiki-content blockquote p {
 
 .wiki blockquote {
     border: 0;
-    font-size: 130%;
+    font-size: 110%;
+    font-weight: bold;
+    line-height: 1.4;
     margin: 0;
     padding: 0;
+    padding-left: 3em;
 }
 
 .wiki blockquote em {

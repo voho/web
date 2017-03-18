@@ -14,7 +14,7 @@ U proudů v jazyce Java platí pravidlo, že stačí zavřít vždy jen ten "nej
 
 #### JDK 7 a novější
 
-V jazyce Java 7 a novějších existuje tzv. konsturkce **try-with-resources**, která umožňuje přehlednější zápis algoritmů pracujících s proudy. Blok *try* má nově volitelné tělo (uzavřené v závorkách), které může obsahovat deklaraci a inicializaci proudů. Tyto proudy jsou po skončení bloku *try* uzavřeny, a to jak v běžné situaci, tak při vyjímce. Jediným požadavkem na inicializaci proudu v bloku *try* je, aby tento proud implementoval rozhraní *AutoCloseable**.
+V jazyce Java 7 a novějších existuje tzv. konsturkce **try-with-resources**, která umožňuje přehlednější zápis algoritmů pracujících s proudy. Blok *try* má nově volitelné tělo (uzavřené v závorkách), které může obsahovat deklaraci a inicializaci proudů. Tyto proudy jsou po skončení bloku *try* uzavřeny, a to jak v běžné situaci, tak při vyjímce. Jediným požadavkem na inicializaci proudu v bloku *try* je, aby tento proud implementoval rozhraní *AutoCloseable*.
 
 ```java
 try (
