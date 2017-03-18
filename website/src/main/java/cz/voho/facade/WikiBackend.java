@@ -8,7 +8,8 @@ import cz.voho.common.utility.WikiLinkUtility;
 import cz.voho.wiki.model.*;
 import cz.voho.wiki.repository.image.CachingWikiImageRepository;
 import cz.voho.wiki.repository.image.WikiImageRepository;
-import cz.voho.wiki.repository.page.TopLevelWikiPageRepository;
+import cz.voho.wiki.repository.page.ParsedWikiPageRepository;
+import cz.voho.wiki.repository.page.WikiPageSourceRepository;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -23,12 +24,17 @@ import static cz.voho.wiki.repository.page.WikiPageSourceRepository.MISSING_PAGE
 
 // TODO improve code
 public class WikiBackend {
-    private final TopLevelWikiPageRepository topLevelWikiPageRepository;
     private final WikiImageRepository wikiImageRepository;
+    private final ParsedWikiPages parsedWikiPages;
 
-    WikiBackend(TopLevelWikiPageRepository topLevelWikiPageRepository, WikiImageRepository wikiImageRepository) {
-        this.topLevelWikiPageRepository = topLevelWikiPageRepository;
+    WikiBackend(WikiPageSourceRepository wikiPageSourceRepository, ParsedWikiPageRepository parsedWikiPageRepository, WikiImageRepository wikiImageRepository) {
         this.wikiImageRepository = wikiImageRepository;
+
+        this.parsedWikiPages = new ParsedWikiPages(wikiPageSourceRepository
+                .getWikiPageIds()
+                .stream()
+                .map(parsedWikiPageRepository::getParsedWikiPageById)
+                .collect(Collectors.toList()));
     }
 
     public String getExternalWikiPageLink(final String wikiPageId) {
@@ -36,7 +42,7 @@ public class WikiBackend {
     }
 
     public ParsedWikiPage load(final String wikiPageId) {
-        ParsedWikiPage parsedWikiPage = topLevelWikiPageRepository.getParsedWikiPages().getPage(wikiPageId);
+        ParsedWikiPage parsedWikiPage = parsedWikiPages.getPage(wikiPageId);
 
         if (parsedWikiPage != null) {
             return parsedWikiPage;
@@ -152,11 +158,11 @@ public class WikiBackend {
     }
 
     public ImmutableSet<String> getWikiPageIds() {
-        return topLevelWikiPageRepository.getParsedWikiPages().getWikiPageIds();
+        return parsedWikiPages.getWikiPageIds();
     }
 
     public ParsedWikiPages getCurrentContext() {
-        return topLevelWikiPageRepository.getParsedWikiPages();
+        return parsedWikiPages;
     }
 
     public List<WikiPageCommit> enrichCommits(List<WikiPageCommitGroup> recentWikiChanges) {

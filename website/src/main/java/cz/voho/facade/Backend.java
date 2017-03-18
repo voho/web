@@ -26,8 +26,7 @@ public class Backend {
             new TocPreprocessor()
     );
     private final ParsedWikiPageRepository parsedWikiPageRepository = new DefaultParsedWikiPageRepository(wikiPageSourceRepository, wikiParser);
-    private final TopLevelWikiPageRepository topLevelWikiPageRepository = new DefaultTopLevelWikiPageRepository(wikiPageSourceRepository, parsedWikiPageRepository);
-    private final WikiBackend wikiBackend = new WikiBackend(topLevelWikiPageRepository, wikiImageRepository);
+    private final WikiBackend wikiBackend = new WikiBackend(wikiPageSourceRepository, parsedWikiPageRepository, wikiImageRepository);
 
     public RecentBackend getRecentBackend() {
         return recentBackend;
