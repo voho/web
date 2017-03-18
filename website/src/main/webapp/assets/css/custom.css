@@ -146,12 +146,15 @@ section#wiki-content blockquote p {
     line-height: 1.4;
     margin: 0;
     padding: 0;
-    padding-left: 3em;
+    padding-left: 2em;
 }
 
-.wiki blockquote em {
-    background: none transparent;
+.wiki em {
     white-space: nowrap;
+}
+
+section#wiki-content blockquote em {
+    background: none transparent;
 }
 
 .wiki blockquote em:before {

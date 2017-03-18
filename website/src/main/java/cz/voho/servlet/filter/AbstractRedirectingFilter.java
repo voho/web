@@ -1,6 +1,11 @@
 package cz.voho.servlet.filter;
 
-import javax.servlet.*;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -31,7 +36,7 @@ abstract class AbstractRedirectingFilter implements Filter {
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
-    protected abstract boolean doCustomFilter(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse);
+    protected abstract boolean doCustomFilter(final HttpServletRequest httpServletRequest, final HttpServletResponse httpServletResponse);
 
     protected boolean redirect(final HttpServletResponse response, final int statusCode, final String newUrl) {
         try {
