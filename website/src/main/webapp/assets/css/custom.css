@@ -150,6 +150,7 @@ section#wiki-content blockquote p {
 }
 
 .wiki blockquote em {
+    background: none transparent;
     white-space: nowrap;
 }
 
