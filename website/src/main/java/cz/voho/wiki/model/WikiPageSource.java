@@ -7,6 +7,7 @@ public class WikiPageSource {
     private String githubRawUrl;
     private String githubUrl;
     private String githubIssueUrl;
+    private String githubHistoryUrl;
 
     public String getGithubUrl() {
         return githubUrl;
@@ -54,6 +55,14 @@ public class WikiPageSource {
 
     public void setSource(final String source) {
         this.source = source;
+    }
+
+    public String getGithubHistoryUrl() {
+        return githubHistoryUrl;
+    }
+
+    public void setGithubHistoryUrl(String githubHistoryUrl) {
+        this.githubHistoryUrl = githubHistoryUrl;
     }
 
     @Override

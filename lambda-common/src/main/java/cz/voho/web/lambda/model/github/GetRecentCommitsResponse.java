@@ -2,7 +2,7 @@ package cz.voho.web.lambda.model.github;
 
 import java.util.List;
 
-public class LatestCommitsResponse {
+public class GetRecentCommitsResponse {
     private List<CommitMeta> commits;
 
     public List<CommitMeta> getCommits() {

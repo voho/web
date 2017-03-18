@@ -11,6 +11,9 @@
             <li>
                 <a href="${active_wiki_page_github_url}" class="button icon fa-github">Zdrojový kód</a>
             </li>
+            <li>
+                <a href="${active_wiki_page_history_url}" class="button icon fa-history">Historie</a>
+            </li>
         </ul>
     </div>
 </section>

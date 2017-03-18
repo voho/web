@@ -15,8 +15,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 public class CachingWikiImageRepository implements WikiImageRepository, WikiImageCacheWarmUp {
-    private static final byte[] DUMMY_IMAGE = loadDummyImage();
     private static final Logger LOG = LoggerFactory.getLogger(CachingWikiImageRepository.class);
+    private static final byte[] DUMMY_IMAGE = loadDummyImage();
     private static final MessageDigest SHA_256 = getMessageDigest();
 
     private final WikiImageRepository primaryDelegate;

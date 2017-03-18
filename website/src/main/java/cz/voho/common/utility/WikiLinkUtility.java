@@ -47,19 +47,15 @@ public class WikiLinkUtility {
         if (value.startsWith("website/src/main/resources/")) {
             value = value.substring("website/src/main/resources/".length());
         }
-
         if (value.endsWith(".md")) {
             value = value.substring(0, value.length() - ".md".length());
         }
-
         if (value.startsWith("wiki/")) {
             value = value.substring(5);
         }
-
         if (value.equals("wiki")) {
             value = "";
         }
-
         return value;
     }
 

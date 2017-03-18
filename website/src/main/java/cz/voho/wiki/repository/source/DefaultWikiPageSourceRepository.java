@@ -42,7 +42,13 @@ public class DefaultWikiPageSourceRepository implements WikiPageSourceRepository
 
     @Override
     public WikiPageSource getWikiPageSourceById(final String wikiPageId) {
-        return wikiPageIdToResourceName.get(wikiPageId); // TODO
+        WikiPageSource page = wikiPageIdToResourceName.get(wikiPageId);
+
+        if (page == null) {
+            throw new ContentNotFoundException("Wiki page not found: " + wikiPageId);
+        }
+
+        return page;
     }
 
     private WikiPageSource load(String resourceName) {
@@ -53,6 +59,7 @@ public class DefaultWikiPageSourceRepository implements WikiPageSourceRepository
         page.setGithubUrl(getRepositoryPath(resourceName));
         page.setGithubRawUrl(getRawRepositoryPath(resourceName));
         page.setGithubIssueUrl(getIssueRepositoryPath(resourceName));
+        page.setGithubHistoryUrl(getHistoryRepositoryPath(resourceName));
         return page;
     }
 
@@ -79,11 +86,17 @@ public class DefaultWikiPageSourceRepository implements WikiPageSourceRepository
     }
 
     private String getRepositoryPath(final String resourceName) {
-        return String.format("https://github.com/voho/web/blob/master/website/src/main/resources/wiki/%s", resourceName);
+        return String.format(
+                "https://github.com/voho/web/blob/master/website/src/main/resources/wiki/%s",
+                resourceName
+        );
     }
 
     private String getRawRepositoryPath(final String resourceName) {
-        return String.format("https://gitcdn.link/repo/voho/web/master/website/src/main/resources/wiki/%s", resourceName);
+        return String.format(
+                "https://gitcdn.link/repo/voho/web/master/website/src/main/resources/wiki/%s",
+                resourceName
+        );
     }
 
     private String getIssueRepositoryPath(String resourceName) {
@@ -91,6 +104,13 @@ public class DefaultWikiPageSourceRepository implements WikiPageSourceRepository
                 "https://github.com/voho/web/issues/new?title=%s&body=%s",
                 UrlEscapers.urlFragmentEscaper().escape(String.format("%s (chyba na Wiki)", resourceName)),
                 UrlEscapers.urlFragmentEscaper().escape("")
+        );
+    }
+
+    private String getHistoryRepositoryPath(String resourceName) {
+        return String.format(
+                "https://github.com/voho/web/blame/master/website/src/main/resources/%s",
+                resourceName
         );
     }
 }

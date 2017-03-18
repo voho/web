@@ -1,6 +1,7 @@
 package cz.voho.wiki.repository.total;
 
 import cz.voho.common.utility.LambdaClient;
+import cz.voho.wiki.parser.*;
 import cz.voho.wiki.repository.image.CachingWikiImageRepository;
 import cz.voho.wiki.repository.image.LambdaWikiImageRepository;
 import cz.voho.wiki.repository.parsed.DefaultParsedWikiPageRepository;
@@ -8,7 +9,6 @@ import cz.voho.wiki.repository.parsed.ParsedWikiPageRepository;
 import cz.voho.wiki.repository.parsed.WikiParsingContext;
 import cz.voho.wiki.repository.source.DefaultWikiPageSourceRepository;
 import cz.voho.wiki.repository.source.WikiPageSourceRepository;
-import cz.voho.wiki.parser.*;
 
 public class DefaultTotalWikiPageRepository implements TotalWikiPageRepository {
     private final WikiPageSourceRepository wikiPageSourceRepository;
@@ -39,7 +39,9 @@ public class DefaultTotalWikiPageRepository implements TotalWikiPageRepository {
                 wikiParsingContext
         );
 
-        parsedWikiPageRepository.getWikiPageIds().forEach(wikiPageId -> wikiParsingContext.addParsedPage(wikiPageId, parsedWikiPageRepository.getParsedWikiPageById(wikiPageId)));
+        parsedWikiPageRepository
+                .getWikiPageIds()
+                .forEach(wikiPageId -> wikiParsingContext.addPage(parsedWikiPageRepository.getParsedWikiPageById(wikiPageId)));
 
         return wikiParsingContext;
     }

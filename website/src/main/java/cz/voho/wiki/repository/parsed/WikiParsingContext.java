@@ -12,7 +12,6 @@ public class WikiParsingContext {
     private final SetMultimap<String, String> linksFromPage;
     private final SetMultimap<String, String> quotesByAuthor;
     private final Set<String> todoPages;
-    private final Set<String> allPages;
     private final Map<String, String> parentPage;
     private final Map<String, Toc> pageToc;
     private final Map<String, ParsedWikiPage> parsedWikiPages;
@@ -22,10 +21,17 @@ public class WikiParsingContext {
         this.linksFromPage = Multimaps.newSortedSetMultimap(Maps.newTreeMap(), TreeSet::new);
         this.quotesByAuthor = Multimaps.newSortedSetMultimap(Maps.newTreeMap(), TreeSet::new);
         this.todoPages = Sets.newTreeSet();
-        this.allPages = Sets.newTreeSet();
         this.parentPage = Maps.newHashMap();
         this.pageToc = Maps.newHashMap();
         this.parsedWikiPages = Maps.newHashMap();
+    }
+
+    public boolean exists(final String wikiPageId) {
+        return parsedWikiPages.containsKey(wikiPageId);
+    }
+
+    public ParsedWikiPage getPage(String wikiPageId) {
+        return parsedWikiPages.get(wikiPageId);
     }
 
     public ImmutableList<String> getBreadCrumbs(final String wikiPageId) {
@@ -46,24 +52,8 @@ public class WikiParsingContext {
                 .collect(Collectors.toList()));
     }
 
-    public ImmutableList<String> getParentPages(final String wikiPageId) {
-        final List<String> parents = Lists.newLinkedList();
-
-        String tempId = wikiPageId;
-
-        while (tempId != null) {
-            parents.add(tempId);
-            tempId = parentPage.get(tempId);
-        }
-
-        // remove the current page (which is first)
-        parents.remove(0);
-
-        return ImmutableList.copyOf(parents);
-    }
-
     public ImmutableSet<String> getWikiPageIds() {
-        return ImmutableSet.copyOf(allPages);
+        return ImmutableSet.copyOf(parsedWikiPages.keySet());
     }
 
     public Toc getNonTrivialToc(final String wikiPageId) {
@@ -86,7 +76,7 @@ public class WikiParsingContext {
         final List<Missing> result = Lists.newLinkedList();
 
         linksFromPage.entries().forEach(e -> {
-            if (!allPages.contains(e.getValue())) {
+            if (!parsedWikiPages.containsKey(e.getValue())) {
                 final Missing missing = new Missing();
                 missing.setSourceWikiPageId(e.getKey());
                 missing.setMissingWikiPageId(e.getValue());
@@ -101,10 +91,10 @@ public class WikiParsingContext {
         return quotesByAuthor
                 .entries()
                 .stream()
-                .map(a -> {
+                .map(entry -> {
                     Quote q = new Quote();
-                    q.setAuthor(a.getKey());
-                    q.setText(a.getValue());
+                    q.setAuthor(entry.getKey());
+                    q.setText(entry.getValue());
                     return q;
                 })
                 .sorted(Comparator.comparing(Quote::getAuthor))
@@ -114,20 +104,12 @@ public class WikiParsingContext {
     public Set<Todo> getTodoPages() {
         return todoPages
                 .stream()
-                .map(a -> {
+                .map(entry -> {
                     Todo t = new Todo();
-                    t.setWikiPageId(a);
+                    t.setWikiPageId(entry);
                     return t;
                 })
                 .collect(Collectors.toCollection(LinkedHashSet::new));
-    }
-
-    private ImmutableSet<String> nullToEmpty(final Set<String> strings) {
-        if (strings == null) {
-            return ImmutableSet.of();
-        }
-
-        return ImmutableSet.copyOf(strings);
     }
 
     public void addLink(final String sourceWikiPageId, final String targetWikiPageId) {
@@ -135,12 +117,12 @@ public class WikiParsingContext {
         linksToPage.put(targetWikiPageId, sourceWikiPageId);
     }
 
-    public void addParsedPage(final String wikiPageId, ParsedWikiPage parsedWikiPage) {
-        this.allPages.add(wikiPageId);
+    public void addPage(ParsedWikiPage parsedWikiPage) {
+        parsedWikiPages.put(parsedWikiPage.getSource().getId(), parsedWikiPage);
+
         if (parsedWikiPage.getSource().getParentId() != null) {
             parentPage.put(parsedWikiPage.getSource().getId(), parsedWikiPage.getSource().getParentId());
         }
-        parsedWikiPages.put(wikiPageId, parsedWikiPage);
     }
 
     public void addTodo(final String id) {
@@ -151,15 +133,31 @@ public class WikiParsingContext {
         quotesByAuthor.put(author, quote);
     }
 
-    public boolean exists(final String wikiPageId) {
-        return allPages.contains(wikiPageId);
-    }
-
     public void addToc(final String wikiPageId, Toc toc) {
         this.pageToc.put(wikiPageId, toc);
     }
 
-    public ParsedWikiPage getPage(String wikiPageId) {
-        return parsedWikiPages.get(wikiPageId);
+    private ImmutableSet<String> nullToEmpty(final Set<String> strings) {
+        if (strings == null) {
+            return ImmutableSet.of();
+        }
+
+        return ImmutableSet.copyOf(strings);
+    }
+
+    private ImmutableList<String> getParentPages(final String wikiPageId) {
+        final List<String> parents = Lists.newLinkedList();
+
+        String tempId = wikiPageId;
+
+        while (tempId != null) {
+            parents.add(tempId);
+            tempId = parentPage.get(tempId);
+        }
+
+        // remove the current page (which is first)
+        parents.remove(0);
+
+        return ImmutableList.copyOf(parents);
     }
 }

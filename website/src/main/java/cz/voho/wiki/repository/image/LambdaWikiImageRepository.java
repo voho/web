@@ -12,6 +12,7 @@ import java.nio.charset.StandardCharsets;
 
 public class LambdaWikiImageRepository implements WikiImageRepository {
     private static final Logger LOG = LoggerFactory.getLogger(LambdaWikiImageRepository.class);
+
     private final LambdaClient lambdaClient;
 
     public LambdaWikiImageRepository(final LambdaClient lambdaClient) {

@@ -36,6 +36,7 @@ public class WikiPageServlet extends AbstractPageServlet {
         model.put("active_wiki_page_parent_id", parsedWikiPage.getSource().getParentId());
         model.put("active_wiki_page_external_url", wikiBackend.getExternalWikiPageLink(parsedWikiPage.getSource().getId()));
         model.put("active_wiki_page_github_url", parsedWikiPage.getSource().getGithubUrl());
+        model.put("active_wiki_page_history_url", parsedWikiPage.getSource().getGithubHistoryUrl());
         model.put("active_wiki_page_github_raw_url", parsedWikiPage.getSource().getGithubRawUrl());
         model.put("active_wiki_page_title", parsedWikiPage.getTitle());
         model.put("active_wiki_page_content", parsedWikiPage.getHtml());

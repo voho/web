@@ -6,8 +6,8 @@ import cz.voho.common.utility.ExecutorProvider;
 import cz.voho.common.utility.LambdaClient;
 import cz.voho.common.utility.WikiLinkUtility;
 import cz.voho.web.lambda.model.github.CommitMeta;
-import cz.voho.web.lambda.model.github.LatestCommitsRequest;
-import cz.voho.web.lambda.model.github.LatestCommitsResponse;
+import cz.voho.web.lambda.model.github.GetRecentCommitsRequest;
+import cz.voho.web.lambda.model.github.GetRecentCommitsResponse;
 import cz.voho.web.lambda.model.photo.GetRecentPhotosRequest;
 import cz.voho.web.lambda.model.photo.GetRecentPhotosResponse;
 import cz.voho.web.lambda.model.photo.Image;
@@ -35,16 +35,16 @@ public class RecentBackend {
 
     private final ScheduledExecutorService scheduledExecutorService;
     private final LambdaClient lambdaClient;
-    private final AtomicReference<GetRecentPhotosResponse> photosCache;
-    private final AtomicReference<GetRecentSongsResponse> songsCache;
-    private final AtomicReference<LatestCommitsResponse> recentWikiChangesCache;
+    private final AtomicReference<GetRecentPhotosResponse> recentPhotosCache;
+    private final AtomicReference<GetRecentSongsResponse> recentSongsCache;
+    private final AtomicReference<GetRecentCommitsResponse> recentCommitsCache;
 
     RecentBackend(final LambdaClient lambdaClient) {
         this.scheduledExecutorService = ExecutorProvider.INSTAGRAM_UPDATER_EXECUTOR;
         this.lambdaClient = lambdaClient;
-        this.photosCache = new AtomicReference<>(null);
-        this.songsCache = new AtomicReference<>(null);
-        this.recentWikiChangesCache = new AtomicReference<>(null);
+        this.recentPhotosCache = new AtomicReference<>(null);
+        this.recentSongsCache = new AtomicReference<>(null);
+        this.recentCommitsCache = new AtomicReference<>(null);
 
         this.scheduledExecutorService.scheduleWithFixedDelay(
                 this::update,
@@ -56,6 +56,7 @@ public class RecentBackend {
 
     @Override
     protected void finalize() throws Throwable {
+        super.finalize();
         scheduledExecutorService.shutdown();
     }
 
@@ -68,14 +69,14 @@ public class RecentBackend {
     }
 
     private void updateRecentWikiChanges() {
-        final LatestCommitsRequest request = new LatestCommitsRequest();
+        final GetRecentCommitsRequest request = new GetRecentCommitsRequest();
         request.setPath(WIKI_COMMIT_PATH);
 
-        final LatestCommitsResponse response = lambdaClient.callGitHubLambda(request);
+        final GetRecentCommitsResponse response = lambdaClient.callGitHubLambda(request);
 
         if (response != null && response.getCommits() != null && !response.getCommits().isEmpty()) {
             LOG.info("Updating recent wiki changes cache.");
-            recentWikiChangesCache.set(response);
+            recentCommitsCache.set(response);
         } else {
             LOG.warn("Could not upgrade recent wiki changes cache.");
         }
@@ -89,7 +90,7 @@ public class RecentBackend {
 
         if (response != null && response.getSongs() != null && response.getSongs().getSongs() != null) {
             LOG.info("Updating SoundCloud cache.");
-            songsCache.set(response);
+            recentSongsCache.set(response);
         } else {
             LOG.warn("Could not upgrade SoundCloud cache.");
         }
@@ -103,14 +104,14 @@ public class RecentBackend {
 
         if (response != null && response.getRecentItems() != null && response.getRecentItems().getData() != null) {
             LOG.info("Updating Instagram cache.");
-            photosCache.set(response);
+            recentPhotosCache.set(response);
         } else {
             LOG.warn("Could not upgrade Instagram cache.");
         }
     }
 
     public List<Song> getRecentTracks() {
-        final GetRecentSongsResponse latestValue = songsCache.get();
+        final GetRecentSongsResponse latestValue = recentSongsCache.get();
 
         if (latestValue == null) {
             return Collections.emptyList();
@@ -120,7 +121,7 @@ public class RecentBackend {
     }
 
     public List<Image> getRecentPhotos() {
-        final GetRecentPhotosResponse latestValue = photosCache.get();
+        final GetRecentPhotosResponse latestValue = recentPhotosCache.get();
 
         if (latestValue == null) {
             return Collections.emptyList();
@@ -130,7 +131,7 @@ public class RecentBackend {
     }
 
     public List<WikiPageCommitGroup> getRecentWikiChanges() {
-        final LatestCommitsResponse latestValue = recentWikiChangesCache.get();
+        final GetRecentCommitsResponse latestValue = recentCommitsCache.get();
 
         if (latestValue == null) {
             return Collections.emptyList();

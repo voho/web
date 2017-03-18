@@ -6,8 +6,8 @@ import com.google.common.io.CharStreams;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.ReadContext;
 import cz.voho.web.lambda.model.github.CommitMeta;
-import cz.voho.web.lambda.model.github.LatestCommitsRequest;
-import cz.voho.web.lambda.model.github.LatestCommitsResponse;
+import cz.voho.web.lambda.model.github.GetRecentCommitsRequest;
+import cz.voho.web.lambda.model.github.GetRecentCommitsResponse;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -33,7 +33,7 @@ import java.util.List;
 /**
  * The main AWS Lambda handler.
  */
-public class Handler implements RequestHandler<LatestCommitsRequest, LatestCommitsResponse> {
+public class Handler implements RequestHandler<GetRecentCommitsRequest, GetRecentCommitsResponse> {
     private static final String GET_REPO_EVENTS_URI_FORMAT = "https://api.github.com/repos/voho/website/commits?path=%s";
     private static final HttpHost TARGET_HOST = new HttpHost("api.github.com", 443, "https");
     private static final String GITHUB_USER = System.getenv("GITHUB_USER");
@@ -41,9 +41,9 @@ public class Handler implements RequestHandler<LatestCommitsRequest, LatestCommi
     private static final UsernamePasswordCredentials CREDENTIALS = new UsernamePasswordCredentials(GITHUB_USER, GITHUB_TOKEN);
 
     @Override
-    public LatestCommitsResponse handleRequest(final LatestCommitsRequest request, final Context context) {
+    public GetRecentCommitsResponse handleRequest(final GetRecentCommitsRequest request, final Context context) {
         try {
-            final LatestCommitsResponse response = new LatestCommitsResponse();
+            final GetRecentCommitsResponse response = new GetRecentCommitsResponse();
             response.setCommits(getPathCommits(context, request));
             return response;
         } catch (Exception e) {
@@ -52,7 +52,7 @@ public class Handler implements RequestHandler<LatestCommitsRequest, LatestCommi
         }
     }
 
-    private List<CommitMeta> getPathCommits(Context context, LatestCommitsRequest request) throws IOException {
+    private List<CommitMeta> getPathCommits(Context context, GetRecentCommitsRequest request) throws IOException {
         List<CommitMeta> result = new LinkedList<>();
         String url = String.format(GET_REPO_EVENTS_URI_FORMAT, request.getPath());
 

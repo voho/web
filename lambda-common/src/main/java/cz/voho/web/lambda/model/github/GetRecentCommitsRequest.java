@@ -1,6 +1,6 @@
 package cz.voho.web.lambda.model.github;
 
-public class LatestCommitsRequest {
+public class GetRecentCommitsRequest {
     // e.g. website/src/main/resources/wiki/404.md
     // e.g. website/src/main/resources/wiki/
     private String path;
