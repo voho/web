@@ -4,35 +4,31 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import cz.voho.common.exception.ContentNotFoundException;
 import cz.voho.common.utility.Constants;
-import cz.voho.common.utility.LambdaClient;
 import cz.voho.common.utility.WikiLinkUtility;
 import cz.voho.wiki.model.*;
 import cz.voho.wiki.repository.image.CachingWikiImageRepository;
-import cz.voho.wiki.repository.image.LambdaWikiImageRepository;
 import cz.voho.wiki.repository.image.WikiImageRepository;
-import cz.voho.wiki.repository.parsed.WikiParsingContext;
-import cz.voho.wiki.repository.total.DefaultTotalWikiPageRepository;
-import cz.voho.wiki.repository.total.TotalWikiPageRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import cz.voho.wiki.repository.page.TopLevelWikiPageRepository;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.*;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.stream.Collectors;
 
-import static cz.voho.wiki.repository.source.WikiPageSourceRepository.MISSING_PAGE_ID;
+import static cz.voho.wiki.repository.page.WikiPageSourceRepository.MISSING_PAGE_ID;
 
 // TODO improve code
 public class WikiBackend {
-    private final WikiParsingContext wikiParsingContext;
+    private final TopLevelWikiPageRepository topLevelWikiPageRepository;
     private final WikiImageRepository wikiImageRepository;
 
-    WikiBackend() {
-        TotalWikiPageRepository totalWikiPageRepository = new DefaultTotalWikiPageRepository();
-        wikiParsingContext = totalWikiPageRepository.createContext();
-        wikiImageRepository = new CachingWikiImageRepository(new LambdaWikiImageRepository(new LambdaClient()));
+    WikiBackend(TopLevelWikiPageRepository topLevelWikiPageRepository, WikiImageRepository wikiImageRepository) {
+        this.topLevelWikiPageRepository = topLevelWikiPageRepository;
+        this.wikiImageRepository = wikiImageRepository;
     }
 
     public String getExternalWikiPageLink(final String wikiPageId) {
@@ -40,7 +36,7 @@ public class WikiBackend {
     }
 
     public ParsedWikiPage load(final String wikiPageId) {
-        ParsedWikiPage parsedWikiPage = wikiParsingContext.getPage(wikiPageId);
+        ParsedWikiPage parsedWikiPage = topLevelWikiPageRepository.getParsedWikiPages().getPage(wikiPageId);
 
         if (parsedWikiPage != null) {
             return parsedWikiPage;
@@ -156,11 +152,11 @@ public class WikiBackend {
     }
 
     public ImmutableSet<String> getWikiPageIds() {
-        return wikiParsingContext.getWikiPageIds();
+        return topLevelWikiPageRepository.getParsedWikiPages().getWikiPageIds();
     }
 
-    public WikiParsingContext getCurrentContext() {
-        return wikiParsingContext;
+    public ParsedWikiPages getCurrentContext() {
+        return topLevelWikiPageRepository.getParsedWikiPages();
     }
 
     public List<WikiPageCommit> enrichCommits(List<WikiPageCommitGroup> recentWikiChanges) {

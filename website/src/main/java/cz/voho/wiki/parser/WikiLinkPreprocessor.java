@@ -6,12 +6,12 @@ import com.vladsch.flexmark.ast.NodeVisitor;
 import com.vladsch.flexmark.ast.VisitHandler;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import cz.voho.common.utility.WikiLinkUtility;
+import cz.voho.wiki.model.ParsedWikiPage;
 import cz.voho.wiki.model.WikiPageSource;
-import cz.voho.wiki.repository.parsed.WikiParsingContext;
 
 public class WikiLinkPreprocessor implements Preprocessor {
     @Override
-    public void preprocessNodes(WikiParsingContext context, WikiPageSource source, Node root) {
+    public void preprocessNodes(ParsedWikiPage context, WikiPageSource source, Node root) {
         String sourceId = source.getId();
 
         if (sourceId != null) {
@@ -23,7 +23,7 @@ public class WikiLinkPreprocessor implements Preprocessor {
                 if (linkUrl.startsWith("wiki/")) {
                     String targetId = WikiLinkUtility.stripWikiPrefixSuffix(WikiLinkUtility.stripSlashes(linkUrl));
                     link.setUrl(PrefixedSubSequence.of("/wiki/" + targetId + "/"));
-                    context.addLink(sourceId, targetId);
+                    context.addLinkTo(targetId);
                 }
             }));
 

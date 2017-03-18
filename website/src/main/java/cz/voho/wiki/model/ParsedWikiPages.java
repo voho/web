@@ -1,13 +1,13 @@
-package cz.voho.wiki.repository.parsed;
+package cz.voho.wiki.model;
 
 import com.google.common.collect.*;
 import cz.voho.wiki.model.*;
-import cz.voho.wiki.repository.source.WikiPageSourceRepository;
+import cz.voho.wiki.repository.page.WikiPageSourceRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class WikiParsingContext {
+public class ParsedWikiPages {
     private final SetMultimap<String, String> linksToPage;
     private final SetMultimap<String, String> linksFromPage;
     private final SetMultimap<String, String> quotesByAuthor;
@@ -16,7 +16,7 @@ public class WikiParsingContext {
     private final Map<String, Toc> pageToc;
     private final Map<String, ParsedWikiPage> parsedWikiPages;
 
-    public WikiParsingContext() {
+    public ParsedWikiPages() {
         this.linksToPage = Multimaps.newSortedSetMultimap(Maps.newTreeMap(), TreeSet::new);
         this.linksFromPage = Multimaps.newSortedSetMultimap(Maps.newTreeMap(), TreeSet::new);
         this.quotesByAuthor = Multimaps.newSortedSetMultimap(Maps.newTreeMap(), TreeSet::new);
@@ -24,6 +24,27 @@ public class WikiParsingContext {
         this.parentPage = Maps.newHashMap();
         this.pageToc = Maps.newHashMap();
         this.parsedWikiPages = Maps.newHashMap();
+    }
+
+    public void addPage(ParsedWikiPage parsedWikiPage) {
+        parsedWikiPage.getQuotes().forEach(quote -> quotesByAuthor.put(quote.getAuthor(), quote.getText()));
+
+        if (parsedWikiPage.isTodo()) {
+            todoPages.add(parsedWikiPage.getSource().getId());
+        }
+
+        if (parsedWikiPage.getSource().getParentId() != null) {
+            parentPage.put(parsedWikiPage.getSource().getId(), parsedWikiPage.getSource().getParentId());
+        }
+
+        parsedWikiPage.getLinkedPages().forEach(targetWikiPageId -> {
+            linksFromPage.put(parsedWikiPage.getSource().getId(), targetWikiPageId);
+            linksToPage.put(targetWikiPageId, parsedWikiPage.getSource().getId());
+        });
+
+        pageToc.put(parsedWikiPage.getSource().getId(), parsedWikiPage.getToc());
+
+        parsedWikiPages.put(parsedWikiPage.getSource().getId(), parsedWikiPage);
     }
 
     public boolean exists(final String wikiPageId) {
@@ -110,31 +131,6 @@ public class WikiParsingContext {
                     return t;
                 })
                 .collect(Collectors.toCollection(LinkedHashSet::new));
-    }
-
-    public void addLink(final String sourceWikiPageId, final String targetWikiPageId) {
-        linksFromPage.put(sourceWikiPageId, targetWikiPageId);
-        linksToPage.put(targetWikiPageId, sourceWikiPageId);
-    }
-
-    public void addPage(ParsedWikiPage parsedWikiPage) {
-        parsedWikiPages.put(parsedWikiPage.getSource().getId(), parsedWikiPage);
-
-        if (parsedWikiPage.getSource().getParentId() != null) {
-            parentPage.put(parsedWikiPage.getSource().getId(), parsedWikiPage.getSource().getParentId());
-        }
-    }
-
-    public void addTodo(final String id) {
-        todoPages.add(id);
-    }
-
-    public void addQuote(final String quote, final String author) {
-        quotesByAuthor.put(author, quote);
-    }
-
-    public void addToc(final String wikiPageId, Toc toc) {
-        this.pageToc.put(wikiPageId, toc);
     }
 
     private ImmutableSet<String> nullToEmpty(final Set<String> strings) {

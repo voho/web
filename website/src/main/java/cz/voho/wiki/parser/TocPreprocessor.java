@@ -4,13 +4,10 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.vladsch.flexmark.ast.Heading;
 import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
-import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
+import cz.voho.wiki.model.ParsedWikiPage;
 import cz.voho.wiki.model.Toc;
 import cz.voho.wiki.model.TocItem;
-import cz.voho.wiki.repository.parsed.WikiParsingContext;
 import cz.voho.wiki.model.WikiPageSource;
 
 import java.util.Map;
@@ -20,7 +17,7 @@ public class TocPreprocessor implements Preprocessor {
     private final Map<Node, Map<String, Integer>> counters = Maps.newHashMap();
 
     @Override
-    public void preprocessNodes(WikiParsingContext context, WikiPageSource source, Node root) {
+    public void preprocessNodes(ParsedWikiPage context, WikiPageSource source, Node root) {
         Toc toc = new Toc("toc", "Obsah", 0);
         TocItem[] lastByLevel = new TocItem[10];
         lastByLevel[0] = toc;
@@ -39,25 +36,17 @@ public class TocPreprocessor implements Preprocessor {
             }
         }
 
-        context.addToc(source.getId(), toc);
+        context.setToc(toc);
     }
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        return Sets.newHashSet(new NodeRenderingHandler<>(Heading.class, new CustomNodeRenderer<Heading>() {
-            @Override
-            public void render(Heading node, NodeRendererContext context, HtmlWriter html) {
-                if (node.getAnchorRefId() != null) {
-                    html.attr("id", node.getAnchorRefId());
-                }
-
-                html.srcPos(node.getText()).withAttr().tagLine("h" + node.getLevel(), new Runnable() {
-                    @Override
-                    public void run() {
-                        context.renderChildren(node);
-                    }
-                });
+        return Sets.newHashSet(new NodeRenderingHandler<>(Heading.class, (node, context, html) -> {
+            if (node.getAnchorRefId() != null) {
+                html.attr("id", node.getAnchorRefId());
             }
+
+            html.srcPos(node.getText()).withAttr().tagLine("h" + node.getLevel(), () -> context.renderChildren(node));
         }));
     }
 

@@ -2,7 +2,7 @@ package cz.voho.wiki.parser;
 
 import com.vladsch.flexmark.util.html.Escaping;
 import cz.voho.common.utility.ReplacePatternCallback;
-import cz.voho.wiki.repository.parsed.WikiParsingContext;
+import cz.voho.wiki.model.ParsedWikiPage;
 import cz.voho.wiki.model.WikiPageSource;
 
 import java.util.regex.MatchResult;
@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class ImagePreprocessor implements Preprocessor {
     @Override
-    public String preprocessSource(WikiParsingContext context, WikiPageSource wikiPageSource, String source) {
+    public String preprocessSource(ParsedWikiPage context, WikiPageSource wikiPageSource, String source) {
         String result = source;
         result = preprocessFloatingImage(context, wikiPageSource, result, "left");
         result = preprocessFloatingImage(context, wikiPageSource, result, "right");
@@ -18,7 +18,7 @@ public class ImagePreprocessor implements Preprocessor {
         return result;
     }
 
-    private String preprocessImageFigure(WikiParsingContext context, WikiPageSource wikiPageSource, String source) {
+    private String preprocessImageFigure(ParsedWikiPage context, WikiPageSource wikiPageSource, String source) {
         final ReplacePatternCallback rp = new ReplacePatternCallback(Pattern.compile("^!\\[(.+)\\]\\((.+)\\)$", Pattern.MULTILINE));
         return rp.replace(source, matchResult -> {
             final String alt = Escaping.escapeHtml(matchResult.group(1), true);
@@ -35,7 +35,7 @@ public class ImagePreprocessor implements Preprocessor {
         }
     }
 
-    private String preprocessFloatingImage(WikiParsingContext context, WikiPageSource wikiPageSource, String source, String direction) {
+    private String preprocessFloatingImage(ParsedWikiPage context, WikiPageSource wikiPageSource, String source, String direction) {
         final ReplacePatternCallback callback = getFloatingImagePattern(direction);
         return callback.replace(source, matchResult -> getReplacement(direction, matchResult));
     }

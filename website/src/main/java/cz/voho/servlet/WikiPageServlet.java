@@ -9,7 +9,7 @@ import cz.voho.facade.WikiBackend;
 import cz.voho.wiki.model.ParsedWikiPage;
 import cz.voho.wiki.model.WikiPageReference;
 import cz.voho.wiki.model.WikiPageReferences;
-import cz.voho.wiki.repository.source.WikiPageSourceRepository;
+import cz.voho.wiki.repository.page.WikiPageSourceRepository;
 import freemarker.template.SimpleHash;
 
 import javax.servlet.ServletException;

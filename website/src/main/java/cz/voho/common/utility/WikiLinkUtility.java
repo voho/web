@@ -1,6 +1,6 @@
 package cz.voho.common.utility;
 
-import cz.voho.wiki.repository.source.WikiPageSourceRepository;
+import cz.voho.wiki.repository.page.WikiPageSourceRepository;
 
 import java.util.Locale;
 import java.util.regex.Pattern;

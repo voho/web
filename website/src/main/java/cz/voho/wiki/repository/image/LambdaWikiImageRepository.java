@@ -44,4 +44,14 @@ public class LambdaWikiImageRepository implements WikiImageRepository {
         }
         return response.getTextData().getBytes(StandardCharsets.UTF_8);
     }
+
+    @Override
+    public void warmUpCacheDotSvg(String source) {
+        // NOP
+    }
+
+    @Override
+    public void warmUpCachePlantUmlSvg(String source) {
+        // NOP
+    }
 }

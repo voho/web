@@ -1,4 +1,4 @@
-package cz.voho.wiki.repository.source;
+package cz.voho.wiki.repository.page;
 
 import com.google.common.collect.ImmutableSet;
 import cz.voho.wiki.model.WikiPageSource;

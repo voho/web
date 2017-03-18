@@ -14,7 +14,6 @@ import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 import cz.voho.wiki.model.ParsedWikiPage;
-import cz.voho.wiki.repository.parsed.WikiParsingContext;
 import cz.voho.wiki.model.WikiPageSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,13 +55,13 @@ public class FlexmarkWikiParser implements WikiParser {
     }
 
     @Override
-    public ParsedWikiPage parse(final WikiParsingContext context, final WikiPageSource source) {
+    public ParsedWikiPage parse(final WikiPageSource source) {
         LOG.debug("Parsing the wiki page: {}", source);
         final ParsedWikiPage page = new ParsedWikiPage();
         page.setSource(source);
-        final String processedSource = preprocessSource(context, source, source.getSource());
+        final String processedSource = preprocessSource(page, source, source.getSource());
         final Node pageRootNode = parser.parse(processedSource);
-        preprocessNodes(context, source, pageRootNode);
+        preprocessNodes(page, source, pageRootNode);
         final String firstHeading = findFirstHeadingAndRemove(pageRootNode);
         page.setTitle(firstHeading);
         final String parsedSource = renderer.render(pageRootNode);
@@ -71,13 +70,13 @@ public class FlexmarkWikiParser implements WikiParser {
         return page;
     }
 
-    private void preprocessNodes(final WikiParsingContext context, final WikiPageSource wikiPageSource, final Node pageRootNode) {
+    private void preprocessNodes(final ParsedWikiPage context, final WikiPageSource wikiPageSource, final Node pageRootNode) {
         for (final Preprocessor p : preprocessors) {
             p.preprocessNodes(context, wikiPageSource, pageRootNode);
         }
     }
 
-    private String preprocessSource(final WikiParsingContext context, final WikiPageSource wikiPageSource, final String source) {
+    private String preprocessSource(final ParsedWikiPage context, final WikiPageSource wikiPageSource, final String source) {
         String result = source;
 
         for (final Preprocessor p : preprocessors) {

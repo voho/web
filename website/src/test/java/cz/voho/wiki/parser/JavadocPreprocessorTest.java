@@ -27,7 +27,7 @@ public class JavadocPreprocessorTest {
     public void singleMatch() {
         String source = "Here is the link: *javadoc:org.slf4j.Logger* and that is it!";
         String actual = toTest.preprocessSource(null, null, source);
-        String expected = "Here is the link: [org.slf4j.Logger](http://grepcode.com/search?query=org.slf4j.Logger) and that is it!";
+        String expected = "Here is the link: [org.slf4j.**Logger**](http://grepcode.com/search?query=org.slf4j.Logger) and that is it!";
         assertEquals(expected, actual);
     }
 
@@ -35,7 +35,7 @@ public class JavadocPreprocessorTest {
     public void multiMatch() {
         String source = "Here is the *link*: *javadoc:org.slf4j.Logger* and that is it! Maybe one more: *javadoc:org.slf4j.Logger*";
         String actual = toTest.preprocessSource(null, null, source);
-        String expected = "Here is the *link*: [org.slf4j.Logger](http://grepcode.com/search?query=org.slf4j.Logger) and that is it! Maybe one more: [org.slf4j.Logger](http://grepcode.com/search?query=org.slf4j.Logger)";
+        String expected = "Here is the *link*: [org.slf4j.**Logger**](http://grepcode.com/search?query=org.slf4j.Logger) and that is it! Maybe one more: [org.slf4j.**Logger**](http://grepcode.com/search?query=org.slf4j.Logger)";
         assertEquals(expected, actual);
     }
 
@@ -43,7 +43,7 @@ public class JavadocPreprocessorTest {
     public void mixedMatch() {
         String source = "Here is the *link*: *javadoc:org.slf4j.Logger* and that is it!";
         String actual = toTest.preprocessSource(null, null, source);
-        String expected = "Here is the *link*: [org.slf4j.Logger](http://grepcode.com/search?query=org.slf4j.Logger) and that is it!";
+        String expected = "Here is the *link*: [org.slf4j.**Logger**](http://grepcode.com/search?query=org.slf4j.Logger) and that is it!";
         assertEquals(expected, actual);
     }
 }
