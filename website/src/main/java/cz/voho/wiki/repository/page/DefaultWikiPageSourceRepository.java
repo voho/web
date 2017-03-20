@@ -42,7 +42,7 @@ public class DefaultWikiPageSourceRepository implements WikiPageSourceRepository
 
     @Override
     public WikiPageSource getWikiPageSourceById(final String wikiPageId) {
-        WikiPageSource page = wikiPageIdToResourceName.get(wikiPageId);
+        final WikiPageSource page = wikiPageIdToResourceName.get(wikiPageId);
 
         if (page == null) {
             throw new ContentNotFoundException("Wiki page not found: " + wikiPageId);
@@ -52,10 +52,12 @@ public class DefaultWikiPageSourceRepository implements WikiPageSourceRepository
     }
 
     private WikiPageSource load(String resourceName) {
-        if (resourceName.startsWith("webapps/WEB-INF/classes/")) {
-            resourceName = resourceName.substring("webapps/WEB-INF/classes/".length());
+        if (resourceName.startsWith("webapps/ROOT/WEB-INF/classes/")) {
+            // hack to make it work in AWS :) - too lazy to figure that out
+            resourceName = resourceName.substring("webapps/ROOT/WEB-INF/classes/".length());
         }
-        WikiPageSource page = new WikiPageSource();
+
+        final WikiPageSource page = new WikiPageSource();
         page.setId(extractId(resourceName));
         page.setParentId(extractParentId(resourceName));
         page.setMarkdownSource(loadSource(resourceName) + "\r\n\r\n");
@@ -71,7 +73,7 @@ public class DefaultWikiPageSourceRepository implements WikiPageSourceRepository
     }
 
     private String extractParentId(final String resourceName) {
-       return WikiLinkUtility.resolveParentWikiPageId(resourceName);
+        return WikiLinkUtility.resolveParentWikiPageId(resourceName);
     }
 
     private String loadSource(final String resourceName) {
@@ -98,7 +100,7 @@ public class DefaultWikiPageSourceRepository implements WikiPageSourceRepository
         );
     }
 
-    private String getIssueRepositoryPath(String resourceName) {
+    private String getIssueRepositoryPath(final String resourceName) {
         return String.format(
                 "https://github.com/voho/web/issues/new?title=%s&body=%s",
                 UrlEscapers.urlFragmentEscaper().escape(String.format("%s (chyba na Wiki)", resourceName)),
@@ -106,7 +108,7 @@ public class DefaultWikiPageSourceRepository implements WikiPageSourceRepository
         );
     }
 
-    private String getHistoryRepositoryPath(String resourceName) {
+    private String getHistoryRepositoryPath(final String resourceName) {
         return String.format(
                 "https://github.com/voho/web/blame/master/website/src/main/resources/%s",
                 resourceName
