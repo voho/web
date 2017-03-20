@@ -19,12 +19,12 @@
             <div class="inner">
                 <#include "macro/print_wiki_tree.ftl"/>
                 <div class="row">
-                    <div class="8u">
+                    <div class="8u 12u$(medium)">
                         <#list indexSubPages.items as pageRef>
                             <@print_wiki_tree pageRef/>
                         </#list>
                     </div>
-                    <div class="4u">
+                    <div class="4u 12u$(medium)">
                         <div class="box">
                             <h3>Poslední změny</h3>
                             <#list recentlyChangedPages as page>
