@@ -2,25 +2,19 @@
     <title>${title}</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+
     <!--[if lte IE 8]>
-    <script src="/assets/js/ie/html5shiv.js"></script>
+    <script src="/assets/html5shiv.min.js"></script>
     <![endif]-->
-    <link rel="stylesheet" href="/assets/css/main.css"/>
-    <link rel="stylesheet" href="/assets/css/custom.css"/>
 
     <!-- syntax highlighter -->
     <link rel="stylesheet" href="/assets/highlight/vs.css">
 
-    <!--[if lte IE 9]>
-    <link rel="stylesheet" href="/assets/css/ie9.css"/>
-    <![endif]-->
-    <!--[if lte IE 8]>
-    <link rel="stylesheet" href="/assets/css/ie8.css"/>
-    <![endif]-->
-
+    <!-- icons -->
     <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
 
+    <!-- MathJax -->
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         showProcessingMessages: true,
@@ -44,6 +38,7 @@
     });
     </script>
 
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_SVG"></script>
+    <!-- custom style -->
+    <link rel="stylesheet" href="/assets/custom.css"/>
 
 </head>

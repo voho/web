@@ -1,26 +1,9 @@
-<!--
-
-    Vojtěch Hordějčuk: Personal website
-
-	HTML Template: Forty by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-
--->
-<#if alt??>
-<header id="header" class="alt">
-<#else>
+<#import "../macro/icons.ftl" as icons />
 <header id="header">
-</#if>
-    <a href="/" class="logo"><strong>${website_short_name}</strong> <span> = ${website_extended_name}</span></a>
-    <nav>
-        <#include "search.ftl"/>
-        <a href="#menu">Menu</a>
+    <div class="inner">
+        <a href="/" class="logo"><strong>${website_short_name}</strong> = ${website_extended_name}</a>
     <#if active_wiki_page_toc?has_content && !active_wiki_page_cover>
-        <a onclick="$('#toc').fadeToggle();" class="icon fa-map-o">Obsah</a>
+        <a onclick="$('#toc').toggle()" class="button"><@icons.add "bars"/> Obsah</a>
     </#if>
-    </nav>
+    </div>
 </header>
-<nav id="menu">
-<#include "menu.ftl"/>
-</nav>

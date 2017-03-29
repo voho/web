@@ -1,21 +1,23 @@
-<script src="/assets/js/jquery.min.js"></script>
-<script src="/assets/js/jquery-ui.min.js"></script>
-<script src="/assets/js/skel.min.js"></script>
-<script src="/assets/js/util.js"></script>
+<!-- jQuery -->
+<script src="/assets/jquery.js"></script>
 
-<!--[if lte IE 8]>
-<script src="/assets/js/ie/respond.min.js"></script>
-<![endif]-->
+<!-- skel -->
+<script src="/assets/skel.min.js"></script>
+<script src="/assets/skel-layout.min.js"></script>
+<script src="/assets/skel-viewport.min.js"></script>
 
 <!-- syntax highlighter -->
 <script src="/assets/highlight/highlight.pack.js"></script>
 
 <!-- stupid effects for the intro page -->
-<script src="/assets/js/particles.min.js"></script>
-<script src="/assets/js/typed.min.js"></script>
+<script src="/assets/particles.min.js"></script>
+<script src="/assets/typed.min.js"></script>
 
-<!-- everything put together -->
-<script src="/assets/js/main.js"></script>
+<!-- custom scripts -->
+<script src="/assets/custom.js"></script>
+
+<!-- MathJax -->
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_SVG"></script>
 
 <!-- Google Analytics -->
 <script>

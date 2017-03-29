@@ -4,30 +4,32 @@
 <#include "html/html-head.ftl"/>
 <body>
 
-<div id="wrapper">
-
-<#assign alt = true>
 <#include "common/header.ftl"/>
+<#import "macro/icons.ftl" as icons/>
 
-    <section id="banner" class="major">
+<div id="universe">
+
+    <section id="banner">
         <div class="inner">
-            <header class="major">
+            <header>
                 <h1><span id="typed">Hi! My name is Vojta.</span></h1>
             </header>
-            <div class="content">
-                <p>
-                <#include "index/about.ftl"/>
-                </p>
-                <ul class="vertical actions">
-                    <li><a href="#what_i_do" class="big button next">See what I do</a></li>
-                    <li><a href="${social_profile_linkedin}" class="button">Contact me</a></li>
-                </ul>
+            <div class="row">
+                <div class="8u">
+                    <p><#include "index/about.ftl"/></p>
+                </div>
+                <div class="4u">
+                    <ul class="vertical actions">
+                        <li><a href="#menu" class="big button"><@icons.add "user-circle"/> See what I do</a></li>
+                        <li><a href="${social_profile_linkedin}" class="button"><@icons.add "envelope"/> Contact me</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
 
     <div id="main">
-        <section id="what_i_do">
+        <section id="menu">
             <div class="inner">
                 <#include "common/menu.ftl"/>
             </div>

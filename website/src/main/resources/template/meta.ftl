@@ -4,9 +4,9 @@
 <#include "html/html-head.ftl"/>
 <body>
 
-<div id="wrapper">
-
 <#include "common/header.ftl"/>
+
+<div id="universe">
 
     <section class="wiki" id="wiki-content">
         <div class="inner">

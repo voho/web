@@ -1,1 +1,1 @@
-<li><a href="/wiki" class="fit button next">Open (in Czech)</a></li>
+<li><a href="/wiki" class="button"><@icons.add "arrow-right"/> Open (in Czech)</a></li>

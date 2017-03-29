@@ -85,6 +85,8 @@ public class RecentBackend {
     private void updateRecentSongs() {
         final GetRecentSongsRequest request = new GetRecentSongsRequest();
         request.setCount(RECENT_SONGS_COUNT);
+        request.setDarkColor("606af6");
+        request.setLightColor("606af6");
 
         final GetRecentSongsResponse response = lambdaClient.callSoundcloudLambda(request);
 

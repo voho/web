@@ -3,7 +3,7 @@
     <div class="row">
         <#list subPages.items as pageRef>
             <div class="4u 12u$(medium)">
-                <h4><a href="/wiki/${pageRef.id}/">${pageRef.title}</a></h4>
+                <h4><a href="/wiki/${pageRef.id}/" class="button">${pageRef.title}</a></h4>
                 <#if pageRef.children??>
                     <ul>
                         <#list pageRef.children.items as childPageRef>
@@ -19,7 +19,7 @@
 <section class="wiki-related-pages siblings">
     <ul>
         <#list siblingPages.items as pageRef>
-            <li class="icon fa-book"><a href="/wiki/${pageRef.id}/">${pageRef.title}</a></li>
+            <li><a href="/wiki/${pageRef.id}/">${pageRef.title}</a></li>
         </#list>
     </ul>
 </section>

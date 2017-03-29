@@ -28,6 +28,8 @@ public class Handler implements RequestHandler<GetRecentSongsRequest, GetRecentS
     private static final String AUTHOR_URL = "https://soundcloud.com/voho/tracks";
     private static final String SOUNDCLOUD_WIDGET_URL_FORMAT = "https://w.soundcloud.com/player/?url=%s%s";
     private static final String SOUNDCLOUD_SONG_URL_FORMAT = "https://soundcloud.com%s";
+    private static final String DEFAULT_LIGHT_COLOR = "9bf1ff";
+    private static final String DEFAULT_DARK_COLOR = "242943";
 
     @Override
     public GetRecentSongsResponse handleRequest(final GetRecentSongsRequest request, final Context context) {
@@ -45,12 +47,12 @@ public class Handler implements RequestHandler<GetRecentSongsRequest, GetRecentS
                 final Element link = song.select(SONG_LINK_SELECTOR).first();
 
                 if (link != null) {
-                    listOfSongs.add(toSong(link));
+                    listOfSongs.add(toSong(link, coalesce(request.getLightColor(), DEFAULT_LIGHT_COLOR), coalesce(request.getDarkColor(), DEFAULT_DARK_COLOR)));
                 }
             }
 
             return toResponse(listOfSongs);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             log(context, "Internal error: %s", e.toString());
             throw new RuntimeException(e);
         }
@@ -64,13 +66,13 @@ public class Handler implements RequestHandler<GetRecentSongsRequest, GetRecentS
         return response;
     }
 
-    private Song toSong(final Element link) {
+    private Song toSong(final Element link, final String lightColor, final String darkColor) {
         final String href = link.attr("href");
 
         final Song songModel = new Song();
         songModel.setTitle(link.text());
         songModel.setUrl(generateSongUrl(href));
-        songModel.setWidgetUrl(generateWidgetUrl(href));
+        songModel.setWidgetUrl(generateWidgetUrl(href, lightColor, darkColor));
         return songModel;
     }
 
@@ -78,10 +80,10 @@ public class Handler implements RequestHandler<GetRecentSongsRequest, GetRecentS
         return String.format(SOUNDCLOUD_SONG_URL_FORMAT, href);
     }
 
-    private String generateWidgetUrl(final String href) {
+    private String generateWidgetUrl(final String href, final String lightColor, final String darkColor) {
         final Map<String, String> params = Maps.newHashMap();
-        params.put("color", "9bf1ff"); // bright blue
-        params.put("theme_color", "242943"); // dark blue
+        params.put("color", lightColor); // bright blue
+        params.put("theme_color", darkColor); // dark blue
         params.put("show_playcount", "false");
         params.put("show_comments", "false");
         params.put("show_bpm", "false");
@@ -90,12 +92,25 @@ public class Handler implements RequestHandler<GetRecentSongsRequest, GetRecentS
         params.put("hide_related", "true");
         params.put("buying", "true"); // capitalist
         params.put("sharing", "false"); // not a communist
-        params.put("download", "false"); // not pirate party
+        params.put("download", "false"); // not a pirate party
         final String paramsStr = params.entrySet().stream().map(e -> String.format("%s=%s", e.getKey(), e.getValue())).collect(Collectors.joining("&", "&", ""));
         return String.format(SOUNDCLOUD_WIDGET_URL_FORMAT, generateSongUrl(href), paramsStr);
     }
 
-    private void log(Context context, String messageFormat, Object... arguments) {
+    @SafeVarargs
+    private static <T> T coalesce(final T... values) {
+        if (values != null) {
+            for (final T value : values) {
+                if (value != null) {
+                    return value;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private void log(final Context context, final String messageFormat, final Object... arguments) {
         if (context != null) {
             context.getLogger().log(String.format(messageFormat, arguments));
         }
