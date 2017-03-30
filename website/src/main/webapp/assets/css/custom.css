@@ -21,12 +21,20 @@ body {
     body {
         font-size: 11pt;
     }
+
+    #banner h1 {
+        font-size: 2em;
+    }
 }
 
 /* small */
 @media screen and (max-width: 736px) {
     body {
         font-size: 9pt;
+    }
+
+    #banner h1 {
+        font-size: 1em;
     }
 
     #footer {
@@ -228,6 +236,7 @@ ul.copyright li {
     margin: 1ex 0;
     padding: 0.8ex 1em;
     white-space: nowrap;
+    transition: 1s;
 }
 
 .big.button {

@@ -15,16 +15,7 @@
                 <h1><span id="typed">Hi! My name is Vojta.</span></h1>
             </header>
             <div class="row">
-                <div class="8u 12u$(medium)">
-                    <p><#include "index/about.ftl"/></p>
-                </div>
-                <div class="4u 12u$(medium)">
-                    <ul class="vertical actions">
-                        <li><a href="#menu" class="big button"><@icons.add "user-circle"/> See what I do</a></li>
-                        <li><a href="${social_profile_linkedin}" class="button"><@icons.add "envelope"/> Contact me</a>
-                        </li>
-                    </ul>
-                </div>
+                <p><#include "index/about.ftl"/></p>
             </div>
         </div>
     </section>
