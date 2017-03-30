@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
 
     <!--[if lte IE 8]>
-    <script src="/assets/html5shiv.min.js"></script>
+    <script src="/assets/js/html5shiv.min.js"></script>
     <![endif]-->
 
     <!-- syntax highlighter -->
@@ -39,6 +39,6 @@
     </script>
 
     <!-- custom style -->
-    <link rel="stylesheet" href="/assets/custom.css"/>
+    <link rel="stylesheet" href="/assets/css/custom.css"/>
 
 </head>

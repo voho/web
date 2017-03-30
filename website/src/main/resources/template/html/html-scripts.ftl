@@ -1,20 +1,19 @@
 <!-- jQuery -->
-<script src="/assets/jquery.js"></script>
+<script src="/assets/js/jquery.js"></script>
 
 <!-- skel -->
-<script src="/assets/skel.min.js"></script>
-<script src="/assets/skel-layout.min.js"></script>
-<script src="/assets/skel-viewport.min.js"></script>
+<script src="/assets/js/skel.min.js"></script>
+<script src="/assets/js/skel-layout.min.js"></script>
+<script src="/assets/js/skel-viewport.min.js"></script>
 
 <!-- syntax highlighter -->
 <script src="/assets/highlight/highlight.pack.js"></script>
 
 <!-- stupid effects for the intro page -->
-<script src="/assets/particles.min.js"></script>
-<script src="/assets/typed.min.js"></script>
+<script src="/assets/js/typed.min.js"></script>
 
 <!-- custom scripts -->
-<script src="/assets/custom.js"></script>
+<script src="/assets/js/custom.js"></script>
 
 <!-- MathJax -->
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_SVG"></script>
