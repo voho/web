@@ -107,6 +107,20 @@ executor.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
 
 Trochu detailnější studium vyžadují metody *awaitTermination* a *shutdown*. Stručně řečeno: *shutdown* způsobí, že plánovač přestane přijímat nové úlohy, což znamená i to, že pravidelně opakované úlohy přestanou plánovat své další iterace. Metoda *awaitTermination* pro změnu zablokuje volající vlákno až do doby, než všechny úlohy skončí nebo dojde k vypršení zadaného časového limitu (podle toho, co nastane dřív). V případě, že vyprší časový limit, dojde sice k odblokování volajícího vlákna, ale na existující úlohy to nemá žádný vliv. V případě, že jsou naplánovány nějaké opakující se úlohy, volání *awaitTermination* vždy skončí vypršením časového limitu, protože opakující se úlohy za normálních podmínek nikdy neskončí.
 
+### Druhy plánovačů
+
+: Cached Thread Pool
+: Plánovač, který vytváří nová vlákna podle potřeby a recykluje ta, která nejsou využitá. Po uplynutí určité doby je neaktivní vlákno odstraněno.
+
+: Fixed Thread Pool
+: Plánovač, který obsahuje pevně daný počet vláken. Úlohy jsou řazeny do fronty a zpracovávány na pozadí volnými vlákny.
+
+: Scheduled Thread Pool
+: Plánovač pro plánování a opakování úloh v daném intervalu.
+
+: Fork-Join Pool
+: Speciální plánovač, který umožňuje dělit úlohy za běhu na menší a opět je spojovat dohromady, a tím efektivně využít procesory.
+
 ### Pokročilé frameworky
 
 Plánování úloh je podporováno i ve frameworku [Spring](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/scheduling.html), který podporuje i [CRON výrazy](wiki/cron). Pro ještě náročnější použití například v klastru lze použít [Quartz Job Scheduler](http://quartz-scheduler.org/).
