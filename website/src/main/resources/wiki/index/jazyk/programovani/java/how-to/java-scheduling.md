@@ -109,16 +109,16 @@ Trochu detailnější studium vyžadují metody *awaitTermination* a *shutdown*.
 
 ### Druhy plánovačů
 
-: Cached Thread Pool
+Cached Thread Pool
 : Plánovač, který vytváří nová vlákna podle potřeby a recykluje ta, která nejsou využitá. Po uplynutí určité doby je neaktivní vlákno odstraněno.
 
-: Fixed Thread Pool
+Fixed Thread Pool
 : Plánovač, který obsahuje pevně daný počet vláken. Úlohy jsou řazeny do fronty a zpracovávány na pozadí volnými vlákny.
 
-: Scheduled Thread Pool
+Scheduled Thread Pool
 : Plánovač pro plánování a opakování úloh v daném intervalu.
 
-: Fork-Join Pool
+Fork-Join Pool
 : Speciální plánovač, který umožňuje dělit úlohy za běhu na menší a opět je spojovat dohromady, a tím efektivně využít procesory.
 
 ### Pokročilé frameworky
