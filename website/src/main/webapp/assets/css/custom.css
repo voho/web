@@ -40,6 +40,10 @@ body {
     #footer {
         display: none;
     }
+
+    #header .explain {
+        display: none;
+    }
 }
 
 a {
@@ -210,7 +214,7 @@ ul.copyright li {
 
 .actions {
     display: block;
-    line-height: 2.2;
+    line-height: 2.1;
     margin: 0 0 2ex 0;
     padding: 0;
 }
