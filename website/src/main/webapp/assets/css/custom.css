@@ -122,7 +122,6 @@ a.logo {
     letter-spacing: 3pt;
     text-transform: uppercase;
     opacity: 0.9;
-    transition: 2s;
 }
 
 a.logo strong {
@@ -130,6 +129,7 @@ a.logo strong {
 }
 
 a.logo:hover {
+    transition: 2s;
     opacity: 1;
 }
 
@@ -268,6 +268,7 @@ ul.copyright li {
 
 #banner p {
     margin-top: 0;
+    padding: 0;
 }
 
 /* toc */
@@ -529,7 +530,7 @@ a.logo:hover strong {
 
 #toc {
     background-color: #e8e7e5;
-    border: 2px solid #111111;
+    box-shadow: 0 0 2em #333333;
     border-top: 0;
     z-index: 99999;
 }
@@ -547,10 +548,6 @@ a.logo:hover strong {
 
 #wiki-content th, #wiki-content td {
     border: 1px solid #eeeeee;
-}
-
-#wiki-content th {
-    background-color: rgba(246, 235, 97, 0.1);
 }
 
 #wiki-content td {
