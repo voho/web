@@ -10,7 +10,7 @@ U slov lze měřit délku, případně je spojovat a jejich řetězením vytvá�
 
 A konečně, formální jazyk €L \subseteq \Sigma^*€ je podmnožinou všech slov nad abecedou €\Sigma€, vytvořenou dle určitých pravidel. Formální jazyk tedy vždy musí obsahovat nějaký rozhodovací mechanismus, který o každém slově nad danou abecedou jednoznačně prohlásí, zda do jazyka patří, či nikoliv. 
 
-Tímto rozhodovacím mechanismem může být například [konečný automat](wiki/automat), [Turingův stroj](wiki/turinguv-stroj), [formální gramatika](wiki/formalni-gramatika), prostý výčet přijatelných slov, a tak dále. Tyto mechanismy lze mezi sebou různě převádět a pro každé použití je vhodnější jiný z nich.
+Tímto rozhodovacím mechanismem může být například [konečný automat](wiki/konecny-automat), [Turingův stroj](wiki/turinguv-stroj), [formální gramatika](wiki/formalni-gramatika), prostý výčet přijatelných slov, a tak dále. Tyto mechanismy lze mezi sebou různě převádět a pro každé použití je vhodnější jiný z nich.
 
 ### Příklady
 
