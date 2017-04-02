@@ -2,7 +2,7 @@
 
 ### Situace
 
-V systému se nachází třída, jejíž chování je velmi silně závislé na jejím vnitřním stavu. Zbytek systému má být od tohoto stavu odstíněn. V podstatě se jedná o objektově-orientovanou implementaci [konečného automatu](wiki/automat).
+V systému se nachází třída, jejíž chování je velmi silně závislé na jejím vnitřním stavu. Zbytek systému má být od tohoto stavu odstíněn. V podstatě se jedná o objektově-orientovanou implementaci [konečného automatu](wiki/konecny-automat).
 
 ### Problém
 
