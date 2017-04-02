@@ -207,11 +207,37 @@ java org.junit.runner.JUnitCore MyTest1.class MyTest2.class
 
 #### Testování se souborovým systémem
 
-!TODO!
+K vytvoření testovacích souborů lze využít třídu *TemporaryFolder*. Tato proměnná musí být deklarovaná veřejně a anotovaná jako *Rule*. Systém JUnit vytvoří dočasný adresář před spuštěním testů a po dokončení každé testovací metody (nezávisle na jejím výsledku) smaže všechny soubory, které testovací metoda vytvořila.
+
+```java
+public class FileSystemUnitTest {
+  @Rule
+  public TemporaryFolder temporaryFolder = new TemporaryFolder();
+
+  @Test
+  public void testSomeFileFunction() throws IOException {
+    File newFile = temporaryFolder.newFile("output.txt");
+    // ...
+  }
+}
+```
 
 #### Testování s databází
 
-!TODO!
+Jako databáze vhodná pro jednotkové testy se ukázala [H2 Database](http://www.h2database.com/html/main.html). Ta nabízí embedded i in-memory režim a umožňuje snadnou inicializaci databáze ze skriptů pomocí třídy *org.h2.tools.RunScript*:
+
+```java
+RunScript.execute(connection, new FileReader("create_db.sql"));
+```
+
+Při použití frameworku Spring se inicialize ještě trochu zjednoduší:
+
+```xml
+<jdbc:embedded-database id="dataSource" type="H2">
+  <jdbc:script location="classpath:db/sql/create-db.sql" />
+	<jdbc:script location="classpath:db/sql/insert-data.sql" />
+</jdbc:embedded-database>
+```
 
 #### Testování se Spring kontextem
 
