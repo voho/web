@@ -1,11 +1,13 @@
 ## Blockchain
 
-Pod názvem "blockchain" se skrývají různé technologie a systémové architektury, protože se jedná o poměrně nový a tedy neustálený pojem. 
-Dají se vypozorovat tyto společné rysy:
+Pod názvem "blockchain" se skrývají různé technologie a [systémové architektury](wiki/architektura), protože se jedná o poměrně nový a tedy neustálený pojem.
 
-- distribuovaná databáze nějakých transakcí (např. finančních toků)
-- kryptografický mechanismus prakticky zabraňující změně existujících transakcí
+Dají se však vypozorovat tyto společné rysy:
+
+- je to distribuovaná databáze nějakých transakcí (např. finančních toků)
+- obsahuje kryptografický mechanismus prakticky zabraňující změně existujících či vložení neověřených transakcí
 - používá kryptografii a digitální podpisy pro autentizaci a autorizaci čtecích a zápisových operací
+- zpravidla není určen jednoznačný vlastník dat, jedná se tedy o sdílená data
 
 ### Základní pojmy
 
@@ -15,13 +17,26 @@ Pod pojmem otisk rozumíme výstup [hashovací funkce](wiki/zobrazeni), která p
 Dobrá hashovací funkce by měla mít následující vlastnosti:
  
 - z otisku je **velmi obtížné** získat vstupní data
-- změnou vstupních dat se otisk mění **velmi těžko** způsobem
+- změnou vstupních dat se otisk mění **velmi těžko** předvídatelným způsobem
 
-Pokud zde používáme výrazy jako **velmi těžko**, mluvíme o současné technologii, se kterou by se podobné operace realizovaly až miliony let.
+Pokud zde používáme výrazy jako **velmi těžko**, mluvíme o současné technologii - teoreticky prolomení možné je, ale čas potřebný k takové operaci přesahuje jakoukoliv rozumnou mez.
 
 #### Transakce
 
 Transakcí může být cokoliv - jedna zpráva, událost, finanční operace, záznam o převodu vlastnictví určitého majetku, a podobně.
+V případě potřeby lze transakce zkládat zašifrované či podepsané a připojit i veřejný klíč k jejímu ověření, případně dešifrování.
+
+Ke každé transakci se vypočítá její otisk, který by měl zahrnovat všechny její parametry.
+ 
+Posléze se vypočítá otisk všech těchto otisků, který se stane součástí bloku.
+
+```dot:digraph
+rankdir=LR;
+Transaction1 -> HashTx1 -> HashAllTx
+Transaction2 -> HashTx2 -> HashAllTx
+Transaction3 -> HashTx3 -> HashAllTx
+HashAllTx-> Block
+```
 
 #### Blok
 
@@ -33,16 +48,31 @@ Tento odkaz je uložen jako **otisk předchozího bloku**, nikoliv tedy jako ně
 Protože je otisk bloku vypočítán na základě celého svého obsahu, včetně případného odkazu na předchozí blok, je otisk určitým odrazem celé historie.
 Jakmile bychom tedy libovolný blok nebo transakci v historii změnili, změnil by se tím i jeho otisk a následující bloky by na něj již neodkazovaly správně.
 
-### Neměnnost
+Jako blockchain - tedy **řetězec bloků** - se označuje jednosměrně zřetězená posloupnost těchto bloků, ve které má každý blok ukazatel na předchozí blok.
+
+![blockchain](blockchain.png)
+
+### Nonce
 
 !TODO!
 
-#### Ověřování otisků
+### Operace
 
-Celou historii lze ověřit tak, že se začne u prvního bloku a všechny otisky se znovu ověří.
+#### Ověřování řetězce
+
+Celou historii lze ověřit tak, že se začne u posledního bloku a ověří se zpětně všechny otisky všech bloků až ke konci řetězce.
+
+#### Přidání platné transakce
+
+!TODO!
+
+#### Útok: vložení neplatné transakce
+
+!TODO!
 
 ### Reference
 
 - https://bitsonblocks.net/2016/02/29/a-gentle-introduction-to-immutability-of-blockchains/
 - https://bitsonblocks.net/2015/09/09/a-gentle-introduction-to-blockchain-technology/
 - http://www.xorbin.com/tools/sha256-hash-calculator
+- http://www.abclinuxu.cz/images/clanky/hrach/bitcoin-blockchain.png
