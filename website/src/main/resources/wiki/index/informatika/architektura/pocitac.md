@@ -9,7 +9,7 @@ Počítač slouží jako fyzická platforma pro vykonávání [programů](wiki/a
 | [Diskrétní součástky](wiki/elektronika) | [fyzikální rovnice](wiki/fyzika) a modely
 | [Logická hradla](wiki/logicke-hradlo) | pravdivostní tabulky
 | [Kombinační obvody](wiki/kombinacni-obvod) | Booleova algebra
-| [Sekvenční obvody](wiki/sekvencni-obvod) | [konečné automaty](wiki/automat) [Moore](wiki/moore), [Mealy](wiki/mealy)
+| [Sekvenční obvody](wiki/sekvencni-obvod) | [konečné automaty](wiki/konecny-automat) [Moore](wiki/moore), [Mealy](wiki/mealy)
 | Procesor | ISA, jazyky symbolických instrukcí
 | Firmware a ovladače | systémové [programovací jazyky](wiki/jazyk)
 | Operační systém | systémové [programovací jazyky](wiki/jazyk)
