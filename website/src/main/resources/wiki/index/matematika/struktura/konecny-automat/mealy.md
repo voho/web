@@ -7,8 +7,8 @@ rankdir=LR
 ratio=0.5
 "transition function" [shape=none,fillcolor=transparent]
 "output function" [shape=none,fillcolor=transparent]
-input -> "transition function"
 "transition function" -> state [dir=both]
+input -> "transition function"
 state -> "output function"
 input -> "output function"
 "output function" -> output
