@@ -116,7 +116,7 @@ iframe {
 }
 
 #search {
-    background-color: #f6eb61;
+    background-color: #282828;
     display: none;
 }
 
@@ -137,11 +137,9 @@ iframe {
 }
 
 #search input.button {
-    background: #606af6;
-    border: 0;
-    color: #ffffff;
-    margin: 0 1em;
-    padding: 0.5ex 1em;
+    margin: 0 1ex;
+    padding-left: 1em;
+    padding-right: 1em;
 }
 
 #search input.button:hover {
