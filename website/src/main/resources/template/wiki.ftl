@@ -9,6 +9,7 @@
 <div id="universe">
 
 <#include "wiki/toc-wrapper.ftl"/>
+<#include "common/search.ftl"/>
 <#include "wiki/breadcrumbs.ftl"/>
 
 <#if active_wiki_page_id == 'index'>
@@ -49,13 +50,13 @@
     <#else>
     <section id="heading">
     </#if>
-        <div class="inner">
-            <header class="major">
-                <h1>${active_wiki_page_title}</h1>
-            </header>
-            <#include "wiki/children.ftl"/>
-        </div>
-    </section>
+    <div class="inner">
+        <header class="major">
+            <h1>${active_wiki_page_title}</h1>
+        </header>
+        <#include "wiki/children.ftl"/>
+    </div>
+</section>
 
     <#if active_wiki_page_content?has_content>
         <#if active_wiki_page_cover>

@@ -111,10 +111,41 @@ iframe {
 }
 
 #header .button {
-    right: 0;
-    position: absolute;
-    margin: 0;
+    margin: 0 1ex;
     padding: 0;
+}
+
+#search {
+    background-color: #f6eb61;
+    display: none;
+}
+
+#search .inner {
+    padding: 1em 0;
+}
+
+#search * {
+    font-size: 12pt;
+    font-weight: bold;
+    padding: 5pt;
+}
+
+#search input {
+    background-color: #ffffff;
+    border: 2px solid #cccccc;
+    margin: 0;
+}
+
+#search input.button {
+    background: #606af6;
+    border: 0;
+    color: #ffffff;
+    margin: 0 1em;
+    padding: 0.5ex 1em;
+}
+
+#search input.button:hover {
+    background: #111111;
 }
 
 a.logo {
@@ -129,7 +160,6 @@ a.logo strong {
 }
 
 a.logo:hover {
-    transition: 2s;
     opacity: 1;
 }
 
@@ -228,7 +258,7 @@ ul.copyright li {
 }
 
 .vertical.actions li {
-    margin: 0 0 2ex 0;
+    margin: 0 0 0.5ex 0;
     width: 100%;
 }
 
@@ -500,6 +530,7 @@ a.logo {
 a.logo strong {
     border: 2px solid #333333;
     color: #cccccc;
+    transition: 2s;
 }
 
 a.logo:hover strong {
