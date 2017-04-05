@@ -3,17 +3,20 @@
 Konečný automat typu Moore si lze představit jako jednoduché zařízení s konečným počtem vnitřních stavů, mezi kterými se přechází na základě vstupních symbolů. Každý vnitřní stav má definovaný právě jednu hodnotu na výstupu. Automat musí mít dále definovaný výchozí vnitřní stav, ve kterém se nachází před zadáním prvního vstupního symbolu a pravidla pro přechody mezi jednotlivými stavy.
 
 ```dot:digraph
+ratio=1
 rankdir=LR
 "transition function" [shape=none,fillcolor=transparent]
 "output function" [shape=none,fillcolor=transparent]
 input -> "transition function"
-"transition function" -> state
-state -> "transition function"
+"transition function" -> state [dir=both]
 state -> "output function"
 "output function" -> output
 input [shape=oval]
 output [shape=oval]
 state [shape=box3d,fillcolor=beige]
+{rank=same;"state";"output function";}
+{rank=same;"transition function";"output function";}
+{rank=same;"input";"output";}
 ```
 
 ### Formální definice
