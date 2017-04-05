@@ -137,6 +137,7 @@ iframe {
 }
 
 #search input.button {
+    border: 0;
     margin: 0 1ex;
     padding-left: 1em;
     padding-right: 1em;
@@ -144,6 +145,7 @@ iframe {
 
 #search input.button:hover {
     background: #111111;
+    border: 0;
 }
 
 a.logo {
