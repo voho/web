@@ -297,6 +297,10 @@ ul.copyright li {
     margin: 0 0 1em 0;
 }
 
+#banner p {
+    margin: 0;
+}
+
 /* toc */
 
 #toc {
