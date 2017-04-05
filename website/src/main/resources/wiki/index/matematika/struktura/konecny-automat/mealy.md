@@ -14,7 +14,6 @@ input -> "output function"
 "output function" -> output
 state [shape=box3d,fillcolor=beige]
 {rank=same;"state";"output function";}
-{rank=same;"input";"transition function";}
 ```
 
 ### Formální definice
