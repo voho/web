@@ -29,3 +29,13 @@
         });
     }
 })(jQuery);
+
+function displaySearchBar() {
+    $("#toc").hide();
+    $("#search").fadeToggle(300);
+}
+
+function displayTocBar() {
+    $("#search").hide();
+    $("#toc").fadeToggle(300);
+}
