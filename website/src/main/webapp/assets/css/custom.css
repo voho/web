@@ -3,8 +3,11 @@
 @import url('font-awesome.min.css');
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,300i,600,600i&subset=latin-ext');
 
+* {
+    font-family: Raleway, Arial, sans-serif !important;
+}
+
 body {
-    font-family: Raleway, Arial, sans-serif;
     font-size: 14pt;
     line-height: 1.5;
 }
@@ -115,12 +118,15 @@ iframe {
     padding: 0;
 }
 
-#search {
+#search, #toc {
     background-color: #282828;
+    box-shadow: 0 0 10em #282828;
     display: none;
+    width: 100%;
+    position: fixed;
 }
 
-#search .inner {
+#search .inner, #toc .inner {
     padding: 1em 0;
 }
 
@@ -144,6 +150,7 @@ iframe {
 }
 
 #search input.button:hover {
+    background: #6af660;
     border: 0;
 }
 
@@ -301,15 +308,6 @@ ul.copyright li {
 }
 
 /* toc */
-
-#toc {
-    border-top: 0;
-    position: fixed;
-    min-width: 20em;
-    max-width: 40em;
-    padding: 1ex;
-    right: 0;
-}
 
 #toc ul {
     margin: 0;
