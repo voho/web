@@ -75,10 +75,6 @@ h1 {
     width: 100%;
 }
 
-#universe a:hover {
-    text-decoration: underline;
-}
-
 /* blocks */
 
 iframe {
@@ -198,10 +194,6 @@ header .inner {
 
 .icons li a {
     color: #666666;
-}
-
-.icons li a:hover {
-    text-decoration: none;
 }
 
 .icons li .label {
@@ -511,7 +503,7 @@ a {
 }
 
 #heading {
-    background-color: #ffffff;
+    border-bottom: 2px solid #eeeeee;
 }
 
 #heading h1 {
