@@ -20,7 +20,11 @@ import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
@@ -160,7 +164,7 @@ public class RecentBackend {
                 LocalDateTime o2d = LocalDateTime.parse(o2.getIsoTime(), DateTimeFormatter.ISO_DATE_TIME);
                 return o1d.compareTo(o2d);
             });
-            CommitMeta newest = commits.iterator().next();
+            CommitMeta newest = commits.get(commits.size() - 1);
             group.setLatestDate(newest.getIsoTime());
             group.setLatestCommitSha(newest.getSha());
             group.setLatestCommitMessage(newest.getMessage());
