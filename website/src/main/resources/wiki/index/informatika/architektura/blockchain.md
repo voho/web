@@ -1,13 +1,12 @@
 ## Blockchain
 
-Pod názvem "blockchain" se skrývají různé technologie a [systémové architektury](wiki/architektura), protože se jedná o poměrně nový a tedy neustálený pojem.
+Zatím neexistuje žádná formální definice toho, co přesně pojem **blockchain** znamená. Pod tímto označením se tedy skrývají různé technologie a [systémové architektury](wiki/architektura), u kterých lze vypozorovat tyto společné rysy:
 
-Dají se však vypozorovat tyto společné rysy:
-
-- je to distribuovaná databáze nějakých transakcí (např. finančních toků)
-- obsahuje kryptografický mechanismus prakticky zabraňující změně existujících či vložení neověřených transakcí
+- je to distribuovaná databáze nějakých transakcí (např. finančních toků nebo informací o převodu vlastnictví z jednoho subjektu na druhý)
+- jednotlivé transakce v této databázi jsou uloženy v tzv. **blocích**, které po sobě následují v přesně daném a neměnném pořadí, přičemž každý blok se odkazuje na blok předchozí
+- obsahuje kryptografický mechanismus prakticky zabraňující změně existujících transakcí nebo vložení neověřených bloků
 - používá kryptografii a digitální podpisy pro autentizaci a autorizaci čtecích a zápisových operací
-- zpravidla není určen jednoznačný vlastník dat, jedná se tedy o sdílená data
+- není určen jednoznačný vlastník dat, jedná se tedy často o sdílená data
 
 ### Základní pojmy
 
@@ -60,7 +59,7 @@ Jako blockchain - tedy **řetězec bloků** - se označuje jednosměrně zřetě
 
 #### Ověřování řetězce
 
-Celou historii lze ověřit tak, že se začne u posledního bloku a ověří se zpětně všechny otisky všech bloků až ke konci řetězce.
+!TODO!
 
 #### Přidání platné transakce
 
