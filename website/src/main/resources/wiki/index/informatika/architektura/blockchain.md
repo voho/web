@@ -41,14 +41,15 @@ V případě potřeby lze transakce zkládat zašifrované či podepsané a při
 
 Ke každé transakci se vypočítá její otisk, který by měl zahrnovat všechny její parametry.
  
-Posléze se vypočítá otisk všech těchto otisků, který se stane součástí bloku.
+Posléze se vypočítá otisk všech těchto otisků, který se stane součástí bloku. K výpočtu otisku otisků se používá tzv. [Merkle Tree](https://en.wikipedia.org/wiki/Merkle_tree).
 
 ```dot:digraph
 rankdir=LR;
-Transaction1 -> Transaction1Hash -> AllTransactionHash
-Transaction2 -> Transaction2Hash -> AllTransactionHash
-Transaction3 -> Transaction3Hash -> AllTransactionHash
-AllTransactionHash-> Block
+Transaction1 -> T1_hash -> T12_hash -> T1234_hash
+Transaction2 -> T2_hash -> T12_hash -> T1234_hash
+Transaction3 -> T3_hash -> T34_hash -> T1234_hash
+Transaction4 -> T4_hash -> T34_hash -> T1234-hash
+T1234_hash -> Block
 ```
 
 #### Blok
