@@ -59,7 +59,9 @@ public class SomeTest {
 }
 ```
 
-#### Testování výsledků
+Pro vlastní implementaci podobných funkcí lze využít [@Rules](https://github.com/junit-team/junit4/wiki/rules).
+
+#### Ověřování výsledků
 
 Pro logické hodnoty:
 
@@ -87,7 +89,7 @@ Assert.assertSame(e, a);
 Assert.assertNotSame(e, a);
 ```
 
-#### Testování pomocí Matchers
+#### Ověřování pomocí Matchers
 
 Knihovna [Hamcrest Matchers](http://hamcrest.org/) se stala de-facto standardem pro tvorbu validačních tříd, tzv. **matcherů**. Matcher je v podstatě jen predikát, který obdrží objekt a odpoví, zda je podle něho daný objekt validní.
 
@@ -108,47 +110,44 @@ Assert.assertThat(
 );
 ```
 
-#### Pokročilé funkce
+#### Ověřování pomocí AssertJ
 
-##### Přeskočení testů
-
-Přeskočit testovací metodu nebo celý test lze pomocí anotace *@org.junit.Ignore*.
+Pro verifikaci výsledků lze použít i knihovnu [AssertJ](http://joel-costigliola.github.io/assertj/).
+Ta je výborná zejména pro verifikaci kolekcí - například seznamů, množin a map.
 
 ```java
-@Ignore
-@Test
-public void testSomething() {
-  // ...
-}
+// základní ověřování
+assertThat(frodo.getName())
+    .isEqualTo("Frodo");
+
+assertThat(frodo)
+    .isNotEqualTo(sauron);
 ```
 
 ```java
-@Ignore
-public class SomeTest1() {
-  // ...
-}
+// ověřování výjimek
+assertThatThrownBy(() -> { throw new Exception("boom!"); })
+        .hasMessage("boom!");
 ```
 
-##### Očekávané výjimky
-
-Chyby v programech se stávají a je dobré mít otestované jejich chování i v těchto krajních případech. A to nejen kvůli dosažení vysokého procenta pokrytí, ale hlavně kvůli zajištění rozumného zotavení programu po chybě.
-
 ```java
-@Test(expected = IOException.class)
-public void testWithTimeout() {
-  throw new IOException("This test will pass.");
-}
+// ověřování prvků v seznamu
+assertThat(fellowshipOfTheRing)
+    .extracting(TolkienCharacter::getName)
+    .contains("Sam", "Legolas")
 ```
 
-##### Časový limit
-
-Pokud zadaný test nedoběhne do stanovené doby, označí se jako nesplněný. Osobně tuto konstrukci příliš nedoporučuji
-
 ```java
-@Test(timeout = 1000)
-public void testWithTimeout() {
-  // ...
-}
+// ověřování prvků v mapě
+assertThat(ringBearers)
+    .containsValues(frodo, galadriel);
+
+assertThat(ringBearersByName).containsOnly(
+        entry(sam.getName(), sam),
+        entry(frodo.getName(), frodo),
+        entry(gandalf.getName(), gandalf),
+        entry(galadriel.getName(), galadriel)
+);
 ```
 
 ### Spuštění testů
@@ -176,10 +175,6 @@ Testy se standardně umisťují do této adresářové struktury:
 Třídy a resources z tého struktury rozšíří produkční classpath a navíc mají navíc k dispozici všechny závislosti se scopem *test*.
 
 Testy se budou spouštět automaticky s každým buildem (pokud to nechceme, stačí přidat parametr *-DskipTests=true*).
-
-```bash
-mvn clean package
-```
 
 Samostatně lze spustit testy například takto:
 
@@ -263,7 +258,49 @@ public class UnitTestWithSpringContext {
 
 K tvorbě mocků lze využít například framework [Mockito](wiki/mockito).
 
+#### Přeskočení testů
+
+Přeskočit testovací metodu nebo celý test lze pomocí anotace *@org.junit.Ignore*.
+
+```java
+@Ignore
+@Test
+public void testSomething() {
+  // ...
+}
+```
+
+```java
+@Ignore
+public class SomeTest1() {
+  // ...
+}
+```
+
+#### Očekávané výjimky
+
+Chyby v programech se stávají a je dobré mít otestované jejich chování i v těchto krajních případech. A to nejen kvůli dosažení vysokého procenta pokrytí, ale hlavně kvůli zajištění rozumného zotavení programu po chybě.
+
+```java
+@Test(expected = IOException.class)
+public void testWithTimeout() {
+  throw new IOException("This test will pass.");
+}
+```
+
+#### Časový limit
+
+Pokud zadaný test nedoběhne do stanovené doby, označí se jako nesplněný. Osobně tuto konstrukci příliš nedoporučuji
+
+```java
+@Test(timeout = 1000)
+public void testWithTimeout() {
+  // ...
+}
+```
+
 ### Reference
 
 - http://junit.org/
+- https://github.com/junit-team/junit4/wiki/rules
 - http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
