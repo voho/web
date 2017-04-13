@@ -10,14 +10,17 @@ Zatím neexistuje žádná formální definice toho, co přesně pojem **blockch
 
 ### Potenciální využití
 
-: Sdílená ekonomika
-Decentralizovaný peer-to-peer blockchain lze využít k bezpečnému převádění vlastnických práv k různým předmětům bez potřeby centrální autority: dopravní prostředky, nemovitosti, finanční produkty, obrazy, hudba, filmy, patenty, licence. Ve světě, kde neexistuje důvěra k velkým společnostem, se takové ekonomice může překvapivě dobře dařit.
-: Dohled
-Technologie a protokoly založené na blockchainu mohou být využity ke zvýšení transparentnosti veřejného hlasování v demokratických systémech. Každý volič bude mít jistotu, že byl jeho hlas započítán do celkového výsledku, aniž by musel důvěřovat nějaké autoritě.
-: Ověřování autenticity produktů
-Historie určitého produktu může být v čase zaznamenávána a ověřována koncovými zákazníky. Velmi důležité pro produkty typu fair-trade a různé sběratelské předměty vysoké hodnoty.
-: Ukládání souborů
-Soubory uložené v peer-to-peer blockchainu nemusí mít centrálního vlastníka a úložiště, které by mohlo ohrozit napadení hackerem či výpadek proudu.
+Sdílená ekonomika
+: Decentralizovaný peer-to-peer blockchain lze využít k bezpečnému převádění vlastnických práv k různým předmětům bez potřeby centrální autority: dopravní prostředky, nemovitosti, finanční produkty, obrazy, hudba, filmy, patenty, licence. Ve světě, kde neexistuje důvěra k velkým společnostem, se takové ekonomice může překvapivě dobře dařit.
+
+Dohled
+: Technologie a protokoly založené na blockchainu mohou být využity ke zvýšení transparentnosti veřejného hlasování v demokratických systémech. Každý volič bude mít jistotu, že byl jeho hlas započítán do celkového výsledku, aniž by musel důvěřovat nějaké autoritě.
+
+Ověřování autenticity produktů
+: Historie určitého produktu může být v čase zaznamenávána a ověřována koncovými zákazníky. Velmi důležité pro produkty typu fair-trade a různé sběratelské předměty vysoké hodnoty.
+
+Ukládání souborů
+: Soubory uložené v peer-to-peer blockchainu nemusí mít centrálního vlastníka a úložiště, které by mohlo ohrozit napadení hackerem či výpadek proudu.
 
 ### Základní pojmy
 
