@@ -48,7 +48,7 @@ rankdir=LR;
 Transaction1 -> T1_hash -> T12_hash -> T1234_hash
 Transaction2 -> T2_hash -> T12_hash -> T1234_hash
 Transaction3 -> T3_hash -> T34_hash -> T1234_hash
-Transaction4 -> T4_hash -> T34_hash -> T1234-hash
+Transaction4 -> T4_hash -> T34_hash -> T1234_hash
 T1234_hash -> Block
 ```
 
