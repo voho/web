@@ -8,7 +8,7 @@
     <![endif]-->
 
     <!-- syntax highlighter -->
-    <link rel="stylesheet" href="/assets/highlight/vs.css">
+    <link rel="stylesheet" href="/assets/highlight/github.css">
 
     <!-- icons -->
     <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
