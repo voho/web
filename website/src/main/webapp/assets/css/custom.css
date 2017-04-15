@@ -54,6 +54,10 @@ a {
     text-decoration: none;
 }
 
+a:hover {
+    text-decoration: underline;   
+}
+
 a:hover.button {
     text-decoration: none !important;
 }
@@ -194,6 +198,10 @@ header .inner {
 
 .icons li a {
     color: #666666;
+}
+
+.icons li a:hover {
+    text-decoration: none;   
 }
 
 .icons li .label {
