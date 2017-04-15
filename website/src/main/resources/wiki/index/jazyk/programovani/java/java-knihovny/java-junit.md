@@ -184,7 +184,7 @@ mvn clean test
 
 #### Spuštění z kódu
 
-Spustit testy lze pomocí metody *runClasses* třídy *JUnitCore*. Spustit lze libovolné množství testů.
+Spustit testy lze pomocí metody *runClasses* třídy *javadoc:org.junit.runner.JUnitCore*. Spustit lze libovolné množství testů.
 
 ```java
 org.junit.runner.JUnitCore.runClasses(MyTest1.class, MyTest2.class);
@@ -202,7 +202,7 @@ java org.junit.runner.JUnitCore MyTest1.class MyTest2.class
 
 #### Testování se souborovým systémem
 
-K vytvoření testovacích souborů lze využít třídu *TemporaryFolder*. Tato proměnná musí být deklarovaná veřejně a anotovaná jako *Rule*. Systém JUnit vytvoří dočasný adresář před spuštěním testů a po dokončení každé testovací metody (nezávisle na jejím výsledku) smaže všechny soubory, které testovací metoda vytvořila.
+K vytvoření testovacích souborů lze využít třídu *javadoc:org.junit.rules.TemporaryFolder*. Tato proměnná musí být deklarovaná veřejně a anotovaná jako *javadoc:org.junit.Rule*. Systém JUnit vytvoří dočasný adresář před spuštěním testů a po dokončení každé testovací metody (nezávisle na jejím výsledku) smaže všechny soubory, které testovací metoda vytvořila.
 
 ```java
 public class FileSystemUnitTest {
@@ -219,7 +219,7 @@ public class FileSystemUnitTest {
 
 #### Testování s databází
 
-Jako databáze vhodná pro jednotkové testy se ukázala [H2 Database](http://www.h2database.com/html/main.html). Ta nabízí embedded i in-memory režim a umožňuje snadnou inicializaci databáze ze skriptů pomocí třídy *org.h2.tools.RunScript*:
+Jako databáze vhodná pro jednotkové testy se ukázala [H2 Database](http://www.h2database.com/html/main.html). Ta nabízí embedded i in-memory režim a umožňuje snadnou inicializaci databáze ze skriptů pomocí třídy *javadoc:org.h2.tools.RunScript*:
 
 ```java
 RunScript.execute(connection, new FileReader("create_db.sql"));
@@ -230,13 +230,13 @@ Při použití frameworku Spring se inicialize ještě trochu zjednoduší:
 ```xml
 <jdbc:embedded-database id="dataSource" type="H2">
   <jdbc:script location="classpath:db/sql/create-db.sql" />
-	<jdbc:script location="classpath:db/sql/insert-data.sql" />
+  <jdbc:script location="classpath:db/sql/insert-data.sql" />
 </jdbc:embedded-database>
 ```
 
 #### Testování se Spring kontextem
 
-K testování se Spring kontextem je nutné do závislostí přidat *org.springframework.test* se scope *test*. Pomocí anotace *RunWith* přítomné v JUnit se pak definuje, že se daný unit test bude spouštět pomocí speciální třídy, která pak podle dalších anotací provede potřebná nastavení třídy unit testu.
+K testování se Spring kontextem je nutné do testovacích závislostí přidat *org.springframework.test*. Pomocí anotace *javadoc:org.junit.runner.RunWith* přítomné v JUnit se pak definuje, že se daný unit test bude spouštět pomocí speciální třídy, která pak podle dalších anotací provede potřebná nastavení třídy unit testu.
 
 Tímto způsobem lze testovat různé beany přítomné v kontextu a validovat jejich vlastnosti. Obecně se však podobný test doporučuje brát spíše jako integrační testy vyšší úrovně, které testují pouze to, že je kontext validní (lze jej vytvořit) a jednotlivé závislosti si "sednou" dobře dohromady. Funkce jednotlivých bean by měly být otestovány zvlášť bez nutnosti vůbec nějaký kontext vytvářet.
 
@@ -260,7 +260,7 @@ K tvorbě mocků lze využít například framework [Mockito](wiki/mockito).
 
 #### Přeskočení testů
 
-Přeskočit testovací metodu nebo celý test lze pomocí anotace *@org.junit.Ignore*.
+Přeskočit testovací metodu nebo celý test lze pomocí anotace *javadoc:org.junit.Ignore*.
 
 ```java
 @Ignore
