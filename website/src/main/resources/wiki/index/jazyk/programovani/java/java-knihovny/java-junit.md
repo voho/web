@@ -14,7 +14,7 @@ V Javě je nejmenší jednotkou třída, respektive metoda třídy. Závislostmi
 
 V JUnit je každý test reprezentován třídou, jejíž název je odvozen z názvu testované třídy a příponou *Test* (například **CalculatorTest**, **UserManagementServiceTest**). JUnit od verze 4 může být zcela řízen anotacemi, takže testovací třída nemusí od žádné jiné třídy dědit a ani není nutné ji přidávat do nějakých seznamů, jako tomu bylo dříve. Testovací třída bsahuje skutečně jen samotný test, případně přípravu testovacích dat. simulovaných závislostí a jejich následný úklid.
 
-Nejjednodušší test vypadá na první pohled jako obyčejná třída. Jediným rozdílem je přítomnost anotací z knihovny JUnit. Mezi základní anotace patří *@org.junit.Test* označující veřejné metody, které mají být v rámci testu spuštěny.
+Nejjednodušší test vypadá na první pohled jako obyčejná třída. Jediným rozdílem je přítomnost anotací z knihovny JUnit. Mezi základní anotace patří *javadoc:org.junit.Test* označující veřejné metody, které mají být v rámci testu spuštěny.
 
 ```java
 public class SomeTest {
@@ -29,12 +29,12 @@ public class SomeTest {
 
 Pokud je třeba před testem či po testu vykonat nějaké akce, lze využít těchto anotací:
 
-- *@org.junit.Before* - metoda se provede před každým spuštěním testovací metody v této třídě
-- *@org.junit.After* - metoda se provede po každém spuštění testovací metody v této třídě
-- *@org.junit.BeforeClass* - metoda se provede před spuštěním první testovací metody v této třídě (metoda musí být statická)
-- *@org.junit.AfterClass* - metoda se provede po dokončení všech metod z této testovací třídy (metoda musí být statická)
+- *javadoc:org.junit.Before* - metoda se provede před každým spuštěním testovací metody v této třídě
+- *javadoc:org.junit.After* - metoda se provede po každém spuštění testovací metody v této třídě
+- *javadoc:org.junit.BeforeClass* - metoda se provede před spuštěním první testovací metody v této třídě (metoda musí být statická)
+- *javadoc:org.junit.AfterClass* - metoda se provede po dokončení všech metod z této testovací třídy (metoda musí být statická)
 
-Do metod s anotací *Before* se často vkládá společný kód pro inicializaci komponenty a jejich závislostí. Inicializace komponenty před každým testem způsobí, že je pro každý test připravena vždy ve stejném výchozím stavu a nemá vliv, v jakém pořadí se testovací metody spouštějí. U testů není prioritou výkon, ale jejich korektnost a úplnost.
+Do metod s anotací *javadoc:org.junit.Before* se často vkládá společný kód pro inicializaci komponenty a jejich závislostí. Inicializace komponenty před každým testem způsobí, že je pro každý test připravena vždy ve stejném výchozím stavu a nemá vliv, v jakém pořadí se testovací metody spouštějí. U testů není prioritou výkon, ale jejich korektnost a úplnost.
 
 ```java
 public class SomeTest {
@@ -59,7 +59,7 @@ public class SomeTest {
 }
 ```
 
-Pro vlastní implementaci podobných funkcí lze využít [@Rules](https://github.com/junit-team/junit4/wiki/rules).
+Pro vlastní implementaci podobných funkcí lze využít [Rules](https://github.com/junit-team/junit4/wiki/rules).
 
 #### Ověřování výsledků
 
@@ -93,7 +93,7 @@ Assert.assertNotSame(e, a);
 
 Knihovna [Hamcrest Matchers](http://hamcrest.org/) se stala de-facto standardem pro tvorbu validačních tříd, tzv. **matcherů**. Matcher je v podstatě jen predikát, který obdrží objekt a odpoví, zda je podle něho daný objekt validní.
 
-Můžete využít již připravené matchery, implementovat vlastní (jako implementaci rozhraní *Matcher* nebo *TypeSafeMatcher*), nebo je vzájemně kombinovat pomocí již existujících logických operátorů (*allOf* = AND, *anyOf* = OR).
+Můžete využít již připravené matchery, implementovat vlastní (jako implementaci rozhraní *javadoc:org.hamcrest.Matcher* nebo *javadoc:org.hamcrest.TypeSafeMatcher*), nebo je vzájemně kombinovat pomocí již existujících logických operátorů (*allOf* = AND, *anyOf* = OR).
 
 ```java
 Assert.assertThat(
