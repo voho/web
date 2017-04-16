@@ -30,11 +30,11 @@ Typ je velmi abstraktní pojem, který se v objektovém programování použív�
 
 Ve většině objektově orientovaných jazyků je typ nějakým způsobem vázán na třídu, nebo je třída přímo typem instance.
 
-#### Atributy
+#### Atributy (attributes, properties)
 
 Jako atributy se označují proměnné které definují vnitřní stav objektu.
 
-#### Metody
+#### Metody (operations, methods)
 
 Jako metody se označují procedury, které (jako jediné) pracují s vnitřním stavem objektu.
 
@@ -53,10 +53,9 @@ truck -up-|> car
 sedan -up-|> car
 ```
 
-Tento princip se v objektově orientovaných jazycích velmi často používá jako prostředek pro znovupoužití kódu a k implementaci polymorfismu. Pro tento účel se používá častěji pojem **dědičnost** (inheritance). Dědičnost umožňuje vytvářet hiearchie mezi třídami. Třída výše v hierarchii se nazývá **předek** (nadřída, superclass) a třída níže v hierarchii **potomek** (podtřída, subclass). Potomek může mít i více předků, což někdy vede na tzv. problém diamantu. Proto se ve většině jazyků používá dědičnost jednoduchá (každá třída může mít jen jednoho potomka). Řešením jsou i tzv. **traity**, které zjemňují granularitu objektového kódu.
+Princip zobecnění se v objektově orientovaných jazycích nejčastěji používá jako prostředek k implementaci polymorfismu a znovupoužití kódu. Častěji se můžeme setkat s pojmem **dědičnost** (inheritance). Dědičnost umožňuje vytvářet hiearchie mezi třídami. Třída výše v hierarchii se nazývá **předek** (nadtřída, superclass, ancestor) a třída níže v hierarchii **potomek** (podtřída, subclass, child). Potomek může mít i více předků, což někdy vede na tzv. problém diamantu (nejednoznačnost deklarace metod se stejnými signaturami). Proto se ve většině jazyků používá dědičnost jednoduchá (každá třída může mít jen jednoho předka). Řešením jsou i tzv. **traity**, které zjemňují granularitu objektového kódu.
 
-Formálně je dědičnost € C=P+\delta P €, kde €P€ je předek a €C€ je potomek. Úspora kódu při vhodném použití dědičnosti je zajištěna tak, že se v potomkovi uvádí jen změny, které jej odlišují od předka.
-
+Formálně je dědičnost definována jako € C=P+\delta P €, kde €P€ je předek a €C€ je potomek. Úspora kódu při vhodném použití dědičnosti je zajištěna tak, že se v potomkovi uvádí jen změny, které jej odlišují od předka.
 
 Dědičnost umožňuje programátorovi:
 
