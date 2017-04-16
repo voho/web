@@ -25,14 +25,14 @@ public Customer getCustomer(long id)
 
 public void problem()
 {
-  Customer c1 = getCustomer(1);
-  Customer c2 = getCustomer(1);
+  Customer c1_firstInstance = getCustomer(1);
+  Customer c1_secondInstance = getCustomer(1);
 
-  c1.setName("John");
+  c1_secondInstance.setName("John");
 
-  // problém: která instance je teď ta správná
-  // instance c1 má ještě staré jméno
-  // instance c2 obsahuje již nové jméno
+  // problém: která instance je teď ta správná?
+  // instance c1_firstInstance: původní jméno
+  // instance c1_secondInstance: změněné jméno (John)
 }
 ```
 
