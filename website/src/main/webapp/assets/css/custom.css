@@ -55,10 +55,10 @@ a {
 }
 
 a:hover {
-    text-decoration: underline;   
+    text-decoration: underline;
 }
 
-a:hover.button {
+a:hover.button, a.logo {
     text-decoration: none !important;
 }
 
@@ -201,7 +201,7 @@ header .inner {
 }
 
 .icons li a:hover {
-    text-decoration: none;   
+    text-decoration: none;
 }
 
 .icons li .label {

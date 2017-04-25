@@ -25,12 +25,12 @@ A[label="B|A|D|D|A|D|C|D|D|A|E|D|C|C|F|D|A|D"]
 
 Nyní už stačí jen vybrat náhodné políčko a po provedení dostatečně velkého množství výběrů uvidíme, že se relativní četnosti vybraných prvků blíží jejich vahám.
 
-Jednoduchá implementace v [jazyce Java](wiki/jazyk-java):
+Jednoduchá implementace v [jazyce Java](wiki/java):
 
 ```java
 public class RouletteWheelSelection {
     public static <T> T randomElement(final T[] elements, final double[] weights) {
-        if (elements.length!=weights.length) {
+        if (elements.length != weights.length) {
             throw new IllegalArgumentException("Both arrays must have the same length.");
         }
         
