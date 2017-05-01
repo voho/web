@@ -1,6 +1,6 @@
 ## Beta kód
 
-Beta kód je jednoduchý algoritmus pro kódování přirozených čísel. Zobrazí každé přirozené číslo *N* jako jeho zápis v binární číselné soustavě.
+Beta kód je jednoduchý algoritmus pro kódování přirozených čísel. Zobrazí každé přirozené číslo *N* jako jeho zápis v [binární číselné soustavě](wiki/bit).
 
 | Číslo | Kód
 |---|---
@@ -28,7 +28,6 @@ Binární zápis čísla je možné vytvořit několika způsoby. Jedním z nich
 | 1 | 2 | 1
 | 0 | 1 | 1
 
-
 Beta kód je shodný s binárním zápisem čísla 75, výsledek je tedy *1001011*.
 
 #### Dekódování čísla 10010110
@@ -50,7 +49,7 @@ Výsledné číslo je součet takových mocnin dvojky, u kterých je v binární
 
 Součet = 128 + 32 + 8 + 4 = *172*
 
-### Beta kód s čárkou
+## Beta kód s čárkou
 
 Beta kód (binární zápis) každého přirozeného čísla začíná číslicí jedna. Beta kód s čárkou tuto jedničku vynechává a ušetří tak jeden bit.
 
@@ -64,13 +63,13 @@ Beta kód (binární zápis) každého přirozeného čísla začíná číslic�
 | 10 | 1*010* | 010
 | 100 | 1*100100* | 100100
 
-#### Příklad
+### Příklad
 
-##### Kódování čísla 75
+#### Kódování čísla 75
 
 Binární zápis čísla 75 je **1001011** (viz beta kód). Beta kód s čárkou pouze odebere z binárního zápisu první jedničku. Výsledek je tedy *001011*.
 
-##### Dekódování čísla 0010110
+#### Dekódování čísla 0010110
 
 Ke vstupnímu řetězci přidáme na začátek jedničku a výsledný řetězec **10010110** převedeme jako obyčejné binární číslo do dekadické soustavy (viz beta kód). Výsledek je tedy *172*.
 

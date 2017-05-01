@@ -1,13 +1,13 @@
 ## Gama kód
 
-Gama kód je jednoduchý algoritmus pro kódování přirozených čísel. V tomto kódování se využívá alfa kód, beta kód a beta kód s čárkou. Gama kód je permutací gama kódu s čárkou (viz níže).
+Gama kód je jednoduchý algoritmus pro kódování přirozených čísel. V tomto kódování se využívá [kódování alfa](wiki/kodovani-alfa), [kódování beta](wiki/kodovani-beta) a kódování beta s čárkou. Gama kód je permutací gama kódu s čárkou (viz níže).
 
 Gama kód přirozeného čísla *N* se vytváří z těchto komponent:
 
 - alfa kód délky beta kódu *N* (slovo *A*)
 - beta s čárkou *N* (slovo *B*)
 
-Slovo *A* je vždy o jeden symbol delší, než část *B*. Proto je možné "vložit" mezi jednotlivé symboly delší část všechny symboly kratšího slova tak, že první, lichý a poslední symbol pochází ze slova *A*, zatímco všechny sudé symboly z části *B* (například ze slov **AAAA** a **BBB** vznikne slovo **ABABABA**).
+Slovo *A* je vždy o jeden symbol delší, než část *B*. Proto je možné "vložit" mezi jednotlivé symboly delší část všechny symboly kratšího slova tak, že liché symboly pochází ze slova *A*, zatímco všechny sudé symboly z části *B* (například ze slov **AAAA** a **BBB** vznikne slovo **ABABABA**).
 
 Nechť je tedy zavedena funkce *F*, která toto "vnoření" kratšího řetězce do delšího provede. Gama kód je pak definován takto:
 

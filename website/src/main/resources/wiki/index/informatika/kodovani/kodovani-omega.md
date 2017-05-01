@@ -2,9 +2,9 @@
 
 Omega kód je jednoduchý algoritmus kódování přirozených čísel. Omega kód čísla 1 je definován jako *0*, kód obecného přirozeného čísla *N* > 1 lze definovat rekurzivně pomocí tohoto algoritmu:
 
-1. Nechť řetězec *A* je binární zápis (beta kód) čísla *N*.
+1. Nechť řetězec *A* je binární zápis ([kódování beta](wiki/kodovani-beta)) čísla *N*.
 1. Je-li délka řetězce *A* větší než 2, opakuj předchozí krok pro *N* = délka řetězce *A* zmenšená o jedničku.
-1. Na konec kódového slova přidej nulu.
+1. Na konec kódového slova přidej *nulu*.
 
 | Číslo | Konstrukce kódu | Kód
 |---|---|---
@@ -28,7 +28,7 @@ Omega kód s čárkou funguje na stejném principu jako kód omega, ale rekurze 
 
 1. Nechť řetězec *A* je binární zápis (beta kód) čísla *N*.
 1. Je-li délka řetězce *A* větší než 3, opakuj předchozí krok pro *N* = délka řetězce *A* zmenšená o jedničku.
-1. Na konec kódového slova přidej nulu.
+1. Na konec kódového slova přidej *nulu*.
 
 | Číslo | Konstrukce kódu | Kód
 |---|---|---

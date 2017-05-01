@@ -1,15 +1,15 @@
 ## Burrows-Wheelerova transformace
 
-Burrows-Wheelerova transformace je [kódování](wiki/kodovani), které se používá před kompresí, aby zvýšilo její efektivitu. Tato transformace způsobí, že se frekventované symboly a jejich skupiny přesunou tak, že jsou více pohromadě. 
+Burrows-Wheelerova transformace je [kódování](wiki/kodovani), které se používá před kompresí, aby zvýšilo její efektivitu. Tato transformace způsobí, že se frekventované symboly a jejich skupiny přesunou blíže k sobě. 
 
-Burrows-Wheelerovat transformace se používá jako pre-processing před použitím [kompresního algoritmu](wiki/kompresni-algoritmus). Po dekompresi se opět musí provést zpětná transformace (podobně jako u každého jiného skládání [zobrazení](wiki/zobrazeni).
+Burrows-Wheelerova transformace se typicky používá jako pre-processing před použitím [kompresního algoritmu](wiki/kompresni-algoritmus). Po dekompresi se musí opět provést zpětná transformace (podobně jako u každého jiného složeného [zobrazení](wiki/zobrazeni)).
 
 ### Transformace
 
 Nejprve se vytvoří všechny cyklické rotace zadaného řetězce.
 
 | Index řádku | Posunutý řetězec
-|---|---|---
+|---|---
 | 0 | ABRABABRA *(eof)*
 | 1 | *(eof)* ABRABABRA
 | 2 | A *(eof)* ABRABABR
@@ -24,7 +24,7 @@ Nejprve se vytvoří všechny cyklické rotace zadaného řetězce.
 Potom se všechny řetězce vzniklé rotací lexikograficky seřadí.
 
 | Index řádku | Posunutý řetězec
-|---|---|---
+|---|---
 | 7 | ABABRA *(eof)* ABR
 | 0 | ABRABABRA *(eof)*
 | 5 | ABRA *(eof)* ABRAB
@@ -44,10 +44,10 @@ Ve výsledném řetězci je například vidět trojnásobné opakování symbolu
 
 ### Inverzní transformace
 
-Vstupem pro inverzní transformaci bude řetězec R*(eof)*BRAAABBA. Tento řetězec se vloží jako poslední sloupec prázdné tabulky.
+Vstupem pro inverzní transformaci bude řetězec R *(eof)* BRAAABBA. Tento řetězec se vloží jako poslední sloupec prázdné tabulky.
 
 | Index řádku | Posunutý řetězec
-|---|---|---
+|---|---
 | 0 | R
 | 1 | *(eof)*
 | 2 | B
@@ -62,7 +62,7 @@ Vstupem pro inverzní transformaci bude řetězec R*(eof)*BRAAABBA. Tento řetě
 Řádky se po každém kroku seřadí lexikograficky:
 
 | Index řádku | Posunutý řetězec
-|---|---|---
+|---|---
 | 0 | A
 | 1 | A
 | 2 | A
@@ -77,7 +77,7 @@ Vstupem pro inverzní transformaci bude řetězec R*(eof)*BRAAABBA. Tento řetě
 Opět vložíme vstupní řetězec R *(eof)* BRAAABBA:
 
 | Index řádku | Posunutý řetězec
-|---|---|---
+|---|---
 | 0 | RA
 | 1 | *(eof)* A
 | 2 | BA
@@ -92,7 +92,7 @@ Opět vložíme vstupní řetězec R *(eof)* BRAAABBA:
 A řádky opět seřadíme:
 
 | Index řádku | Posunutý řetězec
-|---|---|---
+|---|---
 | 0 | AB
 | 1 | AB
 | 2 | AB
@@ -107,7 +107,7 @@ A řádky opět seřadíme:
 Takto se postupuje stále dál, dokud není tabulka zaplněna.
 
 | Index řádku | Posunutý řetězec
-|---|---|---
+|---|---
 | 0 | ABABRA *(eof)* ABR
 | 1 | ABRABABRA *(eof)* 
 | 2 | ABRA *(eof)* ABRAB
@@ -125,7 +125,7 @@ ABRABABRA *(eof)*
 
 ### Asymptotická složitost
 
-Při implementaci se samozřejmě nemusí vytvářet žádné tabulky v paměti, které by zabíraly mnoho místa, pracuje se s ukazateli. V případě použití efektivních metod tvorby tabulky a řazení řetězců je asymptotická časová složitost €O(n\cdot\log(n))€. Při použití [datové struktury](wiki/datova-struktura) Suffix Array může klesnout až na €O(n)€.
+Při implementaci se samozřejmě nemusí vytvářet žádné tabulky v paměti, protože by zabíraly mnoho místa. Proto se pracuje s ukazateli. V případě použití efektivních metod tvorby tabulky a [řazení řetězců](wiki/radici-algoritmus) je [asymptotická časová složitost](wiki/asymptoticka-slozitost) €O(n\cdot\log(n))€. Při použití [datové struktury](wiki/datova-struktura) Suffix Array může klesnout až na €O(n)€.
 
 ### Reference
 

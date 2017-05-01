@@ -1,6 +1,6 @@
 ## Alfa kód
 
-Alfa kód je jednoduchý algoritmus pro kódování přirozených čísel. Zobrazí každé přirozené číslo *N* jako *N* bitů. Všechny bity až na poslední jsou **nula**, poslední bit je **jedna**. Alfa kód je prefixový.
+Alfa kód je jednoduchý algoritmus pro kódování přirozených čísel. Zobrazí každé přirozené číslo *N* jako *N* bitů. Všechny bity kromě posledního jsou **nula**, poslední bit je vždy **jedna**. Alfa kód je tedy prefixový.
 
 | Číslo | Kód
 |---|---

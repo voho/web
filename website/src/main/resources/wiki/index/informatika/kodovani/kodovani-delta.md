@@ -1,6 +1,6 @@
 ## Delta kód
 
-Delta kód je jednoduchý algoritmus pro kódování přirozených čísel. V tomto kódování se využívá gama kód, beta kód a beta kód s čárkou. Delta kód je permutací delta kódu s čárkou (viz níže). Funguje podobně jako gama kód s čárkou, ale místo kódování alfa používá kódování gama.
+Delta kód je jednoduchý algoritmus pro kódování přirozených čísel. V tomto kódování se využívá [gama kód](wiki/kodovani-gama), [beta kód](wiki/kodovani-beta) a beta kód s čárkou. Delta kód je permutací delta kódu s čárkou (viz níže). Funguje podobně jako gama kód s čárkou, ale místo [kódování alfa](wiki/kodovani-alfa) používá kódování gama.
 
 Delta kód přirozeného čísla *N* je zřetězením těchto komponent:
 
