@@ -35,10 +35,11 @@ Volně řečeno, centrální limitní věta říká, že pokud je nějaká náho
 
 #### Alternativní rozdělení
 
-Alternativní rozdělení je diskrétní rozdělení pravděpodobnosti náhodné proměnné, která s pravděpodobností *p* nabývá hodnoty 1 a s pravděpodobností {\displaystyle 1-p} {\displaystyle 1-p} nabývá hodnoty 0. Jde o speciální případ binomického rozdělení.
+Alternativní rozdělení je diskrétní rozdělení pravděpodobnosti náhodné proměnné, která s pravděpodobností €p€ nabývá hodnoty 1 a s pravděpodobností €1-p€  hodnoty 0. Jde také o speciální případ binomického rozdělení, kde €n=1€.
 
 Střední hodnota
 : € \mathrm{E}(X)=p €
+
 Rozptyl
 : € \mathrm{D}(X)=p(1-p) €
 
@@ -50,6 +51,7 @@ Rovnoměrné rozdělení €R(a,b)€ na intervalu €(a,b)€, kde € a<b €,
 
 Střední hodnota
 : € \mathrm{E}(X)=\frac{a+b}{2} €
+
 Rozptyl
 : € \mathrm{D}(X)=\frac{{(b-a)}^{2}}{12} €
 
@@ -61,6 +63,7 @@ Binomické rozdělení €B(n,p)€ popisuje četnost výskytu náhodného jevu 
 
 Střední hodnota
 : € \mathrm{E}(X)=n \cdot p €
+
 Rozptyl
 : € \mathrm{D}(X)=n \cdot p(1-p) €
 
