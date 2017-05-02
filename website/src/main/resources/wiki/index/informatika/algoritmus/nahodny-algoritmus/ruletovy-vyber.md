@@ -8,22 +8,37 @@ Váhy nemusí být celočíselné - jediný rozdíl je v tom, že celočíselné
 Hodnoty váhy mohou být teoreticky libovolně veliké, protože se porovnávají pouze samy mezi sebou, avšak implementace mohou nějaká omezení klást - například rozsahem datových typů.
 
 Jak ruletový výběr funguje? Představme si, že máme prvky (*A*, *B*, *C*, *D*, *E*, *F*) s celočíselnými vahami (4, 1, 3, 8, 1, 1).
-Z těchto údajů můžeme vytvořit následující ruletu, ve které každý prvek zopakujeme právě tolikrát, kolik udává jeho váha:
-
-```dot:graph
-node[shape=record]
-A[label="A|A|A|A|B|C|C|C|D|D|D|D|D|D|D|D|E|F"]
-```
-
+Z těchto údajů můžeme vytvořit následující ruletu, ve které každý prvek zopakujeme právě tolikrát, kolik udává jeho váha.
 Na pořadí prvků vůbec nezáleží, protože předpokládáme, že každé políčko rulety může být vybráno se stejnou pravděpodobností.
-Proto lze stejných výsledků dosáhnout i s touto ruletou, ve které prvky náhodně přeházíme:
 
 ```dot:graph
 node[shape=record]
 A[label="B|A|D|D|A|D|C|D|D|A|E|D|C|C|F|D|A|D"]
 ```
 
-Nyní už stačí jen vybrat náhodné políčko a po provedení dostatečně velkého množství výběrů uvidíme, že se relativní četnosti vybraných prvků blíží jejich vahám.
+Aby se tento algoritmus lépe implementoval, zkusme ruletu trochu upravit.
+V nové ruletě políčka uspořádáme tak, aby všechna políčka představující stejné prvky následovala za sebou:
+
+```dot:graph
+node[shape=record]
+A[label="A|A|A|A|B|C|C|C|D|D|D|D|D|D|D|D|E|F"]
+```
+
+Z rulety nyní můžeme vypsat rozsahy políček, které jednotlivé prvky zabírají (první políčko číslujeme jako *0*):
+
+| Prvek | Počet políček (váha) | Počáteční políčko | Koncové políčko | Rozsah políček
+|---|---|---|---|---
+| A | 4 | 0 | 3 | (0 až 3)
+| B | 1 | 4 | 4 | (4 až 4)
+| C | 3 | 5 | 7 | (5 až 7)
+| D | 8 | 8 | 15 | (8 až 15)
+| E | 1 | 16 | 16 | (16 až 16)
+| F | 1 | 17 | 17 | (17 až 17)
+
+Prvek vybereme opět tak, že zvolíme náhodné políčko a vrátíme prvek, který se na daném políčku nachází.
+Nyní však stačí jen projít tabulku a najít rozsah, do kterého toto náhodně vybrané políčko patří.
+Jelikož má tabulka pro každý prvek jen jeden řádek, je průchod tabulkou daleko rychlejší než roztáčení rulety, která musí mít právě tolik políček, kolik udává celková váha.
+Druhou výhodou tabulky je, že váhy nyní nemusí být celočíselné.
 
 Jednoduchá implementace v [jazyce Java](wiki/java):
 
