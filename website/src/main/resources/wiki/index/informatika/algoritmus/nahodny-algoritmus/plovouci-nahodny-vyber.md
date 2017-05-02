@@ -14,9 +14,9 @@ Pokud chceme vybrat *s* náhodných prvků z předem neznámého výčtu prvků,
 
 1. Inicializujeme pole €R€ o velikosti €s€.
 1. Prvních €s€ přijatých prvků postupně uložíme do pole €R€.
-1. Pro každý další přijatý prvek na pozici €k = s+1 až n€:
+1. Pro každý další přijatý prvek na pozici €k = s+1 € až €n€:
     1. S pravděpodobností €s/k€ prvek přijmeme a nahradíme jím náhodně vybraný prvek v poli €R€.
-1. Předchozí bod se opakuje, dokud nejsou přijaty všechny prvky.
+1. Předchozí bod se opakuje, dokud nejsou vyčerpány všechny prvky.
 
 Jak a proč tato technika funguje? 
 
