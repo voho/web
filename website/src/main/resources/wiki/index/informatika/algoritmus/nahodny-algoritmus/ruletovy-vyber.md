@@ -11,18 +11,18 @@ Jak ruletový výběr funguje? Představme si, že máme prvky (*A*, *B*, *C*, *
 Z těchto údajů můžeme vytvořit následující ruletu, ve které každý prvek zopakujeme právě tolikrát, kolik udává jeho váha.
 Na pořadí prvků vůbec nezáleží, protože předpokládáme, že každé políčko rulety může být vybráno se stejnou pravděpodobností.
 
-```dot:graph
-node[shape=record]
-A[label="B|A|D|D|A|D|C|D|D|A|E|D|C|C|F|D|A|D"]
-```
+|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---
+|B|A|D|D|A|D|C|D|D|A|E|D|C|C|F|D|A|D
 
-Aby se tento algoritmus lépe implementoval, zkusme ruletu trochu upravit.
+Prvek nyní zvolíme tak, že vybereme náhodné políčko (0 až 17) a vrátíme odpovídající prvek (např. pro náhodné číslo 5 vrátíme prvek *D*).
+
+Aby se však tento algoritmus lépe implementoval, zkusme ruletu trochu upravit.
 V nové ruletě políčka uspořádáme tak, aby všechna políčka představující stejné prvky následovala za sebou:
 
-```dot:graph
-node[shape=record]
-A[label="A|A|A|A|B|C|C|C|D|D|D|D|D|D|D|D|E|F"]
-```
+|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---
+|A|A|A|A|B|C|C|C|D|D|D|D|D|D|D|D|E|F
 
 Z rulety nyní můžeme vypsat rozsahy políček, které jednotlivé prvky zabírají (první políčko číslujeme jako *0*):
 
@@ -35,8 +35,8 @@ Z rulety nyní můžeme vypsat rozsahy políček, které jednotlivé prvky zabí
 | E | 1 | 16 | 16 | (16 až 16)
 | F | 1 | 17 | 17 | (17 až 17)
 
-Prvek vybereme opět tak, že zvolíme náhodné políčko (0 až 17) a vrátíme prvek, který se na daném políčku nachází.
-Nyní však stačí jen projít tabulku a najít rozsah, do kterého toto náhodně vybrané políčko patří.
+Prvek vybereme opět tak, že zvolíme náhodné políčko (0 až 17) a vrátíme prvek, který se na něm nachází (např. pro náhodné číslo 7 vrátíme prvek *C*).
+Nyní však nemusíme znát všechna políčka, stačí nám projít tabulku a najít rozsah, do kterého toto náhodně vybrané políčko patří.
 Jelikož má tabulka pro každý prvek jen jeden řádek, je průchod tabulkou daleko rychlejší než roztáčení rulety, která musí mít právě tolik políček, kolik udává celková váha.
 
 Druhou výhodou tabulky je, že váhy nyní nemusí být celočíselné. Podobného výběru bychom mohli dosáhnout například s touto tabulkou:
@@ -51,6 +51,7 @@ Druhou výhodou tabulky je, že váhy nyní nemusí být celočíselné. Podobn�
 | F | 0,1 | <1.7 až 1.8)
 
 Nyní však musíme vygenerovat náhodné číslo v rozsahu *0* (včetně) až *1,8*.
+Výběr probíhá stejně - opět najdeme odpovídající rozsah a vrátíme prvek, který do něj patří (např. pro náhodné číslo 0,2442 vrátíme prvek *A*).
 
 Jednoduchá implementace v [jazyce Java](wiki/java):
 
