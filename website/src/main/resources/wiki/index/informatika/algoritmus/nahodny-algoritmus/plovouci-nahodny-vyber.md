@@ -20,13 +20,14 @@ Pokud chceme vybrat *s* náhodných prvků z předem neznámého výčtu prvků,
 
 Jak a proč tato technika funguje? 
 
-Algoritmus vždy vybírá prvek *k* s pravdpěpodobností €1/k€. Pro prvek €k+1€ to tedy bude €1/(k+1)€.
-Prvek €k+1€ může být vybrán v případě, že předchozí prvek €k€ byl přeskočen (€p=1/k€) a následující prvky ho nepřeskočí (€p=1-(1/(k+1))€).
-Součinem těchto pravděpodobností dostáváme €p=1/k \cdot (1-(1/(k+1)))= 1/k \cdot (k/(k+1)) = 1/(k+1) €, což odopovídá očekávané hodnotě €1/n€.
+Řekněme, že chceme náhodně vybrat €s€ prvků a vyhodnotili jsme již €n>s€ prvků, přičemž každý z těchto €s€ prvků byl vybrán se stejnou pravděpodobností €s/n€.
+Podle definice algoritmus vybere prvek €I_{n+1}€ s pravděpodobností €s/(n+1)€ a po svém vybrání může jakýkoliv již vybraný prvek nahradit se stejnou pravděpodobností €1/s€.
+Pravděpodobnost, že při vyhodnocování prvku €I_{n+1}€ nahradíme nějaký již vybraný, je €(1/s) \cdot (s/(n+1)) = 1/(n+1)€.
+Pravděpodobnost opačného případu, tedy toho, že prvek €I_{n+1}€ přeskočíme, je rovna €1-(1/(n+1)) = n/(n+1)€.
+Množina vybraných prvků po vyhodnocení €n+1€ prvků obsahuje prvek €I_{n+1}€ buď tehdy, když byl vybrán dříve a nahrazen nebyl (€p = (s/n) \cdot (n \cdot (n+1)) = s/(n+1) €), nebo tehdy, když vybrán byl a tedy nahradí některý již vybraný prvek (€p = s/(n+1)€).
+V obou případech bude pravděpodobnost výběru prvku odpovídat očekávané hodnotě €s/(n+1)€.
 
-!TODO!
-
-Implementace této techniky v [jazyce Java](wiki/java):
+Jednoduchá implementace této techniky v [jazyce Java](wiki/java) (pozor, pro velké objemy dat musíme počítat se zaokrouhlovací chybou a omezeným rozsahem typu *javadoc:java.lang.Integer*):
 
 ```java
 public class ReservoirSampling {
