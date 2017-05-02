@@ -35,10 +35,22 @@ Z rulety nyní můžeme vypsat rozsahy políček, které jednotlivé prvky zabí
 | E | 1 | 16 | 16 | (16 až 16)
 | F | 1 | 17 | 17 | (17 až 17)
 
-Prvek vybereme opět tak, že zvolíme náhodné políčko a vrátíme prvek, který se na daném políčku nachází.
+Prvek vybereme opět tak, že zvolíme náhodné políčko (0 až 17) a vrátíme prvek, který se na daném políčku nachází.
 Nyní však stačí jen projít tabulku a najít rozsah, do kterého toto náhodně vybrané políčko patří.
 Jelikož má tabulka pro každý prvek jen jeden řádek, je průchod tabulkou daleko rychlejší než roztáčení rulety, která musí mít právě tolik políček, kolik udává celková váha.
-Druhou výhodou tabulky je, že váhy nyní nemusí být celočíselné.
+
+Druhou výhodou tabulky je, že váhy nyní nemusí být celočíselné. Podobného výběru bychom mohli dosáhnout například s touto tabulkou:
+
+| Prvek | Váha | Rozsah políček
+|---|---|---
+| A | 0,4 | <0 až 0.4)
+| B | 0,1 | <0.4 až 0.5)
+| C | 0,3 | <0.5 až 0.8)
+| D | 0,8 | <0.8 až 1.6)
+| E | 0,1 | <1.6 až 1.7)
+| F | 0,1 | <1.7 až 1.8)
+
+Nyní však musíme vygenerovat náhodné číslo v rozsahu *0* (včetně) až *1,8*.
 
 Jednoduchá implementace v [jazyce Java](wiki/java):
 
