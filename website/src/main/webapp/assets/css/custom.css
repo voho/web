@@ -125,6 +125,7 @@ iframe {
     display: none;
     width: 100%;
     position: fixed;
+    z-index: 10000;
 }
 
 #search .inner, #toc .inner {
@@ -638,6 +639,21 @@ a.logo:hover strong {
 
 dl dd {
     margin-left: 2em;
+}
+
+/* special mark-up */
+
+.todo {
+    display: block;
+    color: white;
+    background-color: black;
+    text-align: center;
+    font-weight: bold;
+    font-size: 120%;
+    padding: 1ex;
+    width: 20%;
+    margin: 1em 0;
+    letter-spacing: 3pt;
 }
 
 /* typed */

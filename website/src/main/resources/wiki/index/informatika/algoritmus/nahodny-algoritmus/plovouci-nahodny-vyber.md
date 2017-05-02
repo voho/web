@@ -35,7 +35,7 @@ public class ReservoirSampling {
      * @param stream stream of elements
      * @param s reservoir size (number of elements)
      * @param <T> element type
-     * @return list of random elements from the stream
+     * @return list of s random elements from the stream
      */
     public static <T> List<T> reservoirSampling(final Iterator<T> stream, final int s) {
         final List<T> R = new ArrayList<>(s);
@@ -83,7 +83,7 @@ public class ReservoirSampling {
      * Randomly select one item from a stream of items of unknown length.
      * @param stream stream of elements
      * @param <T> element type
-     * @return list of random elements from the stream
+     * @return one random element from the stream
      */
     public static <T> Optional<T> reservoirSampling(final Iterator<T> stream) {
         Optional<T> R = Optional.empty();
