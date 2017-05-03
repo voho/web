@@ -20,12 +20,13 @@ Pokud chceme vybrat *s* náhodných prvků z předem neznámého výčtu prvků,
 
 Jak a proč tato technika funguje? 
 
-Řekněme, že chceme náhodně vybrat €s€ prvků a vyhodnotili jsme již €n>s€ prvků, přičemž každý z těchto €s€ prvků byl vybrán se stejnou pravděpodobností €s/n€.
-Podle definice algoritmus vybere prvek €I_{n+1}€ s pravděpodobností €s/(n+1)€ a po svém vybrání může jakýkoliv již vybraný prvek nahradit se stejnou pravděpodobností €1/s€.
-Pravděpodobnost, že při vyhodnocování prvku €I_{n+1}€ nahradíme nějaký již vybraný, je €(1/s) \cdot (s/(n+1)) = 1/(n+1)€.
-Pravděpodobnost opačného případu, tedy toho, že prvek €I_{n+1}€ přeskočíme, je rovna €1-(1/(n+1)) = n/(n+1)€.
-Množina vybraných prvků po vyhodnocení €n+1€ prvků obsahuje prvek €I_{n+1}€ buď tehdy, když byl vybrán dříve a nahrazen nebyl (€p = (s/n) \cdot (n \cdot (n+1)) = s/(n+1) €), nebo tehdy, když vybrán byl a tedy nahradí některý již vybraný prvek (€p = s/(n+1)€).
-V obou případech bude pravděpodobnost výběru prvku odpovídat očekávané hodnotě €s/(n+1)€.
+Každý prvek €I_k€ je nahrazen následujícím prvkem s pravděpodobností €1/k€ a zachován v ostatních případech, což znamená €1-(1/k)=(k-1)/k€.
+
+Aby byl prvek €I_k€ nakonec vybrán, musí nastat současně tyto jevy:
+- předchozí prvek €I_{k-1}€ je nahrazen, což nastane s pravděpodobností €1/(k-1)€ (viz definice algoritmu)
+- aktuální €I_k€ prvek není přeskočen, což nastane s pravděpodobností €1-(1/k)=(k-1)/k€ (viz definice algoritmu)
+
+Pravděpodobnost toho, že tyto dva jevy nastanou současně, je tedy €(1/(k-1))\cdot((k-1)/k)=1/k€, což odpovídá předpokladu.
 
 Jednoduchá implementace této techniky v [jazyce Java](wiki/java) (pozor, pro velké objemy dat musíme počítat se zaokrouhlovací chybou a omezeným rozsahem typu *javadoc:java.lang.Integer*):
 
@@ -114,6 +115,7 @@ public class ReservoirSampling {
 
 ### Reference
 
+- http://blog.cloudera.com/blog/2013/04/hadoop-stratified-randosampling-algorithm/
 - https://gregable.com/2007/10/reservoir-sampling.html
 - http://www.cs.umd.edu/~samir/498/vitter.pdf
 - https://xlinux.nist.gov/dads/HTML/reservoirSampling.html
