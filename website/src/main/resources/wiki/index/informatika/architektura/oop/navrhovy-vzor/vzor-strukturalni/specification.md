@@ -2,7 +2,7 @@
 
 ### Problém
 
-Je potřeba vybírat objekty na základě určitých kritérií a tato kritéria uchovat pro opakované použití (například jako databázový dotaz, filtr nebo validace).
+Je potřeba vybírat objekty na základě určitých kritérií. Tato kritéria chceme modelovat pomocí bojektů, abychom je mohli například předávat v programu nebo uchovat pro opakované použití. Příkladem může být databázový dotaz, uživatelský filtr nebo pravidla validace.
 
 ### Řešení
 
