@@ -11,7 +11,7 @@ public class TodoPreprocessor implements Preprocessor {
         final ReplacePatternCallback rp = new ReplacePatternCallback(Pattern.compile("!TODO!", Pattern.MULTILINE));
         String sourceFixed = rp.replace(context.getSource().getMarkdownSource(), matchResult -> {
             context.setTodo(true);
-            return "<span class='todo'>TODO</span>";
+            return "<img src='/assets/images/todo.png' alt='TODO' />";
         });
         context.getSource().setMarkdownSource(sourceFixed);
     }
