@@ -61,17 +61,46 @@ Příklady: Chyba při zaokrouhlování, hod kostkou (diskrétní).
 
 Binomické rozdělení €B(n,p)€ popisuje četnost výskytu náhodného jevu v €n€ nezávislých pokusech, v nichž má jev stále stejnou pravděpodobnost €p€. Pokud €n=1€, jde o alternativní rozdělení. Pro velký počet pokusů a malé pravděpodobnosti (€ n \to \infty, p \to 0 €) přechází v rozdělení Poissonovo (pro velká €n€ je také obtížné počítat velká [kombinační čísla](wiki/kombinatorika)).
 
+Příklady: 
+
+- Počet orlů a pannen v několika po sobě následujících hodech mincí (diskrétní)
+- Počet hlasů pro dva kandidáty ve volbách
+- Počet mužů a žen zaměstnaných v nějaké společnosti
+- Počet denních transakcí, které jsou v souladu s regulací
+- Počet úspěšných telefonních prodejů, provedených za určitou dobu
+- Počet zmetků ve výrobě za určitou dobu
+
+Hustota pravděpodobnosti
+: €P(X=x) = \frac{n!}{x!(n-x)} \cdot p^x \cdot (1-p)^{n-x}€
+
 Střední hodnota
 : € \mathrm{E}(X)=n \cdot p €
 
 Rozptyl
 : € \mathrm{D}(X)=n \cdot p(1-p) €
 
-Příklad: Jaká je pravděpodobnost, že ze sto hodů mincí padne deset pannen? (diskrétní)
-
 #### Poissonovo rozdělení
 
-!TODO!
+Poissonovo rozdělení €P(\lambda)€ popisuje četnost výskytu náhodného jevu v mnoha nezávislých pokusech, v nichž má jev stále stejnou malou pravděpodobnost €p€. Jedná se o speciální případ binomického rozdělení pro velké €n€ a malé €p€. 
+Můžeme říci, že popisuje situace, ve kterých sledujeme výskyt určité málo pravděpodobné události v čase (protože čas je z našeho hlediska spojitý) a kdy se pravděpodobnost jevu dále snižuje s tím, jak daný časový interval zkracujeme.
+
+Příklady:
+
+- Denní počet zákazníků, kteří dorazí na určitou pobočku banky
+- Počet nehod na určitém úseku dálnice
+- Počet návštěv na webové stránce za hodinu
+- Počet tísňových hovorů v Praze během dne
+- Měsíční poptávka po určitém produktu
+- Počet překlepů v knize
+
+Hustota pravděpodobnosti
+: €P(X=x) = e^{-\lambda t \frac{\lambda t^x}{x!}}€
+
+Střední hodnota
+: € \mathrm{E}(X)=\lambda €
+
+Rozptyl
+: € \mathrm{D}(X)=\lambda €
 
 #### Normální (Gaussovo) rozdělení
 
@@ -89,6 +118,7 @@ Příklad: Jaká je pravděpodobnost, že ze sto hodů mincí padne deset pannen
 
 ### Reference
 
+- https://www.utdallas.edu/~scniu/OPRE-6301/documents/Important_Probability_Distributions.pdf
 - https://is.muni.cz/do/rect/el/estud/prif/ps15/statistika/web/pages/zakon-velkych-cisel.html
 - https://is.muni.cz/do/rect/el/estud/prif/ps15/statistika/web/pages/centralni-limitni-veta.html
 - https://homen.vsb.cz/~oti73/cdpast1/KAP05/PRAV5.HTM
