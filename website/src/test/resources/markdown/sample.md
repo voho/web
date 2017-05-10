@@ -4,6 +4,10 @@ Návrhový vzor abstract factory je návrhovým vzorem pro strukturu objektů. P
 
 Obecně lze mít rozsáhlé hierarchie produktů i továrních tříd, přičemž klient nemůže očekávat žádnou konkrétní implementaci továrny či produktu, musí mu stačit jen to nejobecnější rozhraní od každého. Všechny možné produkty tovární třídy mají společného předka a klient spoléhá pouze na to, že mu bude vrácen jeden z potomků této třídy. Dopředu neví, který to bude - logiku pro jeho výběr zná pouze tovární třída. To umožňuje klientovi se všemi možnými produkty pracovat stejně. Klient má k dispozici pouze rozhraní jejich abstraktního předka a neměl by mít žádná očekávání ohledně tovární třídy, která bude pro vytvoření instancí použita.
 
+### Emoji
+
+:bowtie: :blush: :stuck_out_tongue_winking_eye:
+
 ### UML diagramy
 
 ```uml:class

@@ -3,7 +3,15 @@ package cz.voho.wiki.backend;
 import com.google.common.io.Resources;
 import cz.voho.wiki.model.ParsedWikiPage;
 import cz.voho.wiki.model.WikiPageSource;
-import cz.voho.wiki.parser.*;
+import cz.voho.wiki.parser.CodePreprocessor;
+import cz.voho.wiki.parser.EmojiPreprocessor;
+import cz.voho.wiki.parser.FlexmarkWikiParser;
+import cz.voho.wiki.parser.ImagePreprocessor;
+import cz.voho.wiki.parser.JavadocPreprocessor;
+import cz.voho.wiki.parser.MathPreprocessor;
+import cz.voho.wiki.parser.QuotePreprocessor;
+import cz.voho.wiki.parser.TodoPreprocessor;
+import cz.voho.wiki.parser.WikiLinkPreprocessor;
 import cz.voho.wiki.repository.image.WikiImageRepository;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -18,7 +26,8 @@ public class FlexmarkWikiParserTest {
             new WikiLinkPreprocessor(),
             new TodoPreprocessor(),
             new ImagePreprocessor(),
-            new JavadocPreprocessor()
+            new JavadocPreprocessor(),
+            new EmojiPreprocessor()
     );
 
     @Test
