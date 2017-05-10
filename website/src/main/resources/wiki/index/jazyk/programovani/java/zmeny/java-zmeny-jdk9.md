@@ -2,7 +2,35 @@
 
 Tento seznam není úplný, protože [změn je opět mnoho](https://www.jcp.org/en/jsr/detail?id=379), ale zachycuje to nejdůležitější z hlediska běžného vývojáře.
 
-### Statické tovární metody pro kolekce (JEP 269)
+### Drobná vylepšení API
+
+Nejprve několik nových metod pro [proudy](wiki/java-stream). 
+Pozor na metody *takeWhile* a *dropWhile*, které se chovají odlišně pro proudy [s definovaným pořadím](https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html#Ordering) (ordered) a bez tohoto pořadí (unordered).
+Pro proudy bez pořadí není jejich chování definováno.
+
+```java
+// takeWhile (prints: 1 2 3)
+Stream.of(1, 2, 3, 4, 10, 1).takeWhile(i -> i < 4).forEach(System.out::println);
+
+// dropWhile (prints: 1 2 10 1)
+Stream.of(1, 2, 3, 4, 10, 1).dropWhile(i -> i > 2 && i < 5).forEach(System.out::println);
+
+// Optional.stream (prints: 1)
+Optional.of(1).stream().forEach(System.out::println);
+
+// Optional.stream (prints nothing)
+Optional.empty().stream().forEach(System.out::println);
+
+// empty stream for NULL (prints nothing)
+Stream.ofNullable(null).forEach(System.out::println);
+
+// extended iterate on stream (prints 0 1 2 3 4)
+Stream.iterate(0, i -> i < 5; i -> i + 1).forEach(System.out::println);
+
+// collectors
+// TODO Collectors.filtering
+// TODO Collectors.flatMapping
+```
 
 Pro množinu (*javadoc:java.util.Set*), seznam (*javadoc:java.util.List) a mapu (*javadoc:java.util.Map*) byly přidány statické [tovární metody](wiki/factory-method) pro vytváření nemodifikovatelných instancí těchto objektů.
 
@@ -23,29 +51,76 @@ Map<String, String> map = Map.ofEntries(
 );
 ```
 
-- Reference: http://openjdk.java.net/jeps/269
+Vylepšení [vstupně-výstupních proudů](wiki/java-io-stream):
 
-### Nové metody pro stream
+```java
+ByteArrayInputStream bais = new ByteArrayInputStream(buffer);
 
-dropWhile(), takeWhile()
-: podobné jako *skip* a *limit*, ale používají predikát místo čísla
+// přečíst všechny bajty
+byte[] result = bais.readAllBytes();
 
-iterate()
-: proud bude lépe použitelný jako cyklus *for*
+// kopírovat celý proud
+bais.transferTo(someOutputStream);
+```
 
-Optional.stream()
-: vytvoří prázdný proud nebo proud s jedním prvkem
+Nyní je také možné snadno zjistit, v jakém balíčku se daná třída nachází.
 
-### Privátní metody v rozhraních 
+```java
+String thisPackageName = this.getClass().getPackageName();
+```
 
-!TODO!
+### Drobná vylepšení jazyka
+
+Povolení privátních metod v rozhraních jen jen logickým následkem přidáním výchozích metod (default methods) v rozhraních v [minulé verzi jazyka](wiki/java-zmeny-jdk8).
+Tento mechanismus umožní přepoužití kódu a lepší zapouzdření - v případě rozdělení kódu do několika metod.
+
+```java
+interface SomeLogger {
+    default void logError(String message) {
+        log(message, "ERROR");
+    }
+    
+    default void logFatal(String message) {
+        log(message, "FATAL");
+    }
+    
+    private void log(String message, String prefix) {
+        log(prefix + ": " + message);  
+    }
+    
+    void log(String message);
+}
+```
+
+Inicialize instancí typu *javadoc:java.lang.AutoCloseable* už nemusí být uzavřené v bloku *try*. 
+Jediná podmínka kladaná na tyto instance je, že musí být "efektivně finální" (effective final). 
+
+```java
+public void tryWithResourcesOnVariable() throws IOException {
+    BufferedReader reader = new BufferedReader(new FileReader("file.txt"));
+    
+    try (reader) {
+        // ...
+    }
+}
+
+public void tryWithResourcesOnArgument(BufferedReader reader) throws IOException {
+    try (reader) {
+        // ...
+    }
+}
+```
+
+A pozor, podtržítko již není platnou součástí identifikátorů.
 
 ## Rozšíření knihovny nástrojů pro paralelizaci (JEP 266)
 
 Několik vylepšení doznala i knihovna nástrojů pro implementaci paralelních aplikací.
-První změnou je přidání podpory pro reaktivní proudy (reactive streams), což umožní snadnější implementaci aplikací typu publisher-subscriber.
 
-Další drobná vylepšení jsou ve třídě *CompletableFuture*.
+První změnou je přidání podpory pro reaktivní proudy (reactive streams), což umožní snadnější implementaci aplikací typu publisher-subscriber.
+K tomuto účelu byly přidány třídy *javadoc:java.util.concurrent.Flow*, *javadoc:java.util.concurrent.Flow.Publisher*, *javadoc:java.util.concurrent.Flow.Subscriber*, *javadoc:java.util.concurrent.Flow.Processor*.
+
+Další změny můžeme najít například v *CompletableFuture* a dalších často používaných třídách.
 
 - Reference: http://openjdk.java.net/jeps/266
 
@@ -186,3 +261,5 @@ Tato čistě vnitřní optimalizace redukuje potřebu spouštění garbage colle
 - http://www.baeldung.com/java-9-process-api
 - https://dzone.com/articles/a-look-at-intellij-ideas-support-for-java-9-modules
 - https://www.voxxed.com/blog/2016/10/java-9-series-concurrency-updates/
+- https://bentolor.github.io/java9-in-action/#/1
+- http://blog.codefx.org/java/java-9-stream/
