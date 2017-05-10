@@ -23,7 +23,7 @@ public class EmojiPreprocessor implements Preprocessor {
 
     static {
         try {
-            final URL mapResource = ClassLoader.getSystemClassLoader().getResource("emojimap.json");
+            final URL mapResource = EmojiPreprocessor.class.getResource("/emojimap.json");
             String map = Resources.toString(mapResource, StandardCharsets.UTF_8);
             smileys = new JsonParser().parse(map).getAsJsonObject();
         } catch (IOException e) {
