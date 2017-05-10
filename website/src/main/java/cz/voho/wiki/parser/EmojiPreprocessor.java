@@ -1,52 +1,82 @@
 package cz.voho.wiki.parser;
 
-import com.google.common.io.Resources;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import cz.voho.common.exception.InitializationException;
 import cz.voho.common.utility.ReplacePatternCallback;
 import cz.voho.wiki.model.ParsedWikiPage;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.URL;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
- * Replaces :xxx: with corresponding emoji.
- * For rendering, the image is used, e.g. for 0x1f17f = https://cdn.rawgit.com/twitter/twemoji/gh-pages/16x16/1f17f.png
+ * Data source: http://unicode.org/Public/emoji/5.0/emoji-data.txt
  */
 public class EmojiPreprocessor implements Preprocessor {
-    private static final Gson GSON = new GsonBuilder().create();
-    private static JsonObject smileys;
+    private static final Set<String> EMOJIS = new LinkedHashSet<>(3000);
 
     static {
-        try {
-            final URL mapResource = EmojiPreprocessor.class.getResource("/emojimap.json");
-            String map = Resources.toString(mapResource, StandardCharsets.UTF_8);
-            smileys = new JsonParser().parse(map).getAsJsonObject();
+        fillEmojiCache();
+    }
+
+    private static void fillEmojiCache() {
+        // http://unicode.org/Public/emoji/5.0/emoji-data.txt
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(EmojiPreprocessor.class.getResourceAsStream("/emoji-data.v4.txt"), StandardCharsets.UTF_8))) {
+            br
+                    .lines()
+                    .filter(EmojiPreprocessor::isDataLine)
+                    .map(EmojiPreprocessor::splitLine)
+                    .forEach(EmojiPreprocessor::processDataLine);
         } catch (IOException e) {
-            // ignore
+            throw new InitializationException("Cannot read emojis.", e);
         }
     }
 
-    private static String getEmojiByName(String name) {
-        return smileys == null ? "" : smileys.get(name) == null ? "" : smileys.get(name).getAsString();
+    private static void processDataLine(String[] strings) {
+        String range = strings[0].trim();
+
+        if (range.contains("..")) {
+            // e.g. 1F191..1F19A
+            String[] bounds = range.split(Pattern.quote(".."), 2);
+            int from = Integer.parseInt(bounds[0], 16);
+            int to = Integer.parseInt(bounds[1], 16);
+            for (int i = from; i <= to; i++) {
+                addEmojiCode(i);
+            }
+        } else {
+            // e.g. 2B55
+            int num = Integer.parseInt(range, 16);
+            addEmojiCode(num);
+        }
+    }
+
+    private static void addEmojiCode(int num) {
+        EMOJIS.add(String.valueOf(num));
+    }
+
+    private static String[] splitLine(String line) {
+        return line.split(Pattern.quote(";"));
+    }
+
+    private static boolean isDataLine(String line) {
+        return !line.startsWith("#") && !line.trim().isEmpty();
     }
 
     @Override
     public void preprocessSource(final ParsedWikiPage context) {
-        final ReplacePatternCallback rp = new ReplacePatternCallback(Pattern.compile(":([\\-\\+\\_a-z0-9]+):", Pattern.MULTILINE));
+        final ReplacePatternCallback rp = new ReplacePatternCallback(Pattern.compile("%EMOJI%", Pattern.MULTILINE));
         final String sourceFixed = rp.replace(context.getSource().getMarkdownSource(), matchResult -> {
-            final String code = matchResult.group(1);
-            final String smiley = getEmojiByName(code);
-            if (smiley != null) {
-                return smiley;
-            } else {
-                return code;
-            }
-            //  return String.format("<img src='https://cdn.rawgit.com/twitter/twemoji/gh-pages/16x16/%s.png' alt='%s' />", code, code);
+            StringBuilder sb = new StringBuilder(1024);
+            //EmojiManager.data().stream().map(Emoji::getHexHtmlShort).forEach(sb::append);
+//            com.vdurmont.emoji.EmojiManager.getAll().stream().map(a -> a.getHtmlHexadecimal()).forEach(sb::append);
+            EMOJIS.forEach(a -> {
+                sb.append("&#").append(a).append(";");
+            });
+            return sb.toString();
         });
         context.getSource().setMarkdownSource(sourceFixed);
     }

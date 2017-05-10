@@ -6,7 +6,7 @@ Obecně lze mít rozsáhlé hierarchie produktů i továrních tříd, přičem�
 
 ### Emoji
 
-:bowtie: :blush: :stuck_out_tongue_winking_eye:
+%EMOJI%
 
 ### UML diagramy
 
