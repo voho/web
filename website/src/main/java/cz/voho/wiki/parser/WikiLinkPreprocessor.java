@@ -10,12 +10,12 @@ import cz.voho.wiki.model.ParsedWikiPage;
 
 public class WikiLinkPreprocessor implements Preprocessor {
     @Override
-    public void preprocessNodes(ParsedWikiPage context, Node root) {
-        NodeVisitor visitor = new NodeVisitor(new VisitHandler<>(Link.class, link -> {
-            String linkUrl = link.getUrl().toString();
+    public void preprocessNodes(final ParsedWikiPage context, final Node root) {
+        final NodeVisitor visitor = new NodeVisitor(new VisitHandler<>(Link.class, link -> {
+            final String linkUrl = link.getUrl().toString();
 
             if (linkUrl.startsWith("wiki/")) {
-                String targetId = WikiLinkUtility.stripWikiPrefixSuffix(WikiLinkUtility.stripSlashes(linkUrl));
+                final String targetId = WikiLinkUtility.stripWikiPrefixSuffix(WikiLinkUtility.stripSlashes(linkUrl));
                 link.setUrl(PrefixedSubSequence.of("/wiki/" + targetId + "/"));
                 context.addLinkTo(targetId);
             }
