@@ -155,20 +155,26 @@ Povolení privátních metod v rozhraních jen jen logickým následkem přidán
 Tento mechanismus umožní přepoužití kódu a lepší zapouzdření - v případě rozdělení kódu do několika metod.
 
 ```java
-interface SomeLogger {
-    default void logError(String message) {
-        log(message, "ERROR");
+interface CharacterMapper {
+    char map(char c);
+    
+    default char[] mapArray(char[] array) {
+        char[] cc = Arrays.copyOf(array, array.length);
+        mapArray(array);
+        return new String(cc);
     }
     
-    default void logFatal(String message) {
-        log(message, "FATAL");
+    default String mapString(String s) {
+        char[] cc = s.toCharArray();
+        mapArray(cc);
+        return new String(cc);
     }
     
-    private void log(String message, String prefix) {
-        log(prefix + ": " + message);  
+    private void mapArray(char[] array) {
+        for (int i = 0; i < array.length; i++) {
+            array[i] = map(array[i]);
+        }
     }
-    
-    void log(String message);
 }
 ```
 
