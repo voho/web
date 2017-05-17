@@ -24,11 +24,6 @@ Client -right-> Responsible : " first"
 Responsible --> Responsible : next
 ```
 
-```java
-class FirstResponsible implements Responsible {
-}
-```
-
 Druhá varianta zapouzdřuje celý řetězec do samostatného objektu, který obsahuje jednotlivé články a definuje jejich pořadí. Tento objekt potom zpracovává požadavek, aniž by jednotlivé články měly přehled nad tím, v jakém pořadí jsou uspořádány.
 
 ```uml:class
