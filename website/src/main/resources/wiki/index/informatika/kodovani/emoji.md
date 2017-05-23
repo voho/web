@@ -5,12 +5,9 @@ Název "emoji" je původně složenina z japonských slov *e* (絵, "obrázek") 
 Podobnost se slovem "emotikona" nebo "emoce" je tedy čistě náhodná.
 Zajímavost: škála barev pleti je založena na tzv. [Fitzpatrickově škále](https://en.wikipedia.org/wiki/Fitzpatrick_scale).
 
-### Seznam emoji
-
-%EMOJI%
-
 ### Reference
 
+- http://unicode.org/Public/emoji/5.0/emoji-data.txt
 - https://www.webpagefx.com/tools/emoji-cheat-sheet/
 - http://getemoji.com/
 - https://www.emoji.codes/
@@ -21,4 +18,3 @@ Zajímavost: škála barev pleti je založena na tzv. [Fitzpatrickově škále](
 - http://www.unicode.org/emoji/charts/full-emoji-list.html
 - http://www.unicode.org/emoji/charts/emoji-list.html
 - https://github.com/muan/emojilib/blob/master/simplemap.json
-- http://unicode.org/Public/emoji/5.0/emoji-data.txt
