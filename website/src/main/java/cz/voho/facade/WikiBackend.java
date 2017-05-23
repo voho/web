@@ -27,7 +27,7 @@ public class WikiBackend {
     private final WikiImageRepository wikiImageRepository;
     private final ParsedWikiPages parsedWikiPages;
 
-    WikiBackend(WikiPageSourceRepository wikiPageSourceRepository, ParsedWikiPageRepository parsedWikiPageRepository, WikiImageRepository wikiImageRepository) {
+    WikiBackend(final WikiPageSourceRepository wikiPageSourceRepository, final ParsedWikiPageRepository parsedWikiPageRepository, final WikiImageRepository wikiImageRepository) {
         this.wikiImageRepository = wikiImageRepository;
 
         this.parsedWikiPages = new ParsedWikiPages(wikiPageSourceRepository
@@ -42,7 +42,7 @@ public class WikiBackend {
     }
 
     public ParsedWikiPage load(final String wikiPageId) {
-        ParsedWikiPage parsedWikiPage = parsedWikiPages.getPage(wikiPageId);
+        final ParsedWikiPage parsedWikiPage = parsedWikiPages.getPage(wikiPageId);
 
         if (parsedWikiPage != null) {
             return parsedWikiPage;
@@ -165,7 +165,7 @@ public class WikiBackend {
         return parsedWikiPages;
     }
 
-    public List<WikiPageCommit> enrichCommits(List<WikiPageCommitGroup> recentWikiChanges) {
+    public List<WikiPageCommit> enrichCommits(final List<WikiPageCommitGroup> recentWikiChanges) {
         return recentWikiChanges
                 .stream()
                 .map(c -> {

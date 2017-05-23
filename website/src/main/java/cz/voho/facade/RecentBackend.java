@@ -143,28 +143,28 @@ public class RecentBackend {
             return Collections.emptyList();
         }
 
-        SetMultimap<String, CommitMeta> filesToSortedCommits = HashMultimap.create();
+        final SetMultimap<String, CommitMeta> filesToSortedCommits = HashMultimap.create();
 
-        for (CommitMeta commit : latestValue.getCommits()) {
-            for (String filename : commit.getFilenames()) {
+        for (final CommitMeta commit : latestValue.getCommits()) {
+            for (final String filename : commit.getFilenames()) {
                 if (WikiLinkUtility.isValidWikiPageSource(filename)) {
                     filesToSortedCommits.put(filename, commit);
                 }
             }
         }
 
-        List<WikiPageCommitGroup> groups = new LinkedList<>();
+        final List<WikiPageCommitGroup> groups = new LinkedList<>();
 
         filesToSortedCommits.asMap().entrySet().forEach(entry -> {
-            WikiPageCommitGroup group = new WikiPageCommitGroup();
+            final WikiPageCommitGroup group = new WikiPageCommitGroup();
             group.setFilename(entry.getKey());
-            List<CommitMeta> commits = new ArrayList<>(entry.getValue());
+            final List<CommitMeta> commits = new ArrayList<>(entry.getValue());
             Collections.sort(commits, (o1, o2) -> {
-                LocalDateTime o1d = LocalDateTime.parse(o1.getIsoTime(), DateTimeFormatter.ISO_DATE_TIME);
-                LocalDateTime o2d = LocalDateTime.parse(o2.getIsoTime(), DateTimeFormatter.ISO_DATE_TIME);
+                final LocalDateTime o1d = LocalDateTime.parse(o1.getIsoTime(), DateTimeFormatter.ISO_DATE_TIME);
+                final LocalDateTime o2d = LocalDateTime.parse(o2.getIsoTime(), DateTimeFormatter.ISO_DATE_TIME);
                 return o1d.compareTo(o2d);
             });
-            CommitMeta newest = commits.get(commits.size() - 1);
+            final CommitMeta newest = commits.get(commits.size() - 1);
             group.setLatestDate(newest.getIsoTime());
             group.setLatestCommitSha(newest.getSha());
             group.setLatestCommitMessage(newest.getMessage());
