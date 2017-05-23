@@ -27,7 +27,7 @@ Optional.empty().stream().forEach(System.out::println);
 Stream.ofNullable(null).forEach(System.out::println);
 
 // extended iterate on stream (vypíše 0 1 2 3 4)
-Stream.iterate(0, i -> i < 5; i -> i + 1).forEach(System.out::println);
+Stream.iterate(0, i -> i < 5, i -> i + 1).forEach(System.out::println);
 
 // filtering collector
 // (seznam transakcí přes 1,000 pro každý rok)
@@ -248,21 +248,22 @@ Existující moduly lze zobrazit příkazem *java -listmods*.
 
 Řetězce jsou nyní uloženy ve dvou formách: pole typu *byte[]* (řetězce, které obsahují pouze znaky z ISO-8859-1) a pole typu *char[]* (ostatní řetězce).
 Tato čistě vnitřní optimalizace redukuje potřebu spouštění garbage collectoru a také požadavky na paměť (v řádu procent).
+Řetězce jsou také nově sdíleny mezi různými JVM.
 
 ### Reference
 
-- https://github.com/honzapaces/java9-examples/wiki
-- http://openjdk.java.net/projects/jdk9/
-- http://blog.takipi.com/java-9-the-ultimate-feature-list/
-- https://blogs.oracle.com/java/features-in-java-8-and-9
-- https://docs.oracle.com/javase/9/whatsnew/toc.htm#JSNEW-GUID-C23AFD78-C777-460B-8ACE-58BE5EA681F6
-- https://www.slideshare.net/SimonRitter/55-new-features-in-jdk-9
-- http://www.journaldev.com/13121/java-9-features-with-examples
-- https://dzone.com/articles/jdk-9-is-feature-complete
-- http://blog.takipi.com/5-features-in-java-9-that-will-change-how-you-develop-software-and-2-that-wont/
-- http://www.baeldung.com/java-9-process-api
-- https://dzone.com/articles/a-look-at-intellij-ideas-support-for-java-9-modules
-- https://www.voxxed.com/blog/2016/10/java-9-series-concurrency-updates/
-- https://bentolor.github.io/java9-in-action/#/1
 - http://blog.codefx.org/java/java-9-stream/
+- http://blog.takipi.com/5-features-in-java-9-that-will-change-how-you-develop-software-and-2-that-wont/
+- http://blog.takipi.com/java-9-the-ultimate-feature-list/
 - http://iteratrlearning.com/java9/2016/08/16/java9-collectors.html
+- http://openjdk.java.net/projects/jdk9/-C777-460B-8ACE-58BE5EA681F6
+- http://www.baeldung.com/java-9-process-api
+- http://www.journaldev.com/13121/java-9-features-with-examples
+- https://bentolor.github.io/java9-in-action/#/1
+- https://blogs.oracle.com/java/features-in-java-8-and-9develop-software-and-2-that-wont/
+- https://docs.oracle.com/javase/9/whatsnew/toc.htm#JSNEW-GUID-C23AFD78-C777-460B-8ACE-58BE5EA681F6
+- https://dzone.com/articles/a-look-at-intellij-ideas-support-for-java-9-modules9-modules
+- https://dzone.com/articles/jdk-9-is-feature-complete/
+- https://github.com/honzapaces/java9-examples/wiki
+- https://www.slideshare.net/SimonRitter/55-new-features-in-jdk-9
+- https://www.voxxed.com/blog/2016/10/java-9-series-concurrency-updates/
