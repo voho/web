@@ -38,28 +38,26 @@ Levenstheinova vzdálenost se využívá například při implementaci kontroly 
 Levenshteinova vzdálenost mezi slovy *DOG* a *BUGGY* je 4.
 Můžeme například nahradit *D*->*B* (+1), nahradit *O*->*U* (+1), ponechat *G* a přidat *GY* (+2).
 
-```
- 	 	B	U	G	G	Y
- 	0	1	2	3	4	5
-D	1	2	3	4	5	6
-O	2	3	4	5	6	7
-G	3	4	5	4	5	6
-```
+| | |B|U|G|G|Y|
+|---|---|---|---|---|---|---
+| |*0*|*1*| 2 | 3 | 4 | 5 |
+|D| 1 | 2 |*3*| 4 | 5 | 6 |
+|O| 2 | 3 | 4 |*5*| 6 | 7 |
+|G| 3 | 4 | 5 | 4 |*5*|*6*|
 
 #### Příklad: NANNY &rarr; MAN
 
 Levenshteinova vzdálenost mezi slovy *NANNY* a *MAN* je 3.
 Můžeme například nahradit *N*->*M* (+1), ponechat *AN* a smazat *NY* (+2).
 
-```
- 	 	M	A	N
- 	0	1	2	3
-N	1	2	3	2
-A	2	3	2	3
-N	3	4	3	2
-N	4	5	4	3
-Y	5	6	5	4
-```
+| | |M|A|N|
+|---|---|---|---|---|
+| |*0*| 1 | 2 | 3 |
+|N| 1 |*2*| 3 | 2 |
+|A| 2 | 3 |*2*| 3 |
+|N| 3 | 4 |*3*| 2 |
+|N| 4 | 5 | 4 |*3*|
+|Y| 5 | 6 | 5 |*4*|
 
 ### Implementace
 
