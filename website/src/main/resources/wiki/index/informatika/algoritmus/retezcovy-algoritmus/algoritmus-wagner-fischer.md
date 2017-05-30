@@ -8,10 +8,10 @@ Je založený na dynamickém programování.
 1. Vytvoř matici s €m+1€ řádky a €n+1€ sloupci.
 1. Do prvního řádku matice vlož posloupnost 0, 1, 2, 3 až €n+1€.
 1. Do prvního sloupce matice vlož posloupnost 0, 1, 2, 3 až €m+1€.
-1. Pro každý znak řetězce €s€ (€i \in <1,n>€):
-    1. Pro každý znak řetězce €t€ (€j \in <1,m>€):
+1. Pro každý znak řetězce €s€ (€i \in \langle1,n\rangle€):
+    1. Pro každý znak řetězce €t€ (€j \in \langle1,m\rangle€):
         1. Pokud jsou znaky na těchto pozicích shodné, pak €cost = 0€, jinak €cost = 1€.
-            1. Do matice na pozici €(i,j)€ vlož nejmenší z těchto hodnot:
+            1. Do matice na pozici €[i,j]€ vlož nejmenší z těchto hodnot:
             1. Hodnotu políčka o jednu pozici výše + 1.
             1. Hodnotu políčka o jednu pozici vlevo + 1.
             1. Hodnotu políčka diagonály (vlevo nahoře) + €cost€.
@@ -106,6 +106,45 @@ class WagnerFischer {
 
     private static int min(final int a, final int b, final int c) {
         return Math.min(a, Math.min(b, c));
+    }
+}
+```
+
+Protože jsou vždy k výpočtu potřeba jen dva poslední řádky matice, není nutné ukládat celou matici a ušetřit nějakou pameť:
+
+```java
+class WagnerFischerOptimized {
+    public static int getLevenshteinDistance(final char[] s, final char[] t) {
+        int[] previousRow = new int[t.length + 1];
+        int[] currentRow = new int[t.length + 1];
+
+        for (int i = 0; i < previousRow.length; i++) {
+            previousRow[i] = i;
+        }
+
+        for (int is = 1; is <= s.length; is++) {
+            currentRow[0] = is;
+
+            for (int it = 1; it <= t.length; it++) {
+                // up = deletion
+                final int costDeletion = previousRow[it] + 1;
+                // left = insertion
+                final int costInsertion = currentRow[it - 1] + 1;
+                // cost for replacing the character in case it is different
+                final int costReplacement = (s[is - 1] == t[it - 1]) ? 0 : 1;
+                // diagonal = substitution (if necessary)
+                final int costSubstitution = previousRow[it - 1] + costReplacement;
+
+                currentRow[it] = min(costDeletion, costInsertion, costSubstitution);
+            }
+
+            // swap arrays (currentRow will be re-used and overwritten)
+            final int[] temp = previousRow;
+            previousRow = currentRow;
+            currentRow = temp;
+        }
+
+        return previousRow[t.length];
     }
 }
 ```

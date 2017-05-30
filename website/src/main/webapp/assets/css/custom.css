@@ -386,6 +386,11 @@ ul.copyright li {
     padding: 1pt 5pt;
 }
 
+#wiki-content table em {
+    background-color: #111111;
+    color: #ffffff;
+}
+
 #wiki-content table {
     border-collapse: collapse;
     margin: 1em 0;
