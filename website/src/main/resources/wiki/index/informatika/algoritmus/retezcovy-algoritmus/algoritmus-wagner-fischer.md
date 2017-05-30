@@ -115,6 +115,12 @@ Protože jsou vždy k výpočtu potřeba jen dva poslední řádky matice, není
 ```java
 class WagnerFischerOptimized {
     public static int getLevenshteinDistance(final char[] s, final char[] t) {
+        if (t.length > s.length) {
+            // to save memory, we want the shorter string to be the second parameter
+            // (as long as the distance is symmetrical, we do not care about the order)
+            return getLevenshteinDistance(t, s);
+        }
+
         int[] previousRow = new int[t.length + 1];
         int[] currentRow = new int[t.length + 1];
 
