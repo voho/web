@@ -2,7 +2,7 @@
 
 Lidé mají odvěkou touhu získávat a shromažďovat informace. To není v informační době problém. Co je omezené, je kapacita médií a úložišť. Proto vznikaly a stále vznikají různé metody, jak na nich ušetřit místo a mít tak prostor pro další data. Také kapacitou přenosových kanálů se musí nakládat ekonomicky a každá možnost, jak jimi protlačit více informací za časovou jednotku, přijde telekomunikačním společnostem vhod. Právě komprese umožnila vznik a rychlý rozvoj technologií pro vzdálený přenos obrazu či videa.
 
-Komprese je speciální druh kódování dat za účelem zmenšení jejich objemu odstraněním nadbytečné informace (redundance). Kompresní algoritmus definuje přesný postup, jak toho docílit. Musí obsahovat i odpovídající opačný postup pro dekompresi, který původní informaci zpětně zrekonstruuje. Kompresní algoritmus převádí **zdrojové jednotky** (symboly a posloupnosti symbolů - tzv. slova a posloupnosti slov) na **posloupnosti symbolů**. Zdrojové jednotky se mohou označovat jako **vzory** (originály) a výsledné posloupnosti jako **obrazy**.
+Komprese je speciální druh [kódování](wiki/kodovani) dat za účelem zmenšení jejich objemu odstraněním nadbytečné informace (redundance). Kompresní [algoritmus](wiki/algoritmus) definuje přesný postup, jak toho docílit. Musí obsahovat i odpovídající opačný postup pro dekompresi, který původní informaci zpětně zrekonstruuje. Kompresní algoritmus převádí **zdrojové jednotky** (symboly a posloupnosti symbolů - tzv. slova a posloupnosti slov) na **posloupnosti symbolů**. Zdrojové jednotky se mohou označovat jako **vzory** (originály) a výsledné posloupnosti jako **obrazy**.
 
 ### Princip komprese
 
@@ -24,7 +24,7 @@ Ztrátová komprese využívá nedokonalosti lidských smyslů. Je pouhou aproxi
 
 #### Bezeztrátová komprese
 
-Bezeztrátová komprese, jak již název napovídá, zachovává vždy kompletní informaci. Dekomprimovaná data jsou identická originálu. Příklady: **LZ77, LZ78, LZW, Huffmanovo kódování**.
+Bezeztrátová komprese, jak již název napovídá, zachovává kompletní informaci. Dekomprimovaná data jsou tedy identická originálu. Příklady: **LZ77, LZ78, LZW, Huffmanovo kódování**.
 
 ### Další vlastnosti komprese
 
