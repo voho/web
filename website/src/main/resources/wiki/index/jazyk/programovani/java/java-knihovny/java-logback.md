@@ -102,6 +102,12 @@ Logback hledá konfigurace v následujícím pořadí: *logback-test.xml*, *loba
 </configuration>
 ```
 
+### Názvosloví chyb
+
+* **Failure** použijte, pokud selhala externí závislost, například databáze nebo služba
+* **Fault** použijte, nastala-li neočekávaná chyba v kódu, například se program dostal do neplatného stavu
+* **Error** použijte, pokud chybu udělal například člověk a způsobil tím chybu v kódu (fault)
+
 ### Úroveň logování
 
 - **ERROR** použijte, pokud nastal nebo brzy nastane vážný problém, který vyžaduje rychlý lidský zásah
