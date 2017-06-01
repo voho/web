@@ -32,7 +32,7 @@ Preferovaná barva vlasů je tmavá, protože je u lidí častější.
 | U+1F3FE | 🏾 | medium-dark skin tone: EMOJI MODIFIER FITZPATRICK TYPE-5		
 | U+1F3FF | 🏿 | dark skin tone: EMOJI MODIFIER FITZPATRICK TYPE-6	
 	
-![http://unicode.org/reports/tr51/images/other/person.png](znak emoji s modifikátorem barvy pleti)
+![znak emoji s modifikátorem barvy pleti](http://unicode.org/reports/tr51/images/other/person.png)
 
 ### Modifikátor: pohlaví
 
@@ -41,7 +41,7 @@ Preferovaná barva vlasů je tmavá, protože je u lidí častější.
 | U+2642 | ♂️ | Male Sign
 | U+2640 | ♀️ | Female Sign
 
-![https://cdn.arstechnica.net/wp-content/uploads/2016/07/Screen-Shot-2016-07-14-at-2.17.17-PM.png](znak emoji s modifikátorem pohlaví)
+![znak emoji s modifikátorem pohlaví](https://cdn.arstechnica.net/wp-content/uploads/2016/07/Screen-Shot-2016-07-14-at-2.17.17-PM.png)
 
 ### Reference
 
