@@ -1,47 +1,90 @@
 ## Emoji
 
-Emoji je sada emotikon, která je obsažena ve standardu Unicode.
-
+Emoji je výraz pro sadu ikon, který se stal součástí standardu Unicode. 
 Název "emoji" je původně složenina z japonských slov *e* (絵, "obrázek") a *moji* (文字, "znak").
 Podobnost se slovem "emotikona" nebo "emoce" je tedy čistě náhodná.
 
-Emoji může být buď jeden znak Unicode, nebo jejich kombinace - k některým emojis lze přidávat modifikátory, které jejich vzhled upravují.
-Mezi modifikátory patří například pohlaví nebo barva pleti.
+Pod pojmem emoji se obvykle rozumí jeden znak neboli jeden obrázek, ale technicky lze jeden obrázek vytvořit i kombinací několika za sebou následujících znaků.
+Přímo ve standardu se nachází některé kombinace, například vlajky.
 
-Posloupnosti e-moji jsou předepsané jako doporučené, ale výrobci mohou vytvářet symboly pro libovolné kombinace.
+### Kombinace emoji
 
-### Modifikátor: barva pleti
+Některé posloupnosti znaků emoji mají speciální význam a přidání určitých znaků lze ovlivnit symboly předcházející.
 
-Škála barev pleti je založena na tzv. [Fitzpatrickově škále](https://en.wikipedia.org/wiki/Fitzpatrick_scale), která byla publikovaná v roce 1975 a obsahuje šest skupin:
+#### Prezentace
 
-* Typ I se vždy spálí, nikdy se neopálí (blond nebo zrzavé vlasy, modré či šedé oči, pihy)
-* Typ II se obvykle spálí, velmi zřídka se opálí (blond, hnědé nebo zrzavé vlasy, modré, zelené či oříškové oči)
-* Typ III se občas mírně spálí a obvykle se opálí rovnoměrně (různé barvy vlasů, hnědé oči)
-* Typ IV se zřídka spálí, vždy se opálí (hnědé nebo tmavě hnědé oči a vlasy)
-* Typ V se velmi zřídka spálí, opalí se velmi snadno (hnědé nebo tmavě hnědé oči, černé vlasy)
-* Typ VI se nikdy nespálí a vždy se opálí (velmi tmavě hnědé oči, černé vlasy)
+Některé symboly lze vyjádřit pomocí textu i obrázku, proto existují  
 
+#### Regionální identifikátory
+
+Z regionálních identifikátorů lze skládat například vlajky různých států. 
+Například dvoupísmenný ISO kód Lucemburska je *LU*, za sebe tedy vložíme dva regionální identifikátory *L* + *U*:
+🇱+🇺 = 🇱🇺
+
+| Kód | Symbol | Název Unicode
+|---|---|---
+| U+1F1E6 |🇦|REGIONAL INDICATOR SYMBOL LETTER A
+| U+1F1E7 |🇧|REGIONAL INDICATOR SYMBOL LETTER B
+| U+1F1E8 |🇨|REGIONAL INDICATOR SYMBOL LETTER C
+| U+1F1E9 |🇩|REGIONAL INDICATOR SYMBOL LETTER D
+| U+1F1EA |🇪|REGIONAL INDICATOR SYMBOL LETTER E
+| U+1F1EB |🇫|REGIONAL INDICATOR SYMBOL LETTER F
+| U+1F1EC |🇬|REGIONAL INDICATOR SYMBOL LETTER G
+| U+1F1ED |🇭|REGIONAL INDICATOR SYMBOL LETTER H
+| U+1F1EE |🇮|REGIONAL INDICATOR SYMBOL LETTER I
+| U+1F1EF |🇯|REGIONAL INDICATOR SYMBOL LETTER J
+| U+1F1F0 |🇰|REGIONAL INDICATOR SYMBOL LETTER K
+| U+1F1F1 |🇱|REGIONAL INDICATOR SYMBOL LETTER L
+| U+1F1F2 |🇲|REGIONAL INDICATOR SYMBOL LETTER M
+| U+1F1F3 |🇳|REGIONAL INDICATOR SYMBOL LETTER N
+| U+1F1F4 |🇴|REGIONAL INDICATOR SYMBOL LETTER O
+| U+1F1F5 |🇵|REGIONAL INDICATOR SYMBOL LETTER P
+| U+1F1F6 |🇶|REGIONAL INDICATOR SYMBOL LETTER Q
+| U+1F1F7 |🇷|REGIONAL INDICATOR SYMBOL LETTER R
+| U+1F1F8 |🇸|REGIONAL INDICATOR SYMBOL LETTER S
+| U+1F1F9 |🇹|REGIONAL INDICATOR SYMBOL LETTER T
+| U+1F1FA |🇺|REGIONAL INDICATOR SYMBOL LETTER U
+| U+1F1FB |🇻|REGIONAL INDICATOR SYMBOL LETTER V
+| U+1F1FC |🇼|REGIONAL INDICATOR SYMBOL LETTER W
+| U+1F1FD |🇽|REGIONAL INDICATOR SYMBOL LETTER X
+| U+1F1FE |🇾|REGIONAL INDICATOR SYMBOL LETTER Y
+| U+1F1FF |🇿|REGIONAL INDICATOR SYMBOL LETTER Z
+
+#### Barva pleti
+
+Škála barev pleti je založena na tzv. [Fitzpatrickově škále](https://en.wikipedia.org/wiki/Fitzpatrick_scale), která byla publikovaná v roce 1975 a obsahuje šest fototypů.
 Kvůli zjednodušení byly první dvě skupiny (I + II) sloučeny.
 Preferovaná barva vlasů je tmavá, protože je u lidí častější.
 
-| Kód | Symbol | Název Unicode
+| Kód | Symbol | Název Unicode | Příklad
+|---|---|---|---
+| U+1F3FB | 🏻 | light skin tone: EMOJI MODIFIER FITZPATRICK TYPE-1-2 | 🤷+🏻 = 🤷🏻
+| U+1F3FC | 🏼 | medium-light skin tone: EMOJI MODIFIER FITZPATRICK TYPE-3 | 🤷+🏼 = 🤷🏼		
+| U+1F3FD | 🏽 | medium skin tone: EMOJI MODIFIER FITZPATRICK TYPE-4	| 🤷+🏻 = 🤷🏽
+| U+1F3FE | 🏾 | medium-dark skin tone: EMOJI MODIFIER FITZPATRICK TYPE-5| 🤷+🏾 = 🤷🏾
+| U+1F3FF | 🏿 | dark skin tone: EMOJI MODIFIER FITZPATRICK TYPE-6| 🤷+🏿 = 🤷🏿
+
+#### Pohlaví
+
+| Kód | Symbol | Název Unicode | Příklad
 |---|---|---
-| U+1F3FB | 🏻 | light skin tone: EMOJI MODIFIER FITZPATRICK TYPE-1-2		
-| U+1F3FC | 🏼 | medium-light skin tone: EMOJI MODIFIER FITZPATRICK TYPE-3		
-| U+1F3FD | 🏽 | medium skin tone: EMOJI MODIFIER FITZPATRICK TYPE-4		
-| U+1F3FE | 🏾 | medium-dark skin tone: EMOJI MODIFIER FITZPATRICK TYPE-5		
-| U+1F3FF | 🏿 | dark skin tone: EMOJI MODIFIER FITZPATRICK TYPE-6	
-	
-![znak emoji s modifikátorem barvy pleti](http://unicode.org/reports/tr51/images/other/person.png)
+| U+2642 | ♂️ | Male Sign | 🤷+♂ = 🤷♂
+| U+2640 | ♀️ | Female Sign | 🤷+♀️ = 🤷♀️
 
-### Modifikátor: pohlaví
+### Volné kombinace se spojovacím znakem nulové délky (ZWJ)
 
-| Kód | Symbol | Název Unicode
+Existuje speciální znak, který se nazývá **spojovací znak nulové délky** (zero-width joiner, zkráceně ZWJ).
+Tento znak vložíme mezi emoji, které chceme spojit v jeden znak.
+Pokud výrobce takovou kombinaci emoji podporuje, zobrazí je jako jeden znak.
+Pokud ne, pak prostě spojovací znak ignoruje.
+
+Příklad některých kombinací (kombinace by se měly zobrazit jako jeden znak - pokud ne, váš font je nepodporuje).
+
+| Posloupnost znaků | Kombinace (jako jeden znak) | Popis
 |---|---|---
-| U+2642 | ♂️ | Male Sign
-| U+2640 | ♀️ | Female Sign
+| 👨+🏻+‍⚖ | 👨🏻‍⚖️ | Soudce (bílá pleť, muž) 
 
-![znak emoji s modifikátorem pohlaví](https://cdn.arstechnica.net/wp-content/uploads/2016/07/Screen-Shot-2016-07-14-at-2.17.17-PM.png)
+!TODO!
 
 ### Reference
 
