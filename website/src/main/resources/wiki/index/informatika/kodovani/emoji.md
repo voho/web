@@ -1,19 +1,38 @@
 ## Emoji
 
-Emoji je výraz pro sadu ikon, který se stal součástí standardu Unicode. 
-Název "emoji" je původně složenina z japonských slov *e* (絵, "obrázek") a *moji* (文字, "znak").
-Podobnost se slovem "emotikona" nebo "emoce" je tedy čistě náhodná.
+Emoji je výraz pro sadu ikon, která se stala součástí standardu Unicode.
+Tato sada obsahuje abstraktní symboly i konkrétní předměty, zvířata, lidi, situace, a podobně.
+Název "emoji" je původně složenina z japonských slov **e** (絵, "obrázek") a **moji** (文字, "znak"), podobnost se slovem "emotikona" nebo "emoce" je tedy čistě náhodná.
+Původní emoji se začaly objevovat na japonských mobilních telefonech v devadesátých letech dvacátého století a nyní jich standard obsahuje již několik stovek.
+Standard nepředepisuje, jak přesně by měly být emoji znázorněny, každý výrobce má volnou ruku. 
+Proto stejný symbol emoji může vypadat rozdílně na různých platformách.
 
-Pod pojmem emoji se obvykle rozumí jeden znak neboli jeden obrázek, ale technicky lze jeden obrázek vytvořit i kombinací několika za sebou následujících znaků.
-Přímo ve standardu se nachází některé kombinace, například vlajky.
+### Příklady
+
+| Kód | Symbol | Název Unicode | Název
+|---|---|---|---
+|26FD|⛽|FUEL PUMP|benzínová stanice
+|2747|❇|SPARKLE|třpytka
+|1F308|🌈|RAINBOW|duha
+|1F31D|🌝|FULL MOON WITH FACE|měsíc v úplňku s tváří
+|1F401|🐁|MOUSE|myš
+
+Seznam všech e-moji najdete například na [oficiálních stránkách konsorcia Unicode](http://unicode.org/emoji/charts/full-emoji-list.html) nebo zde na jednotlivých podstránkách.
 
 ### Kombinace emoji
 
-Některé posloupnosti znaků emoji mají speciální význam a přidání určitých znaků lze ovlivnit symboly předcházející.
+Znaky e-moji lze vzájemně kombinovat a standard předepisuje i několik modifikátorů, které ovlivňují výsledné zobrazení.
 
 #### Prezentace
 
-Některé symboly lze vyjádřit pomocí textu i obrázku, proto existují  
+Některé symboly lze vyjádřit pomocí textu i obrázku, proto existuje modifikátor, kterým lze prezentaci vybrat.
+Například znak srdce (U+2764) lze vyjádřit oběma způsoby: textově jako ❤ (U+2764 U+FE0E) nebo graficky jako ❤️ (U+2764 U+FE0F).
+Emoji podporující tento modifikátor mají ve standardu definován i výchozí styl zobrazení, který je použitý v případě, že není použit žádný modifikátor.
+
+| Kód | Název Unicode | Popis
+|---|---|---
+|U+FE0E|VARIATION SELECTOR-15 (text variation selector)|přepnutí na textové zobrazení
+|U+FE0F|VARIATION SELECTOR-16 (emoji variation selector)|přepnutí na grafické znázornění
 
 #### Regionální identifikátory
 
@@ -82,7 +101,8 @@ Příklad některých kombinací (kombinace by se měly zobrazit jako jeden znak
 
 | Posloupnost znaků | Kombinace (jako jeden znak) | Popis
 |---|---|---
-| 👨+🏻+‍⚖ | 👨🏻‍⚖️ | Soudce (bílá pleť, muž) 
+| 👨+🏻+‍⚖ | 👨🏻‍⚖️ | Soudce (muž + bílá pleť + spravedlnost) 
+| 👨+👩+👦+👶 | 👨‍👩‍👦‍👶 | Rodina (muž + žena + dítě žena + dítě muž)
 
 !TODO!
 
