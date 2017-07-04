@@ -29,5 +29,6 @@ public class Constants {
     public static final String PROFILE_GOOGLE_MUSIC = "https://play.google.com/store/music/artist/Vojtech_Hordejcuk?id=Ajqelbv4qqwma7ewjtd6pkmkkie";
     public static final String PROFILE_SPOTIFY = "https://open.spotify.com/artist/02pC7TpobLA5my9tbGgNyl";
     public static final String PROFILE_YOUTUBE = "https://www.youtube.com/channel/UCmhcw6dUD3J7dQz17l2KmCg";
+    public static final String PROFILE_PAYPAL = "https://www.paypal.me/vojtisek";
     public static final Locale CZECH_LOCALE = new Locale("cs", "CZ");
 }
