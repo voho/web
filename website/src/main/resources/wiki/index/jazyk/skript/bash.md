@@ -151,6 +151,37 @@ Přidání execution práva k souboru *FILE*:
 chmod +x FILE
 ```
 
+### Nástroje
+
+#### Screen
+
+Vytvoření screenu:
+
+```bash
+screen
+screen COMMAND
+```
+
+Opuštění (detach) screenu: 
+
+*Ctrl+A* a posléze *D*
+
+Smazání screenu:
+
+*Ctrl+A* a posléze *Q*
+
+Listování aktivních screenů (spoulu se jejich identifikátory):
+
+```bash
+screen -ls
+```
+
+Vstoupení (re-attach) do screenu:
+
+```bash
+screen -r SESSION
+```
+
 ### Tvorba složitějších skriptů
 
 Pokud se nějaké úlohy často opakují nebo jsou složité, je lepší je uložit do samostatného souboru, který lze kdykoliv spustit. Soubory s bash skripty mají zpravidla koncovku *.sh*.
