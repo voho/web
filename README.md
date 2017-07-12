@@ -7,3 +7,5 @@
 Source of my personal website and related AWS lambda functions.
 
 [See it in action!](http://voho.eu/)
+
+Pssst, you wanna [edit the pages](https://github.com/voho/web/tree/master/website/src/main/resources/wiki/index)?
