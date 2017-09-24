@@ -80,7 +80,7 @@ List<Actor> actors = this.jdbcTemplate.query(
         });
 ```
 
-### Vkládání nových řádků
+### INSERT: Vkládání nových řádků
 
 ```java
 public void insert2(Person person) {
@@ -107,7 +107,7 @@ public Number insert(Person person) {
 }
 ```
 
-### UPDATE
+### UPDATE: Změna existujícího řádku
 
 ```java
 this.jdbcTemplate.update(
@@ -115,7 +115,7 @@ this.jdbcTemplate.update(
         "Banjo", 5276L);
 ```
 
-### DELETE
+### DELETE: Smazání existujícího řádků
 
 ```java
 this.jdbcTemplate.update(
@@ -123,7 +123,7 @@ this.jdbcTemplate.update(
         5276L);
 ```
 
-### CALL
+### CALL: volání procedur
 
 ```java
 this.jdbcTemplate.update(
