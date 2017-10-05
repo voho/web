@@ -24,7 +24,7 @@ public class Constants {
     public static final String PROFILE_INSTAGRAM = "https://www.instagram.com/vohocz/";
     public static final String PROFILE_FLICKR = "https://www.flickr.com/photos/vohocz/";
     public static final String PROFILE_SOUNDCLOUD = "http://soundcloud.com/voho";
-    public static final String PROFILE_ITUNES = "https://itunes.apple.com/us/artist/vojtech-hordejcuk/id929462760";
+    public static final String PROFILE_ITUNES = "https://itunes.apple.com/us/artist/voho/id1213510083";
     public static final String PROFILE_AMAZON = "https://www.amazon.com/s/ref=ntt_srch_drd_B00OHRU6TC?ie=UTF8&amp;field-keywords=Vojtech%20Hordejcuk&amp;index=digital-music&amp;search-type=ss";
     public static final String PROFILE_GOOGLE_MUSIC = "https://play.google.com/store/music/artist/Vojtech_Hordejcuk?id=Ajqelbv4qqwma7ewjtd6pkmkkie";
     public static final String PROFILE_SPOTIFY = "https://open.spotify.com/artist/4OaWtKAgl8oGU9QTa4wXu4";
