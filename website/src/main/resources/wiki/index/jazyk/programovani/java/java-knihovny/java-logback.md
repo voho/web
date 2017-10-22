@@ -37,7 +37,7 @@ public class LoggingClass {
 
 ### Konfigurace
 
-Logback hledá konfigurace v následujícím pořadí: *logback-test.xml*, *loback.xml*. To umožňuje v unit testech používat jiné nastavení logování než při běžném provozu aplikace (pouze je třeba zajistit, aby byl soubor *logback-test.xml* přítomný na classpath pouze v době testů, například [Maven](wiki/maven) toto zajišťuje automaticky).
+Logback hledá konfigurace v následujícím pořadí: *logback-test.xml*, *logback.xml*. To umožňuje v unit testech používat jiné nastavení logování než při běžném provozu aplikace (pouze je třeba zajistit, aby byl soubor *logback-test.xml* přítomný na classpath pouze v době testů, například [Maven](wiki/maven) toto zajišťuje automaticky).
 
 #### Jednoduchá konfigurace (konzole)
 
@@ -84,20 +84,20 @@ Logback hledá konfigurace v následujícím pořadí: *logback-test.xml*, *loba
         </encoder>
     </appender>
 	
-	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%date %level %logger{10} %msg%n</pattern>
         </encoder>
     </appender>
 
-	<!-- default root level is debug, but we override it to info -->
+    <!-- default root level is debug, but we override it to info -->
     <root level="info">
         <appender-ref ref="file"/>
-		<appender-ref ref="console"/>
+	<appender-ref ref="console"/>
     </root>
-	
-	<!-- I want to override logging of my package to debug -->
-	<logger name="com.mycompany.myapp" level="debug"/>
+
+    <!-- I want to override logging of my package to debug -->
+    <logger name="com.mycompany.myapp" level="debug"/>
 
 </configuration>
 ```
