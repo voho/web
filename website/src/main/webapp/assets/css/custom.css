@@ -537,13 +537,12 @@ a.logo {
 }
 
 a.logo strong {
-    border: 2px solid #eeeeee;
-    color: #cccccc;
+    background-color: #606af6;
+    color: #eeeeee;
 }
 
 a.logo:hover strong {
-    border: 2px solid #cccccc;
-    color: #111111;
+    color: #ffffff;
 }
 
 .button {
