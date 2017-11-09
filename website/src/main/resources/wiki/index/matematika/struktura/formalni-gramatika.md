@@ -1,14 +1,14 @@
 ## Formální gramatika
 
-Jednou z možností, jak popsat [formální jazyk](wiki/formalni-jazyk), je použití formální gramatiky. Jedná se v podstatě o množinu syntaktických pravidel, kterými lze ověřit, zda nějaké slovo do jazyka popsaného danou gramatikou patří, či nikoliv, a teoreticky také všechna slova vygenerovat, pokud je jejich množina konečná.
+Jednou z možností, jak popsat [formální jazyk](wiki/formalni-jazyk), je použití formální gramatiky. Jedná se v podstatě o [množinu](wiki/mnozina) syntaktických pravidel, kterými lze ověřit, zda nějaké slovo do jazyka popsaného danou gramatikou patří, či nikoliv, a teoreticky také všechna slova vygenerovat, pokud je jejich množina konečná.
 
-Formální gramatika €G€ je čtveřice €(N, T, P, S)€, kde €N€ je konečná [množina](wiki/mnozina) neterminálních symbolů (neterminálů), €T: T \cap N = \varnothing€ je konečná množina terminálních symbolů (terminálů), €P€ je konečná množina odvozovacích pravidel ve tvaru €(T \cup N)^\* N (T \cup N)^\* \longrightarrow (T \cup N)^\* € a €S \in N€ je počáteční symbol.
+Formální gramatika €G€ je čtveřice €(N, T, P, S)€, kde €N€ je konečná [množina](wiki/mnozina) **neterminálních symbolů** (neterminálů), €T: T \cap N = \varnothing€ je konečná množina **terminálních symbolů** (terminálů), €P€ je konečná množina odvozovacích pravidel ve tvaru €(T \cup N)^\* N (T \cup N)^\* \longrightarrow (T \cup N)^\* € a €S \in N€ je počáteční symbol.
 
 Pro zpřehlednění a zkrácení zápisu se pravidla často zapisují v tzv. [Backus-Naurově formě](wiki/backus-naur), která umožňuje příbuzná pravidla sloučit do jednoho řádku.
 
 ### Příklady
 
-*Terminály* budou pro přehlednost psány malými písmeny, **neterminály** velkými.
+**Terminály** budou pro přehlednost psány malými písmeny, **neterminály** velkými.
 
 #### Jednoduché výroky
 
@@ -53,7 +53,7 @@ Definujme gramatiku, která generuje aritmetické výrazy. Množina terminálů 
 1. **ČÍSLICE** &rarr; *8*
 1. **ČÍSLICE** &rarr; *9*
 
-Opět zkusíme vygenerovat nějaké výroky. Začneme u počátečního symbolu a postupně aplikejeme některé z možných pravidel:
+Opět zkusíme vygenerovat nějaké výroky. Začneme u počátečního symbolu a postupně aplikujeme některé z možných pravidel:
 
 1. **VÝRAZ**
 1. **VÝRAZ** **OPERÁTOR** **VÝRAZ** (použité pravidlo: 1)
