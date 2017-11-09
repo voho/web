@@ -517,7 +517,7 @@ a {
 }
 
 #heading {
-    border-bottom: 2px solid #eeeeee;
+    background-color: #eeeeee;
     padding: 3em 0;
 }
 
