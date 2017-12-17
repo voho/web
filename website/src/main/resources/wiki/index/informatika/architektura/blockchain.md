@@ -3,12 +3,15 @@
 Zatím neexistuje žádná formální definice toho, co přesně pojem **blockchain** znamená. Pod tímto označením se tedy skrývají různé technologie a [systémové architektury](wiki/architektura), u kterých lze vypozorovat tyto společné rysy:
 
 - je to distribuovaná databáze nějakých transakcí (např. finančních toků nebo informací o převodu vlastnictví z jednoho subjektu na druhý)
-- jednotlivé transakce v této databázi jsou uloženy v tzv. **blocích**, které po sobě následují v přesně daném a neměnném pořadí, přičemž každý blok se odkazuje na blok předchozí
+- jednotlivé transakce v této databázi jsou uloženy v tzv. **blocích**, které po sobě následují v přesně daném a neměnném pořadí, protože každý blok se odkazuje na blok předchozí
 - obsahuje kryptografický mechanismus prakticky zabraňující změně existujících transakcí nebo vložení neověřených bloků
 - používá kryptografii a digitální podpisy pro autentizaci a autorizaci čtecích a zápisových operací
 - není určen jednoznačný vlastník dat, jedná se tedy často o sdílená data
 
 ### Potenciální využití
+
+Virtuální měny
+: Blockchain umožňuje vytvářet virtuální měny, ve kterých kryptografie a formát dat zajišťují splnění všech požadavků, které společnost u měn vyžaduje: vzácnost, zaměnitelnost, dělitelnost, trvanlivost, převoditelnost.
 
 Sdílená ekonomika
 : Decentralizovaný peer-to-peer blockchain lze využít k bezpečnému převádění vlastnických práv k různým předmětům bez potřeby centrální autority: dopravní prostředky, nemovitosti, finanční produkty, obrazy, hudba, filmy, patenty, licence. Ve světě, kde neexistuje důvěra k velkým společnostem, se takové ekonomice může překvapivě dobře dařit.
