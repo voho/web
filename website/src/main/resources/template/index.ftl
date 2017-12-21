@@ -65,7 +65,6 @@
 
 <#include "index/recent-tracks.ftl"/>
 <#include "index/recent-photos.ftl"/>
-<#include "index/donate.ftl"/>
 
 <#include "common/footer.ftl"/>
 
