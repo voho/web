@@ -221,6 +221,62 @@ Blocked -up-> Running: " notify(), resume()"
 Running -right-> Terminated : " run() method ends"
 ```
 
+### Fork-Join pool
+
+Speciální typ poolu je vhodný pro řešení problémů, které se mohou dále rozpadat na různé podúlohy a konečný výsledek je sestaven až na konci, a to rekurzivně z mnoha dílčích výsledků.
+
+Nejprve definujme úlohu. Cílem je sečíst číslice v seznamu čísel.
+
+```java
+private static class RecursiveSumTask extends RecursiveTask<Long> {
+        private final List<Integer> input;
+
+        RecursiveSumTask(final List<Integer> input) {
+            this.input = input;
+        }
+
+        @Override
+        protected Long compute() {
+            if (input.size() > 10) {
+                // create sub-tasks
+                final List<Integer> leftSubList = this.input.subList(0, input.size() / 2);
+                final List<Integer> rightSubList = this.input.subList(input.size() / 2, input.size());
+                final RecursiveSumTask leftHalf = new RecursiveSumTask(leftSubList);
+                final RecursiveSumTask rightHalf = new RecursiveSumTask(rightSubList);
+
+                // execute sub-tasks asynchronously
+                LOG.info("Executing left half: {}", leftSubList);
+                leftHalf.fork();
+                LOG.info("Executing right half: {}", rightSubList);
+                rightHalf.fork();
+
+                // join and aggregate partial results
+                LOG.info("Aggregating partial results together.");
+                return leftHalf.join() + rightHalf.join();
+            } else {
+                // actual atomic computation (for lists whose length is below a threshold)
+                final long sum = input.stream().mapToLong(Long::valueOf).sum();
+                LOG.info("Sum of {} is {}.", input, sum);
+                return sum;
+            }
+        }
+    }
+```
+
+A takhle se to například používá:
+
+```java
+public static Long solve(final List<Integer> input) {
+    // create fork join pool with the parallelism of 10 threads
+    final ForkJoinPool forkJoinPool = new ForkJoinPool(10);
+    // invoke the main task
+    final long result = forkJoinPool.invoke(new RecursiveSumTask(input));
+    // start shutdown
+    forkJoinPool.shutdown();
+    return result;
+}
+```
+
 ### Atomické hodnoty
 
 Pro každý typ atomické hodnoty i pro reference existuje odpovídající atomická třída. Například pro *Integer* je to *AtomicInteger*, pro *boolean* je to *AtomicBoolean*, a podobně. Pro referenci je to *AtomicReference*. Tyto třídy mají mnoho metod pro zápis i pro čtení a jsou implementovány tak, aby byly vláknově bezpečné. Nejběžnější metodou pro čtení je *get()* a pro zápis *set()*.
