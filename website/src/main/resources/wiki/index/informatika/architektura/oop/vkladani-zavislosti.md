@@ -2,9 +2,9 @@
 
 > The basic idea of the Dependency Injection is to have a separate object, an assembler, that populates a field in a class with an appropriate implementation for the interface. *Martin Fowler*
 
-V [objektově orientovaných](wiki/oop) programovacích [jazycích](wiki/jazyk) se program skládá ze vzájemně propojených objektů. Pokud objekt *A* vyžaduje pro svou činnost objekt *B*, říkáme, že je objekt *A* **závislý** na objektu *B*. Z pohledu druhé strany tvoří objekt *B* je **závislost** objektu *A*.
+V [objektově orientovaných](wiki/oop) programovacích [jazycích](wiki/jazyk) se program skládá ze vzájemně propojených objektů. Pokud objekt *A* vyžaduje pro svou činnost objekt *B*, říkáme, že je objekt *A* **závislý** na objektu *B*. Při pohledu z druhé strany tvoří objekt *B* **závislost** objektu *A*.
 
-Z toho vyplývá, že si program složený z objektů můžeme představit jako [orientovaný graf](wiki/graf), ve kterém jsou uzly tvořeny objekty a hrany závislostmi mezi nimi. Program může vypadat třeba takto:
+Z toho vyplývá, že si program složený z objektů můžeme představit jako [orientovaný graf](wiki/graf), ve kterém objekty představují uzly a hrany jsou závislosti mezi nimi. Program může vypadat třeba takto:
 
 ```dot:digraph
 node[shape=circle,margin=0]
@@ -23,7 +23,7 @@ Kdo rozhoduje o tom, jaké konkrétní instance závislosti se použijí a kde j
 
 První možností je, že si o svých závislostech rozhoduje sám objekt. V konstruktoru tedy vytvoří všechny své závislosti sám. Výhodou tohoto přístupu je, že objekt lze ihned snadno použít jako samostatnou komponentu. Nevýhodou je, že jeho závislosti nemůžeme přepoužít jinde a nemůžeme je nijak změnit.
 
-Druhou možností je, že objekt závislosti dostane zvnějšku, například pomocí konstruktoru. V tomto případě objekt spolého pouze na to, že závislosti budou implementovat určité rozhraní a nezajímá ho, jaké přesné instance to budou. Tím pádem ho lze například při testování "podvést" a místo skutečných instancí mu dát pouze jejich mocky (simulace). 
+Druhou možností je, že objekt závislosti dostane zvnějšku, například pomocí konstruktoru. V tomto případě objekt spoléhá pouze na to, že závislosti budou implementovat určité rozhraní a nezajímá ho, jaké instance to přesně budou. Tím pádem ho lze například při testování "podvést" a místo skutečných instancí mu dát pouze jejich mocky (simulace). 
 
 Druhému způsobu se říká **vkládání závislostí**, protože jsou závislosti vkládány do objektu zvnějšku.
 
