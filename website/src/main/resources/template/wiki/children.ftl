@@ -1,26 +1,8 @@
+<#include "../macro/children_pages.ftl"/>
+<#include "../macro/sibling_pages.ftl"/>
+
 <#if subPages??>
-<section class="wiki-related-pages children">
-    <div class="row">
-        <#list subPages.items as pageRef>
-            <div class="4u 12u$(medium)">
-                <h4><a href="/wiki/${pageRef.id}/" class="button">${pageRef.title}</a></h4>
-                <#if pageRef.children??>
-                    <ul>
-                        <#list pageRef.children.items as childPageRef>
-                            <li><a href="/wiki/${childPageRef.id}/">${childPageRef.title}</a></li>
-                        </#list>
-                    </ul>
-                </#if>
-            </div>
-        </#list>
-    </div>
-</section>
+    <@wiki_children_pages subPages.items />
 <#elseif siblingPages??>
-<section class="wiki-related-pages siblings">
-    <ul>
-        <#list siblingPages.items as pageRef>
-            <li><a href="/wiki/${pageRef.id}/">${pageRef.title}</a></li>
-        </#list>
-    </ul>
-</section>
+    <@wiki_sibling_pages siblingPages.items />
 </#if>

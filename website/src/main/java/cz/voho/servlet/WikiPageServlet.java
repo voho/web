@@ -1,6 +1,10 @@
 package cz.voho.servlet;
 
-import cz.voho.common.model.enrich.*;
+import cz.voho.common.model.enrich.Article;
+import cz.voho.common.model.enrich.BreadcrumbList;
+import cz.voho.common.model.enrich.Item;
+import cz.voho.common.model.enrich.ListItem;
+import cz.voho.common.model.enrich.MetaDataRoot;
 import cz.voho.common.utility.Constants;
 import cz.voho.common.utility.WikiLinkUtility;
 import cz.voho.facade.Backend;
@@ -9,7 +13,6 @@ import cz.voho.facade.WikiBackend;
 import cz.voho.wiki.model.ParsedWikiPage;
 import cz.voho.wiki.model.WikiPageReference;
 import cz.voho.wiki.model.WikiPageReferences;
-import cz.voho.wiki.repository.page.WikiPageSourceRepository;
 import freemarker.template.SimpleHash;
 
 import javax.servlet.ServletException;
@@ -45,7 +48,7 @@ public class WikiPageServlet extends AbstractPageServlet {
         model.put("active_wiki_page_report_issue", parsedWikiPage.getSource().getGithubIssueUrl());
         model.put("active_wiki_page_outgoing_links", wikiBackend.getLinksFromHere(parsedWikiPage.getSource().getId()));
         model.put("active_wiki_page_incoming_links", wikiBackend.getLinksToHere(parsedWikiPage.getSource().getId()));
-        model.put("indexSubPages", wikiBackend.getSubPages(WikiPageSourceRepository.INDEX_PAGE_ID));
+        model.put("indexSubPages", wikiBackend.getWikiIndexSubPages());
         model.put("recentlyChangedPages", wikiBackend.enrichCommits(recentBackend.getRecentWikiChanges()));
 
         WikiPageReferences siblingPages = null;

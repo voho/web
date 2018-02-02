@@ -6,7 +6,11 @@ import cz.voho.common.model.enrich.MetaDataRoot;
 import cz.voho.common.utility.Constants;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.ext.servlet.FreemarkerServlet;
-import freemarker.template.*;
+import freemarker.template.Configuration;
+import freemarker.template.ObjectWrapper;
+import freemarker.template.SimpleHash;
+import freemarker.template.TemplateModel;
+import freemarker.template.TemplateModelException;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;

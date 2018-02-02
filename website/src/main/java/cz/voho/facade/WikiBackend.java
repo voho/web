@@ -5,7 +5,12 @@ import com.google.common.collect.Lists;
 import cz.voho.common.exception.ContentNotFoundException;
 import cz.voho.common.utility.Constants;
 import cz.voho.common.utility.WikiLinkUtility;
-import cz.voho.wiki.model.*;
+import cz.voho.wiki.model.ParsedWikiPage;
+import cz.voho.wiki.model.ParsedWikiPages;
+import cz.voho.wiki.model.WikiPageCommit;
+import cz.voho.wiki.model.WikiPageCommitGroup;
+import cz.voho.wiki.model.WikiPageReference;
+import cz.voho.wiki.model.WikiPageReferences;
 import cz.voho.wiki.repository.image.CachingWikiImageRepository;
 import cz.voho.wiki.repository.image.WikiImageRepository;
 import cz.voho.wiki.repository.page.ParsedWikiPageRepository;
@@ -18,6 +23,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 import static cz.voho.wiki.repository.page.WikiPageSourceRepository.MISSING_PAGE_ID;
@@ -58,7 +64,7 @@ public class WikiBackend {
     public WikiPageReferences getBreadCrumbs(final String wikiPageId) {
         try {
             return toRefs(getCurrentContext().getBreadCrumbs(wikiPageId), false, true);
-        } catch (ContentNotFoundException e) {
+        } catch (final ContentNotFoundException e) {
             return fallback(wikiPageId);
         }
     }
@@ -66,9 +72,22 @@ public class WikiBackend {
     public WikiPageReferences getSubPages(final String wikiPageId) {
         try {
             return toRefs(getCurrentContext().getSubPages(wikiPageId), true, true);
-        } catch (ContentNotFoundException e) {
+        } catch (final ContentNotFoundException e) {
             return fallback(wikiPageId);
         }
+    }
+
+    public WikiPageReferences getWikiIndexSubPages() {
+        final WikiPageReferences result = getSubPages(WikiPageSourceRepository.INDEX_PAGE_ID);
+
+        result.setItems(result
+                .getItems()
+                .stream()
+                .sorted(Comparator.comparingInt(a -> WikiPageSourceRepository.INDEX_CHILDREN_SORT_ORDER.indexOf(a.getId().toLowerCase(Locale.ROOT))))
+                .collect(Collectors.toList())
+        );
+
+        return result;
     }
 
     private WikiPageReferences fallback(final String wikiPageId) {

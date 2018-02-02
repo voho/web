@@ -11,34 +11,35 @@
 <#include "wiki/toc-wrapper.ftl"/>
 <#include "common/search.ftl"/>
 <#include "wiki/breadcrumbs.ftl"/>
+<#include "macro/children_pages.ftl"/>
 
 <#if active_wiki_page_id == 'index'>
 
-    <section>
+    <section id="heading" class="wiki-cover">
         <div class="inner">
-            <#include "macro/print_wiki_tree.ftl"/>
-            <div class="row">
-                <div class="8u 12u$(medium)">
-                    <section id="tree">
-                        <#list indexSubPages.items as pageRef>
-                            <@print_wiki_tree pageRef/>
-                        </#list>
-                    </section>
-                </div>
-                <div class="4u 12u$(medium)">
-                    <div class="box">
-                        <section id="latest">
-                            <h3>Poslední změny</h3>
-                            <#list recentlyChangedPages as page>
+            <#list indexSubPages.items as pageRef>
+                <header class="major">
+                    <h1>${pageRef.title}</h1>
+                </header>
+                <@wiki_children_pages pageRef.children.items/>
+            </#list>
+
+            <h2>Poslední změny</h2>
+
+            <div class="box">
+                <section id="latest">
+                    <div class="row">
+                        <#list recentlyChangedPages as page>
+                            <div class="3u 6u$">
                                 <p>
                                     <strong title="${page.message}">${page.formattedDate}</strong>
                                     <br/>
                                     <a href="/wiki/${page.id}/">${page.title}</a>
                                 </p>
-                            </#list>
-                        </section>
+                            </div>
+                        </#list>
                     </div>
-                </div>
+                </section>
             </div>
         </div>
     </section>
