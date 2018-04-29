@@ -91,3 +91,18 @@ function renderHandlebarsTemplate(elementCssQuery, template, context) {
     $(elementCssQuery).html(template(context));
 }
 ```
+
+Ukázka použití:
+
+```html
+<script id="tpl-banner" type="text/x-handlebars-template">
+    <p>{{this}}</p>
+</script>
+<div id="target-banner"></div>
+```
+
+```javascript
+var template = compileHandlebarsTemplate("#tpl-banner");
+var context = "Hello world!";
+renderHandlebarsTemplate("#target-banner", template, context);
+```
