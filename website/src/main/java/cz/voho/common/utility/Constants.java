@@ -20,7 +20,7 @@ public class Constants {
     public static final String NICKNAME = "voho";
     public static final String PROFILE_LINKED_IN = "http://www.linkedin.com/in/vohocz";
     public static final String PROFILE_GITHUB = "https://github.com/voho";
-    public static final String PROFILE_TWITTER = "http://twitter.com/vohocz";
+    public static final String PROFILE_TWITTER = "http://twitter.com/vohooo";
     public static final String PROFILE_INSTAGRAM = "https://www.instagram.com/vohocz/";
     public static final String PROFILE_FLICKR = "https://www.flickr.com/photos/vohocz/";
     public static final String PROFILE_SOUNDCLOUD = "http://soundcloud.com/voho";
