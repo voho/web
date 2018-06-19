@@ -49,6 +49,17 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>search</servlet-name>
+        <servlet-class>cz.voho.servlet.SearchPageServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>search</servlet-name>
+        <url-pattern>/search/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>wiki</servlet-name>
         <servlet-class>cz.voho.servlet.WikiPageServlet</servlet-class>
         <load-on-startup>1</load-on-startup>

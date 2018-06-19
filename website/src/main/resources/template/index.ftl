@@ -9,8 +9,6 @@
 
 <div id="universe">
 
-    <#include "common/search.ftl"/>
-
     <section id="banner">
         <div class="inner">
             <header>

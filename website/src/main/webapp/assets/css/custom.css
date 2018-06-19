@@ -645,6 +645,35 @@ dl dd {
     margin-left: 2em;
 }
 
+/* search */
+
+#wiki-content .search-result {
+    background-color: #fff;
+    margin: 1em 0;
+    padding: 1em;
+}
+
+#wiki-content .search-result h3 {
+    font-size: 1em;
+    margin-top: 0;
+}
+
+#wiki-content .search-result-fragment {
+    font-size: 10pt;
+    color: #666;
+    margin-top: 3pt;
+    padding: 2pt 5pt;
+    background: #fafafa;
+    line-height: 1.3;
+}
+
+#wiki-content .search-result-fragment b {
+    background-color: #f6eb61;
+    padding: 1px 5pt;
+    font-weight: bold;
+    color: black;
+}
+
 /* special mark-up */
 
 .todo {

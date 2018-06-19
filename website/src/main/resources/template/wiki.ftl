@@ -9,7 +9,6 @@
 <div id="universe">
 
 <#include "wiki/toc-wrapper.ftl"/>
-<#include "common/search.ftl"/>
 <#include "wiki/breadcrumbs.ftl"/>
 <#include "macro/children_pages.ftl"/>
 

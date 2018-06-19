@@ -8,8 +8,6 @@
 
 <div id="universe">
 
-    <#include "common/search.ftl"/>
-
     <section class="wiki" id="wiki-content">
         <div class="inner">
             <header class="major">

@@ -4,7 +4,7 @@ import cz.voho.wiki.model.ParsedWikiPage;
 import cz.voho.wiki.model.WikiPageSearchResult;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.cz.CzechAnalyzer;
+import org.apache.lucene.analysis.core.SimpleAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.StringField;
@@ -37,11 +37,11 @@ import java.util.List;
 
 public class WikiPageSearcher {
     private static final Logger LOG = LoggerFactory.getLogger(WikiPageSearcher.class);
-    private static final int MAX_FRAGMENTS = 5;
-    private static final int FRAGMENT_SIZE = 64;
+    private static final int MAX_FRAGMENTS = 3;
+    private static final int FRAGMENT_SIZE = 100;
 
     private final RAMDirectory index = new RAMDirectory();
-    private final Analyzer analyzer = new CzechAnalyzer();
+    private final Analyzer analyzer = new SimpleAnalyzer();
     private final Formatter formatter = new SimpleHTMLFormatter();
 
     public List<WikiPageSearchResult> searchIndex(String q, int hitsPerPage) throws IOException, InvalidTokenOffsetsException, ParseException {
