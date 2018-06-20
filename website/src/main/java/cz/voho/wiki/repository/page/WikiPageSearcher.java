@@ -1,10 +1,11 @@
 package cz.voho.wiki.repository.page;
 
+import com.google.common.html.HtmlEscapers;
 import cz.voho.wiki.model.ParsedWikiPage;
 import cz.voho.wiki.model.WikiPageSearchResult;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.core.SimpleAnalyzer;
+import org.apache.lucene.analysis.cz.CzechAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.StringField;
@@ -41,8 +42,8 @@ public class WikiPageSearcher {
     private static final int FRAGMENT_SIZE = 100;
 
     private final RAMDirectory index = new RAMDirectory();
-    private final Analyzer analyzer = new SimpleAnalyzer();
-    private final Formatter formatter = new SimpleHTMLFormatter();
+    private final Analyzer analyzer = new CzechAnalyzer();
+    private final Formatter formatter = new SimpleHTMLFormatter("{{{{{", "}}}}}");
 
     public List<WikiPageSearchResult> searchIndex(String q, int hitsPerPage) throws IOException, InvalidTokenOffsetsException, ParseException {
         String field = "source";
@@ -73,6 +74,10 @@ public class WikiPageSearcher {
 
             String[] frags = highlighter.getBestFragments(stream, source, MAX_FRAGMENTS);
 
+            for (int j = 0; j < frags.length; j++) {
+                frags[j] = HtmlEscapers.htmlEscaper().escape(frags[j]).replace("{{{{{", "<b>").replace("}}}}}", "</b>");
+            }
+
             WikiPageSearchResult sr = new WikiPageSearchResult();
             sr.setPageId(id);
             sr.setPageTitle(title);
@@ -94,6 +99,7 @@ public class WikiPageSearcher {
                 doc.add(new StringField("id", page.getSource().getId(), Field.Store.YES));
                 doc.add(new TextField("title", page.getTitle(), Field.Store.YES));
                 doc.add(new TextField("source", page.getSource().getMarkdownSource(), Field.Store.YES));
+
                 w.addDocument(doc);
             }
         }
