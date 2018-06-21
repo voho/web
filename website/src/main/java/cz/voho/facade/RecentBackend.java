@@ -31,7 +31,7 @@ public class RecentBackend {
     private static final int RECENT_PHOTO_COUNT = 6;
     private static final int RECENT_SONGS_COUNT = 4;
     private static final int RECENT_WIKI_UPDATES_COUNT = 10;
-    private static final int UPDATE_INTERVAL_SECONDS = 300;
+    private static final int UPDATE_INTERVAL_SECONDS = 3600;
     private static final String WIKI_COMMIT_PATH = "website/src/main/resources/wiki/";
 
     private final ScheduledExecutorService scheduledExecutorService;

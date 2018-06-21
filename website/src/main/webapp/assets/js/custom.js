@@ -31,6 +31,5 @@
 })(jQuery);
 
 function displayTocBar() {
-    $("#search").hide();
     $("#toc").fadeToggle(300);
 }
