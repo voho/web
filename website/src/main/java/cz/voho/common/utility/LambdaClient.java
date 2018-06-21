@@ -1,12 +1,6 @@
 package cz.voho.common.utility;
 
-import com.amazonaws.auth.AWSCredentialsProvider;
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
-import com.amazonaws.regions.Regions;
 import com.amazonaws.services.lambda.AWSLambda;
-import com.amazonaws.services.lambda.AWSLambdaClientBuilder;
 import com.amazonaws.services.lambda.model.AWSLambdaException;
 import com.amazonaws.services.lambda.model.InvokeRequest;
 import com.amazonaws.services.lambda.model.InvokeResult;
@@ -25,33 +19,11 @@ public class LambdaClient {
     private static final int HTTP_OK = 200;
     private static final String PLANT_UML_LAMBDA = "PlantUmlLambda";
     private static final String GRAPH_VIZ_LAMBDA = "GraphVizLambda";
-    private static final String AWS_KEY = System.getProperty("AWS_KEY");
-    private static final String AWS_SECRET = System.getProperty("AWS_SECRET");
 
     private final AWSLambda lambda;
 
-    public LambdaClient() {
-        this(createDefaultLambdaClient());
-    }
-
     public LambdaClient(final AWSLambda lambda) {
         this.lambda = lambda;
-    }
-
-    private static AWSLambda createDefaultLambdaClient() {
-        return AWSLambdaClientBuilder
-                .standard()
-                .withCredentials(credentials())
-                .withRegion(Regions.EU_WEST_1)
-                .build();
-    }
-
-    private static AWSCredentialsProvider credentials() {
-        if (AWS_KEY == null || AWS_SECRET == null) {
-            return new DefaultAWSCredentialsProviderChain();
-        } else {
-            return new AWSStaticCredentialsProvider(new BasicAWSCredentials(AWS_KEY, AWS_SECRET));
-        }
     }
 
     public GenerateImageResponse callPlantUmlLambda(final GenerateImageRequest request) {
