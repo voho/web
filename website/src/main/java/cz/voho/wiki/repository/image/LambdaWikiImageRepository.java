@@ -2,9 +2,9 @@ package cz.voho.wiki.repository.image;
 
 import com.google.common.base.Strings;
 import cz.voho.common.utility.LambdaClient;
-import cz.voho.web.lambda.model.generate.GenerateImageFormat;
-import cz.voho.web.lambda.model.generate.GenerateImageRequest;
-import cz.voho.web.lambda.model.generate.GenerateImageResponse;
+import cz.voho.web.lambda.model.GenerateImageFormat;
+import cz.voho.web.lambda.model.GenerateImageRequest;
+import cz.voho.web.lambda.model.GenerateImageResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

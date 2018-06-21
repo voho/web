@@ -5,16 +5,20 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.google.common.base.Strings;
 import com.google.common.collect.Sets;
 import com.google.common.io.ByteStreams;
-import cz.voho.web.lambda.model.generate.GenerateImageRequest;
-import cz.voho.web.lambda.model.generate.GenerateImageResponse;
-import cz.voho.web.lambda.utility.generate.ExecutableBinaryFile;
+import cz.voho.web.lambda.model.GenerateImageRequest;
+import cz.voho.web.lambda.model.GenerateImageResponse;
+import cz.voho.web.lambda.utility.ExecutableBinaryFile;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Set;
 
-import static cz.voho.web.lambda.model.generate.GenerateImageFormat.FORMAT_PNG;
-import static cz.voho.web.lambda.model.generate.GenerateImageFormat.FORMAT_SVG;
+import static cz.voho.web.lambda.model.GenerateImageFormat.FORMAT_PNG;
+import static cz.voho.web.lambda.model.GenerateImageFormat.FORMAT_SVG;
 
 /**
  * The main AWS Lambda handler.

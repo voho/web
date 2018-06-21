@@ -4,10 +4,10 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.google.common.base.Strings;
 import com.google.common.collect.Sets;
-import cz.voho.web.lambda.model.generate.GenerateImageFormat;
-import cz.voho.web.lambda.model.generate.GenerateImageRequest;
-import cz.voho.web.lambda.model.generate.GenerateImageResponse;
-import cz.voho.web.lambda.utility.generate.ExecutableBinaryFile;
+import cz.voho.web.lambda.model.GenerateImageFormat;
+import cz.voho.web.lambda.model.GenerateImageRequest;
+import cz.voho.web.lambda.model.GenerateImageResponse;
+import cz.voho.web.lambda.utility.ExecutableBinaryFile;
 import net.sourceforge.plantuml.FileFormat;
 import net.sourceforge.plantuml.FileFormatOption;
 import net.sourceforge.plantuml.SourceStringReader;
@@ -17,8 +17,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.Set;
 
-import static cz.voho.web.lambda.model.generate.GenerateImageFormat.FORMAT_PNG;
-import static cz.voho.web.lambda.model.generate.GenerateImageFormat.FORMAT_SVG;
+import static cz.voho.web.lambda.model.GenerateImageFormat.FORMAT_SVG;
 
 /**
  * The main AWS Lambda handler.
@@ -49,7 +48,7 @@ public class Handler implements RequestHandler<GenerateImageRequest, GenerateIma
                     final byte[] outputAsBytes = outputStream.toByteArray();
                     final String outputAsString = new String(outputAsBytes, StandardCharsets.UTF_8);
                     response.setTextData(outputAsString);
-                } else if (FORMAT_PNG.equalsIgnoreCase(format)) {
+                } else if (GenerateImageFormat.FORMAT_PNG.equalsIgnoreCase(format)) {
                     // generate PNG
 
                     reader.generateImage(outputStream, new FileFormatOption(FileFormat.PNG));

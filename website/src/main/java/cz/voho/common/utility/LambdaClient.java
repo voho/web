@@ -12,14 +12,8 @@ import com.amazonaws.services.lambda.model.InvokeRequest;
 import com.amazonaws.services.lambda.model.InvokeResult;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import cz.voho.web.lambda.model.generate.GenerateImageRequest;
-import cz.voho.web.lambda.model.generate.GenerateImageResponse;
-import cz.voho.web.lambda.model.github.GetRecentCommitsRequest;
-import cz.voho.web.lambda.model.github.GetRecentCommitsResponse;
-import cz.voho.web.lambda.model.photo.GetRecentPhotosRequest;
-import cz.voho.web.lambda.model.photo.GetRecentPhotosResponse;
-import cz.voho.web.lambda.model.sound.GetRecentSongsRequest;
-import cz.voho.web.lambda.model.sound.GetRecentSongsResponse;
+import cz.voho.web.lambda.model.GenerateImageRequest;
+import cz.voho.web.lambda.model.GenerateImageResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,9 +25,6 @@ public class LambdaClient {
     private static final int HTTP_OK = 200;
     private static final String PLANT_UML_LAMBDA = "PlantUmlLambda";
     private static final String GRAPH_VIZ_LAMBDA = "GraphVizLambda";
-    private static final String INSTAGRAM_LAMBDA = "InstagramLambda";
-    private static final String SOUNDCLOUD_LAMBDA = "SoundcloudLambda";
-    private static final String GIT_HUB_LAMBDA = "GitHubLambda";
     private static final String AWS_KEY = System.getProperty("AWS_KEY");
     private static final String AWS_SECRET = System.getProperty("AWS_SECRET");
 
@@ -69,18 +60,6 @@ public class LambdaClient {
 
     public GenerateImageResponse callDotLambda(final GenerateImageRequest request) {
         return call(GRAPH_VIZ_LAMBDA, request, GenerateImageResponse.class);
-    }
-
-    public GetRecentPhotosResponse callInstagramLambda(final GetRecentPhotosRequest request) {
-        return call(INSTAGRAM_LAMBDA, request, GetRecentPhotosResponse.class);
-    }
-
-    public GetRecentSongsResponse callSoundcloudLambda(GetRecentSongsRequest request) {
-        return call(SOUNDCLOUD_LAMBDA, request, GetRecentSongsResponse.class);
-    }
-
-    public GetRecentCommitsResponse callGitHubLambda(GetRecentCommitsRequest request) {
-        return call(GIT_HUB_LAMBDA, request, GetRecentCommitsResponse.class);
     }
 
     private <I, O> O call(final String lambdaFunctionName, final I request, final Class<O> responseType) {

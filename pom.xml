@@ -19,9 +19,6 @@
         <module>lambda-common</module>
         <module>lambda-dot</module>
         <module>lambda-uml</module>
-        <module>lambda-instagram</module>
-        <module>lambda-soundcloud</module>
-        <module>lambda-github</module>
     </modules>
 
     <dependencyManagement>
@@ -117,6 +114,12 @@
                 <groupId>com.amazonaws</groupId>
                 <artifactId>aws-java-sdk</artifactId>
                 <version>1.11.256</version>
+            </dependency>
+            <!-- Others -->
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>1.10.2</version>
             </dependency>
             <!-- Servlet API -->
             <dependency>

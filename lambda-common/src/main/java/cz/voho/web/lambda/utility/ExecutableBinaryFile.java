@@ -1,4 +1,4 @@
-package cz.voho.web.lambda.utility.generate;
+package cz.voho.web.lambda.utility;
 
 import java.io.IOException;
 import java.nio.file.Files;

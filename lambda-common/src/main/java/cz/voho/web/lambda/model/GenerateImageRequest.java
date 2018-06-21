@@ -1,4 +1,4 @@
-package cz.voho.web.lambda.model.generate;
+package cz.voho.web.lambda.model;
 
 public class GenerateImageRequest {
     /**

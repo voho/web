@@ -3,21 +3,17 @@ package cz.voho.facade;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
 import cz.voho.common.utility.ExecutorProvider;
-import cz.voho.common.utility.LambdaClient;
 import cz.voho.common.utility.WikiLinkUtility;
-import cz.voho.web.lambda.model.github.CommitMeta;
-import cz.voho.web.lambda.model.github.GetRecentCommitsRequest;
-import cz.voho.web.lambda.model.github.GetRecentCommitsResponse;
-import cz.voho.web.lambda.model.photo.GetRecentPhotosRequest;
-import cz.voho.web.lambda.model.photo.GetRecentPhotosResponse;
-import cz.voho.web.lambda.model.photo.Image;
-import cz.voho.web.lambda.model.sound.GetRecentSongsRequest;
-import cz.voho.web.lambda.model.sound.GetRecentSongsResponse;
-import cz.voho.web.lambda.model.sound.Song;
+import cz.voho.external.Configuration;
+import cz.voho.external.GitHub;
+import cz.voho.external.Instagram;
+import cz.voho.external.SoundCloud;
 import cz.voho.wiki.model.WikiPageCommitGroup;
+import org.apache.http.client.HttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -25,6 +21,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
@@ -38,14 +35,18 @@ public class RecentBackend {
     private static final String WIKI_COMMIT_PATH = "website/src/main/resources/wiki/";
 
     private final ScheduledExecutorService scheduledExecutorService;
-    private final LambdaClient lambdaClient;
-    private final AtomicReference<GetRecentPhotosResponse> recentPhotosCache;
-    private final AtomicReference<GetRecentSongsResponse> recentSongsCache;
-    private final AtomicReference<GetRecentCommitsResponse> recentCommitsCache;
+    private final GitHub gitHub;
+    private final Instagram instagram;
+    private final SoundCloud soundCloud;
+    private final AtomicReference<List<Instagram.InstagramImage>> recentPhotosCache;
+    private final AtomicReference<List<SoundCloud.SoundCloudSong>> recentSongsCache;
+    private final AtomicReference<List<GitHub.GitHubCommitMeta>> recentCommitsCache;
 
-    RecentBackend(final LambdaClient lambdaClient) {
+    RecentBackend(final HttpClient httpClient, final Configuration configuration) {
         this.scheduledExecutorService = ExecutorProvider.INSTAGRAM_UPDATER_EXECUTOR;
-        this.lambdaClient = lambdaClient;
+        this.gitHub = new GitHub(httpClient, configuration);
+        this.instagram = new Instagram(httpClient, configuration);
+        this.soundCloud = new SoundCloud();
         this.recentPhotosCache = new AtomicReference<>(null);
         this.recentSongsCache = new AtomicReference<>(null);
         this.recentCommitsCache = new AtomicReference<>(null);
@@ -73,79 +74,52 @@ public class RecentBackend {
     }
 
     private void updateRecentWikiChanges() {
-        final GetRecentCommitsRequest request = new GetRecentCommitsRequest();
-        request.setPath(WIKI_COMMIT_PATH);
+        LOG.info("Updating recent wiki changes cache.");
 
-        final GetRecentCommitsResponse response = lambdaClient.callGitHubLambda(request);
-
-        if (response != null && response.getCommits() != null && !response.getCommits().isEmpty()) {
-            LOG.info("Updating recent wiki changes cache.");
+        try {
+            final List<GitHub.GitHubCommitMeta> response = gitHub.getLatestCommits(WIKI_COMMIT_PATH);
             recentCommitsCache.set(response);
-        } else {
-            LOG.warn("Could not upgrade recent wiki changes cache.");
+        } catch (IOException e) {
+            LOG.warn("Could not upgrade recent wiki changes cache.", e);
         }
     }
 
     private void updateRecentSongs() {
-        final GetRecentSongsRequest request = new GetRecentSongsRequest();
-        request.setCount(RECENT_SONGS_COUNT);
-        request.setDarkColor("606af6");
-        request.setLightColor("606af6");
+        LOG.info("Updating SoundCloud cache.");
 
-        final GetRecentSongsResponse response = lambdaClient.callSoundcloudLambda(request);
-
-        if (response != null && response.getSongs() != null && response.getSongs().getSongs() != null) {
-            LOG.info("Updating SoundCloud cache.");
+        try {
+            final List<SoundCloud.SoundCloudSong> response = soundCloud.getLatestSongs(RECENT_SONGS_COUNT, "606af6", "606af6");
             recentSongsCache.set(response);
-        } else {
-            LOG.warn("Could not upgrade SoundCloud cache.");
+        } catch (IOException e) {
+            LOG.warn("Could not upgrade SoundCloud cache.", e);
         }
     }
 
     private void updateRecentPhotos() {
-        final GetRecentPhotosRequest request = new GetRecentPhotosRequest();
-        request.setCount(RECENT_PHOTO_COUNT);
+        LOG.info("Updating Instagram cache.");
 
-        final GetRecentPhotosResponse response = lambdaClient.callInstagramLambda(request);
-
-        if (response != null && response.getRecentItems() != null && response.getRecentItems().getData() != null) {
-            LOG.info("Updating Instagram cache.");
+        try {
+            final List<Instagram.InstagramImage> response = instagram.getLatestPhotos(RECENT_PHOTO_COUNT);
             recentPhotosCache.set(response);
-        } else {
-            LOG.warn("Could not upgrade Instagram cache.");
+        } catch (IOException e) {
+            LOG.warn("Could not upgrade Instagram cache.", e);
         }
     }
 
-    public List<Song> getRecentTracks() {
-        final GetRecentSongsResponse latestValue = recentSongsCache.get();
-
-        if (latestValue == null) {
-            return Collections.emptyList();
-        }
-
-        return latestValue.getSongs().getSongs();
+    public List<Instagram.InstagramImage> getRecentPhotos() {
+        return Optional.ofNullable(recentPhotosCache.get()).orElse(Collections.emptyList());
     }
 
-    public List<Image> getRecentPhotos() {
-        final GetRecentPhotosResponse latestValue = recentPhotosCache.get();
-
-        if (latestValue == null) {
-            return Collections.emptyList();
-        }
-
-        return latestValue.getRecentItems().getData();
+    public List<SoundCloud.SoundCloudSong> getRecentTracks() {
+        return Optional.ofNullable(recentSongsCache.get()).orElse(Collections.emptyList());
     }
 
     public List<WikiPageCommitGroup> getRecentWikiChanges() {
-        final GetRecentCommitsResponse latestValue = recentCommitsCache.get();
+        final List<GitHub.GitHubCommitMeta> latestValue = Optional.ofNullable(recentCommitsCache.get()).orElse(Collections.emptyList());
 
-        if (latestValue == null) {
-            return Collections.emptyList();
-        }
+        final SetMultimap<String, GitHub.GitHubCommitMeta> filesToSortedCommits = HashMultimap.create();
 
-        final SetMultimap<String, CommitMeta> filesToSortedCommits = HashMultimap.create();
-
-        for (final CommitMeta commit : latestValue.getCommits()) {
+        for (final GitHub.GitHubCommitMeta commit : latestValue) {
             for (final String filename : commit.getFilenames()) {
                 if (WikiLinkUtility.isValidWikiPageSource(filename)) {
                     filesToSortedCommits.put(filename, commit);
@@ -158,13 +132,13 @@ public class RecentBackend {
         filesToSortedCommits.asMap().entrySet().forEach(entry -> {
             final WikiPageCommitGroup group = new WikiPageCommitGroup();
             group.setFilename(entry.getKey());
-            final List<CommitMeta> commits = new ArrayList<>(entry.getValue());
+            final List<GitHub.GitHubCommitMeta> commits = new ArrayList<>(entry.getValue());
             Collections.sort(commits, (o1, o2) -> {
                 final LocalDateTime o1d = LocalDateTime.parse(o1.getIsoTime(), DateTimeFormatter.ISO_DATE_TIME);
                 final LocalDateTime o2d = LocalDateTime.parse(o2.getIsoTime(), DateTimeFormatter.ISO_DATE_TIME);
                 return o1d.compareTo(o2d);
             });
-            final CommitMeta newest = commits.get(commits.size() - 1);
+            final GitHub.GitHubCommitMeta newest = commits.get(commits.size() - 1);
             group.setLatestDate(newest.getIsoTime());
             group.setLatestCommitSha(newest.getSha());
             group.setLatestCommitMessage(newest.getMessage());
