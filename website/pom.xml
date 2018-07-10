@@ -34,6 +34,11 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
+        <!-- Plant UML -->
+        <dependency>
+            <groupId>net.sourceforge.plantuml</groupId>
+            <artifactId>plantuml</artifactId>
+        </dependency>
         <!-- Lucene for fulltext search -->
         <dependency>
             <groupId>org.apache.lucene</groupId>
@@ -71,17 +76,6 @@
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-ext-toc</artifactId>
-        </dependency>
-        <!-- emoji -->
-        <dependency>
-            <groupId>com.kcthota</groupId>
-            <artifactId>emoji4j</artifactId>
-            <version>5.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.vdurmont</groupId>
-            <artifactId>emoji-java</artifactId>
-            <version>3.2.0</version>
         </dependency>
         <!-- AWS Client -->
         <dependency>

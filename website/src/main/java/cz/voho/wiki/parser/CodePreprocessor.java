@@ -7,7 +7,10 @@ import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import cz.voho.wiki.repository.image.WikiImageRepository;
+import net.sourceforge.plantuml.code.Transcoder;
+import net.sourceforge.plantuml.code.TranscoderUtil;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Set;
@@ -20,6 +23,10 @@ public class CodePreprocessor implements Preprocessor {
     private static final String UML_SEQUENCE = "uml:seq";
 
     private static final String DOT_PREFIX = "bgcolor=transparent;dpi=70;node[color=silver,style=filled,fillcolor=white];";
+
+    private static final boolean PLANT_TEXT_ENABLED = true;
+
+    private static final Transcoder PLANT_TEXT_TRANSCODER = TranscoderUtil.getDefaultTranscoder();
 
     private final String UML_PREFIX = "@startuml\n\n" +
             "skinparam style strictuml\n" +
@@ -93,23 +100,34 @@ public class CodePreprocessor implements Preprocessor {
 
     private void umlSequence(final HtmlWriter html, final String codeSource) {
         final String codeSourceFixed = UML_PREFIX + codeSource + UML_SUFFIX;
-        wikiImageCacheWarmUp.warmUpCachePlantUmlSvg(codeSourceFixed);
-        final String sourceEncoded = encodeForUrl(codeSourceFixed);
-        html.raw(String.format("<div class='figure uml'><img src='/generate/svg/uml?data=%s' alt='UML (sekvenční diagram)' /></div>", sourceEncoded));
+        final String imageUrl = getUmlImageUrl(codeSourceFixed);
+        html.raw(String.format("<div class='figure uml'><img src='%s' alt='UML (sekvenční diagram)' /></div>", imageUrl));
     }
 
     private void umlActivity(final HtmlWriter html, final String codeSource) {
         final String codeSourceFixed = UML_PREFIX + codeSource + UML_SUFFIX;
-        wikiImageCacheWarmUp.warmUpCachePlantUmlSvg(codeSourceFixed);
-        final String sourceEncoded = encodeForUrl(codeSourceFixed);
-        html.raw(String.format("<div class='figure uml'><img src='/generate/svg/uml?data=%s' alt='UML (diagram aktivit)' /></div>", sourceEncoded));
+        final String imageUrl = getUmlImageUrl(codeSourceFixed);
+        html.raw(String.format("<div class='figure uml'><img src='%s' alt='UML (diagram aktivit)' /></div>", imageUrl));
     }
 
     private void umlClass(final HtmlWriter html, final String codeSource) {
         final String codeSourceFixed = UML_PREFIX + codeSource + UML_SUFFIX;
+        final String imageUrl = getUmlImageUrl(codeSourceFixed);
+        html.raw(String.format("<div class='figure uml'><img src='%s' alt='UML (diagram tříd)' /></div>", imageUrl));
+    }
+
+    private String getUmlImageUrl(final String codeSourceFixed) {
+        if (PLANT_TEXT_ENABLED) {
+            try {
+                return String.format("https://www.planttext.com/plantuml/svg/%s", PLANT_TEXT_TRANSCODER.encode(codeSourceFixed));
+            } catch (IOException e) {
+                // ignore the exception and just do it the old way
+            }
+        }
+
         wikiImageCacheWarmUp.warmUpCachePlantUmlSvg(codeSourceFixed);
         final String sourceEncoded = encodeForUrl(codeSourceFixed);
-        html.raw(String.format("<div class='figure uml'><img src='/generate/svg/uml?data=%s' alt='UML (diagram tříd)' /></div>", sourceEncoded));
+        return String.format("/generate/svg/uml?data=%s", sourceEncoded);
     }
 
     private void dotDigraph(final HtmlWriter html, final String codeSource) {
