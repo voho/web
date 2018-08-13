@@ -43,7 +43,7 @@ public class ZipStreamCompressionTest {
         assertTrue(Files.exists(extractedDirectory));
         assertTrue(Files.isDirectory(extractedDirectory));
 
-        final Path[] extractedFiles = Files.list(extractedDirectory).toArray(Path[]::new);
+        final Path[] extractedFiles = Files.list(extractedDirectory).sorted().toArray(Path[]::new);
 
         assertEquals(filesToCompress.size(), extractedFiles.length);
 
