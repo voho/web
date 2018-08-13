@@ -5,7 +5,7 @@ import java.util.Locale;
 
 public class Constants {
     public static final String OFFICIAL_FULL_NAME = "Vojtěch Hordějčuk";
-    public static final String GOOGLE_SITE_SEARCH = "https://www.google.cz/?gws_rd=ssl#q=site:voho.eu+%s&*";
+    public static final String GOOGLE_SITE_SEARCH = "https://www.google.cz/search?q=site:voho.eu+%s&*&cad=h";
     public static final String WEBSITE_URL_WITH_SLASH = "http://voho.eu/";
     public static final String DEGREE = "Ing.";
     public static final String OFFICIAL_FIRST_NAME = "Vojtěch";
