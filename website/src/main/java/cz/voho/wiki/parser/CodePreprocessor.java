@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Set;
+import java.util.UUID;
 
 public class CodePreprocessor implements Preprocessor {
     private static final String DOT_GRAPH = "dot:graph";
@@ -21,6 +22,7 @@ public class CodePreprocessor implements Preprocessor {
     private static final String UML_CLASS = "uml:class";
     private static final String UML_ACTIVITY = "uml:activity";
     private static final String UML_SEQUENCE = "uml:seq";
+    private static final String RUNKIT_JS = "runkit:js";
 
     private static final String DOT_PREFIX = "bgcolor=transparent;dpi=70;node[color=silver,style=filled,fillcolor=white];";
 
@@ -77,10 +79,25 @@ public class CodePreprocessor implements Preprocessor {
                 umlActivity(html, codeSource);
             } else if (codeLang.equalsIgnoreCase(UML_SEQUENCE)) {
                 umlSequence(html, codeSource);
+            } else if (codeLang.equalsIgnoreCase(RUNKIT_JS)) {
+                runkitJs(node, html);
             } else {
                 sourceCode(node, html);
             }
         }));
+    }
+
+    private void runkitJs(final FencedCodeBlock node, final HtmlWriter html) {
+        final String randomId = UUID.randomUUID().toString();
+        html.line();
+        html.raw(PrefixedSubSequence.of(String.format("<div id=\"%s\">", randomId)));
+        html.openPre();
+        html.text(node.getContentChars());
+        html.closePre();
+        html.raw("</div>");
+        html.line();
+        html.raw(String.format("<script src=\"https://embed.runkit.com\" data-element-id=\"%s\"></script>", randomId));
+        html.line();
     }
 
     private void sourceCode(final FencedCodeBlock node, final HtmlWriter html) {
