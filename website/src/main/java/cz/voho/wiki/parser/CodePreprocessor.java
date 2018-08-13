@@ -88,7 +88,7 @@ public class CodePreprocessor implements Preprocessor {
     }
 
     private void runkitJs(final FencedCodeBlock node, final HtmlWriter html) {
-        final String randomId = UUID.randomUUID().toString();
+        final String randomId = String.format("runkit-js-%s", UUID.randomUUID().toString());
         html.line();
         html.raw(PrefixedSubSequence.of(String.format("<div id=\"%s\">", randomId)));
         html.openPre();
