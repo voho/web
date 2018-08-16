@@ -1,14 +1,14 @@
 /* typography */
 @import url('normalize.css');
 @import url('font-awesome.min.css');
-@import url('https://fonts.googleapis.com/css?family=Raleway:300,300i,600,600i&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Asap:300,300i,600,600i&subset=latin-ext');
 
 h1, h2, h3, h4, h5, h6, option, select, button, input {
-    font-family: Raleway, Arial, sans-serif;
+    font-family: Asap, Arial, sans-serif;
 }
 
 body {
-    font-family: Raleway, Arial, sans-serif;
+    font-family: Asap, Arial, sans-serif;
     font-size: 14pt;
     line-height: 1.5;
 }
