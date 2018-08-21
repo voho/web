@@ -33,7 +33,7 @@ public static BigInteger power(final BigInteger base, final BigInteger power) {
 ### Zdrojový kód (Java z Githubu)
 
 ```github:java
-web/examples/lz77/src/main/java/LZ77Codeword.java
+https://raw.githubusercontent.com/voho/web/master/website/src/main/java/cz/voho/common/utility/Constants.java
 ```
 
 ### UML

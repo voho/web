@@ -11,6 +11,7 @@ import net.sourceforge.plantuml.code.Transcoder;
 import net.sourceforge.plantuml.code.TranscoderUtil;
 
 import java.io.IOException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -93,8 +94,7 @@ public class CodePreprocessor implements Preprocessor {
     }
 
     private void githubJava(FencedCodeBlock node, HtmlWriter html) {
-        // TODO this does not work yet
-        Path sourcePath = Paths.get(".");
+        // must be RAW link (e.g. https://raw.githubusercontent.com/voho/web/master/website/src/main/java/cz/voho/common/utility/Constants.java)
         String path = node.getContentChars().toString();
         String lang = "nohighlight";
         final BasedSequence info = node.getInfo();
@@ -104,10 +104,18 @@ public class CodePreprocessor implements Preprocessor {
         html.line();
         html.raw(PrefixedSubSequence.of(String.format("<pre><code class=\"hljs %s\">", lang)));
         html.openPre();
-        html.text("rel: " + sourcePath + " / abs: " + sourcePath.toAbsolutePath() + " / file: " + path);
+        html.text(download(path));
         html.closePre();
         html.raw("</code></pre>");
         html.line();
+    }
+
+    private String download(String url) {
+        try {
+            return String.valueOf(new URL(url).getContent());
+        } catch (IOException e) {
+            return "Error: " + e.toString();
+        }
     }
 
     private void runkitJs(final FencedCodeBlock node, final HtmlWriter html) {
