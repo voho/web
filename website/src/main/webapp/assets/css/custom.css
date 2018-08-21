@@ -433,7 +433,12 @@ ul.copyright li {
 }
 
 .wiki-related-pages.incoming ul li a, .wiki-related-pages.outgoing ul li a, .wiki-related-pages.siblings ul li a {
-    border: 0;
+    background-color: #e6e6e6;
+    border: 0;    
+    border-radius: 1em;
+    padding: 0.5ex 1em;
+    display: inline-block;
+    margin: 0.5ex;    
     white-space: nowrap;
 }
 
