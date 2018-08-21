@@ -115,12 +115,13 @@ iframe {
 }
 
 #toc {
-    background-color: #282828;
-    box-shadow: 0 0 10em #282828;
-    display: none;
-    width: 100%;
+    background-color: #e8e7e5;
+    box-shadow: -1ex 1ex 20em 10px #f8ed61;
+    z-index: 99999;
     position: fixed;
-    z-index: 10000;
+    top: 1em;
+    right: 1em;
+    border-radius: 2em;
 }
 
 #toc .inner {
