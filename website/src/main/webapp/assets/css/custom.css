@@ -1,14 +1,13 @@
 /* typography */
 @import url('normalize.css');
 @import url('font-awesome.min.css');
-@import url('https://fonts.googleapis.com/css?family=Asap:400,400i,700,700i&subset=latin-ext');
 
 h1, h2, h3, h4, h5, h6, option, select, button, input {
-    font-family: Asap, Arial, sans-serif;
+    font-family: Arial, sans-serif;
 }
 
 body {
-    font-family: Asap, Arial, sans-serif;
+    font-family: Arial, sans-serif;
     font-size: 14pt;
     line-height: 1.5;
 }
@@ -429,7 +428,7 @@ ul.copyright li {
     display: inline;
     list-style: none;
     padding-left: 0;
-    padding-right: 1em;
+    padding-right: 0;
     white-space: nowrap;
 }
 
@@ -439,7 +438,7 @@ ul.copyright li {
     border-radius: 1em;
     padding: 0.5ex 1em;
     display: inline-block;
-    margin: 0.5ex;    
+    margin: 0 0.5ex 1ex 0;
     white-space: nowrap;
 }
 
@@ -460,11 +459,13 @@ ul.copyright li {
 }
 
 .image.left, .image.right {
-    max-width: 30%;
+    max-width: 25%;
 }
 
 .image {
     border: 0;
+    color: #999999;
+    font-size: 80%;
     display: inline-block;
     position: relative;
 }
@@ -514,7 +515,7 @@ a {
 
 #heading {
     background-color: #eeeeee;
-    padding: 3em 0;
+    padding: 2em 0;
 }
 
 #heading h1 {
