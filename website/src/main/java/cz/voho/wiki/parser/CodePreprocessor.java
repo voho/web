@@ -12,6 +12,8 @@ import net.sourceforge.plantuml.code.TranscoderUtil;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.Set;
 import java.util.UUID;
@@ -23,6 +25,7 @@ public class CodePreprocessor implements Preprocessor {
     private static final String UML_ACTIVITY = "uml:activity";
     private static final String UML_SEQUENCE = "uml:seq";
     private static final String RUNKIT_JS = "runkit:js";
+    private static final String GITHUB_JAVA = "github:java";
 
     private static final String DOT_PREFIX = "bgcolor=transparent;dpi=70;node[color=silver,style=filled,fillcolor=white];";
 
@@ -81,10 +84,30 @@ public class CodePreprocessor implements Preprocessor {
                 umlSequence(html, codeSource);
             } else if (codeLang.equalsIgnoreCase(RUNKIT_JS)) {
                 runkitJs(node, html);
+            } else if (codeLang.equalsIgnoreCase(GITHUB_JAVA)) {
+                githubJava(node, html);
             } else {
                 sourceCode(node, html);
             }
         }));
+    }
+
+    private void githubJava(FencedCodeBlock node, HtmlWriter html) {
+        // TODO this does not work yet
+        Path sourcePath = Paths.get(".");
+        String path = node.getContentChars().toString();
+        String lang = "nohighlight";
+        final BasedSequence info = node.getInfo();
+        if (info.isNotNull() && !info.isBlank()) {
+            lang = info.unescape();
+        }
+        html.line();
+        html.raw(PrefixedSubSequence.of(String.format("<pre><code class=\"hljs %s\">", lang)));
+        html.openPre();
+        html.text("rel: " + sourcePath + " / abs: " + sourcePath.toAbsolutePath() + " / file: " + path);
+        html.closePre();
+        html.raw("</code></pre>");
+        html.line();
     }
 
     private void runkitJs(final FencedCodeBlock node, final HtmlWriter html) {

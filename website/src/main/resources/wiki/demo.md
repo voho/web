@@ -30,6 +30,12 @@ public static BigInteger power(final BigInteger base, final BigInteger power) {
 }
 ```
 
+### Zdrojový kód (Java z Githubu)
+
+```github:java
+web/examples/lz77/src/main/java/LZ77Codeword.java
+```
+
 ### UML
 
 ```uml:class
