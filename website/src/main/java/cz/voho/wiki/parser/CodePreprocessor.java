@@ -11,13 +11,14 @@ import net.sourceforge.plantuml.code.Transcoder;
 import net.sourceforge.plantuml.code.TranscoderUtil;
 
 import java.io.IOException;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CodePreprocessor implements Preprocessor {
     private static final String DOT_GRAPH = "dot:graph";
@@ -86,36 +87,11 @@ public class CodePreprocessor implements Preprocessor {
             } else if (codeLang.equalsIgnoreCase(RUNKIT_JS)) {
                 runkitJs(node, html);
             } else if (codeLang.equalsIgnoreCase(GITHUB_JAVA)) {
-                githubJava(node, html);
+                sourceCodeGithubJava(node, html);
             } else {
                 sourceCode(node, html);
             }
         }));
-    }
-
-    private void githubJava(FencedCodeBlock node, HtmlWriter html) {
-        // must be RAW link (e.g. https://raw.githubusercontent.com/voho/web/master/website/src/main/java/cz/voho/common/utility/Constants.java)
-        String path = node.getContentChars().toString();
-        String lang = "nohighlight";
-        final BasedSequence info = node.getInfo();
-        if (info.isNotNull() && !info.isBlank()) {
-            lang = info.unescape();
-        }
-        html.line();
-        html.raw(PrefixedSubSequence.of(String.format("<pre><code class=\"hljs %s\">", lang)));
-        html.openPre();
-        html.text(download(path));
-        html.closePre();
-        html.raw("</code></pre>");
-        html.line();
-    }
-
-    private String download(String url) {
-        try {
-            return String.valueOf(new URL(url).getContent());
-        } catch (IOException e) {
-            return "Error: " + e.toString();
-        }
     }
 
     private void runkitJs(final FencedCodeBlock node, final HtmlWriter html) {
@@ -131,19 +107,50 @@ public class CodePreprocessor implements Preprocessor {
         html.line();
     }
 
+    private void sourceCodeGithubJava(final FencedCodeBlock node, final HtmlWriter html) {
+        final String lang = sourceCodeLang(node);
+        final String sourcePath = node.getContentChars().toString();
+        final String source = loadSource(sourcePath);
+        sourceCodeUsingString(html, lang, source);
+    }
+
     private void sourceCode(final FencedCodeBlock node, final HtmlWriter html) {
+        final String lang = sourceCodeLang(node);
+        final String source = node.getContentChars().toString();
+        sourceCodeUsingString(html, lang, source);
+    }
+
+    private String loadSource(final String sourcePath) {
+        return Stream
+                .of(
+                        "url=" + sourcePath,
+                        "path=" + Paths.get("examples.zip"),
+                        "rpath=" + Paths.get("/examples.zip"),
+                        "apath=" + Paths.get("examples.zip").toAbsolutePath(),
+                        "rapath=" + Paths.get("/examples.zip").toAbsolutePath(),
+                        "path_exists=" + Files.exists(Paths.get("examples.zip")),
+                        "rpath_exists=" + Files.exists(Paths.get("/examples.zip"))
+                )
+                .collect(Collectors.joining("; "));
+    }
+
+    private void sourceCodeUsingString(final HtmlWriter html, final String lang, final String source) {
+        html.line();
+        html.raw(PrefixedSubSequence.of(String.format("<pre><code class=\"hljs %s\">", lang)));
+        html.openPre();
+        html.text(source);
+        html.closePre();
+        html.raw("</code></pre>");
+        html.line();
+    }
+
+    private String sourceCodeLang(final FencedCodeBlock node) {
         String lang = "nohighlight";
         final BasedSequence info = node.getInfo();
         if (info.isNotNull() && !info.isBlank()) {
             lang = info.unescape();
         }
-        html.line();
-        html.raw(PrefixedSubSequence.of(String.format("<pre><code class=\"hljs %s\">", lang)));
-        html.openPre();
-        html.text(node.getContentChars());
-        html.closePre();
-        html.raw("</code></pre>");
-        html.line();
+        return lang;
     }
 
     private void umlSequence(final HtmlWriter html, final String codeSource) {

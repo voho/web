@@ -6,6 +6,7 @@ phases:
       - mvn package
 artifacts:
   files:
+    - examples/target/examples.zip
     - website/target/ROOT.war
     - website/scripts/*.sh
     - appspec.yml
