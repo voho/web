@@ -3,6 +3,8 @@ os: linux
 files:
   - source: /ROOT.war
     destination: /var/lib/tomcat8/webapps/
+  - source: /examples.zip
+    destination: /tmp/
 hooks:
   ApplicationStop:
     - location: application_stop.sh

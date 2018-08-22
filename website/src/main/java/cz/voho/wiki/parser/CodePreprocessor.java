@@ -13,12 +13,15 @@ import net.sourceforge.plantuml.code.TranscoderUtil;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 public class CodePreprocessor implements Preprocessor {
     private static final String DOT_GRAPH = "dot:graph";
@@ -121,17 +124,17 @@ public class CodePreprocessor implements Preprocessor {
     }
 
     private String loadSource(final String sourcePath) {
-        return Stream
-                .of(
-                        "url=" + sourcePath,
-                        "path=" + Paths.get("examples.zip"),
-                        "rpath=" + Paths.get("/examples.zip"),
-                        "apath=" + Paths.get("examples.zip").toAbsolutePath(),
-                        "rapath=" + Paths.get("/examples.zip").toAbsolutePath(),
-                        "path_exists=" + Files.exists(Paths.get("examples.zip")),
-                        "rpath_exists=" + Files.exists(Paths.get("/examples.zip"))
-                )
-                .collect(Collectors.joining("; "));
+        final Path path = Paths.get("/tmp/examples.zip");
+
+        if (Files.exists(path)) {
+            try (final ZipFile zipFile = new ZipFile(path.toFile())) {
+                return zipFile.stream().map(a -> ((ZipEntry) a).getName()).collect(Collectors.joining(", "));
+            } catch (IOException e) {
+                return e.toString();
+            }
+        } else {
+            return String.format("ZIP file with source not found: %s", path.toAbsolutePath());
+        }
     }
 
     private void sourceCodeUsingString(final HtmlWriter html, final String lang, final String source) {
