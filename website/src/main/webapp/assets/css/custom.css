@@ -665,10 +665,14 @@ dl dd {
 }
 
 #wiki-content .code-included-disclaimer {
-    font-size: 80%;
-    color: #999;
+    color: #666;
     margin-bottom: -1.5ex;
     text-align: right;
+}
+
+#wiki-content .code-included-disclaimer a {
+    color: #999;
+    font-size: 80%;
 }
 
 /* special mark-up */

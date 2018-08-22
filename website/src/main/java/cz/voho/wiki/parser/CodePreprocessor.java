@@ -180,7 +180,7 @@ public class CodePreprocessor implements Preprocessor {
             final String url = "https://github.com/voho/web/blob/master/" + sourcePath;
 
             html.line();
-            html.raw("<p class='code-included-disclaimer'><span class='fa fa-github'></span><a href='");
+            html.raw("<p class='code-included-disclaimer'><span class='fa fa-github'></span> <a href='");
             html.text(url);
             html.raw("' onclick='return !window.open(this.href);' title='");
             html.text(sourcePath);
