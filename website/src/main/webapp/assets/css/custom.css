@@ -434,7 +434,7 @@ ul.copyright li {
 
 .wiki-related-pages.incoming ul li a, .wiki-related-pages.outgoing ul li a, .wiki-related-pages.siblings ul li a {
     background-color: #e6e6e6;
-    border: 0;    
+    border: 0;
     border-radius: 1em;
     padding: 0.5ex 1em;
     display: inline-block;
@@ -662,6 +662,13 @@ dl dd {
     padding: 1px 5pt;
     font-weight: bold;
     color: black;
+}
+
+#wiki-content .code-included-disclaimer {
+    font-size: 80%;
+    color: #999;
+    margin-bottom: -1.5ex;
+    text-align: right;
 }
 
 /* special mark-up */

@@ -147,6 +147,6 @@ public class RecentBackend {
 
         Collections.sort(groups, Comparator.comparing(WikiPageCommitGroup::getLatestDate).reversed());
 
-        return groups.subList(0, RECENT_WIKI_UPDATES_COUNT);
+        return groups.size() > RECENT_WIKI_UPDATES_COUNT ? groups.subList(0, RECENT_WIKI_UPDATES_COUNT) : groups;
     }
 }

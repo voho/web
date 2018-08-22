@@ -10,6 +10,8 @@ import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import cz.voho.wiki.repository.image.WikiImageRepository;
 import net.sourceforge.plantuml.code.Transcoder;
 import net.sourceforge.plantuml.code.TranscoderUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -25,13 +27,15 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 public class CodePreprocessor implements Preprocessor {
+    private static final Logger LOG = LoggerFactory.getLogger(CodePreprocessor.class);
+
     private static final String DOT_GRAPH = "dot:graph";
     private static final String DOT_DIGRAPH = "dot:digraph";
     private static final String UML_CLASS = "uml:class";
     private static final String UML_ACTIVITY = "uml:activity";
     private static final String UML_SEQUENCE = "uml:seq";
     private static final String RUNKIT_JS = "runkit:js";
-    private static final String INCLUDE_JAVA = "include:java";
+    private static final String INCLUDE_PREFIX = "include:";
 
     private static final String DOT_PREFIX = "bgcolor=transparent;dpi=70;node[color=silver,style=filled,fillcolor=white];";
 
@@ -66,7 +70,7 @@ public class CodePreprocessor implements Preprocessor {
 
     private final String UML_SUFFIX = "\n\n@enduml";
 
-    private WikiImageRepository wikiImageCacheWarmUp;
+    private final WikiImageRepository wikiImageCacheWarmUp;
 
     public CodePreprocessor(final WikiImageRepository wikiImageCacheWarmUp) {
         this.wikiImageCacheWarmUp = wikiImageCacheWarmUp;
@@ -90,8 +94,6 @@ public class CodePreprocessor implements Preprocessor {
                 umlSequence(html, codeSource);
             } else if (codeLang.equalsIgnoreCase(RUNKIT_JS)) {
                 runkitJs(node, html);
-            } else if (codeLang.equalsIgnoreCase(INCLUDE_JAVA)) {
-                sourceCodeGithubJava(node, html);
             } else {
                 sourceCode(node, html);
             }
@@ -111,54 +113,81 @@ public class CodePreprocessor implements Preprocessor {
         html.line();
     }
 
-    private void sourceCodeGithubJava(final FencedCodeBlock node, final HtmlWriter html) {
-        final String lang = sourceCodeLang(node);
-        final String sourcePath = node.getContentChars().toString();
-        final String source = loadSource(sourcePath);
-        sourceCodeUsingString(html, lang, source);
-    }
-
     private void sourceCode(final FencedCodeBlock node, final HtmlWriter html) {
         final String lang = sourceCodeLang(node);
-        final String source = node.getContentChars().toString();
-        sourceCodeUsingString(html, lang, source);
+
+        if (lang.startsWith(INCLUDE_PREFIX)) {
+            // contents needs to be loaded from ZIP first
+            final String langWithoutPrefix = lang.substring(INCLUDE_PREFIX.length());
+            final String sourcePath = node.getContentChars().toString().trim();
+            try {
+                final Optional<ZipEntryResult> zipEntry = findZipEntry(sourcePath);
+
+                if (zipEntry.isPresent()) {
+                    sourceCodeUsingString(html, zipEntry.get().zipEntryName, langWithoutPrefix, zipEntry.get().zipEntryContents);
+                } else {
+                    sourceCodeUsingString(html, "Nenalezeno: " + sourcePath, "nohighlight", "N/A");
+                }
+            } catch (Exception e) {
+                LOG.error("Error while loading contents from ZIP.", e);
+            }
+        } else {
+            // inline contents
+            final String source = node.getContentChars().toString();
+            sourceCodeUsingString(html, null, lang, source);
+        }
     }
 
-    private String loadSource(final String sourcePath) {
-        final Path path = Paths.get("/tmp/examples.zip");
+    private Optional<ZipEntryResult> findZipEntry(final String sourcePath) throws IOException {
+        final Path path = Paths.get("/Users/vojta/IdeaProjects/web/examples/target/examples.zip");
 
         if (Files.exists(path)) {
             try (final ZipFile zipFile = new ZipFile(path.toFile())) {
-                final Optional<ZipEntry> zipEntry = findBestFittingZipEntry(sourcePath, zipFile);
-
-                if (zipEntry.isPresent()) {
-                    return extractZipEntry(zipFile, zipEntry.get());
-                } else {
-                    return String.format("ERROR: No fitting entry for: %s", sourcePath);
-                }
-            } catch (IOException e) {
-                return e.toString();
+                return zipFile
+                        .stream()
+                        .filter(f -> f.getName().endsWith(sourcePath))
+                        .map(ZipEntry.class::cast)
+                        .findFirst()
+                        .map(f -> {
+                            final ZipEntryResult result = new ZipEntryResult();
+                            result.zipEntryName = f.getName();
+                            result.zipEntryContents = extractZipEntry(zipFile, f);
+                            return result;
+                        });
+            } catch (Exception e) {
+                final String error = String.format("ERROR: Cannot load the file: %s", path.toAbsolutePath());
+                throw new IOException(error);
             }
         } else {
-            return String.format("ERROR: ZIP file with source not found: %s", path.toAbsolutePath());
+            final String error = String.format("ERROR: ZIP file with source not found: %s", path.toAbsolutePath());
+            throw new IOException(error);
         }
     }
 
-    private String extractZipEntry(final ZipFile zipFile, final ZipEntry zipEntry) throws IOException {
+    private String extractZipEntry(final ZipFile zipFile, final ZipEntry zipEntry) {
         try (final InputStreamReader reader = new InputStreamReader(zipFile.getInputStream(zipEntry), StandardCharsets.UTF_8)) {
             return CharStreams.toString(reader);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    private Optional<ZipEntry> findBestFittingZipEntry(final String sourcePath, final ZipFile zipFile) {
-        return zipFile
-                .stream()
-                .filter(f -> f.getName().endsWith(sourcePath))
-                .map(ZipEntry.class::cast)
-                .findFirst();
-    }
+    private void sourceCodeUsingString(final HtmlWriter html, final String sourcePath, final String lang, final String source) {
+        // https://github.com/voho/web/blob/master/examples/lz77/src/main/java/LZ77Codeword.java
+        // ________________________________________^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    private void sourceCodeUsingString(final HtmlWriter html, final String lang, final String source) {
+        if (sourcePath != null) {
+            final String url = "https://github.com/voho/web/blob/master/" + sourcePath;
+
+            html.line();
+            html.raw("<p class='code-included-disclaimer'><span class='fa fa-github'></span><a href='");
+            html.text(url);
+            html.raw("' onclick='return !window.open(this.href);' title='");
+            html.text(sourcePath);
+            html.raw("'>Zdrojový kód (GitHub)</a></p>");
+            html.line();
+        }
+
         html.line();
         html.raw(PrefixedSubSequence.of(String.format("<pre><code class=\"hljs %s\">", lang)));
         html.openPre();
@@ -172,7 +201,7 @@ public class CodePreprocessor implements Preprocessor {
         String lang = "nohighlight";
         final BasedSequence info = node.getInfo();
         if (info.isNotNull() && !info.isBlank()) {
-            lang = info.unescape();
+            lang = info.unescape().trim();
         }
         return lang;
     }
@@ -225,5 +254,10 @@ public class CodePreprocessor implements Preprocessor {
 
     private String encodeForUrl(final String source) {
         return Base64.getUrlEncoder().encodeToString(source.getBytes(StandardCharsets.UTF_8));
+    }
+
+    private static class ZipEntryResult {
+        String zipEntryName;
+        String zipEntryContents;
     }
 }
