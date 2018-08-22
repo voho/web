@@ -3,7 +3,7 @@ package cz.voho.facade;
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.lambda.AWSLambda;
 import com.amazonaws.services.lambda.AWSLambdaClientBuilder;
 import cz.voho.common.utility.LambdaClient;
@@ -18,14 +18,16 @@ import cz.voho.wiki.repository.page.DefaultParsedWikiPageRepository;
 import cz.voho.wiki.repository.page.DefaultWikiPageSourceRepository;
 import cz.voho.wiki.repository.page.ParsedWikiPageRepository;
 import cz.voho.wiki.repository.page.WikiPageSourceRepository;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 public class Backend {
     public static final Backend SINGLETON = new Backend();
 
     private final boolean isLocalDev = System.getProperty("os.name").contains("Windows");
-    private final AmazonDynamoDB dynamoDB = AmazonDynamoDBClient.builder().withRegion(Regions.EU_WEST_1).build();
-    private final Configuration configuration = new Configuration(dynamoDB);
+    private final DefaultAWSCredentialsProviderChain awsCredentials = new DefaultAWSCredentialsProviderChain();
+    private final AmazonDynamoDB dynamoDB = AmazonDynamoDBClientBuilder.standard().withCredentials(awsCredentials).withRegion(Regions.EU_WEST_1).build();
+    private final Configuration configuration = isLocalDev ? new Configuration() : new Configuration(dynamoDB);
     private final AWSLambda lambda = AWSLambdaClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).withRegion(Regions.EU_WEST_1).build();
     private final LambdaClient lambdaClient = new LambdaClient(lambda);
     private final LambdaWikiImageRepository wikiImageRepositoryDelegate = new LambdaWikiImageRepository(lambdaClient);
@@ -34,7 +36,8 @@ public class Backend {
     private final WikiPageSourceRepository wikiPageSourceRepository = new DefaultWikiPageSourceRepository();
     private final ParsedWikiPageRepository parsedWikiPageRepository = new DefaultParsedWikiPageRepository(wikiPageSourceRepository, wikiParser);
     private final WikiBackend wikiBackend = new WikiBackend(wikiPageSourceRepository, parsedWikiPageRepository, wikiImageRepository);
-    private final RecentBackend recentBackend = new RecentBackend(HttpClientBuilder.create().build(), configuration);
+    private final CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+    private final RecentBackend recentBackend = new RecentBackend(httpClient, configuration);
 
     public RecentBackend getRecentBackend() {
         return recentBackend;

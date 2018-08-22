@@ -113,20 +113,6 @@ iframe {
     position: relative;
 }
 
-#toc {
-    background-color: #e8e7e5;
-    box-shadow: -1ex 1ex 20em 10px #f8ed61;
-    z-index: 99999;
-    position: fixed;
-    top: 1em;
-    right: 1em;
-    border-radius: 2em;
-}
-
-#toc .inner {
-    padding: 1em 0;
-}
-
 a.logo {
     font-weight: bold;
     letter-spacing: 3pt;
@@ -231,6 +217,7 @@ ul.copyright li {
 
 #toc {
     display: none;
+    z-index: 99999;
 }
 
 /* buttons */
@@ -268,7 +255,6 @@ ul.copyright li {
     margin: 1ex 0;
     padding: 0.8ex 1em;
     white-space: nowrap;
-    transition: 1s;
 }
 
 .big.button {
@@ -554,9 +540,19 @@ a.logo:hover strong {
 
 #toc {
     background-color: #e8e7e5;
-    box-shadow: 0 0 2em #333333;
-    border-top: 0;
-    z-index: 99999;
+    box-shadow: -1ex 1ex 20em 10px #333333;
+    border: 0;
+    position: fixed;
+    top: 1em;
+    right: 1em;
+    border-radius: 2em;
+    width: auto;
+    min-width: 20%;
+    max-width: 50%;
+}
+
+#toc .inner {
+    padding: 1em 0;
 }
 
 #tree p:last-child {

@@ -17,11 +17,20 @@ public class Configuration {
 
     private AmazonDynamoDB dynamoDB;
 
+    public Configuration() {
+        this(null);
+    }
+
     public Configuration(AmazonDynamoDB dynamoDB) {
         this.dynamoDB = dynamoDB;
     }
 
     String getValue(String key) {
+        if (dynamoDB == null) {
+            LOG.warn("No configuration option for {} (local dev).", key);
+            return "";
+        }
+
         LOG.info("Loading configuration {}...", key);
 
         GetItemRequest request = new GetItemRequest();
