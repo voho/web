@@ -1,6 +1,7 @@
 package cz.voho.wiki.parser;
 
 import com.google.common.collect.Sets;
+import com.google.common.io.CharStreams;
 import com.vladsch.flexmark.ast.FencedCodeBlock;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
@@ -11,15 +12,15 @@ import net.sourceforge.plantuml.code.Transcoder;
 import net.sourceforge.plantuml.code.TranscoderUtil;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -128,13 +129,33 @@ public class CodePreprocessor implements Preprocessor {
 
         if (Files.exists(path)) {
             try (final ZipFile zipFile = new ZipFile(path.toFile())) {
-                return zipFile.stream().map(a -> ((ZipEntry) a).getName()).collect(Collectors.joining(", "));
+                final Optional<ZipEntry> zipEntry = findBestFittingZipEntry(sourcePath, zipFile);
+
+                if (zipEntry.isPresent()) {
+                    return extractZipEntry(zipFile, zipEntry.get());
+                } else {
+                    return String.format("ERROR: No fitting entry for: %s", sourcePath);
+                }
             } catch (IOException e) {
                 return e.toString();
             }
         } else {
-            return String.format("ZIP file with source not found: %s", path.toAbsolutePath());
+            return String.format("ERROR: ZIP file with source not found: %s", path.toAbsolutePath());
         }
+    }
+
+    private String extractZipEntry(final ZipFile zipFile, final ZipEntry zipEntry) throws IOException {
+        try (final InputStreamReader reader = new InputStreamReader(zipFile.getInputStream(zipEntry), StandardCharsets.UTF_8)) {
+            return CharStreams.toString(reader);
+        }
+    }
+
+    private Optional<ZipEntry> findBestFittingZipEntry(final String sourcePath, final ZipFile zipFile) {
+        return zipFile
+                .stream()
+                .filter(f -> f.getName().endsWith(sourcePath))
+                .map(ZipEntry.class::cast)
+                .findFirst();
     }
 
     private void sourceCodeUsingString(final HtmlWriter html, final String lang, final String source) {
