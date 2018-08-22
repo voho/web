@@ -12,9 +12,6 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-/**
- * The main AWS Lambda handler.
- */
 public class Instagram {
     private static final Gson GSON = new GsonBuilder().create();
     private static final String INSTAGRAM_URI_FORMAT = "https://api.instagram.com/v1/users/self/media/recent?access_token=%s&count=%d";

@@ -13,9 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * The main AWS Lambda handler.
- */
 public class SoundCloud {
     private static final int MINIMAL_GET_TIMEOUT_MS = 5000;
     private static final String SONG_HEADER_SELECTOR = "article.audible[itemprop=track]";
