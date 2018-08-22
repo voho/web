@@ -139,7 +139,7 @@ public class CodePreprocessor implements Preprocessor {
     }
 
     private Optional<ZipEntryResult> findZipEntry(final String sourcePath) throws IOException {
-        final Path path = Paths.get("/Users/vojta/IdeaProjects/web/examples/target/examples.zip");
+        final Path path = Paths.get("/tmp/examples.zip");
 
         if (Files.exists(path)) {
             try (final ZipFile zipFile = new ZipFile(path.toFile())) {
