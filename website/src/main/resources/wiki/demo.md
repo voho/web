@@ -32,7 +32,7 @@ public static BigInteger power(final BigInteger base, final BigInteger power) {
 
 ### Zdrojový kód (Java z Githubu)
 
-```github:java
+```include:java
 LZ77Codeword.java
 ```
 

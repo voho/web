@@ -31,7 +31,7 @@ public class CodePreprocessor implements Preprocessor {
     private static final String UML_ACTIVITY = "uml:activity";
     private static final String UML_SEQUENCE = "uml:seq";
     private static final String RUNKIT_JS = "runkit:js";
-    private static final String GITHUB_JAVA = "github:java";
+    private static final String INCLUDE_JAVA = "include:java";
 
     private static final String DOT_PREFIX = "bgcolor=transparent;dpi=70;node[color=silver,style=filled,fillcolor=white];";
 
@@ -90,7 +90,7 @@ public class CodePreprocessor implements Preprocessor {
                 umlSequence(html, codeSource);
             } else if (codeLang.equalsIgnoreCase(RUNKIT_JS)) {
                 runkitJs(node, html);
-            } else if (codeLang.equalsIgnoreCase(GITHUB_JAVA)) {
+            } else if (codeLang.equalsIgnoreCase(INCLUDE_JAVA)) {
                 sourceCodeGithubJava(node, html);
             } else {
                 sourceCode(node, html);
