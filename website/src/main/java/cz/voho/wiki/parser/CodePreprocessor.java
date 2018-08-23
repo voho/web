@@ -37,13 +37,20 @@ public class CodePreprocessor implements Preprocessor {
     private static final String RUNKIT_JS = "runkit:js";
     private static final String INCLUDE_PREFIX = "include:";
 
-    private static final String DOT_PREFIX = "bgcolor=transparent;dpi=70;node[color=silver,style=filled,fillcolor=white];";
+    private static final String GITHUB_PREFIX = "https://github.com/voho/web/blob/master/";
+    private static final String CODECOV_PREFIX = "https://codecov.io/gh/voho/web/src/master/";
+    private static final String TRAVIS_URL = "https://travis-ci.org/voho/web.svg?branch=master";
 
     private static final boolean PLANT_TEXT_ENABLED = true;
-
     private static final Transcoder PLANT_TEXT_TRANSCODER = TranscoderUtil.getDefaultTranscoder();
 
+    private static final String DOT_PREFIX = "bgcolor=transparent;dpi=70;" +
+            "node[fontname=\"Arial\",color=silver,style=filled,fillcolor=white];" +
+            "graph[fontname=\"Arial\"];" +
+            "edge[fontname=\"Arial\"];";
+
     private final String UML_PREFIX = "@startuml\n\n" +
+            "skinparam defaultFontName Arial\n" +
             "skinparam style strictuml\n" +
             "skinparam noteFontSize 12\n" +
             "skinparam noteBackgroundColor #f6f6f6\n" +
@@ -176,15 +183,23 @@ public class CodePreprocessor implements Preprocessor {
         // https://github.com/voho/web/blob/master/examples/lz77/src/main/java/LZ77Codeword.java
         // ________________________________________^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+        // https://codecov.io/gh/voho/web/src/master/examples/random/src/main/java/random/ReservoirSamplingSingleItem.java
+        // __________________________________________^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
         if (sourcePath != null) {
-            final String url = "https://github.com/voho/web/blob/master/" + sourcePath;
+            final String githubUrl = GITHUB_PREFIX + sourcePath;
+            final String codecovUrl = CODECOV_PREFIX + sourcePath;
 
             html.line();
-            html.raw("<p class='code-included-disclaimer'><span class='fa fa-github'></span> <a href='");
-            html.text(url);
-            html.raw("' onclick='return !window.open(this.href);' title='");
-            html.text(sourcePath);
-            html.raw("'>Zdrojový kód (GitHub)</a></p>");
+            html.raw("<p class='code-included-disclaimer'>");
+
+            html.raw("<span class='fa fa-github'></span> <a href='").text(githubUrl).raw("' onclick='return !window.open(this.href);'>Zdrojový kód (GitHub)</a>");
+            html.raw(" ");
+            html.raw("<span class='fa fa-check'></span> <a href='").text(codecovUrl).raw("' onclick='return !window.open(this.href);'>Pokrytí testy (CodeCov)</a>");
+            html.raw(" ");
+            html.raw("<img src='" + TRAVIS_URL + "' alt='' />");
+
+            html.raw("</p>");
             html.line();
         }
 
