@@ -197,3 +197,9 @@ F[fillcolor=silver]
 ### Složitost
 
 Asymptotická složitost algoritmu je € O(V+E) €, kde €V€ je počet uzlů a €E€ je počet hran.
+
+### Implementace
+
+```include:java
+Dfs.java
+```

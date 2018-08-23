@@ -123,6 +123,12 @@ rankdir=LR
 
 Seznam *S* je prázdný, algoritmus končí. Celkem byly použity tři barvy, chromatické číslo grafu je tedy menší nebo rovno třem.
 
+### Implementace
+
+```include:java
+WelshPowell.java
+```
+
 ### Reference
 
 - Dr. Jeanne Stynes, Computer Science
