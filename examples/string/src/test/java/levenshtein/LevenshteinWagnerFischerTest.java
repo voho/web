@@ -1,8 +1,10 @@
+package levenshtein;
+
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-public class LevenshteinTest {
+public class LevenshteinWagnerFischerTest {
     @Test
     public void test() {
         testUsingAllMethodsBothSides(0, "", "");
@@ -21,7 +23,7 @@ public class LevenshteinTest {
     }
 
     private void testUsingAllMethodsSingleSide(final int expectedLength, final String first, final String second) {
-        assertEquals(expectedLength, Levenshtein.distanceWagnerFischerOptimized(first.toCharArray(), second.toCharArray()));
-        assertEquals(expectedLength, Levenshtein.distanceWagnerFischer(first.toCharArray(), second.toCharArray()));
+        assertEquals(expectedLength, LevenshteinWagnerFischerOptimized.distanceWagnerFischerOptimized(first.toCharArray(), second.toCharArray()));
+        assertEquals(expectedLength, LevenshteinWagnerFischer.distanceWagnerFischer(first.toCharArray(), second.toCharArray()));
     }
 }
