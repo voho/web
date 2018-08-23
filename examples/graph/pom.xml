@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>cz.voho</groupId>
-        <artifactId>examples</artifactId>
+        <groupId>cz.voho.examples</groupId>
+        <artifactId>reactor</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
