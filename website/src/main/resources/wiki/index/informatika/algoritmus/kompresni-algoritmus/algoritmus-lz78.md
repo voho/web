@@ -266,132 +266,16 @@ Je načteno kódové slovo *(1,konec)*. Na výstup se vypíše slovo na řádku 
 
 ### Implementace (Java)
 
-- https://github.com/voho/examples/tree/master/lz78
+#### Kódové slovo
 
-#### Komprese
-
-##### Kompresní algoritmus
-
-```java
-public static List<LZ78Codeword> encode(final char[] input) {
-    final List<LZ78Codeword> result = new LinkedList<>();
-
-    int firstUnencodedCharIndex = 0;
-    final Tree tree = new Tree();
-    Node prefixEndNode = tree.root;
-    StringBuilder prefixBuffer = new StringBuilder();
-
-    while (firstUnencodedCharIndex <= input.length - 1) {
-        final char nextUnencodedChar = input[firstUnencodedCharIndex];
-
-        if (prefixEndNode.canContinueWith(nextUnencodedChar)) {
-            // PREFIX EXTENSION IS STILL IN DICTIONARY
-
-            // update prefix end node
-            prefixEndNode = prefixEndNode.getNextNodeStartingWith(nextUnencodedChar);
-            // extend prefix by the character being read
-            prefixBuffer.append(nextUnencodedChar);
-        } else {
-            // PREFIX EXTENSION IS NOT IN DICTIONARY
-
-            // extend dictionary
-            tree.extend(prefixEndNode, nextUnencodedChar);
-
-            // append codeword
-            result.add(new LZ78Codeword(prefixEndNode.id, nextUnencodedChar));
-
-            // reset state
-            prefixEndNode = tree.root;
-            prefixBuffer = new StringBuilder();
-        }
-
-        // advance to next character
-        firstUnencodedCharIndex++;
-    }
-
-    if (prefixBuffer.length() > 0) {
-        // we must append unfinished buffer
-        result.add(new LZ78Codeword(prefixEndNode.id, (char) 0));
-    }
-
-    return result;
-}
+```include:java
+LZ78Codeword.java
 ```
 
-##### Pomocné struktury
+#### Komprese a dekomprese
 
-```java
-private static class Tree {
-    int nextId = 1;
-    final Node root = new Node(0);
-
-    void extend(final Node parent, final char terminal) {
-        parent.addChild(nextId, terminal);
-        nextId++;
-    }
-}
-```
-
-```java
-private static class Node {
-    final int id;
-    final Map<Character, Node> children;
-
-    Node(final int id) {
-        this.id = id;
-        this.children = new LinkedHashMap<>();
-    }
-
-    void addChild(final int newId, final char newTerminal) {
-        assert !children.containsKey(newTerminal);
-        children.put(newTerminal, new Node(newId));
-    }
-
-    Node getNextNodeStartingWith(final char terminal) {
-        return children.get(terminal);
-    }
-
-    boolean canContinueWith(final char terminal) {
-        return children.containsKey(terminal);
-    }
-}
-```
-
-#### Dekomprese
-
-```java
-public static char[] decode(final List<LZ78Codeword> input) {
-    // table of words
-    final List<String> table = new LinkedList<>();
-    // output string buffer
-    final StringBuilder buffer = new StringBuilder();
-
-    for (final LZ78Codeword codeword : input) {
-        final String wordToAdd;
-
-        if (codeword.getI() == 0) {
-            // non-existing word (new symbol)
-            wordToAdd = String.valueOf(codeword.getX());
-        } else {
-            final String wordFromTable = table.get(codeword.getI() - 1);
-
-            if (codeword.getX() != 0) {
-                // existing word + terminal
-                wordToAdd = wordFromTable + codeword.getX();
-            } else {
-                // existing word only
-                wordToAdd = wordFromTable;
-            }
-        }
-
-        // append the word to output
-        buffer.append(wordToAdd);
-        // extend the table of words
-        table.add(wordToAdd);
-    }
-
-    return buffer.toString().toCharArray();
-}
+```include:java
+LZ78.java
 ```
 
 ### Reference

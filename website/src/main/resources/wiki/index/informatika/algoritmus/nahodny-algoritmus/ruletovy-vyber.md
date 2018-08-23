@@ -53,49 +53,10 @@ Druhou výhodou tabulky je, že váhy nyní nemusí být celočíselné. Podobn�
 Nyní však musíme vygenerovat náhodné číslo v rozsahu *0* (včetně) až *1,8*.
 Výběr probíhá stejně - opět najdeme odpovídající rozsah a vrátíme prvek, který do něj patří (např. pro náhodné číslo 0,2442 vrátíme prvek *A*).
 
-Jednoduchá implementace v [jazyce Java](wiki/java):
+Jednoduchá implementace této techniky v [jazyce Java](wiki/java):
 
-```java
-public class RouletteWheelSelection {
-    public static <T> T randomElement(final T[] elements, final double[] weights) {
-        if (elements.length != weights.length) {
-            throw new IllegalArgumentException("Both arrays must have the same length.");
-        }
-        
-        return elements[randomWeightedInteger(weights)];
-    }
-    
-    /**
-     * Returns a random integer in range (0, weights.length-1), both inclusive.
-     * Every integer n is selected with a probability that corresponds to its weight.
-     * The weight of integer n is stored in as weights[n].
-     * The weights can be an arbitrary numbers.
-     * @param weights array of weights for each number (index = number)
-     * @return random integer
-     */
-    public static int randomWeightedInteger(final double[] weights) {
-        double rouletteSize = 0;
-
-        for (int i = 0; i < weights.length; i++) {
-            rouletteSize += weights[i];
-        }
-
-        final double randomRoulettePosition = Math.random() * rouletteSize;
-        double roulettePosition = 0;
-
-        for (int i = 0; i < weights.length; i++) {
-            roulettePosition += weights[i];
-
-            if (roulettePosition >= randomRoulettePosition) {
-                return i;
-            }
-        }
-
-        // if the array is empty
-        // (other scenarios cannot end up here)
-        return -1;
-    }
-}
+```include:java
+random/RouletteWheelSelection.java
 ```
 
 ### Reference

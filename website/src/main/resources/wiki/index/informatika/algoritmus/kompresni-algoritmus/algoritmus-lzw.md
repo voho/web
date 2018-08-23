@@ -234,7 +234,17 @@ Je načteno kódové slovo *6*. Na výstup se vypíše slovo z řádku 6. Na vst
 
 ### Implementace (Java)
 
-- https://github.com/voho/examples/tree/master/lzw
+#### Kódové slovo
+
+```include:java
+LZWCodeword.java
+```
+
+#### Komprese a dekomprese
+
+```include:java
+LZW.java
+```
 
 ### Reference
 
