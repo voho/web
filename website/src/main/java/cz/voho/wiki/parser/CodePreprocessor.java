@@ -39,7 +39,10 @@ public class CodePreprocessor implements Preprocessor {
 
     private static final String GITHUB_PREFIX = "https://github.com/voho/web/blob/master/";
     private static final String CODECOV_PREFIX = "https://codecov.io/gh/voho/web/src/master/";
-    private static final String TRAVIS_URL = "https://travis-ci.org/voho/web.svg?branch=master";
+    private static final String TRAVIS_ICON_URL = "https://travis-ci.org/voho/web.svg?branch=master";
+    private static final String TRAVIS_BUILD_URL = "https://travis-ci.org/voho/web";
+    private static final String PLANT_UML_IMAGE_URL_FORMAT = "https://www.plantuml.com/plantuml/svg/%s";
+    private static final String PLANT_UML_EDIT_URL_FORMAT = "https://www.planttext.com/?text=%s";
 
     private static final boolean PLANT_TEXT_ENABLED = true;
     private static final Transcoder PLANT_TEXT_TRANSCODER = TranscoderUtil.getDefaultTranscoder();
@@ -197,7 +200,7 @@ public class CodePreprocessor implements Preprocessor {
             html.raw(" ");
             html.raw("<span class='fa fa-check'></span> <a href='").text(codecovUrl).raw("' onclick='return !window.open(this.href);'>Pokrytí testy (CodeCov)</a>");
             html.raw(" ");
-            html.raw("<img src='" + TRAVIS_URL + "' alt='' />");
+            html.raw("<a href='" + TRAVIS_BUILD_URL + "' onclick='return !window.open(this.href);'><img src='" + TRAVIS_ICON_URL + "' alt='' /></a>");
 
             html.raw("</p>");
             html.line();
@@ -224,25 +227,37 @@ public class CodePreprocessor implements Preprocessor {
     private void umlSequence(final HtmlWriter html, final String codeSource) {
         final String codeSourceFixed = UML_PREFIX + codeSource + UML_SUFFIX;
         final String imageUrl = getUmlImageUrl(codeSourceFixed);
-        html.raw(String.format("<div class='figure uml'><img src='%s' alt='UML (sekvenční diagram)' /></div>", imageUrl));
+        final String editUrl = getUmlEditUrl(codeSourceFixed);
+        html.raw(String.format(
+                "<div class='figure uml'><img src='%s' alt='UML (sekvenční diagram)' /><br /><a href='%s'>Upravit</a></div>",
+                imageUrl,
+                editUrl));
     }
 
     private void umlActivity(final HtmlWriter html, final String codeSource) {
         final String codeSourceFixed = UML_PREFIX + codeSource + UML_SUFFIX;
         final String imageUrl = getUmlImageUrl(codeSourceFixed);
-        html.raw(String.format("<div class='figure uml'><img src='%s' alt='UML (diagram aktivit)' /></div>", imageUrl));
+        final String editUrl = getUmlEditUrl(codeSourceFixed);
+        html.raw(String.format(
+                "<div class='figure uml'><img src='%s' alt='UML (diagram aktivit)' /><br /><a href='%s'>Upravit</a><</div>",
+                imageUrl,
+                editUrl));
     }
 
     private void umlClass(final HtmlWriter html, final String codeSource) {
         final String codeSourceFixed = UML_PREFIX + codeSource + UML_SUFFIX;
         final String imageUrl = getUmlImageUrl(codeSourceFixed);
-        html.raw(String.format("<div class='figure uml'><img src='%s' alt='UML (diagram tříd)' /></div>", imageUrl));
+        final String editUrl = getUmlEditUrl(codeSourceFixed);
+        html.raw(String.format(
+                "<div class='figure uml'><img src='%s' alt='UML (diagram tříd)' /><br /><a href='%s'>Upravit</a><</div>",
+                imageUrl,
+                editUrl));
     }
 
     private String getUmlImageUrl(final String codeSourceFixed) {
         if (PLANT_TEXT_ENABLED) {
             try {
-                return String.format("https://www.planttext.com/plantuml/svg/%s", PLANT_TEXT_TRANSCODER.encode(codeSourceFixed));
+                return String.format(PLANT_UML_IMAGE_URL_FORMAT, PLANT_TEXT_TRANSCODER.encode(codeSourceFixed));
             } catch (IOException e) {
                 // ignore the exception and just do it the old way
             }
@@ -251,6 +266,15 @@ public class CodePreprocessor implements Preprocessor {
         wikiImageCacheWarmUp.warmUpCachePlantUmlSvg(codeSourceFixed);
         final String sourceEncoded = encodeForUrl(codeSourceFixed);
         return String.format("/generate/svg/uml?data=%s", sourceEncoded);
+    }
+
+    private String getUmlEditUrl(final String codeSourceFixed) {
+        try {
+            return String.format(PLANT_UML_EDIT_URL_FORMAT, PLANT_TEXT_TRANSCODER.encode(codeSourceFixed));
+        } catch (IOException e) {
+            // ignore the exception and just use the root URL
+            return "https://www.planttext.com";
+        }
     }
 
     private void dotDigraph(final HtmlWriter html, final String codeSource) {
