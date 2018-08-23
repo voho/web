@@ -1,7 +1,5 @@
 package ds.list;
 
-import java.util.Iterator;
-
 /**
  * Doubly iterable linked list with both head and tail.
  *
@@ -17,6 +15,22 @@ public class DoublyLinkedList<DATA> implements List<DATA> {
 
     private Node<DATA> head = null;
     private Node<DATA> tail = null;
+
+    @Override
+    public DATA get(int index) {
+        Node<DATA> temp = head;
+        for (int j = 0; j < index; j++) {
+            if (temp != null) {
+                temp = temp.next;
+            } else {
+                break;
+            }
+        }
+        if (temp == null) {
+            throw new IndexOutOfBoundsException(String.valueOf(index));
+        }
+        return temp.innerValue;
+    }
 
     @Override
     public void add(DATA value) {
@@ -64,28 +78,21 @@ public class DoublyLinkedList<DATA> implements List<DATA> {
     }
 
     @Override
-    public Iterator<DATA> iterator() {
-        return new Iterator<DATA>() {
-            private Node<DATA> next = head;
+    public int size() {
+        int count = 0;
 
-            @Override
-            public boolean hasNext() {
-                return next != null;
-            }
+        Node<DATA> temp = head;
 
-            @Override
-            public DATA next() {
-                assert next != null;
-                DATA nextValue = next.innerValue;
-                next = next.next;
-                return nextValue;
-            }
+        while (temp != null) {
+            count++;
+            temp = temp.next;
+        }
 
-            @Override
-            public void remove() {
-                // we can implement it, but better is to use the remove() method
-                throw new UnsupportedOperationException();
-            }
-        };
+        return count;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return head == null;
     }
 }

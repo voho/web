@@ -1,8 +1,14 @@
 package ds.list;
 
-import java.util.Iterator;
+public interface List<DATA> {
+    /**
+     * Gets element at a certain index.
+     *
+     * @param index index (starts with 0)
+     * @return element at the given index
+     */
+    DATA get(int index);
 
-public interface List<DATA> extends Iterable<DATA> {
     /**
      * Adds an element to the end of this list.
      *
@@ -19,10 +25,16 @@ public interface List<DATA> extends Iterable<DATA> {
     boolean remove(DATA value);
 
     /**
-     * Returns an iterator.
+     * Returns the list size.
      *
-     * @return new iterator instance
+     * @return list size
      */
-    @Override
-    Iterator<DATA> iterator();
+    int size();
+
+    /**
+     * Checks whether the list is empty.
+     *
+     * @return TRUE if the list is empty, FALSE otherwise
+     */
+    boolean isEmpty();
 }
