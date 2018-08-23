@@ -27,15 +27,14 @@ public class IncludeSourceCodePreprocessor implements CodeProcessor {
     public boolean handle(final HtmlWriter html, final String codeLang, final String codeSource) {
         if (codeLang.startsWith(INCLUDE_PREFIX)) {
             final String langWithoutPrefix = codeLang.substring(INCLUDE_PREFIX.length());
-            final String sourcePath = codeSource;
 
             try {
-                final Optional<IncludeSourceCodePreprocessor.ZipEntryResult> zipEntry = findZipEntry(sourcePath);
+                final Optional<IncludeSourceCodePreprocessor.ZipEntryResult> zipEntry = findZipEntry(codeSource);
 
                 if (zipEntry.isPresent()) {
                     sourceCodeUsingString(html, zipEntry.get().zipEntryName, langWithoutPrefix, zipEntry.get().zipEntryContents);
                 } else {
-                    sourceCodeUsingString(html, "Nenalezeno: " + sourcePath, "nohighlight", "N/A");
+                    throw new IllegalStateException("ZIP entry was not found: " + codeSource);
                 }
             } catch (Exception e) {
                 throw new IllegalStateException("Error while loading contents from ZIP.", e);
