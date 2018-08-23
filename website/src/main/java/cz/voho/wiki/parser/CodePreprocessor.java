@@ -229,7 +229,8 @@ public class CodePreprocessor implements Preprocessor {
         final String imageUrl = getUmlImageUrl(codeSourceFixed);
         final String editUrl = getUmlEditUrl(codeSourceFixed);
         html.raw(String.format(
-                "<div class='figure uml'><img src='%s' alt='UML (sekvenční diagram)' /><br /><a href='%s'>Upravit</a></div>",
+                "<div class='figure uml'><img src='%s' alt='UML (sekvenční diagram)' />" +
+                        "<p class='code-included-disclaimer'><a href='%s'>Upravit</a></p></div>",
                 imageUrl,
                 editUrl));
     }
@@ -239,7 +240,8 @@ public class CodePreprocessor implements Preprocessor {
         final String imageUrl = getUmlImageUrl(codeSourceFixed);
         final String editUrl = getUmlEditUrl(codeSourceFixed);
         html.raw(String.format(
-                "<div class='figure uml'><img src='%s' alt='UML (diagram aktivit)' /><br /><a href='%s'>Upravit</a><</div>",
+                "<div class='figure uml'><img src='%s' alt='UML (diagram aktivit)' />" +
+                        "<p class='code-included-disclaimer'><a href='%s'>Upravit</a></p></div>",
                 imageUrl,
                 editUrl));
     }
@@ -249,7 +251,8 @@ public class CodePreprocessor implements Preprocessor {
         final String imageUrl = getUmlImageUrl(codeSourceFixed);
         final String editUrl = getUmlEditUrl(codeSourceFixed);
         html.raw(String.format(
-                "<div class='figure uml'><img src='%s' alt='UML (diagram tříd)' /><br /><a href='%s'>Upravit</a><</div>",
+                "<div class='figure uml'><img src='%s' alt='UML (diagram tříd)' />" +
+                        "<p class='code-included-disclaimer'><a href='%s'>Upravit</a></p></div>",
                 imageUrl,
                 editUrl));
     }
