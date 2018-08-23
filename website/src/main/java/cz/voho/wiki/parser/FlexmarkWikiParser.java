@@ -70,12 +70,14 @@ public class FlexmarkWikiParser implements WikiParser {
 
     private void preprocessNodes(final ParsedWikiPage context, final Node pageRootNode) {
         for (final Preprocessor p : preprocessors) {
+            LOG.debug("{}: Applying node preprocessor: {}", context.getSource().getId(), p);
             p.preprocessNodes(context, pageRootNode);
         }
     }
 
     private void preprocessSource(final ParsedWikiPage context) {
         for (final Preprocessor p : preprocessors) {
+            LOG.debug("{}: Applying source preprocessor: {}", context.getSource().getId(), p);
             p.preprocessSource(context);
         }
     }

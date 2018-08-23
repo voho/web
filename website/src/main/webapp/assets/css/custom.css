@@ -671,6 +671,10 @@ dl dd {
     font-size: 80%;
 }
 
+#wiki-content .code-included-disclaimer img {
+    vertical-align: middle;
+}
+
 /* special mark-up */
 
 .todo {

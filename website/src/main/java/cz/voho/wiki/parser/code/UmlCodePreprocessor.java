@@ -1,4 +1,4 @@
-package cz.voho.wiki.parser;
+package cz.voho.wiki.parser.code;
 
 import com.vladsch.flexmark.html.HtmlWriter;
 import net.sourceforge.plantuml.code.Transcoder;
@@ -6,7 +6,7 @@ import net.sourceforge.plantuml.code.TranscoderUtil;
 
 import java.io.IOException;
 
-public class UmlCodePreprocessor extends AbstractCodePreprocessor {
+public class UmlCodePreprocessor implements CodeProcessor {
     private static final String UML_CLASS = "uml:class";
     private static final String UML_ACTIVITY = "uml:activity";
     private static final String UML_SEQUENCE = "uml:seq";
@@ -44,14 +44,19 @@ public class UmlCodePreprocessor extends AbstractCodePreprocessor {
     private final String UML_SUFFIX = "\n\n@enduml";
 
     @Override
-    protected void handle(HtmlWriter html, String codeLang, String codeSource) {
+    public boolean handle(final HtmlWriter html, final String codeLang, final String codeSource) {
         if (codeLang.equalsIgnoreCase(UML_CLASS)) {
             uml(html, codeSource, "diagram tříd");
+            return true;
         } else if (codeLang.equalsIgnoreCase(UML_ACTIVITY)) {
             uml(html, codeSource, "diagram aktivit");
+            return true;
         } else if (codeLang.equalsIgnoreCase(UML_SEQUENCE)) {
             uml(html, codeSource, "sekvenční diagram");
+            return true;
         }
+
+        return false;
     }
 
     private void uml(final HtmlWriter html, final String codeSource, final String alt) {

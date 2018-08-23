@@ -1,4 +1,4 @@
-package cz.voho.wiki.parser;
+package cz.voho.wiki.parser.code;
 
 import com.vladsch.flexmark.html.HtmlWriter;
 import cz.voho.wiki.repository.image.WikiImageRepository;
@@ -6,7 +6,7 @@ import cz.voho.wiki.repository.image.WikiImageRepository;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-public class DotCodePreprocessor extends AbstractCodePreprocessor {
+public class DotCodePreprocessor implements CodeProcessor {
     private static final String DOT_GRAPH = "dot:graph";
     private static final String DOT_DIGRAPH = "dot:digraph";
 
@@ -22,11 +22,15 @@ public class DotCodePreprocessor extends AbstractCodePreprocessor {
     }
 
     @Override
-    protected void handle(final HtmlWriter html, final String codeLang, final String codeSource) {
+    public boolean handle(final HtmlWriter html, final String codeLang, final String codeSource) {
         if (codeLang.equalsIgnoreCase(DOT_GRAPH)) {
             dotGraph(html, codeSource);
+            return true;
         } else if (codeLang.equalsIgnoreCase(DOT_DIGRAPH)) {
             dotDigraph(html, codeSource);
+            return true;
+        } else {
+            return false;
         }
     }
 
