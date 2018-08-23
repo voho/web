@@ -27,7 +27,6 @@
         <module>zip</module>
         <module>patterns</module>
         <module>libraries</module>
-        <module>bitap</module>
         <module>random</module>
         <module>string</module>
         <module>concurrency</module>

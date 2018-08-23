@@ -1,4 +1,4 @@
-package algorithm.bitap;
+package search;
 
 import org.junit.Test;
 

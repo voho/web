@@ -1,4 +1,4 @@
-package algorithm.bitap;
+package search;
 
 public class Bitap {
     public int find(final char[] text, final char[] pattern) {
