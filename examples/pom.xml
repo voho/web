@@ -16,7 +16,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>skiplist</module>
+        <module>structures</module>
         <module>bitarray</module>
         <module>trie</module>
         <module>graph</module>

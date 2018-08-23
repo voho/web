@@ -5,11 +5,9 @@ import org.junit.Test;
 
 import java.util.function.Function;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
-public class BloomFilterTest {
+public class DefaultBloomFilterTest {
     private BloomFilter<String> filter;
 
     @Before
@@ -17,7 +15,7 @@ public class BloomFilterTest {
         final Function<String, Integer> hash1 = s -> s.toLowerCase().hashCode();
         final Function<String, Integer> hash2 = s -> s.toUpperCase().hashCode();
 
-        filter = new SimpleBloomFilter<>(10, hash1, hash2);
+        filter = new DefaultBloomFilter<>(10, hash1, hash2);
     }
 
     @Test

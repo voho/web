@@ -90,61 +90,16 @@ Odhad pravděpodobnosti falešného pozitiva na základě počtu hashovacích fu
 
 ### Implementace
 
-* https://github.com/voho/examples/tree/master/hash/src/main/java/hash/bloom
-
 #### Rozhraní filtru
 
-```java
-public interface BloomFilter<T> {
-    boolean probablyContains(T element);
-
-    void add(T element);
-}
+```include:java
+BloomFilter.java
 ```
 
 #### Implementace filtru
 
-```java
-public class SimpleBloomFilter<T> implements BloomFilter<T> {
-    private final int numBits;
-    private final BitSet bits;
-    private final Function<T, Integer>[] hashFunctions;
-
-    public SimpleBloomFilter(final int numBits, final Function<T, Integer>... hashFunctions) {
-        this.numBits = numBits;
-        this.bits = new BitSet(this.numBits);
-        this.hashFunctions = hashFunctions;
-    }
-
-    @Override
-    public boolean probablyContains(final T element) {
-        for (final Function<T, Integer> hashFunction : hashFunctions) {
-            final int hashValue = hashFunction.apply(element);
-            final int hashBasedIndex = getSafeIndexFromHash(hashValue);
-
-            if (!bits.get(hashBasedIndex)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    @Override
-    public void add(final T element) {
-        for (final Function<T, Integer> hashFunction : hashFunctions) {
-            final int hashValue = hashFunction.apply(element);
-            final int hashBasedIndex = getSafeIndexFromHash(hashValue);
-            bits.set(hashBasedIndex);
-        }
-    }
-
-    private int getSafeIndexFromHash(final int hashValue) {
-        // this prevents overflow and negative numbers
-        final int index = hashValue % numBits;
-        return index < 0 ? index + numBits : index;
-    }
-}
+```include:java
+DefaultBloomFilter.java
 ```
 
 #### Použití

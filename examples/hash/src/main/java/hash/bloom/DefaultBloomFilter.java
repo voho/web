@@ -6,7 +6,7 @@ import java.util.function.Function;
 /**
  * Simple implementation of a bloom filter.
  */
-public class SimpleBloomFilter<T> implements BloomFilter<T> {
+public class DefaultBloomFilter<T> implements BloomFilter<T> {
     /**
      * number of bits in the bit set
      */
@@ -27,7 +27,7 @@ public class SimpleBloomFilter<T> implements BloomFilter<T> {
      * @param hashFunctions hash functions to be used
      */
     @SafeVarargs
-    public SimpleBloomFilter(final int numBits, final Function<T, Integer>... hashFunctions) {
+    public DefaultBloomFilter(final int numBits, final Function<T, Integer>... hashFunctions) {
         this.numBits = numBits;
         this.bits = new BitSet(this.numBits);
         this.hashFunctions = hashFunctions;
