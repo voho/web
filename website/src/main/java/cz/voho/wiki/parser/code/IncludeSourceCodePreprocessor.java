@@ -105,14 +105,13 @@ public class IncludeSourceCodePreprocessor implements CodeProcessor {
     }
 
     private Path findZip() {
-        Path path = Paths.get(EXAMPLES_ZIP_LOCATION);
+        final Path path = Paths.get(EXAMPLES_ZIP_LOCATION);
 
         if (Files.exists(path)) {
             return path;
         }
 
-        System.out.println("current path: " + Paths.get(".").toAbsolutePath());
-        // fallback
+        // fallback (local development)
         return Paths.get("../examples/target/examples.zip");
     }
 
