@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 
 @Ignore
 abstract class AbstractListTest {
-    private List<String> toTest = createInstance();
+    List<String> toTest = createInstance();
 
     protected abstract List<String> createInstance();
 

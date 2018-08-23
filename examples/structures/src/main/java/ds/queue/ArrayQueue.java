@@ -56,6 +56,6 @@ public class ArrayQueue<DATA> implements Queue<DATA> {
 
     @Override
     public boolean isEmpty() {
-        return top == bottom;
+        return top == -1;
     }
 }
