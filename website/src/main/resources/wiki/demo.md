@@ -1,11 +1,26 @@
 ## Testovací stránka
 
+Toto je **tučný text** a toto *zvýraznění*. Toto je [odkaz](http://voho.eu).
+
+- nečíslovaný seznam 1
+- nečíslovaný seznam 2
+- nečíslovaný seznam 3
+
+1. číslovaný seznam 1
+1. číslovaný seznam 2
+1. číslovaný seznam 3
+
 ### Runkit (Javascript)
 
 ```runkit:js
-// GeoJSON!
 var getJSON = require("async-get-json");
 await getJSON("https://storage.googleapis.com/maps-devrel/google.json");
+```
+
+### Zdrojový kód (bez syntaxe)
+
+```
+test
 ```
 
 ### Zdrojový kód (Java)
