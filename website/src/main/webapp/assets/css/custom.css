@@ -441,8 +441,14 @@ ul.copyright li {
 }
 
 .hljs {
+    border-radius: 1ex;
+    box-shadow: 0 3em 6em 0 #eeeeee;
     font-family: Menlo, monospace;
     font-size: 80%;
+}
+
+.hljs:hover {
+    box-shadow: 0 2em 4em 0 #cccccc;
 }
 
 .image.left, .image.right {
