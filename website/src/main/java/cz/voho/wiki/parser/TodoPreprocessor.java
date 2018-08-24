@@ -7,9 +7,9 @@ import java.util.regex.Pattern;
 
 public class TodoPreprocessor implements Preprocessor {
     @Override
-    public void preprocessSource(ParsedWikiPage context) {
+    public void preprocessSource(final ParsedWikiPage context) {
         final ReplacePatternCallback rp = new ReplacePatternCallback(Pattern.compile("!TODO!", Pattern.MULTILINE));
-        String sourceFixed = rp.replace(context.getSource().getMarkdownSource(), matchResult -> {
+        final String sourceFixed = rp.replace(context.getSource().getMarkdownSource(), matchResult -> {
             context.setTodo(true);
             return "<img src='/assets/images/todo.png' alt='TODO' />";
         });

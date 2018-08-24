@@ -7,9 +7,9 @@ import java.util.regex.Pattern;
 
 public class QuotePreprocessor implements Preprocessor {
     @Override
-    public void preprocessSource(ParsedWikiPage context) {
+    public void preprocessSource(final ParsedWikiPage context) {
         final ReplacePatternCallback rp = new ReplacePatternCallback(Pattern.compile("^>(.+) \\*(.+)\\*$", Pattern.MULTILINE));
-        String sourceUpdated = rp.replace(context.getSource().getMarkdownSource(), matchResult -> {
+        final String sourceUpdated = rp.replace(context.getSource().getMarkdownSource(), matchResult -> {
             final String quote = matchResult.group(1);
             final String author = matchResult.group(2);
             context.addQuote(quote, author);

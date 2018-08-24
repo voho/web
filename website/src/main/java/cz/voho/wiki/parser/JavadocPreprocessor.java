@@ -11,8 +11,8 @@ public class JavadocPreprocessor implements Preprocessor {
     @Override
     public void preprocessSource(final ParsedWikiPage context) {
         final ReplacePatternCallback rp = new ReplacePatternCallback(Pattern.compile("\\*javadoc:(.+?)\\*"));
-        String sourceUpdated = rp.replace(context.getSource().getMarkdownSource(), matchResult -> {
-            String className = matchResult.group(1);
+        final String sourceUpdated = rp.replace(context.getSource().getMarkdownSource(), matchResult -> {
+            final String className = matchResult.group(1);
             final String classNameFormatted = processClassName(className);
             final String classNameJavadocUrl = String.format("http://grepcode.com/search?query=%s", UrlEscapers.urlFragmentEscaper().escape(className));
             return String.format("[%s](%s)", classNameFormatted, classNameJavadocUrl);
@@ -21,7 +21,7 @@ public class JavadocPreprocessor implements Preprocessor {
     }
 
     private String processClassName(String className) {
-        String[] path = className.split(Pattern.quote("."));
+        final String[] path = className.split(Pattern.quote("."));
 
         if (path.length > 0) {
             path[path.length - 1] = String.format("**%s**", path[path.length - 1]);

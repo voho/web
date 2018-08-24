@@ -11,11 +11,11 @@ import cz.voho.wiki.model.ParsedWikiPage;
 import java.util.Set;
 
 public interface Preprocessor extends NodeRenderer, HtmlRenderer.HtmlRendererExtension {
-    default void preprocessSource(ParsedWikiPage context) {
+    default void preprocessSource(final ParsedWikiPage context) {
         // NOP
     }
 
-    default void preprocessNodes(ParsedWikiPage context, Node root) {
+    default void preprocessNodes(final ParsedWikiPage context, final Node root) {
         // NOP
     }
 
@@ -25,12 +25,12 @@ public interface Preprocessor extends NodeRenderer, HtmlRenderer.HtmlRendererExt
     }
 
     @Override
-    default void extend(HtmlRenderer.Builder builder, String s) {
+    default void extend(final HtmlRenderer.Builder builder, final String s) {
         builder.nodeRendererFactory(dataHolder -> Preprocessor.this);
     }
 
     @Override
-    default void rendererOptions(MutableDataHolder mutableDataHolder) {
+    default void rendererOptions(final MutableDataHolder mutableDataHolder) {
         // NOP
     }
 }

@@ -16,18 +16,18 @@ public class TocPreprocessor implements Preprocessor {
     private final Map<Node, Map<String, Integer>> counters = Maps.newHashMap();
 
     @Override
-    public void preprocessNodes(ParsedWikiPage context, Node root) {
-        Toc toc = new Toc("toc", "Obsah", 0);
-        TocItem[] lastByLevel = new TocItem[10];
+    public void preprocessNodes(final ParsedWikiPage context, final Node root) {
+        final Toc toc = new Toc("toc", "Obsah", 0);
+        final TocItem[] lastByLevel = new TocItem[10];
         lastByLevel[0] = toc;
 
-        for (Node child : root.getChildren()) {
+        for (final Node child : root.getChildren()) {
             if (child instanceof Heading) {
-                String title = ((Heading) child).getText().toString();
-                String id = generateIdFromTitle(title, root);
-                int level = ((Heading) child).getLevel() - 2;
+                final String title = ((Heading) child).getText().toString();
+                final String id = generateIdFromTitle(title, root);
+                final int level = ((Heading) child).getLevel() - 2;
                 if (level > 0) {
-                    TocItem item = new TocItem(id, title, level);
+                    final TocItem item = new TocItem(id, title, level);
                     ((Heading) child).setAnchorRefId(item.getId());
                     lastByLevel[level - 1].addChildItem(item);
                     lastByLevel[level] = item;
@@ -49,11 +49,11 @@ public class TocPreprocessor implements Preprocessor {
         }));
     }
 
-    private String generateIdFromTitle(String title, Node root) {
+    private String generateIdFromTitle(final String title, final Node root) {
         counters.putIfAbsent(root, Maps.newHashMap());
         String result = title.toLowerCase().replaceAll("\\s+", "-").replace("\"", "");
         counters.get(root).putIfAbsent(result, 1);
-        int current = counters.get(root).get(result);
+        final int current = counters.get(root).get(result);
         counters.get(root).put(result, current + 1);
 
         if (current > 1) {
