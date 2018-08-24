@@ -11,14 +11,13 @@ public class ParsedWikiPage {
     private boolean todo;
     private List<String> linkedPages = new LinkedList<>();
     private Toc toc;
-    private List<Quote> quotes = new LinkedList<>();
 
     public boolean isCover() {
         return cover;
     }
 
-    public void setCover(boolean cover) {
-        this.cover = cover;
+    public void markAsCover() {
+        this.cover = true;
     }
 
     public WikiPageSource getSource() {
@@ -49,15 +48,11 @@ public class ParsedWikiPage {
         return linkedPages;
     }
 
-    public void setLinkedPages(List<String> linkedPages) {
-        this.linkedPages = linkedPages;
-    }
-
     public Toc getToc() {
         return toc;
     }
 
-    public void setToc(Toc toc) {
+    public void setToc(final Toc toc) {
         this.toc = toc;
     }
 
@@ -65,26 +60,11 @@ public class ParsedWikiPage {
         return todo;
     }
 
-    public void setTodo(boolean todo) {
-        this.todo = todo;
+    public void markAsTodo() {
+        this.todo = true;
     }
 
-    public List<Quote> getQuotes() {
-        return quotes;
-    }
-
-    public void setQuotes(List<Quote> quotes) {
-        this.quotes = quotes;
-    }
-
-    public void addQuote(String quote, String author) {
-        Quote q = new Quote();
-        q.setAuthor(author);
-        q.setText(quote);
-        this.quotes.add(q);
-    }
-
-    public void addLinkTo(String targetId) {
+    public void addLinkTo(final String targetId) {
         this.linkedPages.add(targetId);
     }
 }

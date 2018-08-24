@@ -42,19 +42,6 @@
             </section>
         </#if>
 
-        <#if quotes?has_content>
-            <section>
-                <header class="major">
-                    <h2>Citáty</h2>
-                </header>
-                <#list quotes as quote>
-                    <blockquote>
-                        <p>${quote.text}<br/><em>${quote.author}</em></p>
-                    </blockquote>
-                </#list>
-            </section>
-        </#if>
-
             <section>
                 <header class="major">
                     <h2>Cache</h2>

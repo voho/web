@@ -11,16 +11,11 @@ import cz.voho.wiki.model.WikiPageCommit;
 import cz.voho.wiki.model.WikiPageCommitGroup;
 import cz.voho.wiki.model.WikiPageReference;
 import cz.voho.wiki.model.WikiPageReferences;
-import cz.voho.wiki.model.WikiPageSearchResult;
 import cz.voho.wiki.repository.image.CachingWikiImageRepository;
 import cz.voho.wiki.repository.image.WikiImageRepository;
 import cz.voho.wiki.repository.page.ParsedWikiPageRepository;
-import cz.voho.wiki.repository.page.WikiPageSearcher;
 import cz.voho.wiki.repository.page.WikiPageSourceRepository;
-import org.apache.lucene.queryparser.classic.ParseException;
-import org.apache.lucene.search.highlight.InvalidTokenOffsetsException;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -37,7 +32,6 @@ import static cz.voho.wiki.repository.page.WikiPageSourceRepository.MISSING_PAGE
 public class WikiBackend {
     private final WikiImageRepository wikiImageRepository;
     private final ParsedWikiPages parsedWikiPages;
-    private final WikiPageSearcher wikiPageSearcher;
 
     WikiBackend(final WikiPageSourceRepository wikiPageSourceRepository, final ParsedWikiPageRepository parsedWikiPageRepository, final WikiImageRepository wikiImageRepository) {
         this.wikiImageRepository = wikiImageRepository;
@@ -47,18 +41,6 @@ public class WikiBackend {
                 .stream()
                 .map(parsedWikiPageRepository::getParsedWikiPageById)
                 .collect(Collectors.toList()));
-
-        this.wikiPageSearcher = new WikiPageSearcher();
-
-        try {
-            this.wikiPageSearcher.addToIndex(this.parsedWikiPages.getWikiPageIds().stream().map(((this.parsedWikiPages::getPage))).collect(Collectors.toList()));
-        } catch (IOException e) {
-            throw new RuntimeException("Error while indexing pages.", e);
-        }
-    }
-
-    public List<WikiPageSearchResult> search(String query, int hitsPerPage) throws IOException, ParseException, InvalidTokenOffsetsException {
-        return wikiPageSearcher.searchIndex(query, hitsPerPage);
     }
 
     public String getExternalWikiPageLink(final String wikiPageId) {

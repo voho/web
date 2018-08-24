@@ -64,7 +64,10 @@ public class FlexmarkWikiParser implements WikiParser {
         page.setTitle(firstHeading);
         final String parsedSource = renderer.render(pageRootNode);
         page.setHtml(parsedSource);
-        page.setCover(containsCoverNodesOnly(pageRootNode));
+        final boolean isCover = containsCoverNodesOnly(pageRootNode);
+        if (isCover) {
+            page.markAsCover();
+        }
         return page;
     }
 

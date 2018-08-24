@@ -20,7 +20,6 @@ public class MetaPageServlet extends AbstractPageServlet {
     protected void updateModel(final HttpServletRequest request, final SimpleHash model, final MetaDataRoot metaDataRoot) {
         super.updateModel(request, model, metaDataRoot);
 
-        model.put("quotes", wikiBackend.getCurrentContext().getQuotes());
         model.put("todos", wikiBackend.getCurrentContext().getTodoPages());
         model.put("missing", wikiBackend.getCurrentContext().getMissingPages());
         model.put("debug_image_cache_size_items", wikiBackend.getImageCacheSizeInItems());

@@ -1,9 +1,19 @@
 package cz.voho.wiki.model;
 
-import com.google.common.collect.*;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimaps;
+import com.google.common.collect.SetMultimap;
+import com.google.common.collect.Sets;
 import cz.voho.wiki.repository.page.WikiPageSourceRepository;
 
-import java.util.*;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class ParsedWikiPages {
@@ -15,7 +25,7 @@ public class ParsedWikiPages {
     private final Map<String, Toc> pageToc;
     private final Map<String, ParsedWikiPage> parsedWikiPages;
 
-    public ParsedWikiPages(Iterable<ParsedWikiPage> inputParsedWikiPages) {
+    public ParsedWikiPages(final Iterable<ParsedWikiPage> inputParsedWikiPages) {
         this.linksToPage = Multimaps.newSortedSetMultimap(Maps.newTreeMap(), TreeSet::new);
         this.linksFromPage = Multimaps.newSortedSetMultimap(Maps.newTreeMap(), TreeSet::new);
         this.quotesByAuthor = Multimaps.newSortedSetMultimap(Maps.newTreeMap(), TreeSet::new);
@@ -24,9 +34,7 @@ public class ParsedWikiPages {
         this.pageToc = Maps.newHashMap();
         this.parsedWikiPages = Maps.newHashMap();
 
-        for (ParsedWikiPage parsedWikiPage : inputParsedWikiPages) {
-            parsedWikiPage.getQuotes().forEach(quote -> quotesByAuthor.put(quote.getAuthor(), quote.getText()));
-
+        for (final ParsedWikiPage parsedWikiPage : inputParsedWikiPages) {
             if (parsedWikiPage.isTodo()) {
                 todoPages.add(parsedWikiPage.getSource().getId());
             }
@@ -50,7 +58,7 @@ public class ParsedWikiPages {
         return parsedWikiPages.containsKey(wikiPageId);
     }
 
-    public ParsedWikiPage getPage(String wikiPageId) {
+    public ParsedWikiPage getPage(final String wikiPageId) {
         return parsedWikiPages.get(wikiPageId);
     }
 
@@ -77,7 +85,7 @@ public class ParsedWikiPages {
     }
 
     public Toc getNonTrivialToc(final String wikiPageId) {
-        Toc toc = pageToc.get(wikiPageId);
+        final Toc toc = pageToc.get(wikiPageId);
         if (toc.isTrivial()) {
             return null;
         }
@@ -105,20 +113,6 @@ public class ParsedWikiPages {
         });
 
         return result;
-    }
-
-    public Set<Quote> getQuotes() {
-        return quotesByAuthor
-                .entries()
-                .stream()
-                .map(entry -> {
-                    Quote q = new Quote();
-                    q.setAuthor(entry.getKey());
-                    q.setText(entry.getValue());
-                    return q;
-                })
-                .sorted(Comparator.comparing(Quote::getAuthor))
-                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     public Set<Todo> getTodoPages() {
