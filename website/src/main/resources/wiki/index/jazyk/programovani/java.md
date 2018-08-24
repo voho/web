@@ -365,7 +365,7 @@ Syntaxe lambda výrazu je následující:
 - otevřená kulatá závorka *(* (možno vynechat pokud je pouze jeden parametr)
 - volitelné parametry s typy (typy je možné většinou vynechat, domyslí si je kompilátor)
 - uzavřená kulatá závorka *)* (možno vynechat pokud je pouze jeden parametr)
-- symbol šipky *->*
+- symbol šipky `->`
 - tělo lambda výrazu (pokud obsahuje více příkazů, musí být uzavřeno ve složených závorkách, konstrukci *return* lze vynechat, je-li tělo výrazem)
 
 ### Výčtové typy

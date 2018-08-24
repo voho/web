@@ -36,7 +36,7 @@ Levenstheinova vzdálenost se využívá například při implementaci kontroly 
 #### Příklad: DOG &rarr; BUGGY
 
 Levenshteinova vzdálenost mezi slovy *DOG* a *BUGGY* je 4.
-Můžeme například nahradit *D*->*B*, nahradit *O*->*U*, ponechat *G* a přidat *GY*.
+Můžeme například nahradit *D*→*B*, nahradit *O*→*U*, ponechat *G* a přidat *GY*.
 To jsou dva znaky nahrazené a dva znaky přidané, výsledný počet operací je tedy 4. 
 
 | | |B|U|G|G|Y|
@@ -49,7 +49,7 @@ To jsou dva znaky nahrazené a dva znaky přidané, výsledný počet operací j
 #### Příklad: NANNY &rarr; MAN
 
 Levenshteinova vzdálenost mezi slovy *NANNY* a *MAN* je 3.
-Můžeme například nahradit *N*->*M*, ponechat *AN* a smazat *NY*.
+Můžeme například nahradit *N*→*M*, ponechat *AN* a smazat *NY*.
 To je jeden znak nahrazený a dva smazané, výsledný počet operací je tedy 3.
 
 | | |M|A|N|
