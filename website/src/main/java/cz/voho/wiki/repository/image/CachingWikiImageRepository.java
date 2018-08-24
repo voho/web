@@ -49,7 +49,7 @@ public class CachingWikiImageRepository implements WikiImageRepository {
         return loaded;
     }
 
-    private void generateImageInBackground(String source, ImageGenerator primaryGenerator, String hash) {
+    private void generateImageInBackground(final String source, final ImageGenerator primaryGenerator, final String hash) {
         ExecutorProvider.IMAGE_GENERATOR_EXECUTOR.submit(() -> {
             try {
                 final byte[] generated = primaryGenerator.generate(source);

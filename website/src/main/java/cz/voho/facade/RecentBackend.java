@@ -43,7 +43,7 @@ public class RecentBackend {
     private final AtomicReference<List<GitHub.GitHubCommitMeta>> recentCommitsCache;
 
     RecentBackend(final HttpClient httpClient, final Configuration configuration) {
-        this.scheduledExecutorService = ExecutorProvider.INSTAGRAM_UPDATER_EXECUTOR;
+        this.scheduledExecutorService = ExecutorProvider.RECENT_ITEMS_UPDATER_EXECUTOR;
         this.gitHub = new GitHub(httpClient, configuration);
         this.instagram = new Instagram(httpClient, configuration);
         this.soundCloud = new SoundCloud();

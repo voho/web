@@ -1,7 +1,7 @@
 package cz.voho.servlet;
 
 import com.google.common.collect.Sets;
-import cz.voho.common.utility.Constants;
+import cz.voho.common.utility.WebsiteConstants;
 import cz.voho.facade.Backend;
 import cz.voho.facade.WikiBackend;
 
@@ -32,7 +32,7 @@ public class SitemapServlet extends HttpServlet {
 
         try (PrintWriter writer = resp.getWriter()) {
             urls.forEach(relativeUrl -> {
-                writer.println(Constants.WEBSITE_URL_WITH_SLASH + relativeUrl);
+                writer.println(WebsiteConstants.WEBSITE_URL_WITH_SLASH + relativeUrl);
             });
         }
     }

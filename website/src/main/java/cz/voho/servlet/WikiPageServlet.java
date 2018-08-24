@@ -5,7 +5,7 @@ import cz.voho.common.model.enrich.BreadcrumbList;
 import cz.voho.common.model.enrich.Item;
 import cz.voho.common.model.enrich.ListItem;
 import cz.voho.common.model.enrich.MetaDataRoot;
-import cz.voho.common.utility.Constants;
+import cz.voho.common.utility.WebsiteConstants;
 import cz.voho.common.utility.WikiLinkUtility;
 import cz.voho.facade.Backend;
 import cz.voho.facade.RecentBackend;
@@ -76,7 +76,7 @@ public class WikiPageServlet extends AbstractPageServlet {
                             Article article = new Article();
                             article.setUrl(wikiBackend.getExternalWikiPageLink(a.getId()));
                             article.setName(a.getTitle());
-                            article.setAuthor(Constants.NAME_WITH_ALIAS);
+                            article.setAuthor(WebsiteConstants.NAME_WITH_ALIAS);
                             return article;
                         })
                         .toArray(Article[]::new));

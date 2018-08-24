@@ -6,11 +6,11 @@ import java.util.concurrent.ScheduledExecutorService;
 
 public class ExecutorProvider {
     public static final ExecutorService IMAGE_GENERATOR_EXECUTOR = Executors.newScheduledThreadPool(4);
-    public static final ScheduledExecutorService INSTAGRAM_UPDATER_EXECUTOR = Executors.newScheduledThreadPool(1);
+    public static final ScheduledExecutorService RECENT_ITEMS_UPDATER_EXECUTOR = Executors.newScheduledThreadPool(1);
 
     @Override
-    protected void finalize() throws Throwable {
+    protected void finalize() {
         IMAGE_GENERATOR_EXECUTOR.shutdown();
-        INSTAGRAM_UPDATER_EXECUTOR.shutdown();
+        RECENT_ITEMS_UPDATER_EXECUTOR.shutdown();
     }
 }

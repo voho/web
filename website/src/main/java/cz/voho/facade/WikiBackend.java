@@ -3,7 +3,7 @@ package cz.voho.facade;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import cz.voho.common.exception.ContentNotFoundException;
-import cz.voho.common.utility.Constants;
+import cz.voho.common.utility.WebsiteConstants;
 import cz.voho.common.utility.WikiLinkUtility;
 import cz.voho.wiki.model.ParsedWikiPage;
 import cz.voho.wiki.model.ParsedWikiPages;
@@ -44,7 +44,7 @@ public class WikiBackend {
     }
 
     public String getExternalWikiPageLink(final String wikiPageId) {
-        return Constants.WEBSITE_URL_WITH_SLASH + "wiki/" + wikiPageId + "/";
+        return WebsiteConstants.WEBSITE_URL_WITH_SLASH + "wiki/" + wikiPageId + "/";
     }
 
     public ParsedWikiPage load(final String wikiPageId) {
@@ -190,7 +190,7 @@ public class WikiBackend {
                 .map(c -> {
                     List<WikiPageCommit> results = new LinkedList<WikiPageCommit>();
                     LocalDateTime date = LocalDateTime.parse(c.getLatestDate(), DateTimeFormatter.ISO_DATE_TIME);
-                    String formattedDate = date.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withLocale(Constants.CZECH_LOCALE));
+                    String formattedDate = date.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withLocale(WebsiteConstants.CZECH_LOCALE));
                     String shaLinkUrl = String.format("https://github.com/voho/web/commit/%s", c.getLatestCommitSha());
                     String id = WikiLinkUtility.resolveWikiPageId(c.getFilename());
 

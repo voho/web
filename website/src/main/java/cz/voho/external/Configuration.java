@@ -15,29 +15,20 @@ public class Configuration {
     private static final String KEY_COLUMN = "key";
     private static final String VALUE_COLUMN = "value";
 
-    private AmazonDynamoDB dynamoDB;
+    private final AmazonDynamoDB dynamoDB;
 
-    public Configuration() {
-        this(null);
-    }
-
-    public Configuration(AmazonDynamoDB dynamoDB) {
+    public Configuration(final AmazonDynamoDB dynamoDB) {
         this.dynamoDB = dynamoDB;
     }
 
-    String getValue(String key) {
-        if (dynamoDB == null) {
-            LOG.warn("No configuration option for {} (local dev).", key);
-            return "";
-        }
-
+    String getValue(final String key) {
         LOG.info("Loading configuration {}...", key);
 
-        GetItemRequest request = new GetItemRequest();
+        final GetItemRequest request = new GetItemRequest();
         request.setTableName(TABLE_NAME);
         request.setKey(Collections.singletonMap(KEY_COLUMN, new AttributeValue(key)));
 
-        GetItemResult response = dynamoDB.getItem(request);
+        final GetItemResult response = dynamoDB.getItem(request);
 
         return response.getItem().get(VALUE_COLUMN).getS();
     }

@@ -3,7 +3,7 @@ package cz.voho.servlet.filter;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Sets;
 import com.google.common.net.UrlEscapers;
-import cz.voho.common.utility.Constants;
+import cz.voho.common.utility.WebsiteConstants;
 import cz.voho.common.utility.WikiLinkUtility;
 import cz.voho.facade.Backend;
 import cz.voho.facade.WikiBackend;
@@ -30,7 +30,7 @@ public class InvalidWikiPageRedirectionFilter extends AbstractRedirectingFilter 
         if (wikiPageId == null) {
             String splitQuery = Joiner.on(" ").join(WikiLinkUtility.splitWikiParts(originalQuery));
             String searchQuery = UrlEscapers.urlFragmentEscaper().escape(splitQuery);
-            redirect(httpServletResponse, HttpStatus.SC_MOVED_TEMPORARILY, String.format(Constants.GOOGLE_SITE_SEARCH, searchQuery));
+            redirect(httpServletResponse, HttpStatus.SC_MOVED_TEMPORARILY, String.format(WebsiteConstants.GOOGLE_SITE_SEARCH, searchQuery));
             return false;
         }
 

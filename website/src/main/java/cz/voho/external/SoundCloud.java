@@ -23,7 +23,7 @@ public class SoundCloud {
     private static final String DEFAULT_LIGHT_COLOR = "9bf1ff";
     private static final String DEFAULT_DARK_COLOR = "242943";
 
-    public List<SoundCloudSong> getLatestSongs(int count, String lightColor, String darkColor) throws IOException {
+    public List<SoundCloudSong> getLatestSongs(final int count, final String lightColor, final String darkColor) throws IOException {
         final List<SoundCloudSong> listOfSongs = Lists.newLinkedList();
         final int getTimeoutMs = Math.max(MINIMAL_GET_TIMEOUT_MS, MINIMAL_GET_TIMEOUT_MS);
         final Document document = Jsoup.parse(new URL(AUTHOR_URL), getTimeoutMs);
@@ -97,7 +97,7 @@ public class SoundCloud {
             return title;
         }
 
-        public void setTitle(String title) {
+        public void setTitle(final String title) {
             this.title = title;
         }
 
@@ -105,7 +105,7 @@ public class SoundCloud {
             return url;
         }
 
-        public void setUrl(String url) {
+        public void setUrl(final String url) {
             this.url = url;
         }
 
@@ -113,7 +113,7 @@ public class SoundCloud {
             return widgetUrl;
         }
 
-        public void setWidgetUrl(String widgetUrl) {
+        public void setWidgetUrl(final String widgetUrl) {
             this.widgetUrl = widgetUrl;
         }
     }

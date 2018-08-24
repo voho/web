@@ -3,7 +3,7 @@ package cz.voho.common.utility;
 import java.time.LocalDate;
 import java.util.Locale;
 
-public class Constants {
+public class WebsiteConstants {
     public static final String OFFICIAL_FULL_NAME = "Vojtěch Hordějčuk";
     public static final String GOOGLE_SITE_SEARCH = "https://www.google.cz/search?q=site:voho.eu+%s&*&cad=h";
     public static final String WEBSITE_URL_WITH_SLASH = "http://voho.eu/";

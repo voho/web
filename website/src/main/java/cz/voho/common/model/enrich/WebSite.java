@@ -1,16 +1,16 @@
 package cz.voho.common.model.enrich;
 
 import com.google.gson.annotations.SerializedName;
-import cz.voho.common.utility.Constants;
+import cz.voho.common.utility.WebsiteConstants;
 
 public class WebSite {
     @SerializedName("@context")
     private String context = "http://schema.org";
     @SerializedName("@type")
     private String type = "WebSite";
-    private String name = Constants.PREFERED_FULL_NAME;
-    private String alternateName = Constants.NAME_WITH_ALIAS;
-    private String url = Constants.WEBSITE_URL_WITH_SLASH;
+    private String name = WebsiteConstants.PREFERED_FULL_NAME;
+    private String alternateName = WebsiteConstants.NAME_WITH_ALIAS;
+    private String url = WebsiteConstants.WEBSITE_URL_WITH_SLASH;
 
     public String getContext() {
         return context;

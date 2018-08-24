@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 public class ParsedWikiPages {
     private final SetMultimap<String, String> linksToPage;
     private final SetMultimap<String, String> linksFromPage;
-    private final SetMultimap<String, String> quotesByAuthor;
     private final Set<String> todoPages;
     private final Map<String, String> parentPage;
     private final Map<String, Toc> pageToc;
@@ -28,7 +27,6 @@ public class ParsedWikiPages {
     public ParsedWikiPages(final Iterable<ParsedWikiPage> inputParsedWikiPages) {
         this.linksToPage = Multimaps.newSortedSetMultimap(Maps.newTreeMap(), TreeSet::new);
         this.linksFromPage = Multimaps.newSortedSetMultimap(Maps.newTreeMap(), TreeSet::new);
-        this.quotesByAuthor = Multimaps.newSortedSetMultimap(Maps.newTreeMap(), TreeSet::new);
         this.todoPages = Sets.newTreeSet();
         this.parentPage = Maps.newHashMap();
         this.pageToc = Maps.newHashMap();

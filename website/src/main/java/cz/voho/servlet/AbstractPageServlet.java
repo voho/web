@@ -3,7 +3,7 @@ package cz.voho.servlet;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import cz.voho.common.model.enrich.MetaDataRoot;
-import cz.voho.common.utility.Constants;
+import cz.voho.common.utility.WebsiteConstants;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.ext.servlet.FreemarkerServlet;
 import freemarker.template.Configuration;
@@ -42,26 +42,26 @@ public abstract class AbstractPageServlet extends FreemarkerServlet {
 
     protected void updateModel(final HttpServletRequest request, final SimpleHash model, final MetaDataRoot metaDataRoot) {
         LocalDate now = LocalDate.now();
-        model.put("social_profile_email", "mailto:" + Constants.EMAIL);
-        model.put("social_profile_linkedin", Constants.PROFILE_LINKED_IN);
-        model.put("social_profile_github", Constants.PROFILE_GITHUB);
-        model.put("social_profile_twitter", Constants.PROFILE_TWITTER);
-        model.put("social_profile_instagram", Constants.PROFILE_INSTAGRAM);
-        model.put("social_profile_flickr", Constants.PROFILE_FLICKR);
-        model.put("social_profile_soundcloud", Constants.PROFILE_SOUNDCLOUD);
-        model.put("social_profile_spotify", Constants.PROFILE_SPOTIFY);
-        model.put("social_profile_itunes", Constants.PROFILE_ITUNES);
-        model.put("social_profile_amazon", Constants.PROFILE_AMAZON);
-        model.put("social_profile_google", Constants.PROFILE_GOOGLE_MUSIC);
-        model.put("social_profile_youtube", Constants.PROFILE_YOUTUBE);
-        model.put("website_external_url", Constants.WEBSITE_URL_WITH_SLASH);
-        model.put("website_author", Constants.OFFICIAL_FULL_NAME);
-        model.put("website_short_name", Constants.NICKNAME);
-        model.put("website_extended_name", Constants.PREFERED_FULL_NAME);
-        model.put("website_full_name", Constants.NAME_WITH_ALIAS);
-        model.put("website_full_description", Constants.JOB_TITLE);
+        model.put("social_profile_email", "mailto:" + WebsiteConstants.EMAIL);
+        model.put("social_profile_linkedin", WebsiteConstants.PROFILE_LINKED_IN);
+        model.put("social_profile_github", WebsiteConstants.PROFILE_GITHUB);
+        model.put("social_profile_twitter", WebsiteConstants.PROFILE_TWITTER);
+        model.put("social_profile_instagram", WebsiteConstants.PROFILE_INSTAGRAM);
+        model.put("social_profile_flickr", WebsiteConstants.PROFILE_FLICKR);
+        model.put("social_profile_soundcloud", WebsiteConstants.PROFILE_SOUNDCLOUD);
+        model.put("social_profile_spotify", WebsiteConstants.PROFILE_SPOTIFY);
+        model.put("social_profile_itunes", WebsiteConstants.PROFILE_ITUNES);
+        model.put("social_profile_amazon", WebsiteConstants.PROFILE_AMAZON);
+        model.put("social_profile_google", WebsiteConstants.PROFILE_GOOGLE_MUSIC);
+        model.put("social_profile_youtube", WebsiteConstants.PROFILE_YOUTUBE);
+        model.put("website_external_url", WebsiteConstants.WEBSITE_URL_WITH_SLASH);
+        model.put("website_author", WebsiteConstants.OFFICIAL_FULL_NAME);
+        model.put("website_short_name", WebsiteConstants.NICKNAME);
+        model.put("website_extended_name", WebsiteConstants.PREFERED_FULL_NAME);
+        model.put("website_full_name", WebsiteConstants.NAME_WITH_ALIAS);
+        model.put("website_full_description", WebsiteConstants.JOB_TITLE);
         model.put("current_year", String.valueOf(now.getYear()));
-        model.put("website_author_age", Constants.AUTHOR_BIRTH_DATE.until(now).getYears());
+        model.put("website_author_age", WebsiteConstants.AUTHOR_BIRTH_DATE.until(now).getYears());
     }
 
     protected void updateModelMeta(final HttpServletRequest request, final SimpleHash model, final MetaDataRoot metaDataRoot) {
