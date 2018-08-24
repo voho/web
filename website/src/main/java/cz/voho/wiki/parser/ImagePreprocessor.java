@@ -8,6 +8,10 @@ import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 
 public class ImagePreprocessor implements Preprocessor {
+    private static final String HTTP_PREFIX = "http://";
+    private static final String HTTPS_PREFIX = "https://";
+    private static final String LOCAL_IMAGE_URL_FORMAT = "/assets/images/%s";
+
     @Override
     public void preprocessSource(final ParsedWikiPage context) {
         preprocessFloatingImage(context, "left");
@@ -42,10 +46,10 @@ public class ImagePreprocessor implements Preprocessor {
     }
 
     private String resolveImageSrc(final String src) {
-        if (src.startsWith("http://") || src.startsWith("https://")) {
+        if (src.startsWith(HTTP_PREFIX) || src.startsWith(HTTPS_PREFIX)) {
             return src;
         } else {
-            return "/assets/images/" + src;
+            return String.format(LOCAL_IMAGE_URL_FORMAT, src);
         }
     }
 }
