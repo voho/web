@@ -335,7 +335,7 @@ ul.copyright li {
 }
 
 #wiki-content p {
-    margin: 1em 0;
+    margin: 1ex 0;
 }
 
 #wiki-content .figure {
@@ -353,7 +353,7 @@ ul.copyright li {
 
 #wiki-content em {
     border-radius: 3pt;
-    font-family: menlo, monospace;
+    font-family: monospace;
     font-style: normal;
     font-size: 90%;
     padding: 1pt 5pt;
@@ -372,6 +372,7 @@ ul.copyright li {
 
 #wiki-content th, #wiki-content td {
     text-align: left;
+    vertical-align: top;
     padding: 5pt 10pt;
 }
 
@@ -392,9 +393,13 @@ ul.copyright li {
 
 #wiki-content blockquote em, blockquote em {
     background: none transparent;
+    display: block;
     font-weight: normal;
     font-family: inherit;
     font-size: 0.8em;
+    margin: 0 0 0 auto;
+    padding: 1em 1em 2em 2em;
+    width: 100%;
 }
 
 #wiki-content blockquote em:before, blockquote em:before {
@@ -436,6 +441,7 @@ ul.copyright li {
 }
 
 .hljs {
+    font-family: Menlo, monospace;
     font-size: 80%;
 }
 
@@ -449,6 +455,7 @@ ul.copyright li {
     font-size: 80%;
     display: inline-block;
     position: relative;
+    white-space: nowrap;
 }
 
 .image.left {
@@ -658,6 +665,7 @@ dl dd {
 #wiki-content .code-included-disclaimer {
     color: #666;
     text-align: right;
+    margin: -1ex 0 2em 0;
 }
 
 #wiki-content .code-included-disclaimer a {

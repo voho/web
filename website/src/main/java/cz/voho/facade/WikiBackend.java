@@ -4,11 +4,10 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import cz.voho.common.exception.ContentNotFoundException;
 import cz.voho.common.utility.WebsiteConstants;
-import cz.voho.common.utility.WikiLinkUtility;
+import cz.voho.wiki.model.Missing;
 import cz.voho.wiki.model.ParsedWikiPage;
-import cz.voho.wiki.model.ParsedWikiPages;
-import cz.voho.wiki.model.WikiPageCommit;
-import cz.voho.wiki.model.WikiPageCommitGroup;
+import cz.voho.wiki.model.Toc;
+import cz.voho.wiki.model.Todo;
 import cz.voho.wiki.model.WikiPageReference;
 import cz.voho.wiki.model.WikiPageReferences;
 import cz.voho.wiki.repository.image.CachingWikiImageRepository;
@@ -16,31 +15,29 @@ import cz.voho.wiki.repository.image.WikiImageRepository;
 import cz.voho.wiki.repository.page.ParsedWikiPageRepository;
 import cz.voho.wiki.repository.page.WikiPageSourceRepository;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.Collection;
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-import static cz.voho.wiki.repository.page.WikiPageSourceRepository.MISSING_PAGE_ID;
-
-// TODO improve code
 public class WikiBackend {
     private final WikiImageRepository wikiImageRepository;
-    private final ParsedWikiPages parsedWikiPages;
+    private final ParsedWikiPageRepository parsedWikiPages;
 
-    WikiBackend(final WikiPageSourceRepository wikiPageSourceRepository, final ParsedWikiPageRepository parsedWikiPageRepository, final WikiImageRepository wikiImageRepository) {
+    WikiBackend(final WikiPageSourceRepository wikiPageSourceRepository,
+                final ParsedWikiPageRepository parsedWikiPageRepository,
+                final WikiImageRepository wikiImageRepository
+    ) {
         this.wikiImageRepository = wikiImageRepository;
 
-        this.parsedWikiPages = new ParsedWikiPages(wikiPageSourceRepository
+        final List<ParsedWikiPage> parsedWikiPages = wikiPageSourceRepository
                 .getWikiPageIds()
                 .stream()
                 .map(parsedWikiPageRepository::getParsedWikiPageById)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
+
+        this.parsedWikiPages = parsedWikiPageRepository;
     }
 
     public String getExternalWikiPageLink(final String wikiPageId) {
@@ -48,22 +45,22 @@ public class WikiBackend {
     }
 
     public ParsedWikiPage load(final String wikiPageId) {
-        final ParsedWikiPage parsedWikiPage = parsedWikiPages.getPage(wikiPageId);
+        return parsedWikiPages.getParsedWikiPageById(wikiPageId);
+    }
 
-        if (parsedWikiPage != null) {
-            return parsedWikiPage;
-        }
+    private WikiPageReference toRef(final String wikiPageId) {
+        final ParsedWikiPage page = parsedWikiPages.getParsedWikiPageById(wikiPageId);
 
-        if (wikiPageId.equals(MISSING_PAGE_ID)) {
-            throw new ContentNotFoundException("No error page found: " + wikiPageId);
-        } else {
-            return load(MISSING_PAGE_ID);
-        }
+        final WikiPageReference result = new WikiPageReference();
+        result.setId(wikiPageId);
+        result.setTitle(page.getTitle());
+        result.setChildren(getSubPages(wikiPageId));
+        return result;
     }
 
     public WikiPageReferences getBreadCrumbs(final String wikiPageId) {
         try {
-            return toRefs(getCurrentContext().getBreadCrumbs(wikiPageId), false, true);
+            return toRefs(parsedWikiPages.getBreadCrumbs(wikiPageId), false, true);
         } catch (final ContentNotFoundException e) {
             return fallback(wikiPageId);
         }
@@ -71,7 +68,7 @@ public class WikiBackend {
 
     public WikiPageReferences getSubPages(final String wikiPageId) {
         try {
-            return toRefs(getCurrentContext().getSubPages(wikiPageId), true, true);
+            return toRefs(parsedWikiPages.getSubPages(wikiPageId), true, true);
         } catch (final ContentNotFoundException e) {
             return fallback(wikiPageId);
         }
@@ -99,22 +96,8 @@ public class WikiBackend {
 
         result.setItems(wikiPageIds
                 .stream()
-                .filter(a -> getCurrentContext().exists(a))
-                .map(id -> {
-                    final WikiPageReference ref = new WikiPageReference();
-                    ref.setId(id);
-                    try {
-                        ref.setTitle(getCurrentContext().getPage(id).getTitle());// TODO bullshit
-                    } catch (ContentNotFoundException e) {
-                        ref.setTitle("N/A");
-                    }
-                    try {
-                        ref.setChildren(toRefs(getCurrentContext().getSubPages(id), true, false));
-                    } catch (ContentNotFoundException e) {
-                        ref.setChildren(fallback(id));
-                    }
-                    return ref;
-                })
+                .filter(parsedWikiPages::exists)
+                .map(this::toRef)
                 .collect(Collectors.toList()));
 
         if (sort) {
@@ -140,7 +123,7 @@ public class WikiBackend {
 
     public WikiPageReferences getLinksFromHere(final String wikiPageId) {
         return toRefs(
-                Lists.newArrayList(getCurrentContext().getLinksFromPage(wikiPageId)),
+                Lists.newArrayList(parsedWikiPages.getLinksFromPage(wikiPageId)),
                 true,
                 true
         );
@@ -148,7 +131,7 @@ public class WikiBackend {
 
     public WikiPageReferences getLinksToHere(final String wikiPageId) {
         return toRefs(
-                Lists.newArrayList(getCurrentContext().getLinksToPage(wikiPageId)),
+                Lists.newArrayList(parsedWikiPages.getLinksToPage(wikiPageId)),
                 true,
                 true
         );
@@ -180,36 +163,19 @@ public class WikiBackend {
         return parsedWikiPages.getWikiPageIds();
     }
 
-    public ParsedWikiPages getCurrentContext() {
-        return parsedWikiPages;
+    public Set<Todo> getTodoPages() {
+        return parsedWikiPages.getTodoPages();
     }
 
-    public List<WikiPageCommit> enrichCommits(final List<WikiPageCommitGroup> recentWikiChanges) {
-        return recentWikiChanges
-                .stream()
-                .map(c -> {
-                    List<WikiPageCommit> results = new LinkedList<WikiPageCommit>();
-                    LocalDateTime date = LocalDateTime.parse(c.getLatestDate(), DateTimeFormatter.ISO_DATE_TIME);
-                    String formattedDate = date.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withLocale(WebsiteConstants.CZECH_LOCALE));
-                    String shaLinkUrl = String.format("https://github.com/voho/web/commit/%s", c.getLatestCommitSha());
-                    String id = WikiLinkUtility.resolveWikiPageId(c.getFilename());
+    public List<Missing> getMissingPages() {
+        return parsedWikiPages.getMissingPages();
+    }
 
-                    ParsedWikiPage parsedWikiPage = load(id);
+    public Toc getNonTrivialToc(final String wikiPageId) {
+        return parsedWikiPages.getNonTrivialToc(wikiPageId);
+    }
 
-                    if (parsedWikiPage != null) {
-                        WikiPageCommit result = new WikiPageCommit();
-                        String title = parsedWikiPage.getTitle();
-                        result.setMessage(c.getLatestCommitMessage());
-                        result.setFormattedDate(formattedDate);
-                        result.setId(id);
-                        result.setTitle(title);
-                        result.setUrl(shaLinkUrl);
-                        results.add(result);
-                    }
-
-                    return results;
-                })
-                .flatMap(Collection::stream)
-                .collect(Collectors.toList());
+    public boolean exists(final String wikiPageId) {
+        return parsedWikiPages.exists(wikiPageId);
     }
 }

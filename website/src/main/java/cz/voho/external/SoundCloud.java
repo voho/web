@@ -2,6 +2,7 @@ package cz.voho.external;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import cz.voho.common.utility.WebsiteConstants;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -20,8 +21,6 @@ public class SoundCloud {
     private static final String AUTHOR_URL = "https://soundcloud.com/voho/tracks";
     private static final String SOUNDCLOUD_WIDGET_URL_FORMAT = "https://w.soundcloud.com/player/?url=%s%s";
     private static final String SOUNDCLOUD_SONG_URL_FORMAT = "https://soundcloud.com%s";
-    private static final String DEFAULT_LIGHT_COLOR = "9bf1ff";
-    private static final String DEFAULT_DARK_COLOR = "242943";
 
     public List<SoundCloudSong> getLatestSongs(final int count, final String lightColor, final String darkColor) throws IOException {
         final List<SoundCloudSong> listOfSongs = Lists.newLinkedList();
@@ -37,7 +36,7 @@ public class SoundCloud {
             final Element link = song.select(SONG_LINK_SELECTOR).first();
 
             if (link != null) {
-                listOfSongs.add(toSong(link, coalesce(lightColor, DEFAULT_LIGHT_COLOR), coalesce(darkColor, DEFAULT_DARK_COLOR)));
+                listOfSongs.add(toSong(link, coalesce(lightColor, WebsiteConstants.DEFAULT_LIGHT_COLOR), coalesce(darkColor, WebsiteConstants.DEFAULT_DARK_COLOR)));
             }
         }
 

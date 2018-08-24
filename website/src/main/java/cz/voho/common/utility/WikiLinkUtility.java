@@ -6,15 +6,15 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class WikiLinkUtility {
-    public static String[] splitWikiParts(String wikiParts) {
+    public static String[] splitWikiParts(final String wikiParts) {
         return wikiParts.split(stripWikiPrefixSuffix(stripSlashes(Pattern.quote("/"))));
     }
 
     public static String resolveWikiPageId(String value) {
         value = value.toLowerCase(Locale.ROOT);
         value = stripWikiPrefixSuffix(stripSlashes(value));
-        String[] valueParts = splitWikiParts(value);
-        String lastPart = lastWikiPart(valueParts);
+        final String[] valueParts = splitWikiParts(value);
+        final String lastPart = lastWikiPart(valueParts);
         value = copyValidChars(lastPart);
         if (value.isEmpty()) {
             value = WikiPageSourceRepository.INDEX_PAGE_ID;
@@ -25,7 +25,7 @@ public class WikiLinkUtility {
         return value;
     }
 
-    public static String resolveParentWikiPageId(String resourceName) {
+    public static String resolveParentWikiPageId(final String resourceName) {
         final String[] exploded = WikiLinkUtility.splitWikiParts(resourceName);
         if (exploded.length > 1) {
             return exploded[exploded.length - 2];
@@ -59,7 +59,7 @@ public class WikiLinkUtility {
         return value;
     }
 
-    public static boolean isValidWikiPageSource(String filename) {
+    public static boolean isValidWikiPageSource(final String filename) {
         return filename.contains("wiki/") && filename.endsWith(".md");
     }
 
@@ -73,7 +73,7 @@ public class WikiLinkUtility {
         for (int i = 0; i < pathInfo.length(); i++) {
             final char c = pathInfo.charAt(i);
 
-            if (isValidChar(c)) {
+            if (isValidWikiPageIdChar(c)) {
                 sb.append(c);
             }
         }
@@ -89,7 +89,7 @@ public class WikiLinkUtility {
         }
     }
 
-    private static boolean isValidChar(final char c) {
+    private static boolean isValidWikiPageIdChar(final char c) {
         return Character.isLowerCase(c) || Character.isDigit(c) || c == '-';
     }
 }

@@ -1,5 +1,6 @@
 package cz.voho.servlet;
 
+import cz.voho.common.exception.ContentNotFoundException;
 import cz.voho.common.model.enrich.Article;
 import cz.voho.common.model.enrich.BreadcrumbList;
 import cz.voho.common.model.enrich.Item;
@@ -8,7 +9,6 @@ import cz.voho.common.model.enrich.MetaDataRoot;
 import cz.voho.common.utility.WebsiteConstants;
 import cz.voho.common.utility.WikiLinkUtility;
 import cz.voho.facade.Backend;
-import cz.voho.facade.RecentBackend;
 import cz.voho.facade.WikiBackend;
 import cz.voho.wiki.model.ParsedWikiPage;
 import cz.voho.wiki.model.WikiPageReference;
@@ -19,10 +19,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static cz.voho.wiki.repository.page.WikiPageSourceRepository.MISSING_PAGE_ID;
+
 // TODO improve code
 public class WikiPageServlet extends AbstractPageServlet {
-    private final WikiBackend wikiBackend = Backend.SINGLETON.getWikiBackend();
-    private final RecentBackend recentBackend = Backend.SINGLETON.getRecentBackend();
+    private final WikiBackend wikiBackend = Backend.SINGLETON.getWiki();
 
     @Override
     protected String requestUrlToTemplatePath(final HttpServletRequest request) throws ServletException {
@@ -33,7 +34,7 @@ public class WikiPageServlet extends AbstractPageServlet {
     protected void updateModel(final HttpServletRequest request, final SimpleHash model, final MetaDataRoot metaDataRoot) {
         super.updateModel(request, model, metaDataRoot);
 
-        final ParsedWikiPage parsedWikiPage = wikiBackend.load(WikiLinkUtility.resolveWikiPageId(request.getRequestURI()));
+        final ParsedWikiPage parsedWikiPage = loadPageWithFallback(WikiLinkUtility.resolveWikiPageId(request.getRequestURI()));
 
         model.put("active_wiki_page_id", parsedWikiPage.getSource().getId());
         model.put("active_wiki_page_parent_id", parsedWikiPage.getSource().getParentId());
@@ -44,12 +45,12 @@ public class WikiPageServlet extends AbstractPageServlet {
         model.put("active_wiki_page_title", parsedWikiPage.getTitle());
         model.put("active_wiki_page_content", parsedWikiPage.getHtml());
         model.put("active_wiki_page_cover", parsedWikiPage.isCover());
-        model.put("active_wiki_page_toc", wikiBackend.getCurrentContext().getNonTrivialToc(parsedWikiPage.getSource().getId()));
+        model.put("active_wiki_page_todo", parsedWikiPage.isTodo());
+        model.put("active_wiki_page_toc", wikiBackend.getNonTrivialToc(parsedWikiPage.getSource().getId()));
         model.put("active_wiki_page_report_issue", parsedWikiPage.getSource().getGithubIssueUrl());
         model.put("active_wiki_page_outgoing_links", wikiBackend.getLinksFromHere(parsedWikiPage.getSource().getId()));
         model.put("active_wiki_page_incoming_links", wikiBackend.getLinksToHere(parsedWikiPage.getSource().getId()));
         model.put("indexSubPages", wikiBackend.getWikiIndexSubPages());
-        model.put("recentlyChangedPages", wikiBackend.enrichCommits(recentBackend.getRecentWikiChanges()));
 
         WikiPageReferences siblingPages = null;
 
@@ -64,7 +65,26 @@ public class WikiPageServlet extends AbstractPageServlet {
         updateModelWithBreadCrumbs(model, metaDataRoot, breadCrumbs);
     }
 
-    private void updateModelWithSubAndSiblingPages(SimpleHash model, MetaDataRoot metaDataRoot, ParsedWikiPage parsedWikiPage, WikiPageReferences subPages, WikiPageReferences siblingPages) {
+    private ParsedWikiPage loadPageWithFallback(final String wikiPageId) {
+        final ParsedWikiPage parsedWikiPage = wikiBackend.load(wikiPageId);
+
+        if (parsedWikiPage != null) {
+            return parsedWikiPage;
+        }
+
+        if (wikiPageId.equals(MISSING_PAGE_ID)) {
+            throw new ContentNotFoundException("No error page found: " + wikiPageId);
+        } else {
+            return loadPageWithFallback(MISSING_PAGE_ID);
+        }
+    }
+
+    private void updateModelWithSubAndSiblingPages(final SimpleHash model,
+                                                   final MetaDataRoot metaDataRoot,
+                                                   final ParsedWikiPage parsedWikiPage,
+                                                   final WikiPageReferences subPages,
+                                                   WikiPageReferences siblingPages
+    ) {
         if (subPages != null && subPages.getItems() != null) {
             if (!subPages.getItems().isEmpty()) {
                 model.put("subPages", subPages);
@@ -98,14 +118,14 @@ public class WikiPageServlet extends AbstractPageServlet {
         }
     }
 
-    private void updateModelWithBreadCrumbs(SimpleHash model, MetaDataRoot metaDataRoot, WikiPageReferences breadCrumbs) {
+    private void updateModelWithBreadCrumbs(final SimpleHash model, final MetaDataRoot metaDataRoot, final WikiPageReferences breadCrumbs) {
         if (breadCrumbs != null && breadCrumbs.getItems() != null) {
             if (!breadCrumbs.getItems().isEmpty()) {
                 model.put("breadCrumbs", breadCrumbs);
 
-                AtomicInteger i = new AtomicInteger(1);
+                final AtomicInteger i = new AtomicInteger(1);
 
-                ListItem[] breadcrumbListElements = breadCrumbs.getItems()
+                final ListItem[] breadcrumbListElements = breadCrumbs.getItems()
                         .stream()
                         .map(a -> {
                             Item item = new Item();
@@ -118,7 +138,7 @@ public class WikiPageServlet extends AbstractPageServlet {
                         })
                         .toArray(ListItem[]::new);
 
-                BreadcrumbList breadcrumbList = new BreadcrumbList();
+                final BreadcrumbList breadcrumbList = new BreadcrumbList();
                 breadcrumbList.setItemListElement(breadcrumbListElements);
                 metaDataRoot.setBreadcrumbs(breadcrumbList);
             }

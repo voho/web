@@ -14,7 +14,7 @@ import java.io.PrintWriter;
 import java.util.Set;
 
 public class SitemapServlet extends HttpServlet {
-    private final WikiBackend wikiBackend = Backend.SINGLETON.getWikiBackend();
+    private final WikiBackend wikiBackend = Backend.SINGLETON.getWiki();
 
     @Override
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {

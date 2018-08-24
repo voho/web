@@ -18,7 +18,7 @@ import java.util.Objects;
 public class GenerateServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(GenerateServlet.class);
 
-    private final WikiBackend wikiBackend = Backend.SINGLETON.getWikiBackend();
+    private final WikiBackend wikiBackend = Backend.SINGLETON.getWiki();
 
     @Override
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {

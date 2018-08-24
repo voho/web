@@ -14,14 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Set;
 
 public class InvalidWikiPageRedirectionFilter extends AbstractRedirectingFilter {
-    private final WikiBackend wikiBackend = Backend.SINGLETON.getWikiBackend();
+    private final WikiBackend wikiBackend = Backend.SINGLETON.getWiki();
 
     @Override
     protected boolean doCustomFilter(final HttpServletRequest httpServletRequest, final HttpServletResponse httpServletResponse) {
         String originalQuery = httpServletRequest.getRequestURI();
         String wikiPageId = WikiLinkUtility.resolveWikiPageId(originalQuery);
 
-        if (wikiBackend.getCurrentContext().exists(wikiPageId)) {
+        if (wikiBackend.exists(wikiPageId)) {
             return true;
         }
 

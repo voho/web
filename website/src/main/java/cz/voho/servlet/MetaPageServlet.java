@@ -9,7 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 public class MetaPageServlet extends AbstractPageServlet {
-    private final WikiBackend wikiBackend = Backend.SINGLETON.getWikiBackend();
+    private final WikiBackend wikiBackend = Backend.SINGLETON.getWiki();
 
     @Override
     protected String requestUrlToTemplatePath(final HttpServletRequest request) throws ServletException {
@@ -20,8 +20,8 @@ public class MetaPageServlet extends AbstractPageServlet {
     protected void updateModel(final HttpServletRequest request, final SimpleHash model, final MetaDataRoot metaDataRoot) {
         super.updateModel(request, model, metaDataRoot);
 
-        model.put("todos", wikiBackend.getCurrentContext().getTodoPages());
-        model.put("missing", wikiBackend.getCurrentContext().getMissingPages());
+        model.put("todos", wikiBackend.getTodoPages());
+        model.put("missing", wikiBackend.getMissingPages());
         model.put("debug_image_cache_size_items", wikiBackend.getImageCacheSizeInItems());
         model.put("debug_image_cache_size_bytes", wikiBackend.getImageCacheSizeInBytes());
     }

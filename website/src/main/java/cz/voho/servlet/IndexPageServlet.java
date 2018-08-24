@@ -9,7 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 public class IndexPageServlet extends AbstractPageServlet {
-    private final RecentBackend recentBackend = Backend.SINGLETON.getRecentBackend();
+    private final RecentBackend recentBackend = Backend.SINGLETON.getRecent();
 
     @Override
     protected void updateModel(HttpServletRequest request, SimpleHash model, final MetaDataRoot metaDataRoot) {

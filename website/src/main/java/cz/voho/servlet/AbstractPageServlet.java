@@ -1,8 +1,7 @@
 package cz.voho.servlet;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import cz.voho.common.model.enrich.MetaDataRoot;
+import cz.voho.common.utility.ApiUtility;
 import cz.voho.common.utility.WebsiteConstants;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.ext.servlet.FreemarkerServlet;
@@ -25,7 +24,7 @@ public abstract class AbstractPageServlet extends FreemarkerServlet {
     private static final String UTF_8 = "UTF-8";
 
     @Override
-    protected boolean preprocessRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected boolean preprocessRequest(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding(UTF_8);
         request.setCharacterEncoding(UTF_8);
         return super.preprocessRequest(request, response);
@@ -41,7 +40,7 @@ public abstract class AbstractPageServlet extends FreemarkerServlet {
     }
 
     protected void updateModel(final HttpServletRequest request, final SimpleHash model, final MetaDataRoot metaDataRoot) {
-        LocalDate now = LocalDate.now();
+        final LocalDate now = LocalDate.now();
         model.put("social_profile_email", "mailto:" + WebsiteConstants.EMAIL);
         model.put("social_profile_linkedin", WebsiteConstants.PROFILE_LINKED_IN);
         model.put("social_profile_github", WebsiteConstants.PROFILE_GITHUB);
@@ -65,19 +64,17 @@ public abstract class AbstractPageServlet extends FreemarkerServlet {
     }
 
     protected void updateModelMeta(final HttpServletRequest request, final SimpleHash model, final MetaDataRoot metaDataRoot) {
-        final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
         if (metaDataRoot.getPerson() != null) {
-            model.put("enrich_person", gson.toJson(metaDataRoot.getPerson()));
+            model.put("enrich_person", ApiUtility.toPrettyJson(metaDataRoot.getPerson()));
         }
         if (metaDataRoot.getWebSite() != null) {
-            model.put("enrich_website", gson.toJson(metaDataRoot.getWebSite()));
+            model.put("enrich_website", ApiUtility.toPrettyJson(metaDataRoot.getWebSite()));
         }
         if (metaDataRoot.getArticles() != null) {
-            model.put("enrich_articles", gson.toJson(metaDataRoot.getArticles()));
+            model.put("enrich_articles", ApiUtility.toPrettyJson(metaDataRoot.getArticles()));
         }
         if (metaDataRoot.getBreadcrumbs() != null) {
-            model.put("enrich_breadcrumbs", gson.toJson(metaDataRoot.getBreadcrumbs()));
+            model.put("enrich_breadcrumbs", ApiUtility.toPrettyJson(metaDataRoot.getBreadcrumbs()));
         }
     }
 

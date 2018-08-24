@@ -28,12 +28,12 @@ public class CachingWikiImageRepository implements WikiImageRepository {
     }
 
     @Override
-    public byte[] generateDotSvg(final String source) throws Exception {
+    public byte[] generateDotSvg(final String source) {
         return generateImage(source, primaryDelegate::generateDotSvg);
     }
 
     @Override
-    public byte[] generatePlantUmlSvg(final String source) throws Exception {
+    public byte[] generatePlantUmlSvg(final String source) {
         return generateImage(source, primaryDelegate::generatePlantUmlSvg);
     }
 

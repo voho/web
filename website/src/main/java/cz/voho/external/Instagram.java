@@ -1,8 +1,7 @@
 package cz.voho.external;
 
 import com.google.common.io.CharStreams;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import cz.voho.common.utility.ApiUtility;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -13,7 +12,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class Instagram {
-    private static final Gson GSON = new GsonBuilder().create();
     private static final String INSTAGRAM_URI_FORMAT = "https://api.instagram.com/v1/users/self/media/recent?access_token=%s&count=%d";
 
     private final HttpClient httpClient;
@@ -28,7 +26,7 @@ public class Instagram {
         final String url = generateUrl(count);
         final HttpResponse response = executeGetRequest(url, httpClient);
         final String result = readResponse(response);
-        InstagramImages images = GSON.fromJson(result, InstagramImages.class);
+        InstagramImages images = ApiUtility.fromJson(result, InstagramImages.class);
         return images.getData();
     }
 

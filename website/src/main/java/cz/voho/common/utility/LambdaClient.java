@@ -4,8 +4,6 @@ import com.amazonaws.services.lambda.AWSLambda;
 import com.amazonaws.services.lambda.model.AWSLambdaException;
 import com.amazonaws.services.lambda.model.InvokeRequest;
 import com.amazonaws.services.lambda.model.InvokeResult;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import cz.voho.web.lambda.model.GenerateImageRequest;
 import cz.voho.web.lambda.model.GenerateImageResponse;
 import org.slf4j.Logger;
@@ -15,7 +13,6 @@ import java.nio.charset.StandardCharsets;
 
 public class LambdaClient {
     private static final Logger LOG = LoggerFactory.getLogger(LambdaClient.class);
-    private static final Gson GSON = new GsonBuilder().create();
     private static final int HTTP_OK = 200;
     private static final String PLANT_UML_LAMBDA = "PlantUmlLambda";
     private static final String GRAPH_VIZ_LAMBDA = "GraphVizLambda";
@@ -37,7 +34,7 @@ public class LambdaClient {
     private <I, O> O call(final String lambdaFunctionName, final I request, final Class<O> responseType) {
         final InvokeRequest lambdaRequest = new InvokeRequest();
         lambdaRequest.setFunctionName(lambdaFunctionName);
-        lambdaRequest.setPayload(GSON.toJson(request));
+        lambdaRequest.setPayload(ApiUtility.toUglyJson(request));
 
         try {
             final InvokeResult lambdaResponse = lambda.invoke(lambdaRequest);
@@ -48,7 +45,7 @@ public class LambdaClient {
             }
 
             final String payloadAsString = new String(lambdaResponse.getPayload().array(), StandardCharsets.UTF_8);
-            return GSON.fromJson(payloadAsString, responseType);
+            return ApiUtility.fromJson(payloadAsString, responseType);
         } catch (AWSLambdaException e) {
             LOG.warn("Transient Lambda exception.");
             return null;

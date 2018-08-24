@@ -22,24 +22,6 @@
                 </header>
                 <@wiki_children_pages pageRef.children.items/>
             </#list>
-
-            <h2>Poslední změny</h2>
-
-            <div class="box">
-                <section id="latest">
-                    <div class="row">
-                        <#list recentlyChangedPages as page>
-                            <div class="3u 6u$">
-                                <p>
-                                    <strong title="${page.message}">${page.formattedDate}</strong>
-                                    <br/>
-                                    <a href="/wiki/${page.id}/">${page.title}</a>
-                                </p>
-                            </div>
-                        </#list>
-                    </div>
-                </section>
-            </div>
         </div>
     </section>
 

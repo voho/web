@@ -31,4 +31,6 @@ public class WebsiteConstants {
     public static final String PROFILE_YOUTUBE = "https://www.youtube.com/channel/UCmhcw6dUD3J7dQz17l2KmCg";
     public static final String PROFILE_PAYPAL = "https://www.paypal.me/vojtisek";
     public static final Locale CZECH_LOCALE = new Locale("cs", "CZ");
+    public static final String DEFAULT_LIGHT_COLOR = "9bf1ff";
+    public static final String DEFAULT_DARK_COLOR = "242943";
 }
