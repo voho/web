@@ -356,7 +356,7 @@ ul.copyright li {
 
 #wiki-content em {
     border-radius: 3pt;
-    font-family: monospace;
+    font-family: menlo, monospace;
     font-style: normal;
     font-size: 90%;
     padding: 1pt 5pt;
@@ -439,9 +439,7 @@ ul.copyright li {
 }
 
 .hljs {
-    font-size: 0.8em;
-    padding: 1em;
-    border-radius: 3pt;
+    font-size: 80%;
 }
 
 .image.left, .image.right {
