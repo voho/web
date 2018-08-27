@@ -73,27 +73,19 @@ Jako blockchain - tedy **řetězec bloků** - se označuje jednosměrně zřetě
 
 Obecně je se jako **nonce** v kryptografii označuje (zpravidla náhodné) číslo, které lze použít pouze jednou. V blockchainu se nonce do bloků a tedy i jejich otisků přidává pro zvýšení odolnosti vůči útokům - jeho přítomnost zvyšuje obtížnost podvržení daného bloku. I kdyby útočník vytvořil celý blok včetně transakcí takový, aby jeho otisk odpovídal otisku původního bloku, stále by musel najít takovou hodnotu nonce, aby se hash podvrženého bloku nezměnil. V praxi samozřejmě neexistuje záruka toho, že nějaké číslo bude použito pouze jednou, ale pokud je jeho rozsah dostatečně velký, není to velký problém. K nonce se také často přidává časové razítko (timestamp).
 
-### Operace
-
-#### Ověřování řetězce
-
-!TODO!
-
-#### Přidání platné transakce
-
-!TODO!
-
-#### Útok: vložení neplatné transakce
-
-!TODO!
-
 ### Implementace
 
+- [Bitcoin](https://bitcoin.org/en/)
 - [Ethereum](https://www.ethereum.org/)
+- [XRP](https://ripple.com/xrp/)
+- [Cardano](https://www.cardano.org/en/home/)
 - [Hyperledger](https://www.hyperledger.org/)
+- [Interledger](https://interledger.org/)
 
 ### Reference
 
+- https://medium.com/crypto-currently/lets-build-the-tiniest-blockchain-e70965a248b
+- https://github.com/openblockchains/awesome-blockchains/blob/master/blockchain.rb/blockchain_with_transactions.rb
 - https://distributedlab.com/whitepaper/DLT&exchangeModel.pdf
 - http://searchcio.techtarget.com/feature/Step-by-step-guide-to-a-blockchain-implementation
 - https://bitsonblocks.net/2016/02/29/a-gentle-introduction-to-immutability-of-blockchains/
