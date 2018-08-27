@@ -130,7 +130,7 @@ subgraph cluster0
   "10010110110101" [shape = box3d, style = filled, fillcolor = black, color = white, fontcolor = white];
   "10011110110110" [shape = box3d, style = filled, fillcolor = white, color = black, fontcolor = black];
   "Operátor mutace" [label = "Operátor mutace", color = gray];
-  "10010110110101" -> "Operátor mutace'" -> "10011110110110";
+  "10010110110101" -> "Operátor mutace" -> "10011110110110";
 }
 ```
 
