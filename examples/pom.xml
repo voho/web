@@ -30,6 +30,7 @@
         <module>random</module>
         <module>string</module>
         <module>concurrency</module>
+        <module>sort</module>
     </modules>
 
     <repositories>
