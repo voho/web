@@ -10,7 +10,59 @@ Základní kroky algoritmu:
 - jeden prvek se triviálně pokládá za seřazený
 - zpětné spojení obou seřazených polovin do neklesající posloupnosti
 
-![grafická reprezentace průběhu řazení](http://www.java2novice.com/images/merge_sort.png)
+```dot:digraph
+ratio=0.6;
+node [shape=record];
+edge [dir=none];
+A1 [label="38|27|43|3|9|82|10"];
+A1 -> B1;
+A1 -> B2;
+B1 [label="38|27|43|3"];
+B2 [label="9|82|10"];
+B1 -> C1;
+B1 -> C2;
+B2 -> C3;
+B2 -> C4;
+C1 [label="38|27"];
+C2 [label="43|3"];
+C3 [label="9|82"];
+C4 [label="10"];
+C1 -> D1;
+C1 -> D2;
+C2 -> D3;
+C2 -> D4;
+C3 -> D5;
+C3 -> D6;
+C4 -> D7;
+D1 [label="38"];
+D2 [label="27"];
+D3 [label="43"];
+D4 [label="3"];
+D5 [label="9"];
+D6 [label="82"];
+D7 [label="10"];
+
+D1 -> E1 [color=blue, penwidth=5];
+D2 -> E1 [color=blue, penwidth=5];
+D3 -> E2 [color=blue, penwidth=5];
+D4 -> E2 [color=blue, penwidth=5];
+D5 -> E3 [color=blue, penwidth=5];
+D6 -> E3 [color=blue, penwidth=5];
+D7 -> E4 [color=blue, penwidth=5];
+E1 [label="27|38"];
+E2 [label="3|43"];
+E3 [label="9|82"];
+E4 [label="10"];
+E1 -> F1 [color=blue, penwidth=5];
+E2 -> F1 [color=blue, penwidth=5];
+E3 -> F2 [color=blue, penwidth=5];
+E4 -> F2 [color=blue, penwidth=5];
+F1 [label="3|27|38|43"];
+F2 [label="9|10|82"];
+F1 -> G1 [color=blue, penwidth=5];
+F2 -> G1 [color=blue, penwidth=5];
+G1 [label="3|9|10|27|38|43|82"];
+```
 
 ### Implementace (Java)
 
