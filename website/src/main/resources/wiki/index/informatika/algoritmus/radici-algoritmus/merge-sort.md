@@ -1,8 +1,8 @@
 ## Merge sort (řazení sléváním)
 
-Merge sort (řazení sléváním) je řadící algoritmus, založený na myšlence rekurzivního dělení pole na dvě poloviny a jejich následném spojování (slévání) do neklesající posloupnosti. Popsal jej **John von Neumann** v roce 1945. Merge sort je **přirozený** a **stabilní**.
+Merge sort (řazení sléváním) je řadící algoritmus, založený na myšlence rekurzivního dělení [pole](wiki/datova-struktura-pole) na dvě poloviny a jejich následném spojování (slévání) do neklesající posloupnosti. Popsal jej **John von Neumann** v roce 1945. Merge sort je **přirozený** a **stabilní**.
 
-Mezi výhody tohoto řadícího algorimu patří logaritmická časová složitost € O(n \cdot \log n) €. Nevýhodou je nutnost alokace druhého pomocného pole o stejné velikosti, jako je pole řazené.
+Mezi výhody tohoto řadícího algorimu patří logaritmická [časová složitost](wiki/asymptoticka-slozitost) € O(n \cdot \log n) €. Nevýhodou je nutnost alokace druhého pomocného pole o stejné velikosti, jako je pole řazené.
 
 Základní kroky algoritmu:
 
