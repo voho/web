@@ -15,8 +15,10 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>concurrency</module>
         <module>spring-jdbc-example</module>
         <module>guice-example</module>
+        <module>zip</module>
     </modules>
 
 </project>

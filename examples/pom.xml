@@ -17,18 +17,15 @@
 
     <modules>
         <module>structures</module>
-        <module>bitarray</module>
         <module>graph</module>
         <module>hash</module>
         <module>lz77</module>
         <module>lz78</module>
         <module>lzw</module>
-        <module>zip</module>
         <module>patterns</module>
         <module>libraries</module>
         <module>random</module>
         <module>string</module>
-        <module>concurrency</module>
         <module>sort</module>
     </modules>
 
