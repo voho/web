@@ -18,7 +18,6 @@
     <modules>
         <module>structures</module>
         <module>graph</module>
-        <module>hash</module>
         <module>lz77</module>
         <module>lz78</module>
         <module>lzw</module>

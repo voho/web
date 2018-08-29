@@ -6,7 +6,7 @@
 
     <parent>
         <groupId>cz.voho.examples</groupId>
-        <artifactId>reactor</artifactId>
+        <artifactId>libraries</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
