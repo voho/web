@@ -1,9 +1,5 @@
 package ds.trie;
 
-import ds.trie.internal.CharacterToNodeArrayMap;
-import ds.trie.internal.CharacterToNodeMap;
-import ds.trie.internal.Node;
-
 public class GenericTrie implements Trie {
     private final Node root;
 

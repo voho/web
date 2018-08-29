@@ -1,4 +1,4 @@
-package ds.trie.internal;
+package ds.trie;
 
 public interface CharacterToNodeMap {
     Node get(char keyFragment);

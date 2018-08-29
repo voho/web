@@ -1,4 +1,4 @@
-package ds.trie.internal;
+package ds.trie;
 
 import java.util.Arrays;
 import java.util.Objects;

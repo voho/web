@@ -18,7 +18,6 @@
     <modules>
         <module>structures</module>
         <module>bitarray</module>
-        <module>trie</module>
         <module>graph</module>
         <module>hash</module>
         <module>lz77</module>

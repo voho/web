@@ -1,4 +1,4 @@
-package ds.trie.internal;
+package ds.trie;
 
 public class Node {
     final char keyFragment;

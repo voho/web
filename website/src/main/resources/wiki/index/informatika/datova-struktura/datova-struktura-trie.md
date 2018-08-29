@@ -42,77 +42,29 @@ containsPrefix(*key*)
 
 #### Deklarace uzlu
 
-```java
-private static class Node {
-    private char keyContribution;
-    private Node nextSibling;
-    private Node nextChild;
-}
+```include:java
+ds/trie/Trie.java
 ```
 
-#### Vyhledávací algoritmus
+#### Datová struktura
 
-```java
-public class ValuelessTrie {
-    private final Node root = new Node();
-
-    // ...
-
-    private Optional<Node> findNode(char[] key, boolean createMissingNodes) {
-        Node temp = root;
-        int level = 0;
-
-        while (true) {
-            if (temp.keyContribution == key[level]) {
-                if (level == key.length - 1) {
-                    // FOUND
-                    return Optional.of(temp);
-                } else {
-                    // need to go further: deeper level
-                    if (temp.nextChild == null) {
-                        if (createMissingNodes) {
-                            // need to create child
-                            temp.nextChild = new Node();
-                            temp.nextChild.keyContribution = key[level];
-                        } else {
-                            return Optional.empty();
-                        }
-                    }
-                    level++;
-                    temp = temp.nextChild;
-                }
-            } else {
-                // need to go further: current level
-                if (temp.nextSibling == null) {
-                    if (createMissingNodes) {
-                        // need to create sibling
-                        temp.nextSibling = new Node();
-                        temp.nextSibling.keyContribution = key[level];
-                    } else {
-                        return Optional.empty();
-                    }
-                }
-                temp = temp.nextSibling;
-            }
-        }
-    }
-}
+```include:java
+ds/trie/GenericTrie.java
 ```
 
-#### Vyhledávání prefixu
+Tato implementace umožňuje vnitřní strukturu řešit různým způsobem.
 
-```java
-public boolean containsPrefix(char[] key) {
-    return findNode(key, false).isPresent();
-}
+První řešení využívá [hash tabulku](wiki/datova-struktura-hash-tabulka) a je univerzální co do datových typů, zabírá však mnoho místa v paměti navíc.
+
+```include:java
+ds/trie/CharacterToNodeHashMap.java
 ```
 
-#### Uložení slova
+Druhé řešení je mnohem úspornější, ale funguje pouze pro malá písmena latinky.
+Podobná řešení lze připravit i pro jiné množiny znaků s podobnou kardinalitou ([ASCII](wiki/ascii) a podobně).
 
-```java
-public void add(char[] key) {
-    findNode(key, true);
-}
+```include:java
+ds/trie/CharacterToNodeArrayMap.java
 ```
 
 ### Reference

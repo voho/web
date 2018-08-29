@@ -3,7 +3,6 @@ package ds.trie;
 public interface Trie {
     /**
      * Returns the number of words stored in the trie.
-     *
      * @return number of words in the trie
      */
     default int numWords() {
@@ -12,7 +11,6 @@ public interface Trie {
 
     /**
      * Returns the number of prefixes stored in the trie.
-     *
      * @return number of prefixes in the trie
      */
     default int numPrefixes() {
@@ -21,7 +19,6 @@ public interface Trie {
 
     /**
      * Checks if the trie contains the given key.
-     *
      * @param key key to check
      * @return TRUE if the key is present, FALSE otherwise
      */
@@ -29,7 +26,6 @@ public interface Trie {
 
     /**
      * Checks if the trie contains the given key as prefix.
-     *
      * @param keyPrefix key prefix to check
      * @return TRUE if the key is present as prefix, FALSE otherwise
      */
@@ -41,13 +37,11 @@ public interface Trie {
 
     /**
      * Adds key to the trie.
-     *
      * @param key key to add
      */
     void addWord(char[] key);
 
     // CONVENIENCE METHODS FOR STRINGS
-    // TODO: remove later
 
     default void addWord(final String key) {
         addWord(key.toCharArray());
