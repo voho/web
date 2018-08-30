@@ -1,6 +1,6 @@
 ## Náhodný přístup k souborům
 
-Jak v Javě číst a zapisovat binární soubory po blocích? To se může hodit například při stahování jednoho souboru po částech z více zdrojů. K tomuto účelu je vhodná třída *SeekableByteChannel*, kterou lze vytvořit tovární metodou *Files.newByteChannel*. Její nejdůležitější metody jsou:
+Jak v Javě číst a zapisovat binární soubory po blocích? To se může hodit například při stahování jednoho souboru po částech z více zdrojů. K tomuto účelu je vhodná třída *javadoc:java.nio.channels.SeekableByteChannel*, kterou lze vytvořit tovární metodou *javadoc:java.nio.file.Files::newByteChannel*. Její nejdůležitější metody jsou:
 
 - *position* = přesune kurzor na zadanou pozici v souboru (udává se v bajtech)
 - *read* = naplní buffer bajty přečtenými ze souboru (od aktuální pozice až do rezervované délky bufferu)
