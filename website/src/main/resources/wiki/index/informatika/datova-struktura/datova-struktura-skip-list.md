@@ -107,10 +107,7 @@ Jako pravděpodobnost "pádu" do vyšší úrovně (*fallProbability*) se použ�
 
 Hodnotu lze odstranit na základě jejího klíče. Opět se použije podobný vyhledávací algoritmus jako pro vkládání - pole s nejbližšími předchůdci požadovaného klíče se bude opět hodit.
 
-
 ### Implementace
-
-- https://github.com/voho/examples/tree/master/skiplist
 
 #### Rozhraní skip listu
 
