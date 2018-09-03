@@ -359,7 +359,7 @@ ul.copyright li {
     padding: 1pt 5pt;
 }
 
-#wiki-content table em {
+#wiki-content table em, #wiki-content dd em {
     background-color: #111111;
     color: #ffffff;
 }
@@ -613,24 +613,19 @@ a.logo:hover strong {
     border: 2px solid #eeeeee;
 }
 
-.hljs:hover {
-    border: 2px solid #999999;
-}
-
 #wiki-content dt {
     font-size: 120%;
     font-weight: bold;
     margin-bottom: 1ex;
 }
 
-#wiki-content dt em {
-    background: none transparent;
-    color: #f67b60;
-    padding: 0;
+#wiki-content dd {
+    margin-bottom: 2em;
 }
 
-#wiki-content dd {
-    margin-bottom: 1em;
+dl {
+    margin: 3em auto;
+    width: 95%;
 }
 
 dl dd {
