@@ -12,16 +12,18 @@ public class MutableDirectedGraph<NODE> implements Graph<NODE, MutableDirectedGr
     private final Set<MutableDirectedGraph.DirectedEdge<NODE>> edges = new LinkedHashSet<>();
     private final Table<NODE, NODE, MutableDirectedGraph.DirectedEdge<NODE>> incidence = HashBasedTable.create();
 
-    public void addNode(final NODE node) {
+    public NODE addNode(final NODE node) {
         nodes.add(node);
+        return node;
     }
 
-    public void addEdge(final NODE source, final NODE target) {
+    public MutableDirectedGraph.DirectedEdge<NODE> addEdge(final NODE source, final NODE target) {
         addNode(source);
         addNode(target);
         final DirectedEdge<NODE> newEdge = new DirectedEdge<>(source, target);
         edges.add(newEdge);
         incidence.put(source, target, newEdge);
+        return newEdge;
     }
 
     @Override

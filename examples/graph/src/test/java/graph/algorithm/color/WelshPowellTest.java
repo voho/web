@@ -1,10 +1,10 @@
 package graph.algorithm.color;
 
-import cz.voho.grafo.Graph;
-import cz.voho.grafo.MutableUndirectedGraph;
+import graph.model.MutableDirectedGraph;
 import org.junit.Test;
 
 import java.util.Map;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -15,7 +15,7 @@ import static org.junit.Assert.assertTrue;
 public class WelshPowellTest {
     @Test
     public void testEmptyGraph() {
-        final MutableUndirectedGraph<String, ?> g = Graph.createMutableUndirectedGraph();
+        final MutableDirectedGraph<String> g = new MutableDirectedGraph<>();
 
         final Map<String, Integer> colors = WelshPowell.colorByWelshPowell(g);
         assertTrue(colors.isEmpty());
@@ -23,7 +23,7 @@ public class WelshPowellTest {
 
     @Test
     public void testSingleNodeGraph() {
-        final MutableUndirectedGraph<String, ?> g = Graph.createMutableUndirectedGraph();
+        final MutableDirectedGraph<String> g = new MutableDirectedGraph<>();
         g.addNode("a");
 
         final Map<String, Integer> colors = WelshPowell.colorByWelshPowell(g);
@@ -33,17 +33,17 @@ public class WelshPowellTest {
 
     @Test
     public void testRegularGraph() {
-        final MutableUndirectedGraph<String, Object> g = Graph.createMutableUndirectedGraph();
-        g.addNodes("a", "b", "c", "d", "e", "f", "g");
-        g.addEdge(1, "a", "c");
-        g.addEdge(2, "b", "c");
-        g.addEdge(3, "b", "e");
-        g.addEdge(4, "c", "d");
-        g.addEdge(5, "c", "e");
-        g.addEdge(6, "c", "f");
-        g.addEdge(7, "e", "f");
-        g.addEdge(8, "e", "g");
-        g.addEdge(9, "f", "g");
+        final MutableDirectedGraph<String> g = new MutableDirectedGraph<>();
+        Stream.of("a", "b", "c", "d", "e", "f", "g").forEach(g::addNode);
+        g.addEdge("a", "c");
+        g.addEdge("b", "c");
+        g.addEdge("b", "e");
+        g.addEdge("c", "d");
+        g.addEdge("c", "e");
+        g.addEdge("c", "f");
+        g.addEdge("e", "f");
+        g.addEdge("e", "g");
+        g.addEdge("f", "g");
 
         final Map<String, Integer> colors = WelshPowell.colorByWelshPowell(g);
         assertEquals(7, colors.size());

@@ -1,14 +1,9 @@
 package graph.algorithm.path;
 
-import cz.voho.grafo.Graph;
+import graph.model.Graph;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.function.Function;
+import java.util.*;
+import java.util.function.ToIntFunction;
 
 /**
  * Implementation of Floyd-Warshall`s algorithm.
@@ -16,11 +11,11 @@ import java.util.function.Function;
 public final class FloydWarshall {
     /**
      * Finds all pair`s shortest paths.
-     *
      * @param graph original graph
+     * @param weighter edge weight provider
      * @return output containing the shortest paths between any two of the graph nodes
      */
-    public static <N, E> FloydWarshallOutput calculate(final Graph<N, E, ?> graph, final Function<E, Integer> edgeWeighted) {
+    public static <N, E> FloydWarshallOutput calculate(final Graph<N, E> graph, final ToIntFunction<E> weighter) {
         final List<N> nodes = new ArrayList<>(graph.nodes());
         final FloydWarshallMatrix<Integer, N> matrix = new FloydWarshallMatrix<>(nodes.size());
 
@@ -34,16 +29,13 @@ public final class FloydWarshall {
                     matrix.setMinimumDistance(iX, iY, 0);
                     matrix.setPredecessor(iX, iY, xNode);
                 } else {
-                    final Set<E> edges = graph.edgesIncidentWithNodePair(xNode, yNode);
+                    final E edge = graph.edgeIncidentWithNodes(xNode, yNode);
 
-                    if (edges.size() == 1) {
+                    if (edge != null) {
                         // edge is defined - define distance
-                        final E singleEdge = edges.iterator().next();
-                        final int distance = edgeWeighted.apply(singleEdge);
+                        final int distance = weighter.applyAsInt(edge);
                         matrix.setMinimumDistance(iX, iY, distance);
                         matrix.setPredecessor(iX, iY, xNode);
-                    } else if (edges.size() > 1) {
-                        throw new IllegalArgumentException("Only one edge per node pair is allowed.");
                     }
                 }
             }

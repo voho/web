@@ -1,13 +1,9 @@
 package graph.algorithm.path;
 
-import cz.voho.grafo.Graph;
-import cz.voho.grafo.MutableGraph;
+import graph.model.MutableDirectedGraph;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -24,17 +20,14 @@ public class FloydWarshallTest {
     }
 
     private static FloydWarshallOutput<String> calculate(final String[] nodes, final Object[][] data) {
-        final MutableGraph<String, Integer, ?> g = Graph.createMutableDirectedGraph();
-        g.addNodes(nodes);
-        int i = 0;
+        final MutableDirectedGraph<String> g = new MutableDirectedGraph<>();
+        Arrays.stream(nodes).forEach(g::addNode);
+        final Map<MutableDirectedGraph.DirectedEdge<String>, Integer> weight = new HashMap<>();
         for (final Object[] datum : data) {
-            g.addEdge(i++, (String) datum[0], (String) datum[1]);
+            final MutableDirectedGraph.DirectedEdge<String> edge = g.addEdge((String) datum[0], (String) datum[1]);
+            weight.put(edge, (Integer) datum[2]);
         }
-        final Function<Integer, Integer> w = integer -> {
-            final Object[] row = data[integer];
-            return (Integer) row[2];
-        };
-        return FloydWarshall.calculate(g, w);
+        return FloydWarshall.calculate(g, weight::get);
     }
 
     @Test
