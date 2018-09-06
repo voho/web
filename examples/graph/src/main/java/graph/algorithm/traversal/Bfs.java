@@ -1,14 +1,9 @@
 package graph.algorithm.traversal;
 
 import com.google.common.base.Preconditions;
-import cz.voho.grafo.Graph;
+import graph.model.Graph;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Implementation of breadth-first traversal algorithm.
@@ -16,13 +11,12 @@ import java.util.Set;
 public final class Bfs {
     /**
      * Performs a BFS walk starting from the given node.
-     *
-     * @param graph        graph to walk
+     * @param graph graph to walk
      * @param startingNode node to start walking from (must be in the given graph)
      * @return list of nodes in order they were visited
      */
-    public static <N> List<N> traverseBreadthFirst(final Graph<N, ?, ?> graph, final N startingNode) {
-        Preconditions.checkArgument(graph.hasNode(startingNode));
+    public static <N> List<N> traverseBreadthFirst(final Graph<N, ?> graph, final N startingNode) {
+        Preconditions.checkArgument(graph.nodes().contains(startingNode));
 
         final Set<N> allNodes = graph.nodes();
         final int n = allNodes.size();
@@ -45,7 +39,7 @@ public final class Bfs {
                 closed.add(active);
 
                 // add the node neighbours to the queue
-                graph.nodesDirectlyReachableFromNode(active).forEach(open::add);
+                open.addAll(graph.successors(active));
             }
         }
 

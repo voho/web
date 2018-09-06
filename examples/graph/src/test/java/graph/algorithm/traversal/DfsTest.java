@@ -1,18 +1,18 @@
 package graph.algorithm.traversal;
 
-import cz.voho.grafo.Graph;
-import cz.voho.grafo.MutableDirectedGraph;
+import graph.model.MutableDirectedGraph;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
 
 public class DfsTest {
     @Test
     public void testDfsSingleNode() {
-        final MutableDirectedGraph<String, String> g = Graph.createMutableDirectedGraph();
+        final graph.model.MutableDirectedGraph<String> g = new MutableDirectedGraph<>();
         g.addNode("a");
 
         final List<String> dfs = Dfs.traverseDepthFirst(g, "a");
@@ -21,15 +21,15 @@ public class DfsTest {
 
     @Test
     public void testDfsRegular() {
-        final MutableDirectedGraph<String, String> g = Graph.createMutableDirectedGraph();
-        g.addNodes("a", "b", "c", "d", "e", "f", "g");
-        g.addEdge("a-b", "a", "b");
-        g.addEdge("a-c", "a", "c");
-        g.addEdge("a-e", "a", "e");
-        g.addEdge("b-d", "b", "d");
-        g.addEdge("b-f", "b", "f");
-        g.addEdge("c-g", "c", "g");
-        g.addEdge("e-f", "e", "f");
+        final graph.model.MutableDirectedGraph<String> g = new graph.model.MutableDirectedGraph<>();
+        Stream.of("a", "b", "c", "d", "e", "f", "g").forEach(g::addNode);
+        g.addEdge("a", "b");
+        g.addEdge("a", "c");
+        g.addEdge("a", "e");
+        g.addEdge("b", "d");
+        g.addEdge("b", "f");
+        g.addEdge("c", "g");
+        g.addEdge("e", "f");
 
         final List<String> dfs = Dfs.traverseDepthFirst(g, "a");
         assertEquals(Arrays.asList("a", "e", "f", "c", "g", "b", "d"), dfs);
