@@ -1,11 +1,12 @@
 package graph.algorithm.mst;
 
-import cz.voho.grafo.Graph;
-import cz.voho.grafo.MutableUndirectedGraph;
-import cz.voho.grafo.UndirectedGraph;
+import graph.model.MutableUndirectedGraph;
+import graph.model.UndirectedGraph;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -16,85 +17,88 @@ import static org.junit.Assert.assertTrue;
 public class JarnikPrimTest {
     @Test
     public void testEmpty() {
-        final MutableUndirectedGraph<String, Wedge> g = Graph.createMutableUndirectedGraph();
+        final MutableUndirectedGraph<String> g = new MutableUndirectedGraph<>();
 
-        final UndirectedGraph<String, Wedge> mst = JarnikPrim.compute(g);
+        final UndirectedGraph<String> mst = JarnikPrim.compute(g, (edge) -> 0);
         assertEquals(0, mst.nodes().size());
         assertEquals(0, mst.edges().size());
     }
 
     @Test
     public void testSingleNode() {
-        final MutableUndirectedGraph<String, Wedge> g = Graph.createMutableUndirectedGraph();
+        final MutableUndirectedGraph<String> g = new MutableUndirectedGraph<>();
         g.addNode("a");
 
-        final UndirectedGraph<String, Wedge> mst = JarnikPrim.compute(g);
+        final UndirectedGraph<String> mst = JarnikPrim.compute(g, (edge) -> 0);
         assertEquals(1, mst.nodes().size());
         assertEquals(0, mst.edges().size());
     }
 
     @Test
     public void testSingleEdge() {
-        final MutableUndirectedGraph<String, Wedge> g = Graph.createMutableUndirectedGraph();
+        final Map<UndirectedGraph.Edge<String>, Integer> w = new HashMap<>();
+        final MutableUndirectedGraph<String> g = new MutableUndirectedGraph<>();
         g.addNode("a");
         g.addNode("b");
-        g.addEdge(new Wedge(10), "a", "b");
+        w.put(g.addEdge("a", "b"), 10);
 
-        final UndirectedGraph<String, Wedge> mst = JarnikPrim.compute(g);
+        final UndirectedGraph<String> mst = JarnikPrim.compute(g, w::get);
         assertEquals(2, mst.nodes().size());
         assertEquals(1, mst.edges().size());
-        assertTrue(mst.isDirectlyReachable("a", "b"));
-        assertEquals(10, mst.edges().stream().mapToInt(Wedge::getEdgeWeight).sum());
+        assertTrue(mst.isSuccessor("a", "b"));
+        assertEquals(10, mst.edges().stream().mapToInt(w::get).sum());
     }
 
     @Test
     public void testRegularCase() {
-        final MutableUndirectedGraph<String, Wedge> g = Graph.createMutableUndirectedGraph();
+        final Map<UndirectedGraph.Edge<String>, Integer> w = new HashMap<>();
+        final MutableUndirectedGraph<String> g = new MutableUndirectedGraph<>();
         Arrays.asList("a", "b", "c", "d", "e", "f").forEach(g::addNode);
-        g.addEdge(new Wedge(5), "a", "b");
-        g.addEdge(new Wedge(2), "b", "d");
-        g.addEdge(new Wedge(3), "b", "f");
-        g.addEdge(new Wedge(1), "b", "c");
-        g.addEdge(new Wedge(3), "b", "e");
-        g.addEdge(new Wedge(9), "d", "f");
-        g.addEdge(new Wedge(1), "d", "e");
+        w.put(g.addEdge("a", "b"), 5);
+        w.put(g.addEdge("b", "d"), 2);
+        w.put(g.addEdge("b", "f"), 3);
+        w.put(g.addEdge("b", "c"), 1);
+        w.put(g.addEdge("b", "e"), 3);
+        w.put(g.addEdge("d", "f"), 9);
+        w.put(g.addEdge("d", "e"), 1);
 
-        final UndirectedGraph<String, Wedge> mst = JarnikPrim.compute(g);
+        final UndirectedGraph<String> mst = JarnikPrim.compute(g, w::get);
         assertEquals(6, mst.nodes().size());
         assertEquals(5, mst.edges().size());
-        assertTrue(mst.isDirectlyReachable("a", "b"));
-        assertTrue(mst.isDirectlyReachable("b", "c"));
-        assertTrue(mst.isDirectlyReachable("b", "d"));
-        assertTrue(mst.isDirectlyReachable("b", "f"));
-        assertTrue(mst.isDirectlyReachable("d", "e"));
-        assertEquals(12, mst.edges().stream().mapToInt(Wedge::getEdgeWeight).sum());
+        assertTrue(mst.isSuccessor("a", "b"));
+        assertTrue(mst.isSuccessor("b", "c"));
+        assertTrue(mst.isSuccessor("b", "d"));
+        assertTrue(mst.isSuccessor("b", "f"));
+        assertTrue(mst.isSuccessor("d", "e"));
+        assertEquals(12, mst.edges().stream().mapToInt(w::get).sum());
     }
 
     @Test
     public void testComplexCase() {
-        final MutableUndirectedGraph<String, Wedge> g = Graph.createMutableUndirectedGraph();
+        final Map<UndirectedGraph.Edge<String>, Integer> w = new HashMap<>();
+        final MutableUndirectedGraph<String> g = new MutableUndirectedGraph<>();
         Arrays.asList("a", "b", "c", "d", "e", "f", "g").forEach(g::addNode);
-        g.addEdge(new Wedge(7), "a", "b");
-        g.addEdge(new Wedge(5), "a", "d");
-        g.addEdge(new Wedge(9), "b", "d");
-        g.addEdge(new Wedge(8), "b", "c");
-        g.addEdge(new Wedge(7), "b", "e");
-        g.addEdge(new Wedge(5), "c", "e");
-        g.addEdge(new Wedge(15), "d", "e");
-        g.addEdge(new Wedge(6), "d", "f");
-        g.addEdge(new Wedge(8), "f", "e");
-        g.addEdge(new Wedge(11), "f", "g");
-        g.addEdge(new Wedge(9), "g", "e");
+        w.put(g.addEdge("a", "b"), 7);
+        w.put(g.addEdge("a", "d"), 5);
+        w.put(g.addEdge("b", "d"), 9);
+        w.put(g.addEdge("b", "c"), 8);
+        w.put(g.addEdge("b", "e"), 7);
+        w.put(g.addEdge("c", "e"), 5);
+        w.put(g.addEdge("d", "e"), 15);
+        w.put(g.addEdge("d", "f"), 6);
+        w.put(g.addEdge("f", "e"), 8);
+        w.put(g.addEdge("f", "g"), 11);
+        w.put(g.addEdge("g", "e"), 9);
 
-        final UndirectedGraph<String, Wedge> mst = JarnikPrim.compute(g);
+        final UndirectedGraph<String> mst = JarnikPrim.compute(g, w::get);
         assertEquals(7, mst.nodes().size());
         assertEquals(6, mst.edges().size());
-        assertTrue(mst.isDirectlyReachable("f", "d"));
-        assertTrue(mst.isDirectlyReachable("d", "a"));
-        assertTrue(mst.isDirectlyReachable("a", "b"));
-        assertTrue(mst.isDirectlyReachable("b", "e"));
-        assertTrue(mst.isDirectlyReachable("e", "c"));
-        assertTrue(mst.isDirectlyReachable("e", "g"));
-        assertEquals(39, mst.edges().stream().mapToInt(Wedge::getEdgeWeight).sum());
+        assertTrue(mst.isSuccessor("f", "d"));
+        assertTrue(mst.isSuccessor("d", "a"));
+        assertTrue(mst.isSuccessor("a", "b"));
+        assertTrue(mst.isSuccessor("b", "e"));
+        assertTrue(mst.isSuccessor("e", "c"));
+        assertTrue(mst.isSuccessor("e", "g"));
+        assertEquals(39, mst.edges().stream().mapToInt(w::get).sum());
     }
 }

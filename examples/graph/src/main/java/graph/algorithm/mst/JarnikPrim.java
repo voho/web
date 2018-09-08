@@ -1,13 +1,11 @@
 package graph.algorithm.mst;
 
-import cz.voho.grafo.Graph;
-import cz.voho.grafo.MutableUndirectedGraph;
-import cz.voho.grafo.UndirectedGraph;
-import cz.voho.grafo.UnorderedPair;
-import cz.voho.grafo.WeightedEdge;
+import graph.model.MutableUndirectedGraph;
+import graph.model.UndirectedGraph;
 
 import java.util.Comparator;
 import java.util.Optional;
+import java.util.function.ToIntFunction;
 
 /**
  * Implementation of Jarnik-Prim`s algorithm.
@@ -15,37 +13,34 @@ import java.util.Optional;
 public final class JarnikPrim {
     /**
      * Finds the minimum spanning tree of the given graph.
-     *
-     * @param originalGraph original graph
+     * @param graph original graph
      * @return minimum spanning tree
      */
-    public static <N, E extends WeightedEdge<Integer>> UndirectedGraph<N, E> compute(final UndirectedGraph<N, E> originalGraph) {
-        final MutableUndirectedGraph<N, E> result = Graph.createMutableUndirectedGraph();
+    public static <N> UndirectedGraph<N> compute(final UndirectedGraph<N> graph, final ToIntFunction<UndirectedGraph.Edge<N>> weighter) {
+        final MutableUndirectedGraph<N> result = new MutableUndirectedGraph<>();
 
-        if (!originalGraph.isEmpty()) {
+        if (!graph.nodes().isEmpty()) {
             // chose arbitrary node to start with
 
-            result.addNode(originalGraph.nodes().iterator().next());
+            result.addNode(graph.nodes().iterator().next());
 
             // grow by one edge
 
-            while (result.nodeCount() < originalGraph.nodeCount()) {
+            while (result.nodes().size() < graph.nodes().size()) {
                 // find an edge that connects some node from MST to some non-MST nodes
                 // and has the minimum weight of such edges
 
-                final Optional<E> edgeToAddMaybe = originalGraph
+                final Optional<UndirectedGraph.Edge<N>> edgeToAddMaybe = graph
                         .edges()
                         .stream()
                         .filter(edge -> {
-                            UnorderedPair<N> pair = originalGraph.incidence(edge);
-                            final N eitherNode = pair.getEither();
-                            final N anotherNode = pair.getAnother();
-
-                            boolean p1 = result.hasNode(eitherNode) && !result.hasNode(anotherNode);
-                            boolean p2 = result.hasNode(anotherNode) && !result.hasNode(eitherNode);
+                            final N eitherNode = edge.either();
+                            final N anotherNode = edge.another();
+                            boolean p1 = result.nodes().contains(eitherNode) && !result.nodes().contains(anotherNode);
+                            boolean p2 = result.nodes().contains(anotherNode) && !result.nodes().contains(eitherNode);
                             return p1 || p2;
                         })
-                        .min(Comparator.comparingInt(WeightedEdge::getEdgeWeight));
+                        .min(Comparator.comparingInt(weighter));
 
                 if (!edgeToAddMaybe.isPresent()) {
                     throw new IllegalArgumentException("Graph is not strongly connected.");
@@ -53,20 +48,18 @@ public final class JarnikPrim {
 
                 // merge the edge with the result
 
-                final E edgeToAdd = edgeToAddMaybe.get();
-                final UnorderedPair<N> pair = originalGraph.incidence(edgeToAdd);
-                final N eitherNode = pair.getEither();
-                final N anotherNode = pair.getAnother();
+                final N eitherNode = edgeToAddMaybe.get().either();
+                final N anotherNode = edgeToAddMaybe.get().another();
 
-                if (!result.hasNode(eitherNode)) {
+                if (!result.nodes().contains(eitherNode)) {
                     result.addNode(eitherNode);
                 }
 
-                if (!result.hasNode(anotherNode)) {
+                if (!result.nodes().contains(anotherNode)) {
                     result.addNode(anotherNode);
                 }
 
-                result.addEdge(edgeToAdd, eitherNode, anotherNode);
+                result.addEdge(eitherNode, anotherNode);
             }
         }
 

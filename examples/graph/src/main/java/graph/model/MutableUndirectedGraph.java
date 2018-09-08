@@ -7,7 +7,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-public class MutableDirectedGraph<NODE> implements DirectedGraph<NODE> {
+public class MutableUndirectedGraph<NODE> implements UndirectedGraph<NODE> {
     private final Set<NODE> nodes = new LinkedHashSet<>();
     private final Set<Edge<NODE>> edges = new LinkedHashSet<>();
     private final Table<NODE, NODE, Edge<NODE>> incidence = HashBasedTable.create();
@@ -17,12 +17,13 @@ public class MutableDirectedGraph<NODE> implements DirectedGraph<NODE> {
         return node;
     }
 
-    public Edge<NODE> addEdge(final NODE source, final NODE target) {
-        addNode(source);
-        addNode(target);
-        final Edge<NODE> newEdge = new Edge<>(source, target);
+    public Edge<NODE> addEdge(final NODE either, final NODE another) {
+        addNode(either);
+        addNode(another);
+        final Edge<NODE> newEdge = new Edge<>(either, another);
         edges.add(newEdge);
-        incidence.put(source, target, newEdge);
+        incidence.put(either, another, newEdge);
+        incidence.put(another, either, newEdge);
         return newEdge;
     }
 

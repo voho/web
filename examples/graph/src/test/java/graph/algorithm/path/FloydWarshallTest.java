@@ -1,5 +1,6 @@
 package graph.algorithm.path;
 
+import graph.model.DirectedGraph;
 import graph.model.MutableDirectedGraph;
 import org.junit.Test;
 
@@ -22,9 +23,9 @@ public class FloydWarshallTest {
     private static FloydWarshallOutput<String> calculate(final String[] nodes, final Object[][] data) {
         final MutableDirectedGraph<String> g = new MutableDirectedGraph<>();
         Arrays.stream(nodes).forEach(g::addNode);
-        final Map<MutableDirectedGraph.DirectedEdge<String>, Integer> weight = new HashMap<>();
+        final Map<DirectedGraph.Edge<String>, Integer> weight = new HashMap<>();
         for (final Object[] datum : data) {
-            final MutableDirectedGraph.DirectedEdge<String> edge = g.addEdge((String) datum[0], (String) datum[1]);
+            final DirectedGraph.Edge<String> edge = g.addEdge((String) datum[0], (String) datum[1]);
             weight.put(edge, (Integer) datum[2]);
         }
         return FloydWarshall.calculate(g, weight::get);

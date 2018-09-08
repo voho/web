@@ -29,13 +29,6 @@
         <module>sort</module>
     </modules>
 
-    <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
-
     <build>
         <plugins>
             <plugin>
@@ -62,14 +55,9 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.github.voho</groupId>
-                <artifactId>grafo</artifactId>
-                <version>0.92</version>
-            </dependency>
-            <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>18.0</version>
+                <version>21.0</version>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>

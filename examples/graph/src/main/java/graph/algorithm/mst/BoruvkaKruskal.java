@@ -1,13 +1,10 @@
 package graph.algorithm.mst;
 
-import cz.voho.grafo.Graph;
-import cz.voho.grafo.MutableUndirectedGraph;
-import cz.voho.grafo.UndirectedGraph;
-import cz.voho.grafo.UnorderedPair;
-import cz.voho.grafo.WeightedEdge;
+import graph.model.MutableUndirectedGraph;
+import graph.model.UndirectedGraph;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 
 /**
@@ -16,41 +13,52 @@ import java.util.stream.Collectors;
 public final class BoruvkaKruskal {
     /**
      * Finds the minimum spanning tree of the given graph.
-     *
      * @param graph original graph
      * @return minimum spanning tree
      */
-    public static <N, E extends WeightedEdge<Integer>> UndirectedGraph<N, E> compute(final UndirectedGraph<N, E> graph) {
+    public static <N> UndirectedGraph<N> compute(final UndirectedGraph<N> graph, final ToIntFunction<UndirectedGraph.Edge<N>> weighter) {
         // STEP 1
         // Sort edges by weight (ascending).
 
-        final List<E> sortedEdges = graph
+        final List<UndirectedGraph.Edge<N>> sortedEdges = graph
                 .edges()
                 .stream()
-                .sorted(Comparator.comparingInt(WeightedEdge::getEdgeWeight))
+                .sorted(Comparator.comparingInt(weighter))
                 .collect(Collectors.toList());
 
         // STEP 2
         // Create empty graph with all the nodes of the original graph.
         // But note there are no edges added.
 
-        final MutableUndirectedGraph<N, E> minimumSpanningTree = Graph.createMutableUndirectedGraph();
+        final MutableUndirectedGraph<N> minimumSpanningTree = new MutableUndirectedGraph<>();
         graph.nodes().forEach(minimumSpanningTree::addNode);
 
         // STEP 3
         // Iterate over all sorted edges and add each, unless they cause a cycle. Skip the rest.
+        // Use simple DFS algorithm to find the cycle possibility.
 
         sortedEdges
                 .stream()
-                .filter(edge -> {
-                    UnorderedPair<N> pair = graph.incidence(edge);
-                    return !minimumSpanningTree.isReachable(pair.getEither(), pair.getAnother());
-                })
-                .forEach(edge -> {
-                    final UnorderedPair<N> pair = graph.incidence(edge);
-                    minimumSpanningTree.addEdge(edge, pair.getEither(), pair.getAnother());
-                });
+                .filter(edge -> !isReachable(minimumSpanningTree, edge.either(), edge.another()))
+                .forEach(edge -> minimumSpanningTree.addEdge(edge.either(), edge.another()));
 
         return minimumSpanningTree;
+    }
+
+    private static <N> boolean isReachable(final UndirectedGraph<N> graph, final N either, final N another) {
+        final Stack<N> open = new Stack<>();
+        final Set<N> closed = new HashSet<>();
+        open.push(either);
+        while (!open.isEmpty()) {
+            final N temp = open.pop();
+            if (temp == another) {
+                return true;
+            }
+            if (!closed.contains(temp)) {
+                closed.add(temp);
+                graph.successors(temp).forEach(open::push);
+            }
+        }
+        return false;
     }
 }
