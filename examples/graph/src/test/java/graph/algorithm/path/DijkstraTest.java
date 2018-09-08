@@ -20,6 +20,7 @@ public class DijkstraTest {
         final DijkstraOutput<String> output = Dijkstra.dijkstra(g, "a", edge -> 0);
 
         assertEquals(0, output.getDistance("a"));
+        assertNull(output.getPrevious("a"));
     }
 
     @Test

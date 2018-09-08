@@ -2,10 +2,7 @@ package graph.algorithm.path;
 
 import graph.model.Graph;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.function.ToIntFunction;
 
 public class Dijkstra {
@@ -38,9 +35,10 @@ public class Dijkstra {
             final N u = Collections.min(unprocessed, Comparator.comparing(output::getDistance));
             unprocessed.remove(u);
 
-            for (final N v : graph.successors(u)) {
+            for (final Map.Entry<N, E> entry : graph.successorsWithEdges(u).entrySet()) {
                 // get the edge between nodes (u, v)
-                final E edge = graph.edgeIncidentWithNodes(u, v);
+                final N v = entry.getKey();
+                final E edge = entry.getValue();
                 // compute alternative and evaluate whether it is shorter
                 final int alt = output.getDistance(u) + weighter.applyAsInt(edge);
 
