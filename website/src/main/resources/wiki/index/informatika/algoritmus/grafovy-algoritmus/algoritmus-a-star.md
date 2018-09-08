@@ -190,8 +190,15 @@ Asymptotická složitost algoritmu A-Star silně závisí na použité heuristic
 - **Greedy Search** 
   - všechny hrany mají stejné ohodnocení
   - *cost(x,y)* = C
+  
+### Implementace
+
+```include:java
+AStar.java
+```
 
 ### Reference
 
 - Dr. Jeane Stynes, Artificial Intelligence
+- http://theory.stanford.edu/~amitp/GameProgramming/AStarComparison.html
 - http://www.macs.hw.ac.uk/~alison/ai3notes/subsubsection2_6_2_3_2.html
