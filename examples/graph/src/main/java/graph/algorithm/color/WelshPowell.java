@@ -22,7 +22,7 @@ public final class WelshPowell {
 
         sortedNodesToColor.addAll(allNodes
                 .stream()
-                .sorted(Comparator.<N>comparingInt(node -> graph.neighbours(node).size()).reversed())
+                .sorted(Comparator.<N>comparingInt(node -> graph.adjacent(node).size()).reversed())
                 .collect(Collectors.toList()));
 
         int color = 0;
@@ -40,7 +40,7 @@ public final class WelshPowell {
             sortedNodesToColor
                     .stream()
                     .filter(node -> first != node)
-                    .filter(node -> !graph.isNeighbour(first, node))
+                    .filter(node -> !graph.isAdjacent(first, node))
                     .forEach(thisStepColoredNodes::add);
 
             // color them by the next available color

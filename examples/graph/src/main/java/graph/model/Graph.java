@@ -1,9 +1,10 @@
 package graph.model;
 
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.BiFunction;
-import java.util.stream.Collectors;
 
 public interface Graph<NODE, EDGE> {
     Set<NODE> nodes();
@@ -39,19 +40,41 @@ public interface Graph<NODE, EDGE> {
     }
 
     default Set<NODE> successors(final NODE node) {
-        return nodes().stream().filter(temp -> isSuccessor(node, temp)).collect(Collectors.toCollection(LinkedHashSet::new));
+        return successorsWithEdges(node).keySet();
     }
 
     default Set<NODE> predecessors(final NODE node) {
-        return nodes().stream().filter(temp -> isPredecessor(node, temp)).collect(Collectors.toCollection(LinkedHashSet::new));
+        return predecessorsWithEdges(node).keySet();
     }
 
-    default Set<NODE> neighbours(final NODE node) {
+    default Map<NODE, EDGE> successorsWithEdges(final NODE node) {
+        final Map<NODE, EDGE> result = new LinkedHashMap<>();
+        for (final NODE temp : nodes()) {
+            final EDGE edge = edgeIncidentWithNodes(node, temp);
+            if (edge != null) {
+                result.put(temp, edge);
+            }
+        }
+        return result;
+    }
+
+    default Map<NODE, EDGE> predecessorsWithEdges(final NODE node) {
+        final Map<NODE, EDGE> result = new LinkedHashMap<>();
+        for (final NODE temp : nodes()) {
+            final EDGE edge = edgeIncidentWithNodes(temp, node);
+            if (edge != null) {
+                result.put(temp, edge);
+            }
+        }
+        return result;
+    }
+
+    default Set<NODE> adjacent(final NODE node) {
         final Set<NODE> result = new LinkedHashSet<>();
         for (final NODE temp : nodes()) {
-            final EDGE edge1 = edgeIncidentWithNodes(node, temp);
-            final EDGE edge2 = edgeIncidentWithNodes(temp, node);
-            if (edge1 != null || edge2 != null) {
+            final EDGE outgoingEdge = edgeIncidentWithNodes(node, temp);
+            final EDGE incomingEdge = edgeIncidentWithNodes(temp, node);
+            if (outgoingEdge != null || incomingEdge != null) {
                 result.add(temp);
             }
         }
@@ -66,7 +89,7 @@ public interface Graph<NODE, EDGE> {
         return isSuccessor(node, ref);
     }
 
-    default boolean isNeighbour(final NODE first, final NODE second) {
+    default boolean isAdjacent(final NODE first, final NODE second) {
         return isPredecessor(first, second) || isSuccessor(first, second);
     }
 }
