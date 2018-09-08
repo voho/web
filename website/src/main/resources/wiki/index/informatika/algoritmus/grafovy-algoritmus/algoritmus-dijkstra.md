@@ -2,11 +2,12 @@
 
 ![Edsger Dijkstra (1969)](dijkstra.jpg){.right}
 
-Dijkstrův algoritmus je grafový algoritmus vytvořený nizozemským vědcem **Edsgerem Wybem Dijkstrou** (1930-2002). Slouží k vyhledání **nejkratší cesty** z počátečního uzlu do všech ostatních uzlů **ohodnoceného grafu**. Poradí si však jen s nezáporným ohodnocením hran. Často se používá v **routovacích protokolech**, například v algoritmu OSPF (Open Shortest Path First).
+Dijkstrův algoritmus je grafový algoritmus vytvořený nizozemským vědcem **Edsgerem Wybem Dijkstrou** (1930-2002), který jej navrhl v Amsterdamu po nakupování se svou snoubenkou během dvaceti minut, a to bez tužky a papíru. 
+Slouží k vyhledání **nejkratší cesty** z počátečního uzlu do všech ostatních uzlů **ohodnoceného grafu**. Poradí si však jen s nezáporným ohodnocením hran. Často se používá v **routovacích protokolech**, například v algoritmu OSPF (Open Shortest Path First).
 
 Vstupem algoritmu je nezáporně ohodnocený graf a počáteční uzel, výstupem je datová struktura (například pole nebo tabulka) obsahující délky nejkratších cest z počátečního uzlu do ostatních uzlů.
 
-> What is the shortest way to travel from Rotterdam to Groningen, in general: from given city to given city. It is the algorithm for the shortest path, which I designed in about twenty minutes. One morning I was shopping in Amsterdam with my young fiancée, and tired, we sat down on the café terrace to drink a cup of coffee and I was just thinking about whether I could do this, and I then designed the algorithm for the shortest path. As I said, it was a twenty-minute invention. In fact, it was published in ’59, three years late. The publication is still readable, it is, in fact, quite nice. One of the reasons that it is so nice was that I designed it without pencil and paper. I learned later that one of the advantages of designing without pencil and paper is that you are almost forced to avoid all avoidable complexities. Eventually that algorithm became, to my great amazement, one of the cornerstones of my fame. *Edsger Dijkstra*
+> One morning I was shopping in Amsterdam with my young fiancée, and tired, we sat down on the café terrace to drink a cup of coffee and I was just thinking about whether I could do this, and I then designed the algorithm for the shortest path. As I said, it was a twenty-minute invention. *Edsger Dijkstra*
 
 ### Kroky algoritmu
 
