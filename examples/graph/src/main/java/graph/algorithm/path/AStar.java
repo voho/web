@@ -13,16 +13,48 @@ public class AStar {
      * @param goal goal node
      * @param weighter edge weighter to estimate distance of an edge
      * @param heuristic heuristic to estimate remaining distance from a specific node to goal
-     * @param <N> node type
-     * @param <E> edge type
+     * @param <NODE> node type
+     * @param <EDGE> edge type
      * @return A-Star solution
      */
-    public static <N, E> AStarOutput<N> aStar(final Graph<N, E> graph, final N start, final N goal, final ToIntFunction<E> weighter, final ToIntFunction<N> heuristic) {
-        final AStarOutput<N> output = new AStarOutput<>();
-        final Collection<N> queue = new LinkedList<>();
-        queue.add(start);
+    public static <NODE, EDGE> AStarOutput<NODE> aStar(final Graph<NODE, EDGE> graph, final NODE start, final NODE goal, final ToIntFunction<EDGE> weighter, final ToIntFunction<NODE> heuristic) {
+        final AStarOutput<NODE> output = initializeOutput(graph, start, heuristic);
 
-        for (final N node : graph.nodes()) {
+        final Collection<NODE> unprocessed = new LinkedList<>();
+        unprocessed.add(start);
+
+        while (!unprocessed.isEmpty()) {
+            final NODE current = Collections.min(unprocessed, Comparator.comparingInt(output::getTotalEstimatedDistance));
+            unprocessed.remove(current);
+
+            if (current.equals(goal)) {
+                // we have found the goal node
+                break;
+            }
+
+            for (final Map.Entry<NODE, EDGE> adjacent : graph.successorsWithEdges(current).entrySet()) {
+                final NODE next = adjacent.getKey();
+                final EDGE edgeToNext = adjacent.getValue();
+                final int edgeToNextDistance = weighter.applyAsInt(edgeToNext);
+                final int alternativeDistance = output.getDistanceSoFar(current) + edgeToNextDistance;
+
+                if (alternativeDistance < output.getDistanceSoFar(next)) {
+                    final int newTotalEstimatedDistance = alternativeDistance + heuristic.applyAsInt(next);
+                    output.setDistanceSoFar(next, alternativeDistance);
+                    output.setPrevious(next, current);
+                    output.setTotalEstimatedDistance(next, newTotalEstimatedDistance);
+                    unprocessed.add(next);
+                }
+            }
+        }
+
+        return output;
+    }
+
+    private static <NODE, EDGE> AStarOutput<NODE> initializeOutput(final Graph<NODE, EDGE> graph, final NODE start, final ToIntFunction<NODE> heuristic) {
+        final AStarOutput<NODE> output = new AStarOutput<>();
+
+        for (final NODE node : graph.nodes()) {
             // set previous node in optimal path as unknown
             output.setPrevious(node, null);
             // set distance as unknown (max possible value)
@@ -33,31 +65,6 @@ public class AStar {
         output.setDistanceSoFar(start, 0);
         // total estimated cost from start to goal
         output.setTotalEstimatedDistance(start, heuristic.applyAsInt(start));
-
-        while (!queue.isEmpty()) {
-            final N current = Collections.min(queue, Comparator.comparingInt(output::getTotalEstimatedDistance));
-            queue.remove(current);
-
-            if (current.equals(goal)) {
-                // we have found the goal node
-                break;
-            }
-
-            for (final Map.Entry<N, E> adjacent : graph.successorsWithEdges(current).entrySet()) {
-                final N next = adjacent.getKey();
-                final E edgeToNext = adjacent.getValue();
-                final int edgeToNextDistance = weighter.applyAsInt(edgeToNext);
-                final int alternativeDistance = output.getDistanceSoFar(current) + edgeToNextDistance;
-
-                if (alternativeDistance < output.getDistanceSoFar(next)) {
-                    final int newTotalEstimatedDistance = alternativeDistance + heuristic.applyAsInt(next);
-                    output.setDistanceSoFar(next, alternativeDistance);
-                    output.setPrevious(next, current);
-                    output.setTotalEstimatedDistance(next, newTotalEstimatedDistance);
-                    queue.add(next);
-                }
-            }
-        }
 
         return output;
     }

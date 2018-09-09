@@ -12,20 +12,20 @@ public class AStarOutput<N> {
         this.previous.put(node, previous);
     }
 
-    public N getPrevious(final N node) {
-        return previous.get(node);
-    }
-
     void setDistanceSoFar(final N node, final int distance) {
         this.distanceSoFar.put(node, distance);
     }
 
-    public int getDistanceSoFar(final N node) {
-        return distanceSoFar.get(node);
+    void setTotalEstimatedDistance(final N node, final int distance) {
+        this.totalDistanceEstimated.put(node, distance);
     }
 
-    public void setTotalEstimatedDistance(final N node, final int distance) {
-        this.totalDistanceEstimated.put(node, distance);
+    public N getPrevious(final N node) {
+        return previous.get(node);
+    }
+
+    public int getDistanceSoFar(final N node) {
+        return distanceSoFar.get(node);
     }
 
     public int getTotalEstimatedDistance(final N node) {
