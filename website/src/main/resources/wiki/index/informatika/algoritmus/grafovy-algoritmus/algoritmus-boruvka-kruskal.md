@@ -1,5 +1,7 @@
 ## Algoritmus Borůvka-Kruskal
 
+![Otakar Borůvka](boruvka.png){.right}
+
 Borůvkův/Kruskalův [algoritmus](wiki/algoritmus) slouží k nalezení **minimální kostry** souvislého ohodnoceného [grafu](wiki/graf) a navzájem si jsou natolik podobné, že je lze považovat za jeden algoritmus. Liší se tím, že Borůvkův algoritmus přidává hrany, zatímco Kruskalův uzly. Vstupem obou algoritmů je souvislý ohodnocený graf, výstupem minimální kostra (minimum spanning tree). Oba algoritmy jsou zástupci tzv. **hladových algoritmů** (greedy algorithms).
 
 Borůvkův algoritmus je pojmenovaný po **Otakaru Borůvkovi** (1899-1995), který jej publikoval v roce 1926 ve článku "O jistém problému minimálním". V článku navrhl algoritmus pro návrh efektivní elektrické sítě na Moravě, což je jeden z pěkných příkladů aplikace teorie grafů a vyhledávání minimální kostry v praxi. Druhým nezávislým autorem je americký matematik **Joseph Kruskal**, narozený v roce 1928.
