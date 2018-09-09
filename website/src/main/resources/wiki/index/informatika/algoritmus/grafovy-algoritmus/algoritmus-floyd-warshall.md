@@ -18,31 +18,6 @@ Matice se inicializuje dle následujících pravidel:
 - na hlavní diagonálu se vyplní nuly, protože vzdálenost z uzlu do toho samého uzlu je 0
 - do ostatních buněk se vyplní nekonečno, protože vzdálenost mezi těmito uzly není definována
 
-```java
-final Matrix<Integer, NODE> matrix = new Matrix<>(nodes.size());
-
-for (int iX = 0; iX < matrix.size(); iX++) {
-    for (int iY = 0; iY < matrix.size(); iY++) {
-        final NODE xNode = nodes.get(iX);
-        final NODE yNode = nodes.get(iY);
-
-        if (iX == iY) {
-            // the same node - distance is zero
-            matrix.setMinimumDistance(iX, iY, 0);
-            matrix.setPredecessor(iX, iY, xNode);
-        } else {
-            final Optional<Integer> distance = input.getDistance(xNode, yNode);
-
-            if (distance.isPresent()) {
-                // edge is defined - define distance
-                matrix.setMinimumDistance(iX, iY, distance.get());
-                matrix.setPredecessor(iX, iY, xNode);
-            }
-        }
-    }
-}
-```
-
 #### Výpočet
 
 Výpočet se skládá ze třech vnořených cyklů. V každé iteraci hlavního cyklu se hledá možnost zkrácení cesty mezi všemi dvojicemi uzlů "oklikou" přes jeden uzel vybraný hlavním cyklem. Jsou samozřejmě ignorovány neplatné možnosti, kdy danou zkratkou nelze projít, protože mezi vyhodnocovanými uzly nevede žádná cesta. Pokud je však nalezená "zkratka" výhodnější, záznam v matici se aktualizuje a nalezená zkratka se uloží, aby bylo možné později nejkratší nalezenou cestu zrekonstruovat.
@@ -56,32 +31,15 @@ d->Y [color=forestgreen]
 d [fillcolor=grey]
 ```
 
-```java
-for (int iDetour = 0; iDetour < matrix.size(); iDetour++) {
-    for (int iX = 0; iX < matrix.size(); iX++) {
-        for (int iY = 0; iY < matrix.size(); iY++) {
-            final Optional<Integer> detourPart1 = matrix.get(iX, iDetour);
-            final Optional<Integer> detourPart2 = matrix.get(iDetour, iY);
-
-            if (detourPart1.isPresent() && detourPart2.isPresent()) {
-                final int detourDistance = detourPart1.get() + detourPart2.get();
-                final Optional<Integer> currentDistance = matrix.get(iX, iY);
-
-                if (!currentDistance.isPresent() || detourDistance < currentDistance.get()) {
-                    // the detour is better than what we have so far
-                    final NODE detourNode = nodes.get(iDetour);
-                    matrix.setMinimumDistance(iX, iY, detourDistance);
-                    matrix.setPredecessor(iX, iY, detourNode);
-                }
-            }
-        }
-    }
-}
-```
-
 ### Implementace (Java)
 
-- https://github.com/voho/examples/tree/master/floyd-warshall
+```include:java
+FloydWarshall.java
+```
+
+```include:java
+FloydWarshallMatrix.java
+```
 
 ### Příklad
 
