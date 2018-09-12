@@ -18,6 +18,7 @@ public class UmlCodePreprocessor implements CodeProcessor {
     private final String UML_PREFIX = "@startuml\n\n" +
             "skinparam defaultFontName Arial\n" +
             "skinparam style strictuml\n" +
+            "skinparam padding 3\n" +
             "skinparam noteFontSize 12\n" +
             "skinparam noteBackgroundColor #f6f6f6\n" +
             "skinparam noteFontColor #666666\n" +
