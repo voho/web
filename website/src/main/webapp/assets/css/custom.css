@@ -114,9 +114,8 @@ iframe {
 }
 
 a.logo {
+    font-size: 150%;
     font-weight: bold;
-    letter-spacing: 3pt;
-    text-transform: uppercase;
     opacity: 0.9;
 }
 
