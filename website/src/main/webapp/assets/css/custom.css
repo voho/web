@@ -339,16 +339,16 @@ ul.copyright li {
 }
 
 #wiki-content .figure {
-    text-align: center;
+    text-align: left;
     padding: 2em 1em;
 }
 
 #wiki-content .figure.picture {
-    text-align: center;
+    text-align: left;
 }
 
 #wiki-content .figure.picture p {
-    font-size: 1.2em;
+    font-size: 120%;
 }
 
 #wiki-content em {
