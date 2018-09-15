@@ -30,7 +30,7 @@ public class ImagePreprocessor implements Preprocessor {
         final String sourceUpdated = rp.replace(context.getSource().getMarkdownSource(), matchResult -> {
             final String alt = Escaping.escapeHtml(matchResult.group(1), true);
             final String src = Escaping.escapeHtml(resolveImageSrc(matchResult.group(2)), true);
-            return String.format("<div class='figure picture'><img src='%s' alt='%s' /><p><i class="fa fa-angle-up"></i> %s</p></div>", src, alt, alt);
+            return String.format("<div class='figure picture'><img src='%s' alt='%s' /><p><i class='fa fa-angle-up'></i> %s</p></div>", src, alt, alt);
         });
         context.getSource().setMarkdownSource(sourceUpdated);
     }
