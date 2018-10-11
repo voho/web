@@ -6,7 +6,9 @@ Zatím neexistuje žádná formální definice toho, co přesně pojem **blockch
 - jednotlivé transakce v této databázi jsou uloženy v tzv. **blocích**, které po sobě následují v přesně daném a neměnném pořadí, protože každý blok se odkazuje na blok předchozí
 - obsahuje kryptografický mechanismus prakticky zabraňující změně existujících transakcí nebo vložení neověřených bloků
 - používá kryptografii a digitální podpisy pro autentizaci a autorizaci čtecích a zápisových operací
-- není určen jednoznačný vlastník dat, jedná se tedy často o sdílená data
+- není určen jednoznačný vlastník dat, jedná se tedy o data sdílená mezi účastníky, kteří si nemusí důvěřovat
+
+Formálně jej můžeme definovat takto: blockchain je posloupnost stavů, ve které každý stav (kromě počátečního) obsahuje jednoznačný odkaz na stav předchozí a všechny údaje potřebné k tomu, aby bylo možné dokázat, že přechod z minulého stavu do současného byl proveden platně podle pravidel daného systému.
 
 ### Potenciální využití
 
@@ -84,6 +86,8 @@ Obecně je se jako **nonce** v kryptografii označuje (zpravidla náhodné) čí
 
 ### Reference
 
+- https://www.distributedagreement.com/2018/09/24/what-is-a-blockchain/
+- https://blogs.sap.com/2018/03/06/blockchain-in-a-nutshell/
 - https://medium.com/crypto-currently/lets-build-the-tiniest-blockchain-e70965a248b
 - https://github.com/openblockchains/awesome-blockchains/blob/master/blockchain.rb/blockchain_with_transactions.rb
 - https://distributedlab.com/whitepaper/DLT&exchangeModel.pdf
