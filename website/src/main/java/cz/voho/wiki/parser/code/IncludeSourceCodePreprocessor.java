@@ -12,6 +12,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -25,7 +27,15 @@ public class IncludeSourceCodePreprocessor implements CodeProcessor {
     private static final String TRAVIS_BUILD_URL = "https://travis-ci.org/voho/web";
 
     private static final String INCLUDE_PREFIX = "include:";
-    private static final String EXAMPLES_ZIP_LOCATION = System.getProperty("CATALINA_HOME", ".") + "/examples.zip";
+
+    private static final List<Path> EXAMPLES_ZIP_LOOKUP_LOCATIONS = Arrays.asList(
+            Paths.get("examples.zip"),
+            Paths.get("ROOT/examples.zip"),
+            Paths.get("webapps/ROOT/examples.zip"),
+            Paths.get(System.getProperty("CATALINA_HOME", "."), "examples.zip"),
+            Paths.get("/var/lib/tomcat8/webapps/ROOT/examples.zip"),
+            Paths.get("../examples/target/examples.zip")
+    );
 
     @Override
     public boolean handle(final HtmlWriter html, final String codeLang, final String codeSource) {
@@ -108,22 +118,13 @@ public class IncludeSourceCodePreprocessor implements CodeProcessor {
     }
 
     private Path findZip() {
-        LOG.info("Finding the examples ZIP.");
-        LOG.info("Current directory: {}", Paths.get(".").toAbsolutePath());
+        for (final Path path : EXAMPLES_ZIP_LOOKUP_LOCATIONS) {
+            LOG.info("Trying to locate ZIP file: {}", path.toAbsolutePath());
 
-        final Path path = Paths.get(EXAMPLES_ZIP_LOCATION);
-        LOG.info("Trying to locate ZIP file: {}", path.toAbsolutePath());
-
-        if (Files.exists(path)) {
-            return path;
-        }
-
-        // fallback (local development)
-        final Path fallbackPath = Paths.get("../examples/target/examples.zip");
-        LOG.info("Fallback to locate ZIP file: {}", path.toAbsolutePath());
-
-        if (Files.exists(fallbackPath)) {
-            return fallbackPath;
+            if (Files.exists(path)) {
+                LOG.info("ZIP file found: {}", path);
+                return path;
+            }
         }
 
         LOG.error("ZIP file was not found.");
