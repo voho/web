@@ -4,8 +4,8 @@ phases:
   post_build:
     commands:
     - mvn package
+    - mv examples/target/examples.zip website/target/ROOT/
 artifacts:
   files:
-    - examples/target/examples.zip
-    - website/target/ROOT.war
-  discard-paths: yes
+  - '**/*'
+  base-directory: 'website/target/ROOT'
