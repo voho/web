@@ -3,6 +3,8 @@ package cz.voho.wiki.parser.code;
 import com.google.common.io.CharStreams;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,6 +17,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 public class IncludeSourceCodePreprocessor implements CodeProcessor {
+    private static final Logger LOG = LoggerFactory.getLogger(IncludeSourceCodePreprocessor.class);
+
     private static final String GITHUB_PREFIX = "https://github.com/voho/web/blob/master/";
     private static final String CODECOV_PREFIX = "https://codecov.io/gh/voho/web/src/master/";
     private static final String TRAVIS_ICON_URL = "https://travis-ci.org/voho/web.svg?branch=master";
@@ -104,14 +108,26 @@ public class IncludeSourceCodePreprocessor implements CodeProcessor {
     }
 
     private Path findZip() {
+        LOG.info("Finding the examples ZIP.");
+        LOG.info("Current directory: {}", Paths.get(".").toAbsolutePath());
+
         final Path path = Paths.get(EXAMPLES_ZIP_LOCATION);
+        LOG.info("Trying to locate ZIP file: {}", path.toAbsolutePath());
 
         if (Files.exists(path)) {
             return path;
         }
 
         // fallback (local development)
-        return Paths.get("../examples/target/examples.zip");
+        final Path fallbackPath = Paths.get("../examples/target/examples.zip");
+        LOG.info("Fallback to locate ZIP file: {}", path.toAbsolutePath());
+
+        if (Files.exists(fallbackPath)) {
+            return fallbackPath;
+        }
+
+        LOG.error("ZIP file was not found.");
+        throw new IllegalStateException("ZIP file with examples was not found :(");
     }
 
     private String extractZipEntry(final ZipFile zipFile, final ZipEntry zipEntry) {
