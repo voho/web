@@ -25,7 +25,7 @@ public class IncludeSourceCodePreprocessor implements CodeProcessor {
     private static final String TRAVIS_BUILD_URL = "https://travis-ci.org/voho/web";
 
     private static final String INCLUDE_PREFIX = "include:";
-    private static final String EXAMPLES_ZIP_LOCATION = "examples.zip";
+    private static final String EXAMPLES_ZIP_LOCATION = System.getProperty("CATALINA_HOME", ".") + "/examples.zip";
 
     @Override
     public boolean handle(final HtmlWriter html, final String codeLang, final String codeSource) {
