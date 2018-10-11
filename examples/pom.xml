@@ -22,6 +22,7 @@
         <module>lz77</module>
         <module>lz78</module>
         <module>lzw</module>
+        <module>math</module>
         <module>patterns</module>
         <module>libraries</module>
         <module>random</module>
