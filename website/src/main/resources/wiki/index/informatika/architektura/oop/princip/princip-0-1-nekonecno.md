@@ -2,7 +2,7 @@
 
 > Jediná smysluplná čísla jsou nula, jedna a nekonečno. *B. MacLennan*
 
-Pravidlo Nula-Jedna-Nekonečno (zero-one-infinity rule) je doporučení pro objektový návrh, které hovoří o počtu entit ve vztahu. Ve většině situací dává smysl odlišit "něco" (*1*) od "ničeho" (*0*) a od "libovolného počtu něčeho" (*nekonečno*). Proto nemá smysl se při návrhu vazeb mezi objekty omezovat nějakými jinými čísly.
+Pravidlo Nula-Jedna-Nekonečno (zero-one-infinity rule) je doporučení pro objektový návrh, které hovoří o počtu entit ve vztahu. Ve většině situací dává smysl pouze odlišit "něco" (*1*) od "ničeho" (*0*) a od "libovolného počtu něčeho" (*nekonečno*). Výjimkou však mohou být různé souřadnice, kde je počet dimenzí jasně daný a neměnný.
 
 ### Reference
 
