@@ -12,6 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class Instagram {
+    // TODO can also use https://rsshub.app/instagram/user/vohocz later
     private static final String INSTAGRAM_URI_FORMAT = "https://api.instagram.com/v1/users/self/media/recent?access_token=%s&count=%d";
 
     private final HttpClient httpClient;
