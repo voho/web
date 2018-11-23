@@ -40,6 +40,19 @@ Proto zde žádného zlepšení oproti spojovému seznamu nedocílíme.
 Aby byl binární strom při vyhledávání vždy efektivní, je nutné se o něj během změn starat a jeho podstromy **vyvažovat**. 
 Algoritmy pro vyvažování stromu existují různé, ale zde se jimi zabývat nebudeme. 
 
+### Průchod binárním stromem
+
+Kromě klasických metod pro průchod grafem (např. [DFS](wiki/algoritmus-dfs), [BFS](wiki/algoritmus-bfs)) existují i speciální metody průchodu stromem binárním:
+
+Pre-Order
+: kořen, levý podstrom, pravý podstrom: `preorder(G) = {G; preorder(G.left); preorder(G.right);}`
+
+In-Order
+: levý podstrom, kořen, pravý podstrom: `inorder(G) = {inorder(G.left); G; inorder(G.right);}`
+
+Post-Order
+: levý podstrom, pravý podstrom, kořen: `postorder(G) = {postorder(G.left); postorder(G.right); G;}`
+
 ### Asymptotická složitost
 
 | Operace | Typický případ | Nejhorší případ 
