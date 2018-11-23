@@ -1,6 +1,6 @@
 ## Algoritmus Karp-Rabin
 
-Algoritmus Karp-Rabin pro vyhledávání řetězců je založený na porovnávání **otisků** ([hashů](wiki/hash)) dvou řetězců: otisku řetězce hledaného a otisku části řetězce prohledávaného.
+Algoritmus Karp-Rabin pro vyhledávání řetězců je založený na porovnávání **otisků** ([hashů](wiki/java-hash)) dvou řetězců: otisku řetězce hledaného a otisku části řetězce prohledávaného.
 Tento algoritmus je v praxi efektivnější než triviální algoritmus založený na porovnávání jednotlivých znaků za předpokladu, že výpočet otisku probíhá v konstantním čase, a to nezávisle na délce hledaného řetězce.
 Algoritmus pro výpočet otisku je tedy nutné vybírat tak, aby otisk byl schopný přepočítat v konstantním čase při každém přesunu vyhledávané části (tzv. rolling hash).
 
@@ -25,7 +25,7 @@ Otisky se neshodují (€8 \neq 4€), pokračujeme tedy dál.
 
 Další tři vstupní znaky výřezu, které musíme vyhodnotit, jsou znaky `ABC`. 
 Je to druhý, třetí a čtvrtý znak prohledávaného řetězce.
-Každý posun výřezu totiž způsobí, že první znak z výřezu zmizí a konec výřezu se dostane znak nový.
+Každý posun výřezu způsobí, že první znak z výřezu zmizí a na konec výřezu se dostane znak nový.
 
 Další otisk můžeme spočítat buď klasickým způsobem (€1+2+3=6€) nebo využít předchozího výsledku a ten přepočítat odečtením prvního znaku `A` a přičtením následujícího znaku `C`.
 Obecně je tento způsob rychlejší, a to především v případě, kdy je vyhledávaný řetězec dlouhý.
