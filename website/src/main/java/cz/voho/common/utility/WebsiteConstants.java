@@ -22,7 +22,7 @@ public class WebsiteConstants {
     public static final String PROFILE_GITHUB = "https://github.com/voho";
     public static final String PROFILE_TWITTER = "http://twitter.com/vohooo";
     public static final String PROFILE_INSTAGRAM = "https://www.instagram.com/vohocz/";
-    public static final String PROFILE_FLICKR = "https://www.flickr.com/photos/vohocz/";
+    public static final String PROFILE_FLICKR = "https://www.dropbox.com/sh/yjlrw3845e0cu8y/AADJehOxQz8bdbK9LxcIXmpqa?dl=0";
     public static final String PROFILE_SOUNDCLOUD = "http://soundcloud.com/voho";
     public static final String PROFILE_ITUNES = "https://itunes.apple.com/us/artist/voho/id1213510083";
     public static final String PROFILE_AMAZON = "https://www.amazon.com/s/ref=ntt_srch_drd_B00OHRU6TC?ie=UTF8&amp;field-keywords=Vojtech%20Hordejcuk&amp;index=digital-music&amp;search-type=ss";
