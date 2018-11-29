@@ -6,24 +6,23 @@ public class RouletteWheelSelection {
      * Every integer n is selected with a probability that corresponds to its weight.
      * The weight of integer n is stored in as weights[n].
      * The weights can be an arbitrary numbers.
-     *
      * @param weights array of weights for each number (index = number)
-     * @return
+     * @return random index or -1 if the input is empty
      */
     public static int randomWeightedInteger(final double[] weights) {
         double rouletteSize = 0;
 
-        for (int i = 0; i < weights.length; i++) {
-            rouletteSize += weights[i];
+        for (final double weight : weights) {
+            rouletteSize += weight;
         }
 
         final double randomRoulettePosition = Math.random() * rouletteSize;
-        double roulettePosition = 0;
+        double currentRoulettePosition = 0;
 
         for (int i = 0; i < weights.length; i++) {
-            roulettePosition += weights[i];
+            currentRoulettePosition += weights[i];
 
-            if (roulettePosition >= randomRoulettePosition) {
+            if (currentRoulettePosition >= randomRoulettePosition) {
                 return i;
             }
         }

@@ -53,10 +53,16 @@ Druhou výhodou tabulky je, že váhy nyní nemusí být celočíselné. Podobn�
 Nyní však musíme vygenerovat náhodné číslo v rozsahu *0* (včetně) až *1,8*.
 Výběr probíhá stejně - opět najdeme odpovídající rozsah a vrátíme prvek, který do něj patří (např. pro náhodné číslo 0,2442 vrátíme prvek *A*).
 
-Jednoduchá implementace této techniky v [jazyce Java](wiki/java):
+Jednoduchá implementace této techniky v [jazyce Java](wiki/java) se linární asymptotickou složitostí €O(n)€:
 
 ```include:java
 random/RouletteWheelSelection.java
+```
+
+Algoritmus lze vylepšit až na logaritmickou složitost €O(\log(n))€ použitím binárního vyhledávání:
+
+```include:java
+random/RouletteWheelSelectionWithBinarySearch.java
 ```
 
 ### Reference
