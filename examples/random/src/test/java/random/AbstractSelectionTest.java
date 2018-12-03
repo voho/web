@@ -15,6 +15,11 @@ public abstract class AbstractSelectionTest {
         test(new double[]{10.0, 20.0, 1.0});
     }
 
+    @Test
+    public void testNonZeroSmallWeights() {
+        test(new double[]{0.1, 0.3, 0.6});
+    }
+
     protected abstract int randomIndex(double[] weights);
 
     private void test(final double[] weights) {
