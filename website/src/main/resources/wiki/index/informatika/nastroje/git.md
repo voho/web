@@ -141,14 +141,27 @@ git remote remove NAME
 K odeslání lokálních změn do vzdáleného repositáře slouží příkaz *push*.
 
 ```bash
-// odešle větev "master" do vzdáleného repositáře "origin" a vzdálenévětve "master"
+# odešle místní větev "master" do vzdáleného repositáře "origin" a stejnojmenné vzdálené větve "master"
 git push origin master
 
-// odešle větev "master" do vzdáleného repositáře "origin" a vzdálené větve "ticket154"
+# odešle místní větev "master" do vzdáleného repositáře "origin" a vzdálené větve "ticket154"
 git push origin master:ticket154
 
-// natvrdo přepíše celou vzdálenou větev "master" lokální větví "master"
+# přepíše celou vzdálenou větev "master" lokální větví "master"
 git push origin master -f
+
+# odešle pouze jeden commit s hashem "hash123" do vzdálené větve "master"
+git push origin hash123:master
+```
+
+### Jiné užitečné příkazy
+
+```bash
+# historie (krátký hash + zpráva z commitu)
+git log --pretty=format:"%h %s" --graph
+
+# zobrazení místní historie referencí (zde můžete najít např. hash "ztraceného" commitu)
+git reflog
 ```
 
 #### Tipy a triky pro commit message
@@ -158,6 +171,7 @@ git push origin master -f
 - zprávy v commitu by měly všechny být v jednom jazyce (ideálně v angličtině)
 - mezi příklady nepříliš vhodných zpráv patří příliš obecné termíny, jako jsou "změny", "refactoring", "čištění", "dolaďování", apod.
 - do zprávy se nepíšou informace, které lze snadno zjistit z logu - například názvy změněných souborů, jméno člověka provádějícího změny, atd.
+- někteří lidé preferují použití rozkazujícího způsobu
 
 ### Způsob práce
 
@@ -178,10 +192,10 @@ git remote add upstream URI
 Přepnutí do větve **develop**:
 
 ```bash
-// pokud neexistuje
+# pokud větev neexistuje
 git checkout -b develop
 
-// pokud existuje
+# pokud větev již existuje
 git checkout develop
 ```
 
@@ -203,7 +217,7 @@ Propagace lokálních úpravy zpět do vzdáleného repositáře:
 git push origin develop
 ```
 
-Pokud byla změněna lokální historie commitů (např. interaktivní rebase),  je nutné přidat parametr *-f* (ale pozor, tato operace může vést k velkým problémům, pokud nevíte, co děláte):
+Pokud byla změněna lokální historie commitů (např. interaktivní rebase), je nutné přidat parametr *-f* (ale pozor, tato operace může vést k velkým problémům, pokud nevíte, co děláte):
 
 ```bash
 git push origin develop -f
