@@ -123,7 +123,9 @@ class AcousticObserver implements Observer {
 }
 ```
 
-Nyní vytvoříme pozorovaný objekt, který bude udržovat seznam zaregistrovaných pozorovatelů a umožní 
+Nyní vytvoříme pozorovaný objekt, který bude udržovat seznam zaregistrovaných pozorovatelů a umožní uživatelům snadné odesílání událostí.
+Pozorovatele je doporučeno volat v deterministickém pořadí.
+Typicky se setkáme s tím, že budou pozorovatelské objekty voláni v tom pořadí, v jakém byly jako pozorovatelé zaregistrovány.
 
 ```java
 class Observable {
