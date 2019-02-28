@@ -27,121 +27,26 @@ table:h->pop
 
 ### Implementace
 
+#### Rozhraní
+
+```include:java
+Stack.java
+```
+
 #### Pomocí spojového seznamu
 
 Implementace využívající [spojový seznam](wiki/datova-struktura-seznam) má teoreticky neomezenou kapacitu, ale prvky zabírají více paměti, než by mohly (ke každému prvku totiž náleží ukazatel na prvek následující).
 
-```java
-/**
- * Stack implemented using linked list.
- *
- * @author Vojtěch Hordějčuk
- */
-public class MyLinkedStack<DATA> {
-    private static class Node<DATA> {
-        private DATA innerValue;
-        private Node<DATA> next;
-    }
-
-    private Node<DATA> top;
-
-    /**
-     * Adds an element on the top of the stack.
-     *
-     * @param data data to push
-     */
-    public void push(final DATA data) {
-        final Node<DATA> newTop = new Node<DATA>();
-        newTop.innerValue = data;
-        newTop.next = top;
-        top = newTop;
-    }
-
-    /**
-     * Pops an element from the stack top.
-     * Throws exception if no element is present.
-     *
-     * @return popped element (former stack top)
-     */
-    public DATA pop() {
-        if (top != null) {
-            final DATA topValue = top.innerValue;
-            top = top.next;
-            return topValue;
-        } else {
-            throw new IllegalStateException("Stack underflow.");
-        }
-    }
-
-    /**
-     * Checks if the stack is empty.
-     *
-     * @return TRUE if the stack is empty, FALSE otherwise
-     */
-    public boolean isEmpty() {
-        return top == null;
-    }
-}
+```include:java
+LinkedStack.java
 ```
 
 #### Pomocí pole
 
-```java
-/**
- * Array based stack with maximum capacity.
- *
- * @author Vojtěch Hordějčuk
- */
-public class MyArrayStack<DATA> {
-    private final DATA[] storage;
-    private int top;
+Implementace využívající [pole](wiki/datova-struktura-pole) má kapacitu omezenou shora velikostí pole.
 
-    /**
-     * Creates a new instance.
-     *
-     * @param capacity stack capacity (maximum number of elements to store)
-     */
-    public MyArrayStack(final int capacity) {
-        this.storage = (DATA[]) new Object[capacity];
-        this.top = -1;
-    }
-
-    /**
-     * Adds an element on the top of the stack.
-     *
-     * @param data data to push
-     */
-    public void push(final DATA data) {
-        if (top == storage.length - 1) {
-            throw new IllegalStateException("Stack overflow.");
-        }
-
-        storage[++top] = data;
-    }
-
-    /**
-     * Pops an element from the stack top.
-     * Throws exception if no element is present.
-     *
-     * @return popped element (former stack top)
-     */
-    public DATA pop() {
-        if (top == -1) {
-            throw new IllegalStateException("Stack underflow.");
-        }
-
-        return storage[top--];
-    }
-
-    /**
-     * Checks if the stack is empty.
-     *
-     * @return TRUE if the stack is empty, FALSE otherwise
-     */
-    public boolean isEmpty() {
-        return top == -1;
-    }
-}
+```include:java
+ArrayStack.java
 ```
 
 ### Reference
