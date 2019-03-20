@@ -14,7 +14,7 @@ public class SortTest {
     private static final int RANDOM_MIN = -100;
     private static final int RANDOM_MAX = 100;
     private static final int RANDOM_MIN_LENGTH = 1;
-    private static final int RANDOM_MAX_LENGTH = 50;
+    private static final int RANDOM_MAX_LENGTH = 1000;
 
     private static final List<Consumer<Comparable[]>> ALGORITHMS = Arrays.asList(
             BubbleSort::bubbleSort,
@@ -23,6 +23,7 @@ public class SortTest {
             QuickSort::quickSort,
             MergeSort::mergeSort,
             GnomeSort::gnomeSort,
+            input -> BitonicSort.bitonicSort(input, true),
             input -> HeapSort.heapSort(input, true)
     );
 
