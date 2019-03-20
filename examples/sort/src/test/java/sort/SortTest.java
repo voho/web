@@ -22,6 +22,7 @@ public class SortTest {
             SelectionSort::selectionSort,
             QuickSort::quickSort,
             MergeSort::mergeSort,
+            GnomeSort::gnomeSort,
             input -> HeapSort.heapSort(input, true)
     );
 
