@@ -21,16 +21,16 @@ GnomeSort.java
 
 | Pole | Pozice trpaslíka | Operace
 |---|---|---
-| *5* 3 2 4 | 0 | počátek pole - posun vpřed
-| **5, 3**, 2, 4 | 1 | špatné pořadí - prohodit, posun vzad
-| *3* 5 2 4 | 0 | počátek pole - posun vpřed
-| **3 5** 2 4 | 1 | správné pořadí, posun vpřed
-| 3 **5 2** 4 | 2 | špatné pořadí - prohodit, posun vzad
-| **3 2** 5 4 | 1 | špatné pořadí - prohodit, posun vzad
-| *2* 3 5 4 | 0 | počátek pole - posun vpřed
-| **2 3** 5 4 | 1 | správné pořadí, posun vpřed
-| 2 **3 5** 4 | 2 | správné pořadí, posun vpřed
-| 2 3 **5 4** | 3 | špatné pořadí - prohodit, posun vzad
-| 2 **3 4** 5 | 2 | správné pořadí, posun vpřed
-| 2 3 **4 5** | 3 | správné pořadí, posun vpřed
-| 2 3 4 *5* | 4 | konec pole - řazení dokončeno
+| **🤠 5** 3 2 4 | 0 | počátek pole - posun vpřed
+| **5 🤠 3**, 2, 4 | 1 | špatné pořadí - prohodit, posun vzad
+| **🤠 3** 5 2 4 | 0 | počátek pole - posun vpřed
+| **3 🤠 5** 2 4 | 1 | správné pořadí, posun vpřed
+| 3 **5 🤠 2** 4 | 2 | špatné pořadí - prohodit, posun vzad
+| **3 🤠 2** 5 4 | 1 | špatné pořadí - prohodit, posun vzad
+| **🤠 2** 3 5 4 | 0 | počátek pole - posun vpřed
+| **2 🤠 3** 5 4 | 1 | správné pořadí, posun vpřed
+| 2 **3 🤠 5** 4 | 2 | správné pořadí, posun vpřed
+| 2 3 **5 🤠 4** | 3 | špatné pořadí - prohodit, posun vzad
+| 2 **3 🤠 4** 5 | 2 | správné pořadí, posun vpřed
+| 2 3 **4 🤠 5** | 3 | správné pořadí, posun vpřed
+| 2 3 4 **5 🤠** | 4 | konec pole - řazení dokončeno
