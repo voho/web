@@ -36,7 +36,13 @@ jmeno = "Vojta"
 # formátování
 zprava = f"Já jsem {jmeno}."
 zprava = "Dobrý den, jmenuji se {}.".format(jmeno)
+
+# logická hodnota (boolean)
+ano = True
+ne = False
 ```
+
+Získat typ proměnné lze funkcí `type(a)`. Převádět proměnné mezi jednotlivými datovými typy (kde to dává smysl) lze klíčovými slovy `int()`, `float()`, `str()`, `bool()`.
 
 #### Složené datové typy
 
