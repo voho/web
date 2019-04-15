@@ -2,11 +2,10 @@
 
 ![Guido van Rossum (2006)](van_rossum.png){.right}
 
-Python je interpretovaný programovací jazyk zaměřený na čitelnost výsledného kódu.
-Například pro oddělování syntaktických celků se místo tradičních závorek používá odsazení a jazyk je velmi expresivní, s množstvím syntaktických zkratek.
+Python je interpretovaný programovací jazyk zaměřený na čitelnost výsledného kódu - například pro oddělování syntaktických celků místo tradičních závorek používá odsazení. Jazyk je všeobecně použitelný a velmi expresivní, s množstvím syntaktických zkratek. V současné době se často využívá při zpracování dat a v oboru strojového učení.
 
 Jazyk Python vytvořil *Guido van Rossum* začátkem devadesátých let 20. století. 
-Autor od komunity obdržel titul "benevolentní doživotní diktátor" (Benevolent Dictator For Life), což znamená, že se dále o rozvoj jazyka stará a rozhoduje o jeho dalším osudu.
+Autor od komunity obdržel titul "benevolentní doživotní diktátor" (Benevolent Dictator For Life), což v praxi znamená, že se dále o rozvoj jazyka stará a rozhoduje o jeho dalším osudu.
 
 > Readability is often enhanced by reducing unnecessary variability. When possible, there's a single, obvious way to code a particular construct. This reduces the number of choices facing the programmer who is writing the code, and increases the chance that will appear familiar to a second programmer reading it. Yet another contribution to Python's readability is the choice to use punctuation mostly in a conservative, conventional manner. Most operator symbols are familiar to anyone with even a vague recollection of high school math, and no new meanings have to be learned for comic strip curse characters like @&$!. *Guido van Rossum*
 
@@ -27,7 +26,16 @@ Víceřádkový komentář.
 #### Primitivní datové typy
 
 ```python
-# TODO
+# číslo
+odpoved = 42
+pi = 3.14
+
+# řetězec
+jmeno = "Vojta"
+
+# formátování
+zprava = f"Já jsem {jmeno}."
+zprava = "Dobrý den, jmenuji se {}.".format(jmeno)
 ```
 
 #### Složené datové typy
@@ -51,9 +59,6 @@ tuple = (1, 2, 3)
 
 tuple[0]
 # = 1
-
-tuple[0] = 8
-# -> chyba TypeError
 
 a, b, c = (1, 2, 3)
 # a = 1, b = 2, b = 3
@@ -102,6 +107,8 @@ else:
     # hodnota je nula
 ```
 
+Jazyk Python nemá konstrukci *switch. Místo ní musíte použít řetězec podmínek *if*.
+
 #### Cyklus FOR
 
 ```python
@@ -126,12 +133,6 @@ while x < 4:
 # TODO
 ```
 
-### Funkce
-
-```python
-# TODO
-```
-
 ### Dekorátory
 
 ```python
@@ -140,13 +141,21 @@ while x < 4:
 
 ### Modularizace
 
-#### Moduly
+### Funkce
+
+```python
+# jednoduchá funkce
+def sum_numbers(a, b):
+    return a + b
+```
+
+#### Třídy
 
 ```python
 # TODO
 ```
 
-#### Třídy
+#### Moduly
 
 ```python
 # TODO
