@@ -195,7 +195,7 @@ mvn dependency:analyze
 
 Plugin JAX-WS se používá pro vytváření klientů webových služeb a generování souvisejícího zdrojového kódu dle souboru WSDL. Nejprve je třeba přidat závislost na Java EE web API:
 
-```java
+```xml
 <dependencies>
   <dependency>
     <groupId>javax</groupId>
