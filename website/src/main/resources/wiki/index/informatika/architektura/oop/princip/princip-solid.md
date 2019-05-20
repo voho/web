@@ -12,6 +12,8 @@ SOLID (single responsibility, open-closed, Liskov substitution, interface segreg
 | **I** | Interface segregation principle | Používat malá a úzce zaměřená rozhraní.
 | **D** | Dependency inversion principle | Závislost na abstrakcích, nikoliv na implementacích.
 
+![meme](meme_SOLID.jpg)
+
 ### Podrobnější popis
 
 #### Single responsibility principle
@@ -60,7 +62,6 @@ class Printer {
 }
 ```
 
-
 ```java
 class Reader {
     public void read(Book book) {
@@ -68,6 +69,8 @@ class Reader {
     }
 }
 ```
+
+![meme](meme_SingleResponsibilityPrinciple.jpg)
 
 #### Open/Closed principle
 
@@ -93,7 +96,6 @@ class Payment {
 }
 ```
 
-
 Oprava podle principu:
 
 ```java
@@ -115,10 +117,13 @@ class Payment {
 }
 ```
 
+![meme](meme_OpenClosedPrinciple.jpg)
 
 #### Liskov substitution principle
 
 Liskové princip substituce hovoří o vzájemném nahrazování dvou tříd. Je-li třída *B* potomkem třídy *A*, pak musí být třída *B* použitelná všude, kde je vyžadována třída *A* bez toho, aniž by o tom nadřazená třída věděla. Tento princip opět implikuje použití dědičnosti a polymorfizmu.
+
+![meme](meme_LiskovSubtitutionPrinciple.jpg)
 
 #### Interface segregation principle
 
@@ -135,9 +140,7 @@ interface Lifecycle {
 }
 ```
 
-
 Oprava podle principu:
-
 
 ```java
 interface Startable {
@@ -151,7 +154,6 @@ interface Stoppable{
 }
 ```
 
-
 #### Dependency inversion principle
 
 Princip inverze závislosti říká, že moduly na vyšší úrovni by neměly záviset na modulech nízkoúrovňových. Oba by měly záviset na abstrakcích. A dále, abstrakce by neměly záviset na implementačních detailech, ale naopak - detaily by měly záviset na abstrakcích.
@@ -159,6 +161,8 @@ Princip inverze závislosti říká, že moduly na vyšší úrovni by neměly z
 Pokud například vyšší úroveň provádí nějaká rozhodnutí a jejich realizací pověřuje moduly na úrovni nižší, může se po změně nižší úrovně změnit funkce i vyšší úrovně. To by se ale nemělo stát - snižuje to znovupoužitelnost vysokoúrovňových modulů, které by měly stát odděleně od modulů nízkoúrovňových.
 
 Tento princip souvisí s [vkládáním závislostí](wiki/vkladani-zavislosti).
+
+![meme](meme_DependencyInversionPrinciple.jpg)
 
 ### Reference
 
