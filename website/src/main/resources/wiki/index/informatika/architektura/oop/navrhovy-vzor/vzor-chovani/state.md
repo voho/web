@@ -41,123 +41,30 @@ ConcreteState2 .up-.|> State
 
 #### Vnitřní stavy
 
-```java
-/**
- * Nálada (obecný vnitřní stav).
- * 
- * @author Vojtěch Hordějčuk
- */
-public interface StateOfMind
-{
-  /**
-   * Vyjádří daný pocit.
-   */
-  public void express();
-}
+```include:java
+gof/state/StateOfMind.java
 ```
 
-```java
-/**
- * Pocit štěstí (konkrétní vnitřní stav).
- * 
- * @author Vojtěch Hordějčuk
- */
-public class HappyState implements StateOfMind
-{
-  @Override
-  public void express()
-  {
-    System.out.println("Jsem veselý :)");
-  }
-}
+```include:java
+gof/state/HappyState.java
 ```
 
-```java
-/**
- * Pocit smutku (konkrétní vnitřní stav).
- * 
- * @author Vojtěch Hordějčuk
- */
-public class SadState implements StateOfMind
-{
-  @Override
-  public void express()
-  {
-    System.out.println("Jsem smutný :(");
-  }
-}
+```include:java
+gof/state/SadState.java
 ```
 
 #### Kontext
 
 Kontext je třída, jejíž stav je reprezentován instancí nějakého vnitřního stavu.
 
-```java
-/**
- * Třída s vnitřním stavem.
- * 
- * @author Vojtěch Hordějčuk
- */
-public class Context
-{
-  /**
-   * aktuální pocit
-   */
-  private StateOfMind state;
-  
-  /**
-   * Vytvoří novou instanci.
-   */
-  public Context()
-  {
-    this.state = new HappyState();
-  }
-  
-  /**
-   * Vyjádří daný pocit.
-   */
-  public void express()
-  {
-    System.out.println("Nyní vyjádřím svůj pocit.");
-    state.express();
-  }
-  
-  /**
-   * Nastaví první stav.
-   */
-  public void beHappy()
-  {
-    System.out.println("Teď budu veselý.");
-    this.state = new HappyState();
-  }
-  
-  /**
-   * Nastaví druhý stav.
-   */
-  public void beSad()
-  {
-    System.out.println("Teď budu smutný.");
-    this.state = new SadState();
-  }
-}
+```include:java
+gof/state/Context.java
 ```
 
 #### Test
 
-```java
-// vytvořit kontext
-    
-Context context = new Context();
-    
-// nastavit první stav (štěstí)
-    
-context.beHappy();
-context.express();
-    
-// nastavit druhý stav (smutek)
-    
-context.beSad();
-context.express();
+```include:java
+gof/state/Example.java
 ```
 
 ### Reference
