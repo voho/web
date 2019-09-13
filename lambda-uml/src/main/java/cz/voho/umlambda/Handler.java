@@ -1,68 +1,54 @@
 package cz.voho.umlambda;
 
 import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
 import com.google.common.base.Strings;
 import com.google.common.collect.Sets;
-import cz.voho.web.lambda.model.GenerateImageFormat;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import cz.voho.web.lambda.model.GenerateImageRequest;
-import cz.voho.web.lambda.model.GenerateImageResponse;
 import cz.voho.web.lambda.utility.ExecutableBinaryFile;
 import net.sourceforge.plantuml.FileFormat;
 import net.sourceforge.plantuml.FileFormatOption;
 import net.sourceforge.plantuml.SourceStringReader;
 
-import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.Set;
 
+import static cz.voho.web.lambda.model.GenerateImageFormat.FORMAT_PNG;
 import static cz.voho.web.lambda.model.GenerateImageFormat.FORMAT_SVG;
 
 /**
  * The main AWS Lambda handler.
  */
-public class Handler implements RequestHandler<GenerateImageRequest, GenerateImageResponse> {
-    private static final Set<String> SUPPORTED_FORMATS = Sets.newHashSet(GenerateImageFormat.FORMAT_PNG, FORMAT_SVG);
+public class Handler implements RequestStreamHandler {
+    private static final Set<String> SUPPORTED_FORMATS = Sets.newHashSet(FORMAT_PNG, FORMAT_SVG);
     private static final ExecutableBinaryFile DOT_BINARY = new ExecutableBinaryFile("dot_static");
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
-    public GenerateImageResponse handleRequest(final GenerateImageRequest request, final Context context) {
+    @Override
+    public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
+        GenerateImageRequest request = GSON.fromJson(new InputStreamReader(inputStream, StandardCharsets.UTF_8), GenerateImageRequest.class);
         validateRequest(request);
+        final SourceStringReader reader = new SourceStringReader(request.getSource());
 
-        try {
-            final String format = request.getFormat();
-            final Path binaryPath = DOT_BINARY.ensureExecutablePath();
-            System.setProperty("GRAPHVIZ_DOT", binaryPath.toString());
+        final Path binaryPath = DOT_BINARY.ensureExecutablePath();
+        System.setProperty("GRAPHVIZ_DOT", binaryPath.toString());
 
-            final SourceStringReader reader = new SourceStringReader(request.getSource());
-
-            try (final ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
-                final GenerateImageResponse response = new GenerateImageResponse();
-
-                response.setFormat(format);
-
-                if (FORMAT_SVG.equalsIgnoreCase(format)) {
-                    // generate SVG
-
-                    reader.generateImage(outputStream, new FileFormatOption(FileFormat.SVG));
-                    final byte[] outputAsBytes = outputStream.toByteArray();
-                    final String outputAsString = new String(outputAsBytes, StandardCharsets.UTF_8);
-                    response.setTextData(outputAsString);
-                } else if (GenerateImageFormat.FORMAT_PNG.equalsIgnoreCase(format)) {
-                    // generate PNG
-
-                    reader.generateImage(outputStream, new FileFormatOption(FileFormat.PNG));
-                    final byte[] outputAsBytes = outputStream.toByteArray();
-                    response.setBinaryData(outputAsBytes);
-                } else {
-                    throw new IllegalStateException("Unsupported format.");
-                }
-
-                return response;
-            }
-        } catch (Exception e) {
-            log(context, "Internal error (%s) for input: %s", e.toString(), request.getSource());
-            throw new RuntimeException("Internal error / Source = " + request.getSource(), e);
+        switch (request.getFormat()) {
+            case FORMAT_SVG:
+                reader.generateImage(outputStream, new FileFormatOption(FileFormat.SVG));
+                break;
+            case FORMAT_PNG:
+                reader.generateImage(outputStream, new FileFormatOption(FileFormat.PNG));
+                break;
+            default:
+                throw new IllegalStateException("Unsupported format.");
         }
     }
 
