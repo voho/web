@@ -39,56 +39,24 @@ LoggerMediator -down-> StdErrLogger
 
 #### Loggery
 
-```java
-public class StdOutLogger {
-    public void print(final String message) {
-        System.out.println(message);
-    }
-}
+```include:java
+gof/mediator/StdOutLogger.java
 ```
 
-```java
-public class StdErrLogger {
-    public void print(final String message) {
-        System.err.println(message);
-    }
-}
+```include:java
+gof/mediator/StdErrLogger.java
 ```
 
 #### Prostředník
 
-```java
-public class LoggerMediator {
-    private final StdOutLogger stdOutLogger;
-    private final StdErrLogger stdErrLogger;
-
-    public LoggerMediator(final StdOutLogger stdOutLogger, final StdErrLogger stdErrLogger) {
-        this.stdOutLogger = stdOutLogger;
-        this.stdErrLogger = stdErrLogger;
-    }
-
-    public void logInfo(final String message) {
-        stdOutLogger.print("INFO: " + message);
-    }
-
-    public void logError(final String message) {
-        stdOutLogger.print("ERROR: " + message);
-        stdErrLogger.print(message);
-    }
-}
+```include:java
+gof/mediator/LoggerMediator.java
 ```
 
-#### Použití
+#### Příklad použití
 
-```java
-final LoggerMediator mediator = new LoggerMediator(
-        new StdOutLogger(),
-        new StdErrLogger()
-);
-
-mediator.logInfo("Application started.");
-mediator.logError("Application error.");
-mediator.logInfo("Application terminated.");
+```include:java
+gof/mediator/Example.java
 ```
 
 ### Reference

@@ -64,92 +64,30 @@ deactivate Originator
 
 #### Implementace
 
-* https://github.com/voho/examples/tree/master/patterns/gof-memento
-
 ##### Memento
 
-```java
-public class Memento<S> {
-    private final S storedState;
-
-    public Memento(final S storedState) {
-        this.storedState = storedState;
-    }
-
-    public S getStoredState() {
-        return storedState;
-    }
-}
+```include:java
+gof/memento/Memento.java
 ```
 
 ##### Originator
 
-```java
-public class Originator<S> {
-    private S internalState;
-
-    public Memento<S> saveStateToMemento() {
-        return new Memento<>(this.internalState);
-    }
-
-    public void restoreStateFromMemento(final Memento<S> memento) {
-        this.internalState = memento.getStoredState();
-    }
-}
-
+```include:java
+gof/memento/Originator.java
 ```
 
 ##### Caretaker
 
 Následující objekt lze implementovat různými způsoby. Uvedený příklad ukazuje, jak by se dalo implementovat jednoduché "undo". Externalizované stavy jsou uloženy na zásobníku a po každém zavolání metody *saveState* je stav objektu **originator** externalizován do **mementa**, které je uloženo na zásobník. Po zavolání metody *undoState* je stav objektu **originator** obnoven z **mementa**, odebraného z vrcholu zásobníku.
 
-```java
-public class Caretaker<S> {
-    private final Originator<S> originator;
-    private final Stack<Memento<S>> history;
-
-    public Caretaker(final Originator<S> originator) {
-        this.originator = originator;
-        this.history = new Stack<>();
-    }
-
-    public void saveState() {
-        history.push(originator.saveStateToMemento());
-    }
-
-    public void undoState() {
-        originator.restoreStateFromMemento(history.pop());
-    }
-}
+```include:java
+gof/memento/Caretaker.java
 ```
 
-##### Použití
+##### Příklad použití
 
-```java
-final Originator<State> originator = new Originator<>();
-final Caretaker<State> caretaker = new Caretaker<>(originator);
-
-// initialize state
-originator.setCurrentStateTestOnly(State.STATE_1);
-assertEquals(State.STATE_1, originator.getCurrentStateTestOnly());
-
-// save current state and change it (1 -> 2)
-caretaker.saveState();
-originator.setCurrentStateTestOnly(State.STATE_2);
-assertEquals(State.STATE_2, originator.getCurrentStateTestOnly());
-
-// save current state and change it (2 -> 3)
-caretaker.saveState();
-originator.setCurrentStateTestOnly(State.STATE_3);
-assertEquals(State.STATE_3, originator.getCurrentStateTestOnly());
-
-// test first undo (3 -> 2)
-caretaker.undoState();
-assertEquals(State.STATE_2, originator.getCurrentStateTestOnly());
-
-// test second undo (2 -> 1)
-caretaker.undoState();
-assertEquals(State.STATE_1, originator.getCurrentStateTestOnly());
+```include:java
+gof/memento/Example.java
 ```
 
 ### Reference

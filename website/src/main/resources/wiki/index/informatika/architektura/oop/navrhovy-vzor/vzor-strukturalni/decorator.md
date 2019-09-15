@@ -29,90 +29,32 @@ DecoratedComponent .up.|> Component
 
 ##### Rozhraní tiskárny
 
-```java
-public interface Printer {
-    void printCharacter(char c);
-
-    void goToNextLine();
-}
+```include:java
+gof/decorator/Printer.java
 ```
 
 ##### Jednoduchá tiskárna
 
-```java
-public class SimplePrinter implements Printer {
-    @Override
-    public void printCharacter(final char c) {
-        System.out.print(c);
-    }
-
-    @Override
-    public void goToNextLine() {
-        System.out.println();
-    }
-}
+```include:java
+gof/decorator/SimplePrinter.java
 ```
 
 ##### Řádky zalamující tiskárna
 
-```java
-public class WrappingPrinter implements Printer {
-    private final Printer printer;
-    private final int maxCharsPerLine;
-    private int charsPerCurrentLine;
-
-    public WrappingPrinter(final Printer printer, final int maxCharsPerLine) {
-        this.printer = printer;
-        this.maxCharsPerLine = maxCharsPerLine;
-        this.charsPerCurrentLine = 0;
-    }
-
-    @Override
-    public void printCharacter(final char c) {
-        if (charsPerCurrentLine == maxCharsPerLine) {
-            goToNextLine();
-        }
-
-        printer.printCharacter(c);
-        charsPerCurrentLine++;
-    }
-
-    @Override
-    public void goToNextLine() {
-        printer.goToNextLine();
-        charsPerCurrentLine = 0;
-    }
-}
+```include:java
+gof/decorator/WrappingPrinter.java
 ```
 
 ##### Tiskárna řetězců
 
-```java
-public class StringPrinter implements Printer {
-    private final Printer printer;
+```include:java
+gof/decorator/StringPrinter.java
+```
 
-    public StringPrinter(final Printer printer) {
-        this.printer = printer;
-    }
+##### Příklad použití
 
-    @Override
-    public void printCharacter(final char c) {
-        printer.printCharacter(c);
-    }
-
-    @Override
-    public void goToNextLine() {
-        printer.goToNextLine();
-    }
-
-    public void printString(final String s) {
-        for (int i = 0; i < s.length(); i++) {
-            printCharacter(s.charAt(i));
-        }
-
-        goToNextLine();
-    }
-}
+```include:java
+gof/decorator/Example.java
 ```
 
 ### Související vzory

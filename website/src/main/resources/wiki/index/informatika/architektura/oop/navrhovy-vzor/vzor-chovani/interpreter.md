@@ -42,153 +42,42 @@ Expression .left.> Context
 
 Nejprve definujeme hierarchii logických výrazů:
 
-```java
-public interface LogicalExpression {
-    boolean evaluate(Context context);
-}
+```include:java
+gof/interpreter/LogicalExpression.java
 ```
 
-```java
-public class LogicalNotOperator implements LogicalExpression {
-    private final LogicalExpression operand;
-
-    public LogicalNotOperator(final LogicalExpression operand) {
-        this.operand = operand;
-    }
-
-    @Override
-    public boolean evaluate(final Context context) {
-        return !operand.evaluate(context);
-    }
-
-    @Override
-    public String toString() {
-        return String.format("NOT %s", operand);
-    }
-}
+```include:java
+gof/interpreter/LogicalNotOperator.java
 ```
 
-```java
-public class LogicalAndOperator implements LogicalExpression {
-    private final LogicalExpression leftOperand;
-    private final LogicalExpression rightOperand;
-
-    public LogicalAndOperator(final LogicalExpression leftOperand, final LogicalExpression rightOperand) {
-        this.leftOperand = leftOperand;
-        this.rightOperand = rightOperand;
-    }
-
-    @Override
-    public boolean evaluate(final Context context) {
-        return leftOperand.evaluate(context) && rightOperand.evaluate(context);
-    }
-
-    @Override
-    public String toString() {
-        return String.format("(%s AND %s)", leftOperand, rightOperand);
-    }
-}
+```include:java
+gof/interpreter/LogicalAndOperator.java
 ```
 
-```java
-public class LogicalOrOperator implements LogicalExpression {
-    private final LogicalExpression leftOperand;
-    private final LogicalExpression rightOperand;
-
-    public LogicalOrOperator(final LogicalExpression leftOperand, final LogicalExpression rightOperand) {
-        this.leftOperand = leftOperand;
-        this.rightOperand = rightOperand;
-    }
-
-
-    @Override
-    public boolean evaluate(final Context context) {
-        return leftOperand.evaluate(context) || rightOperand.evaluate(context);
-    }
-
-    @Override
-    public String toString() {
-        return String.format("(%s OR %s)", leftOperand, rightOperand);
-    }
-}
+```include:java
+gof/interpreter/LogicalOrOperator.java
 ```
 
 Nakonec to bude proměnná, která bude svou hodnotu hledat kontextu. To zajistí, že ji bude možné měnit bez nutnosti měnit strukturu výrazu.
 
-```java
-public class LogicalVariable implements LogicalExpression {
-    private final String name;
-
-    public LogicalVariable(final String name) {
-        this.name = name;
-    }
-
-    @Override
-    public boolean evaluate(final Context context) {
-        return context.getVariableValue(this.name);
-    }
-
-    @Override
-    public String toString() {
-        return name;
-    }
-}
+```include:java
+gof/interpreter/LogicalVariable.java
 ```
 
 ##### Kontext
 
-```java
-import java.util.HashMap;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Optional;
-
-public class Context {
-    private final Map<String, Boolean> variableValues;
-
-    public Context() {
-        this.variableValues = new HashMap<>();
-    }
-
-    public void setVariableToFalse(final String variableName) {
-        this.variableValues.put(variableName, false);
-    }
-
-    public void setVariableToTrue(final String variableName) {
-        this.variableValues.put(variableName, true);
-    }
-
-    public boolean getVariableValue(final String variableName) {
-        return Optional.ofNullable(this.variableValues.get(variableName)).orElseThrow(NoSuchElementException::new);
-    }
-}
+```include:java
+gof/interpreter/Context.java
 ```
 
-###### Použití
+###### Příklad použití
 
 Takto se návrhový vzor použije: nejprve vytvoříme strukturu výrazu v paměti a kontext, který posléze použijeme k vyhodnocení hodnoty výrazu. 
 
 Ukázkový výraz: €((a \land \neg b) \lor c)€
 
-```java
-LogicalExpression root = new LogicalOrOperator(
-        new LogicalAndOperator(
-                new LogicalVariable("a"),
-                new LogicalNotOperator(
-                        new LogicalVariable("b")
-                )
-        ),
-        new LogicalVariable("c")
-);
-
-Context context = new Context();
-context.setVariableToFalse("a");
-context.setVariableToTrue("b");
-context.setVariableToFalse("c");
-
-// = FALSE
-
-boolean result = root.evaluate(context);
+```include:java
+gof/interpreter/Example.java
 ```
 
 ### Reference

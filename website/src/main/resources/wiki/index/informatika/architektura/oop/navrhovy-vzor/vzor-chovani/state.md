@@ -61,7 +61,7 @@ Kontext je třída, jejíž stav je reprezentován instancí nějakého vnitřn�
 gof/state/Context.java
 ```
 
-#### Test
+#### Příklad použití
 
 ```include:java
 gof/state/Example.java

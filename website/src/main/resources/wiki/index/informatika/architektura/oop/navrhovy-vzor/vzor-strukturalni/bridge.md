@@ -40,124 +40,30 @@ HighQualityDrawer .up.|> Drawer
 
 Závislostí kreslícího programu je grafická knihovna. Po té se vyžaduje, aby uměla nakreslit kružnici a čáru. Toto rozhraní je kořenem první hierarchie.
 
-```java
-public interface Drawer {
-    void drawCircle(int cx, int cy, int r);
-
-    void drawLine(int x1, int y1, int x2, int y2);
-}
+```include:java
+gof/bridge/Drawer.java
 ```
 
 První implementace kreslí vše černobíle a v nízké kvalitě.
 
-```java
-public class LowQualityDrawer implements Drawer {
-    private final Graphics2D graphics;
-
-    public LowQualityDrawer(final Graphics2D graphics) {
-        this.graphics = graphics;
-        this.graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
-    }
-
-    @Override
-    public void drawCircle(final int cx, final int cy, final int r) {
-        this.graphics.setColor(Color.BLACK);
-        final int d = r + r;
-        this.graphics.drawOval(cx - r, cy - r, d, d);
-    }
-
-    @Override
-    public void drawLine(final int x1, final int y1, final int x2, final int y2) {
-        this.graphics.setColor(Color.BLACK);
-        this.graphics.drawLine(x1, y1, x2, y2);
-    }
-}
+```include:java
+gof/bridge/LowQualityDrawer.java
 ```
 
 Druhá implementace kreslí barevně a ve vysoké kvalitě (s vyhlazováním).
 
-```java
-public class HighQualityDrawer implements Drawer {
-    private static final Stroke CIRCLE_STROKE = new BasicStroke(5f);
-    private static final Stroke LINE_STROKE = new BasicStroke(1f);
-    private final Graphics2D graphics;
-
-    public HighQualityDrawer(final Graphics2D graphics) {
-        this.graphics = graphics;
-        this.graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-    }
-
-    @Override
-    public void drawCircle(final int cx, final int cy, final int r) {
-        final int d = r + r;
-        this.graphics.setColor(Color.RED);
-        this.graphics.setStroke(CIRCLE_STROKE);
-        this.graphics.drawOval(cx - r, cy - r, d, d);
-    }
-
-    @Override
-    public void drawLine(final int x1, final int y1, final int x2, final int y2) {
-        this.graphics.setColor(Color.BLUE);
-        this.graphics.setStroke(LINE_STROKE);
-        this.graphics.drawLine(x1, y1, x2, y2);
-    }
-}
+```include:java
+gof/bridge/HighQualityDrawer.java
 ```
 
 #### Hierarchie kreslícího programu
 
-```java
-public class Canvas {
-    private final Drawer drawer;
-
-    public Canvas(final Drawer drawer) {
-        this.drawer = drawer;
-    }
-
-    public void drawLine(int x1, int y1, int x2, int y2) {
-        this.drawer.drawLine(x1, y1, x2, y2);
-    }
-
-    public void drawCircle(int cx, int cy, int r) {
-        this.drawer.drawCircle(cx, cy, r);
-    }
-
-    public void drawRectangle(int x, int y, int w, int h) {
-        this.drawer.drawLine(x, y, x + w, y); // top 
-        this.drawer.drawLine(x, y, x, y + h); // left 
-        this.drawer.drawLine(x, y + h, x + w, y + h); // bottom 
-        this.drawer.drawLine(x + w, y, x + w, y + h); // right 
-    }
-}
+```include:java
+gof/bridge/Canvas.java
 ```
 
-```java
-public class ExtendedCanvas extends Canvas {
-    public ExtendedCanvas(final Drawer drawer) {
-        super(drawer);
-    }
-
-    public void drawDoubleCircle(int cx, int cy, int r1, int r2) {
-        drawCircle(cx, cy, r1);
-        drawCircle(cx, cy, r2);
-    }
-
-    public void drawCircledSquare(int cx, int cy, int r) {
-        final int a = Math.round(2.0f * (float) (r / Math.sqrt(2.0)));
-        final int px = cx - a / 2;
-        final int py = cy - a / 2;
-        drawRectangle(px, py, a, a);
-        drawCircle(cx, cy, r);
-    }
-
-    public void drawSquaredCircle(int cx, int cy, int r) {
-        final int d = r + r;
-        final int px = cx - r;
-        final int py = cy - r;
-        drawRectangle(px, py, d, d);
-        drawCircle(cx, cy, r);
-    }
-}
+```include:java
+gof/bridge/ExtendedCanvas.java
 ```
 
 ### Reference
