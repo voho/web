@@ -1,14 +1,10 @@
 package cz.voho.wiki.repository.image;
 
-import com.google.common.base.Strings;
 import cz.voho.common.utility.LambdaClient;
 import cz.voho.web.lambda.model.GenerateImageFormat;
 import cz.voho.web.lambda.model.GenerateImageRequest;
-import cz.voho.web.lambda.model.GenerateImageResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.nio.charset.StandardCharsets;
 
 public class LambdaWikiImageRepository implements WikiImageRepository {
     private static final Logger LOG = LoggerFactory.getLogger(LambdaWikiImageRepository.class);
@@ -25,14 +21,7 @@ public class LambdaWikiImageRepository implements WikiImageRepository {
         request.setFormat(GenerateImageFormat.FORMAT_SVG);
         request.setSource(source);
 
-        final GenerateImageResponse response = lambdaClient.callDotLambda(request);
-
-        if (response == null || Strings.isNullOrEmpty(response.getTextData())) {
-            LOG.warn("No response for DOT image: {}", source);
-            return null;
-        }
-
-        return response.getTextData().getBytes(StandardCharsets.UTF_8);
+        return lambdaClient.callDotLambda(request);
     }
 
     @Override
@@ -41,23 +30,16 @@ public class LambdaWikiImageRepository implements WikiImageRepository {
         request.setFormat(GenerateImageFormat.FORMAT_SVG);
         request.setSource(source);
 
-        final GenerateImageResponse response = lambdaClient.callPlantUmlLambda(request);
-
-        if (response == null || Strings.isNullOrEmpty(response.getTextData())) {
-            LOG.warn("No response for Plant UML image: {}", source);
-            return null;
-        }
-
-        return response.getTextData().getBytes(StandardCharsets.UTF_8);
+        return lambdaClient.callPlantUmlLambda(request);
     }
 
     @Override
-    public void warmUpCacheDotSvg(String source) {
+    public void warmUpCacheDotSvg(final String source) {
         // NOP
     }
 
     @Override
-    public void warmUpCachePlantUmlSvg(String source) {
+    public void warmUpCachePlantUmlSvg(final String source) {
         // NOP
     }
 }

@@ -15,7 +15,7 @@ public class CustomWikiParser extends FlexmarkWikiParser {
                         new IncludeSourceCodePreprocessor(),
                         new InlineSourceCodePreprocessor(),
                         new RunkitCodePreprocessor(),
-                        new UmlCodePreprocessor()
+                        new UmlCodePreprocessor(wikiImageRepository)
                 ),
                 new MathPreprocessor(),
                 new WikiLinkPreprocessor(),

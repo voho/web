@@ -1,6 +1,7 @@
 package cz.voho.wiki.parser.code;
 
 import com.vladsch.flexmark.html.HtmlWriter;
+import cz.voho.wiki.repository.image.WikiImageRepository;
 import net.sourceforge.plantuml.code.Transcoder;
 import net.sourceforge.plantuml.code.TranscoderUtil;
 
@@ -44,6 +45,12 @@ public class UmlCodePreprocessor implements CodeProcessor {
 
     private final String UML_SUFFIX = "\n\n@enduml";
 
+    private final WikiImageRepository wikiImageCacheWarmUp;
+
+    public UmlCodePreprocessor(final WikiImageRepository wikiImageCacheWarmUp) {
+        this.wikiImageCacheWarmUp = wikiImageCacheWarmUp;
+    }
+
     @Override
     public boolean handle(final HtmlWriter html, final String codeLang, final String codeSource) {
         if (codeLang.equalsIgnoreCase(UML_CLASS)) {
@@ -62,6 +69,7 @@ public class UmlCodePreprocessor implements CodeProcessor {
 
     private void uml(final HtmlWriter html, final String codeSource, final String alt) {
         final String codeSourceFixed = UML_PREFIX + codeSource + UML_SUFFIX;
+        wikiImageCacheWarmUp.warmUpCachePlantUmlSvg(codeSourceFixed);
         final String codeSourceEncoded = transcodeForUrl(codeSourceFixed);
         final String imageUrl = getUmlImageUrl(codeSourceEncoded);
         final String editUrl = getUmlEditUrl(codeSourceEncoded);

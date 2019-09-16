@@ -55,6 +55,7 @@ public class CachingWikiImageRepository implements WikiImageRepository {
                 final byte[] generated = primaryGenerator.generate(source);
 
                 if (generated != null && generated.length > 0) {
+                    LOG.debug("Generated image put into the cache: {}", hash);
                     cache.put(hash, generated);
                 } else {
                     // the delegate has generated some bullshit
