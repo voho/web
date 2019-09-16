@@ -39,7 +39,7 @@ public abstract class AbstractSelectionTest {
                 final double ratioC = (double) counts[i] / (double) counts[j];
                 final double ratioW = weights[i] / weights[j];
                 // ratios should be the same (do not try this at home)
-                assertEquals(ratioW, ratioC, 0.1);
+                assertEquals(ratioW, ratioC, 0.2);
             }
         }
     }
