@@ -133,7 +133,7 @@ a.logo:hover {
 
 #search-query {
     background-color: white;
-    border: 2px solid #eeeeee;
+    border: 2px solid #ddd;
     border-radius: 2px;
     color: black;
     font-size: 12pt;
@@ -155,7 +155,7 @@ a.logo:hover {
 }
 
 #heading .inner {
-    padding-bottom: 1em;
+    padding: 0;
 }
 
 /* footer */
@@ -266,7 +266,7 @@ ul.copyright li {
 }
 
 .wiki-related-pages {
-    font-size: 90%;
+    font-size: 80%;
 }
 
 /* banner */
@@ -325,6 +325,7 @@ ul.copyright li {
 }
 
 #wiki-content h3 {
+    font-weight: normal;
     font-size: 1.6em;
 }
 
@@ -333,6 +334,7 @@ ul.copyright li {
 }
 
 #wiki-content h5 {
+    font-weight: normal;
     font-size: 1.15em;
 }
 
@@ -355,7 +357,7 @@ ul.copyright li {
 }
 
 #wiki-content .figure.picture p {
-    font-size: 120%;
+    font-size: 80%;
 }
 
 #wiki-content em {
@@ -430,7 +432,6 @@ ul.copyright li {
 .wiki-related-pages.incoming ul li a, .wiki-related-pages.outgoing ul li a, .wiki-related-pages.siblings ul li a {
     background-color: #e6e6e6;
     border: 0;
-    border-radius: 1em;
     padding: 0.5ex 1em;
     display: inline-block;
     margin: 0 0.5ex 1ex 0;
@@ -510,11 +511,13 @@ a {
 
 #heading {
     background-color: #eeeeee;
+    border-top: 2px solid #ddd;
     padding: 2em 0;
 }
 
 #heading h1 {
-    font-size: 3em;
+    margin: 0;
+    padding: 0 0 1em 0;
 }
 
 a.logo {
