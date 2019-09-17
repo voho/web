@@ -44,13 +44,13 @@ public class Spotify {
 
             albumsResponseTree.get("items").forEach(item -> {
                 String trackTitle = item.get("name").asText();
-                String trackId = item.get("id").asText();
+                String trackUri = item.get("uri").asText();
                 String trackUrl = item.get("external_urls").get("spotify").asText();
 
                 final SoundCloud.SoundCloudSong song = new SoundCloud.SoundCloudSong();
                 song.setTitle(trackTitle);
                 song.setUrl(trackUrl);
-                song.setWidgetUrl("https://open.spotify.com/embed/track/" + trackId);
+                song.setWidgetUrl("https://embed.spotify.com/?uri=" + trackUri);
                 songs.add(song);
             });
 

@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class RecentBackend {
     private static final Logger LOG = LoggerFactory.getLogger(RecentBackend.class);
     private static final int RECENT_PHOTO_COUNT = 6;
-    private static final int RECENT_SONGS_COUNT = 6;
+    private static final int RECENT_SONGS_COUNT = 4;
     private static final int UPDATE_INTERVAL_SECONDS = 3600;
 
     private final Instagram instagram;
