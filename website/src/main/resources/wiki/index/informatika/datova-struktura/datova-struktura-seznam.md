@@ -29,7 +29,7 @@ null [shape=none,fillcolor=transparent]
 {rank=same;"item 1";"item 2";"item 3";null}
 ```
 
-#### Obousměrně zřetězené seznamy
+### Obousměrně zřetězené seznamy
 
 V obousměrně zřetězených seznamech mají prvky dva ukazatele: jeden na prvek následující a druhý na prvek předchozí.
 
@@ -48,7 +48,7 @@ null2 [shape=plaintext,label="null",fillcolor=transparent]
 {rank=same;"item 1";"item 2";"item 3";}
 ```
 
-#### Cyklicky zřetězený seznam
+### Cyklicky zřetězený seznam
 
 Pokud poslední prvek seznamu neukazuje do prázdna, ale je napojený opět na začátek seznamu, jedná se o tzv. **cyklicky zřetězený seznam**.
 
@@ -75,13 +75,13 @@ tail [shape=none,label="",style=invisible]
 
 ### Výhody a nevýhody
 
-**Výhody:**
+#### Výhody
 
 - kapacita je teoreticky neomezená
 - velikost obsazené paměti je přímo závislá jen na počtu prvků, není zde žádné plýtvání
 - rychlost přidávání i odebírání prvků je vždy stejně vysoká
 
-**Nevýhody:**
+#### Nevýhody
 
 - pomalý přístup k prvkům na zadaném indexu *i* (random access)
 - uložené hodnoty nejsou v paměti uspořádány za sebou a změna struktury seznamu může způsobit fragmentaci volného místa v paměti
@@ -104,7 +104,7 @@ Nejjednodušší jednosměrně zřetězený seznam s hlavičkou:
 SinglyLinkedList.java
 ```
 
-### Obousměrně zřetězený seznam
+#### Obousměrně zřetězený seznam
 
 Obousměrně zřetězený seznam s hlavičkou i patičkou (všimněte si, že je implementace celkem jednoduchá, protože se tu objevuje symetrie - hlavička/patička, předchozí/následující prvek):
 
