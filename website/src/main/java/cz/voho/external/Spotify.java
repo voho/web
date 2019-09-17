@@ -16,15 +16,16 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
 
 public class Spotify {
     private static final String ARTIST_ID = "4OaWtKAgl8oGU9QTa4wXu4";
-    public static final Base64.Encoder BASE64 = Base64.getEncoder();
-    public static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    private static final Base64.Encoder BASE64 = Base64.getEncoder();
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+
     private final HttpClient httpClient;
     private final String token;
 
@@ -37,18 +38,23 @@ public class Spotify {
         try {
             final JsonNode tokenJson = getTokenJsonNode();
             final String token = tokenJson.get("access_token").asText();
-
             final JsonNode albumsResponseTree = getAlbumsJsonNode(limit, token);
+
+            final List<SoundCloud.SoundCloudSong> songs = new ArrayList<>(limit);
+
             albumsResponseTree.get("items").forEach(item -> {
+                String trackTitle = item.get("name").asText();
+                String trackId = item.get("id").asText();
+                String trackUrl = item.get("external_urls").get("spotify").asText();
 
+                final SoundCloud.SoundCloudSong song = new SoundCloud.SoundCloudSong();
+                song.setTitle(trackTitle);
+                song.setUrl(trackUrl);
+                song.setWidgetUrl("https://open.spotify.com/embed/track/" + trackId);
+                songs.add(song);
             });
-            System.out.println("albums2: " + albumsResponseTree);
 
-            final SoundCloud.SoundCloudSong song = new SoundCloud.SoundCloudSong();
-            song.setTitle("Weird Dream");
-            song.setUrl("https://open.spotify.com/track/2BiIA55vSJE1sGZ1Zhwd9p?si=wJtjOnkYS9-Xkd0hsxn6gA");
-            song.setWidgetUrl("https://open.spotify.com/embed/track/2BiIA55vSJE1sGZ1Zhwd9p");
-            return Arrays.asList(song);
+            return songs;
         } catch (URISyntaxException e) {
             throw new IOException(e);
         }
@@ -61,7 +67,7 @@ public class Spotify {
                 .setPath(String.format("/v1/artists/%s/albums", ARTIST_ID))
                 .setParameter("offset", "0")
                 .setParameter("limit", String.valueOf(limit))
-                .setParameter("include_groups", "album,single,compilation,appears_on")
+                .setParameter("include_groups", "album,single,compilation")
                 .setParameter("market", "CZ")
                 .build();
 
