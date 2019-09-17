@@ -65,10 +65,7 @@ public class Spotify {
                 .setScheme("https")
                 .setHost("api.spotify.com")
                 .setPath(String.format("/v1/artists/%s/albums", ARTIST_ID))
-                .setParameter("offset", "0")
                 .setParameter("limit", String.valueOf(limit))
-                .setParameter("include_groups", "album,single,compilation")
-                .setParameter("market", "CZ")
                 .build();
 
         final HttpGet request = new HttpGet(uri);
