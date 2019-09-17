@@ -34,20 +34,20 @@ public class Spotify {
         this.token = configuration.getValue("SPOTIFY_TOKEN");
     }
 
-    public List<SoundCloud.SoundCloudSong> getLatestSongs(final int limit) throws IOException {
+    public List<SpotifySong> getLatestSongs(final int limit) throws IOException {
         try {
             final JsonNode tokenJson = getTokenJsonNode();
             final String token = tokenJson.get("access_token").asText();
             final JsonNode albumsResponseTree = getAlbumsJsonNode(limit, token);
 
-            final List<SoundCloud.SoundCloudSong> songs = new ArrayList<>(limit);
+            final List<SpotifySong> songs = new ArrayList<>(limit);
 
             albumsResponseTree.get("items").forEach(item -> {
-                String trackTitle = item.get("name").asText();
-                String trackUri = item.get("uri").asText();
-                String trackUrl = item.get("external_urls").get("spotify").asText();
+                final String trackTitle = item.get("name").asText();
+                final String trackUri = item.get("uri").asText();
+                final String trackUrl = item.get("external_urls").get("spotify").asText();
 
-                final SoundCloud.SoundCloudSong song = new SoundCloud.SoundCloudSong();
+                final SpotifySong song = new SpotifySong();
                 song.setTitle(trackTitle);
                 song.setUrl(trackUrl);
                 song.setWidgetUrl("https://embed.spotify.com/?uri=" + trackUri);
@@ -55,13 +55,13 @@ public class Spotify {
             });
 
             return songs;
-        } catch (URISyntaxException e) {
+        } catch (final URISyntaxException e) {
             throw new IOException(e);
         }
     }
 
-    private JsonNode getAlbumsJsonNode(int limit, String token) throws IOException, URISyntaxException {
-        URI uri = new URIBuilder()
+    private JsonNode getAlbumsJsonNode(final int limit, final String token) throws IOException, URISyntaxException {
+        final URI uri = new URIBuilder()
                 .setScheme("https")
                 .setHost("api.spotify.com")
                 .setPath(String.format("/v1/artists/%s/albums", ARTIST_ID))
@@ -77,7 +77,7 @@ public class Spotify {
     }
 
     private JsonNode getTokenJsonNode() throws IOException, URISyntaxException {
-        URI uri = new URIBuilder()
+        final URI uri = new URIBuilder()
                 .setScheme("https")
                 .setHost("accounts.spotify.com")
                 .setPath("/api/token")
@@ -90,15 +90,45 @@ public class Spotify {
         return executeAndParseResponse(request);
     }
 
-    private JsonNode executeAndParseResponse(HttpUriRequest request) throws IOException {
-        HttpResponse response = httpClient.execute(request);
+    private JsonNode executeAndParseResponse(final HttpUriRequest request) throws IOException {
+        final HttpResponse response = httpClient.execute(request);
 
         if (response.getStatusLine().getStatusCode() != 200) {
             throw new IOException("Invalid response code: " + response.getStatusLine().getStatusCode());
         }
 
-        try (InputStream inputStream = response.getEntity().getContent()) {
+        try (final InputStream inputStream = response.getEntity().getContent()) {
             return OBJECT_MAPPER.readTree(inputStream);
+        }
+    }
+
+    public static class SpotifySong {
+        private String title;
+        private String url;
+        private String widgetUrl;
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(final String title) {
+            this.title = title;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(final String url) {
+            this.url = url;
+        }
+
+        public String getWidgetUrl() {
+            return widgetUrl;
+        }
+
+        public void setWidgetUrl(final String widgetUrl) {
+            this.widgetUrl = widgetUrl;
         }
     }
 }

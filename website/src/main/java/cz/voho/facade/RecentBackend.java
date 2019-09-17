@@ -3,7 +3,6 @@ package cz.voho.facade;
 import cz.voho.common.utility.ExecutorProvider;
 import cz.voho.external.Configuration;
 import cz.voho.external.Instagram;
-import cz.voho.external.SoundCloud;
 import cz.voho.external.Spotify;
 import org.apache.http.client.HttpClient;
 import org.slf4j.Logger;
@@ -23,14 +22,12 @@ public class RecentBackend {
     private static final int UPDATE_INTERVAL_SECONDS = 3600;
 
     private final Instagram instagram;
-    private final SoundCloud soundCloud;
     private final Spotify spotify;
     private final AtomicReference<List<Instagram.InstagramImage>> recentPhotosCache;
-    private final AtomicReference<List<SoundCloud.SoundCloudSong>> recentSongsCache;
+    private final AtomicReference<List<Spotify.SpotifySong>> recentSongsCache;
 
     RecentBackend(final HttpClient httpClient, final Configuration configuration) {
         this.instagram = new Instagram(httpClient, configuration);
-        this.soundCloud = new SoundCloud();
         this.spotify = new Spotify(httpClient, configuration);
         this.recentPhotosCache = new AtomicReference<>(null);
         this.recentSongsCache = new AtomicReference<>(null);
@@ -54,10 +51,9 @@ public class RecentBackend {
         LOG.info("Updating song cache.");
 
         try {
-            //final List<SoundCloud.SoundCloudSong> response = soundCloud.getLatestSongs(RECENT_SONGS_COUNT, "606af6", "606af6");
-            final List<SoundCloud.SoundCloudSong> response = spotify.getLatestSongs(RECENT_SONGS_COUNT);
+            final List<Spotify.SpotifySong> response = spotify.getLatestSongs(RECENT_SONGS_COUNT);
             recentSongsCache.set(response);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             LOG.warn("Could not upgrade song cache.", e);
         }
     }
@@ -68,7 +64,7 @@ public class RecentBackend {
         try {
             final List<Instagram.InstagramImage> response = instagram.getLatestPhotos(RECENT_PHOTO_COUNT);
             recentPhotosCache.set(response);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             LOG.warn("Could not upgrade photo cache.", e);
         }
     }
@@ -77,7 +73,7 @@ public class RecentBackend {
         return Optional.ofNullable(recentPhotosCache.get()).orElse(Collections.emptyList());
     }
 
-    public List<SoundCloud.SoundCloudSong> getRecentTracks() {
+    public List<Spotify.SpotifySong> getRecentTracks() {
         return Optional.ofNullable(recentSongsCache.get()).orElse(Collections.emptyList());
     }
 }

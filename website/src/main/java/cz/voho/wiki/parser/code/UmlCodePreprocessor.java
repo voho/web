@@ -2,19 +2,14 @@ package cz.voho.wiki.parser.code;
 
 import com.vladsch.flexmark.html.HtmlWriter;
 import cz.voho.wiki.repository.image.WikiImageRepository;
-import net.sourceforge.plantuml.code.Transcoder;
-import net.sourceforge.plantuml.code.TranscoderUtil;
 
-import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 public class UmlCodePreprocessor implements CodeProcessor {
     private static final String UML_CLASS = "uml:class";
     private static final String UML_ACTIVITY = "uml:activity";
     private static final String UML_SEQUENCE = "uml:seq";
-
-    private static final String PLANT_UML_IMAGE_URL_FORMAT = "https://www.plantuml.com/plantuml/svg/%s";
-    private static final String PLANT_UML_EDIT_URL_FORMAT = "https://www.planttext.com/?text=%s";
-    private static final Transcoder PLANT_TEXT_TRANSCODER = TranscoderUtil.getDefaultTranscoder();
 
     private final String UML_PREFIX = "@startuml\n\n" +
             "skinparam defaultFontName Arial\n" +
@@ -70,29 +65,11 @@ public class UmlCodePreprocessor implements CodeProcessor {
     private void uml(final HtmlWriter html, final String codeSource, final String alt) {
         final String codeSourceFixed = UML_PREFIX + codeSource + UML_SUFFIX;
         wikiImageCacheWarmUp.warmUpCachePlantUmlSvg(codeSourceFixed);
-        final String codeSourceEncoded = transcodeForUrl(codeSourceFixed);
-        final String imageUrl = getUmlImageUrl(codeSourceEncoded);
-        final String editUrl = getUmlEditUrl(codeSourceEncoded);
-        html.raw(String.format(
-                "<div class='figure uml'><img src='%s' alt='UML (%s)' /><p class='code-included-disclaimer'><a href='%s'>Upravit</a></p></div>",
-                imageUrl,
-                alt,
-                editUrl));
+        final String sourceEncoded = encodeForUrl(codeSourceFixed);
+        html.raw(String.format("<div class='figure graph'><img src='/generate/svg/uml?data=%s' alt='%s (UML)' /></div>", sourceEncoded, alt));
     }
 
-    private String transcodeForUrl(final String codeSourceFixed) {
-        try {
-            return PLANT_TEXT_TRANSCODER.encode(codeSourceFixed);
-        } catch (IOException e) {
-            throw new RuntimeException("Error while generating UML image URL.", e);
-        }
-    }
-
-    private String getUmlImageUrl(final String codeSourceEncoded) {
-        return String.format(PLANT_UML_IMAGE_URL_FORMAT, codeSourceEncoded);
-    }
-
-    private String getUmlEditUrl(final String codeSourceEncoded) {
-        return String.format(PLANT_UML_EDIT_URL_FORMAT, codeSourceEncoded);
+    private String encodeForUrl(final String source) {
+        return Base64.getUrlEncoder().encodeToString(source.getBytes(StandardCharsets.UTF_8));
     }
 }
