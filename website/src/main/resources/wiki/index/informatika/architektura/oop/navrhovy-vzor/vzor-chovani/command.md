@@ -24,93 +24,26 @@ MakeItalicCommand ..|> UndoableCommand
 
 #### Rozhraní příkazu
 
-```java
-/**
- * Rozhraní příkazu.
- * @author Vojtěch hordějčuk
- */
-public interface Command
-{
-  /**
-   * Spustí vykonávání tohoto příkazu.
-   */
-  public void execute();
-}
+```include:java
+gof/command/Command.java
 ```
 
 #### Konkrétní příkazy
 
-```java
-/**
- * Příkaz, který vypíše konec řádku na standardní výstup.
- * @author Vojtěch Hordějčuk
- */
-public class NewLineCommand implements Command
-{
-  @Override
-  public void execute()
-  {
-    System.out.println();
-  }
-}
+```include:java
+gof/command/NewLineCommand.java
 ```
 
-```java
-/**
- * Příkaz, který vypíše text na standardní výstup.
- * @author Vojtěch Hordějčuk
- */
-public class PrintCommand implements Command
-{
-  /**
-   * text, který se má vypsat
-   */
-  private final String text;
-
-  /**
-   * Vytvoří nový příkaz.
-   * @param pText text
-   */
-  public PrintCommand(final String pText)
-  {
-    this.text = pText;
-  }
-
-  @Override
-  public void execute()
-  {
-    System.out.print(this.text);
-  }
-}
+```include:java
+gof/command/PrintCommand.java
 ```
 
 #### Použití
 
-```java
-public static void main(final String[] args)
-{
-  // vytvořit frontu a naplnit ji příkazy
-
-  final List<Command> commands = new LinkedList<Command>();
-
-  commands.add(new PrintCommand("First line."));
-  commands.add(new NewLineCommand());
-  commands.add(new PrintCommand("Second line."));
-  commands.add(new NewLineCommand());
-  commands.add(new PrintCommand("Third line."));
-
-  // příkazy jsou připraveny, nyní je možné dělat něco jiného
-
-  // ...
-
-  // spustit příkazy
-
-  for (final Command command : commands)
-  {
-    command.execute();
-  }
-}
+```include:java
+gof/command/Example.java
 ```
+
 
 ### Reference
 
