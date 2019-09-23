@@ -54,91 +54,28 @@ end note
 
 #### Osoba
 
-Náš příklad bude představovat osobu a její denní činnosti. Konkrétní zaměstnání
+Náš příklad bude představovat osobu a její denní činnosti. Konkrétní zaměstnání bude implementováno jako potomek této třídy.
 
-```java
-public abstract class Person {
-  public void printDailyRoutine() {
-    // this is a template method
-    wake();
-    work();
-    relax();
-    sleep();
-  }
-
-  abstract protected void wake();
-  abstract protected void work();
-  abstract protected void relax();
-  abstract protected void sleep();
-}
+```include:java
+gof/template/Person.java
 ```
 
 #### Zaměstnanec
 
-```java
-public class Worker extends Person {
-  protected void wake() {
-    System.out.println("Waking up at 6:00.");
-  }
-
-  protected void work() {
-    System.out.println("Going to work. Working...");
-  }
-
-  protected void relax() {
-    System.out.println("Watching stupid movies.");
-  }
-
-  protected void sleep() {
-    System.out.println("Going to bed.");
-  }
-}
+```include:java
+gof/template/Worker.java
 ```
 
 #### Dítě
 
-```java
-public class Child extends Person {
-  protected void wake() {
-    System.out.println("Waking up at 7:00.");
-  }
-
-  protected void work() {
-    System.out.println("Going to school.");
-  }
-
-  protected void relax() {
-    System.out.println("Playing with other kids.");
-  }
-
-  protected void sleep() {
-    System.out.println("Going to bed.");
-  }
-}
+```include:java
+gof/template/Child.java
 ```
 
 #### Použití
 
-```java
-Person p = new Worker();
-p.printDailyRoutine();
-
-// -- prints --
-// Waking up at 6:00.
-// Going to work. Working...
-// Watching stupid movies.
-// Going to bed.
-```
-
-```java
-Person p = new Child();
-p.printDailyRoutine();
-
-// -- prints --
-// Waking up at 7:00.
-// Going to school.
-// Playing with other kids.
-// Going to bed.
+```include:java
+gof/template/Example.java
 ```
 
 ### Reference
