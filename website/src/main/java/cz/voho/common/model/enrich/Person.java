@@ -23,7 +23,6 @@ public class Person {
             WebsiteConstants.PROFILE_TWITTER,
             WebsiteConstants.PROFILE_INSTAGRAM,
             WebsiteConstants.PROFILE_FLICKR,
-            WebsiteConstants.PROFILE_SOUNDCLOUD,
             WebsiteConstants.PROFILE_SPOTIFY,
             WebsiteConstants.PROFILE_ITUNES,
             WebsiteConstants.PROFILE_YOUTUBE,

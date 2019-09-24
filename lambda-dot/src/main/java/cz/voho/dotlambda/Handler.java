@@ -18,8 +18,8 @@ import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Set;
 
-import static cz.voho.web.lambda.model.GenerateImageFormat.FORMAT_PNG;
-import static cz.voho.web.lambda.model.GenerateImageFormat.FORMAT_SVG;
+import static cz.voho.web.lambda.model.GenerateImageRequest.FORMAT_PNG;
+import static cz.voho.web.lambda.model.GenerateImageRequest.FORMAT_SVG;
 
 /**
  * The main AWS Lambda handler.

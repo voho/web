@@ -23,7 +23,6 @@ public class WebsiteConstants {
     public static final String PROFILE_TWITTER = "http://twitter.com/vohooo";
     public static final String PROFILE_INSTAGRAM = "https://www.instagram.com/vohocz/";
     public static final String PROFILE_FLICKR = "https://www.dropbox.com/sh/yjlrw3845e0cu8y/AADJehOxQz8bdbK9LxcIXmpqa?dl=0";
-    public static final String PROFILE_SOUNDCLOUD = "http://soundcloud.com/voho";
     public static final String PROFILE_ITUNES = "https://itunes.apple.com/us/artist/voho/id1213510083";
     public static final String PROFILE_AMAZON = "https://music.amazon.com/artists/B076MM3JFF?tab=CATALOG";
     public static final String PROFILE_GOOGLE_MUSIC = "https://play.google.com/store/music/artist/voho?id=Aprz5lawb7xu3s2nfeqpqudxdzm";

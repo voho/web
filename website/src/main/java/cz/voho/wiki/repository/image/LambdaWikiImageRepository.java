@@ -1,7 +1,6 @@
 package cz.voho.wiki.repository.image;
 
 import cz.voho.common.utility.LambdaClient;
-import cz.voho.web.lambda.model.GenerateImageFormat;
 import cz.voho.web.lambda.model.GenerateImageRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +17,7 @@ public class LambdaWikiImageRepository implements WikiImageRepository {
     @Override
     public byte[] generateDotSvg(final String source) throws Exception {
         final GenerateImageRequest request = new GenerateImageRequest();
-        request.setFormat(GenerateImageFormat.FORMAT_SVG);
+        request.setFormat(GenerateImageRequest.FORMAT_SVG);
         request.setSource(source);
 
         return lambdaClient.callDotLambda(request);
@@ -27,7 +26,7 @@ public class LambdaWikiImageRepository implements WikiImageRepository {
     @Override
     public byte[] generatePlantUmlSvg(final String source) throws Exception {
         final GenerateImageRequest request = new GenerateImageRequest();
-        request.setFormat(GenerateImageFormat.FORMAT_SVG);
+        request.setFormat(GenerateImageRequest.FORMAT_SVG);
         request.setSource(source);
 
         return lambdaClient.callPlantUmlLambda(request);

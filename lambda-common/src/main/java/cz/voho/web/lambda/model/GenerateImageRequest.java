@@ -1,6 +1,9 @@
 package cz.voho.web.lambda.model;
 
 public class GenerateImageRequest {
+    public static final String FORMAT_PNG = "png";
+    public static final String FORMAT_SVG = "svg";
+
     /**
      * source data (in whatever syntax)
      */

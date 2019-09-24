@@ -16,9 +16,6 @@
         <a href="${social_profile_flickr}"><@icons.add "flickr"/> <span class="label">Flickr</span></a>
     </li>
     <li>
-        <a href="${social_profile_soundcloud}"><@icons.add "soundcloud"/> <span class="label">Soundcloud</span></a>
-    </li>
-    <li>
         <a href="${social_profile_spotify}"><@icons.add "spotify"/> <span class="label">Spotify</span></a>
     </li>
     <li>

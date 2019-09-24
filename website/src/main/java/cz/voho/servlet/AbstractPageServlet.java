@@ -47,7 +47,6 @@ public abstract class AbstractPageServlet extends FreemarkerServlet {
         model.put("social_profile_twitter", WebsiteConstants.PROFILE_TWITTER);
         model.put("social_profile_instagram", WebsiteConstants.PROFILE_INSTAGRAM);
         model.put("social_profile_flickr", WebsiteConstants.PROFILE_FLICKR);
-        model.put("social_profile_soundcloud", WebsiteConstants.PROFILE_SOUNDCLOUD);
         model.put("social_profile_spotify", WebsiteConstants.PROFILE_SPOTIFY);
         model.put("social_profile_itunes", WebsiteConstants.PROFILE_ITUNES);
         model.put("social_profile_amazon", WebsiteConstants.PROFILE_AMAZON);
