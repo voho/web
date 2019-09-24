@@ -606,10 +606,6 @@ a.logo:hover strong {
     color: gray;
 }
 
-#heading.wiki-cover {
-    background: none;
-}
-
 #heading.wiki-cover .wiki-related-pages.siblings {
     font-size: 110%;
     font-weight: bold;
