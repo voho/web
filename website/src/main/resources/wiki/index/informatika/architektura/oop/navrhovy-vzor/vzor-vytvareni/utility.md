@@ -24,68 +24,14 @@ Nevýhodou je možná až příliš nestydaté vystavování metod vnějšímu s
 
 #### Knihovní třída
 
-```java
-/**
- * Ukázková knihovní třída pro práci s polem.
- * @author Vojtěch Hordějčuk
- */
-public final class ArrayUtility {
-  /**
-   * Není možné vytvářet instance knihovní třídy.
-   */
-  private ArrayUtility() {
-    throw new UnsupportedOperationException();
-  }
-
-  /**
-   * Prohodí dvě čísla v poli.
-   * @param array pole
-   * @param i1 první index
-   * @param i2 druhý index
-   */
-  public static void swap(final int[] array, final int i1, final int i2) {
-    final int temp = array[i1];
-    array[i1] = array[i2];
-    array[i2] = temp;
-  }
-
-  /**
-   * Převede pole na řetězec, např. "<b>1, 2, 3, 4</b>".
-   * @param array pole
-   * @return řetězcová reprezentace pole
-   */
-  public static String toString(final int[] array) {
-    final StringBuilder buffer = new StringBuilder(32);
-
-    for (final int element : array) {
-      if (buffer.length() != 0) {
-        buffer.append(", ");
-      }
-
-      buffer.append(element);
-    }
-
-    return buffer.toString();
-  }
-}
+```include:java
+gof/utility/ArrayUtility.java
 ```
 
 #### Použití
 
-```java
-// ukázkové pole
-final int[] array = { 1, 4, -3, 7 };
-
-final String s1 = ArrayUtility.toString(array);
-// vypíše "1, 4, -3, 7"
-System.out.println(s1);
-
-// prohodit první a třetí prvek
-ArrayUtility.swap(array, 0, 2);
-
-// vypíše "-3, 4, 1, 7"
-final String s2 = ArrayUtility.toString(array);
-System.out.println(s2);
+```include:java
+gof/utility/Example.java
 ```
 
 ### Reference
