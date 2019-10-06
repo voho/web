@@ -30,127 +30,32 @@ OrSpecification ..|> Specification
 NotSpecification ..|> Specification
 ```
 
-```java
-public interface Specification<T> {
-    boolean isSatisfiedFor(T object);
-
-    default Specification<T> and(Specification<T> other) {
-        return new AndSpecification<>(Specification.this, other);
-    }
-
-    default Specification<T> or(Specification<T> other) {
-        return new OrSpecification<>(Specification.this, other);
-    }
-
-    default Specification<T> not() {
-        return new NotSpecification<>(Specification.this);
-    }
-}
+```include:java
+gof/specification/Specification.java
 ```
 
-```java
-public class AndSpecification<T> implements Specification<T> {
-    private final Iterable<Specification<T>> clauses;
-
-    public AndSpecification(Specification<T>... clauses) {
-        this(Arrays.asList(clauses));
-    }
-
-    public AndSpecification(Iterable<Specification<T>> clauses) {
-        this.clauses = clauses;
-    }
-
-    @Override
-    public boolean isSatisfiedFor(T object) {
-        for (Specification<T> clause : clauses) {
-            if (!clause.isSatisfiedFor(object)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-}
+```include:java
+gof/specification/AndSpecification.java
 ```
 
-```java
-public class OrSpecification<T> implements Specification<T> {
-    private final Iterable<Specification<T>> clauses;
-
-    public OrSpecification(Specification<T>... clauses) {
-        this(Arrays.asList(clauses));
-    }
-
-    public OrSpecification(Iterable<Specification<T>> clauses) {
-        this.clauses = clauses;
-    }
-
-    @Override
-    public boolean isSatisfiedFor(T object) {
-        for (Specification<T> clause : clauses) {
-            if (clause.isSatisfiedFor(object)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-}
+```include:java
+gof/specification/OrSpecification.java
 ```
 
-```java
-public class NotSpecification<T> implements Specification<T> {
-    private final Specification<T> clause;
-
-    public NotSpecification(Specification<T> clause) {
-        this.clause = clause;
-    }
-
-    @Override
-    public boolean isSatisfiedFor(T object) {
-        return !this.clause.isSatisfiedFor(object);
-    }
-}
+```include:java
+gof/specification/NotSpecification.java
 ```
 
-```java
-public class HasName implements Specification<Person> {
-    private final String desiredName;
-
-    public HasName(String desiredName) {
-        this.desiredName = desiredName;
-    }
-
-    @Override
-    public boolean isSatisfiedFor(Person object) {
-        return desiredName.equals(object.getName());
-    }
-}
+```include:java
+gof/specification/HasName.java
 ```
 
-```java
-public class HasAge implements Specification<Person> {
-    private final int minAge;
-    private final int maxAge;
-
-    public HasAge(int minAge, int maxAge) {
-        this.minAge = minAge;
-        this.maxAge = maxAge;
-    }
-    
-    @Override
-    public boolean isSatisfiedFor(Person object) {
-        return minAge <= object.getAge() && maxAge >= object.getAge();
-    }
-}
+```include:java
+gof/specification/HasAge.java
 ```
 
-```java
-// první způsob
-boolean satisfied = new HasName("John Doe").and(new HasAge(18, 20)).isSatisfiedFor(somePerson);
-
-// druhý způsob
-boolean satisfied = new AndSpecification<>(new HasName("John Doe"), new HasAge(18, 20)).isSatisfiedFor(somePerson);
+```include:java
+gof/specification/Example.java
 ```
 
 ### Reference
