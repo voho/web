@@ -51,95 +51,26 @@ end note
 
 ##### Požadovaná funkcionalita
 
-```java
-/**
- * Rozhraní specifikující požadovanou funkcionalitu.
- * 
- * @author Vojtěch Hordějčuk
- */
-public interface Target
-{
-  /**
-   * Provede požadavek.
-   */
-  public void newRequest();
-}
+```include:java
+gof/adapter/Target.java
 ```
 
 ##### Nevyhovující třída
 
-```java
-/**
- * Vnořená třída, která má zpravidla zastaralé, nekompatibilní, nebo jinak 
- * nevyhovujícím rozhraní. Proto k ní bude vytvořen odpovídající adaptér.
- * 
- * @author Vojtěch Hordějčuk
- */
-public class Adaptee
-{
-  /**
-   * Provede požadavek.
-   */
-  public void oldRequest()
-  {
-    // ...
-  }
-}
+```include:java
+gof/adapter/Adaptee.java
 ```
 
 ##### Adaptér nevyhovující třídy
 
-```java
-/**
- * Adaptér, který implementuje funkcionalitu požadovanou rozhraním "Target" a to
- * tak, že přeposílá (deleguje) požadavky třídě vnořené. K tomu může přidat
- * nějakou řídící logiku. Okolí nemusí vědět ani o instanci vnořené třídy, ani o
- * způsobu, jakým se požadavky převádí.
- * 
- * @author Vojtěch Hordějčuk
- */
-public class Adapter implements Target
-{
-  /**
-   * vnořená třída
-   */
-  private Adaptee adaptee;
-  
-  /**
-   * Vytvoří novou instanci.
-   */
-  public Adapter()
-  {
-    // vytvořit instanci adaptované třídy
-    // (instance může být předána i jinak, například parametrem)
-    
-    this.adaptee = new Adaptee();
-  }
-  
-  @Override
-  public void newRequest()
-  {
-    // v této ukázce se volání pouze jednoduše deleguje
-    // (adaptér ale může přidat nějakou řídící logiku navíc)
-    
-    this.adaptee.oldRequest();
-  }
-}
+```include:java
+gof/adapter/Adapter.java
 ```
 
 ##### Použití
 
-```java
-public static void main(String[] args)
-{
-  // vytvořit instanci třídy s požadovanou funkcionalitou
-    
-  Target adapter = new Adapter();
-    
-  // provést požadavek
-    
-  adapter.newRequest();
-}
+```include:java
+gof/adapter/Example.java
 ```
 
 ### Reference
