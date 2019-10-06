@@ -35,104 +35,32 @@ Client -> Subject
 
 Nejprve vytvoříme rozhraní jednoduché databáze pro čtení a zápis dvojic klíč-hodnota:
 
-```java
-public interface Database<K, V> {
-    V read(K key);
-
-    void write(K key, V value);
-}
+```include:java
+gof/proxy/Database.java
 ```
 
 #### Jednoduchá databáze
 
 Nyní vytvoříme základní implementaci této databáze:
 
-```java
-public class SimpleDatabase<K, V> implements Database<K, V> {
-    private final Map<K, V> storage = new HashMap<>();
-
-    @Override
-    public V read(K key) {
-        return storage.get(key);
-    }
-
-    @Override
-    public void write(K key, V value) {
-        storage.put(key, value);
-    }
-}
+```include:java
+gof/proxy/SimpleDatabase.java
 ```
 
 #### Zabezpečená databáze
 
 Prvním příkladem proxy objektu zastupujícího naší databázi může být její zabezpečená verze. Ta umožňuje povolit či zakázat veškeré přístupy k databázi:
 
-```java
-public class SecureDatabase<K, V> implements Database<K, V> {
-    private final Database<K, V> delegate;
-
-    public SecureDatabase(final Database<K, V> delegate) {
-        this.delegate = delegate;
-    }
-
-    @Override
-    public V read(final K key) {
-        if (canRead()) {
-            return delegate.read(key);
-        } else {
-            throw new IllegalAccessError("Read access denied.");
-        }
-    }
-
-    @Override
-    public void write(final K key, final V value) {
-        if (canWrite()) {
-            delegate.write(key, value);
-        } else {
-            throw new IllegalAccessError("Write access denied.");
-        }
-    }
-
-    private boolean canRead() {
-        // add security logic here
-        return false;
-    }
-
-    private boolean canWrite() {
-        // add security logic here
-        return false;
-    }
-}
+```include:java
+gof/proxy/SecureDatabase.java
 ```
 
 #### Logující databáze
 
 Dalším příkladem proxy objektu zastupujícího naší jednoduchou databází může být třeba logující databáze, která všechny přístupy do databáze loguje:
 
-```java
-public class LoggingDatabase<K, V> implements Database<K, V> {
-    private final Database<K, V> delegate;
-
-    public LoggingDatabase(final Database<K, V> delegate) {
-        this.delegate = delegate;
-    }
-
-    @Override
-    public V read(final K key) {
-        log("Reading from key: " + key);
-        return delegate.read(key);
-    }
-
-    @Override
-    public void write(final K key, final V value) {
-        log("Writing to key: " + key);
-        delegate.write(key, value);
-    }
-
-    private void log(final String message) {
-        // (implement logging here)
-    }
-}
+```include:java
+gof/proxy/LoggingDatabase.java
 ```
 
 Krásné na tomto přístupu je to, že tyto zástupné objekty lze vnořovat do sebe (implementují stejné rozhraní).
