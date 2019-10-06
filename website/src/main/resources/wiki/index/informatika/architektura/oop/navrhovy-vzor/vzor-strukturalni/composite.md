@@ -34,58 +34,18 @@ Client -> Component
 
 #### Společné rozhraní
 
-```java
-/**
- * Společné rozhraní komponent.
- * @author Vojtěch Hordějčuk
- */
-public interface Component {
-  /**
-   * Příklad operace.
-   */
-  public void doSomething();
-}
+```include:java
+gof/composite/Component.java
 ```
 
 #### Objekty
 
-```java
-/**
- * Primitivní objekt.
- * @author Vojtěch Hordějčuk
- */
-public class Leaf implements Component {
-  @Override
-  public void doSomething() {
-    // operace primitivního objektu
-  }
-}
+```include:java
+gof/composite/Leaf.java
 ```
 
-```java
-/**
- * Složený objekt.
- * @author Vojtěch Hordějču
- */
-public class Composite implements Component {
-  /**
-   * vnořené objekty
-   */
-  private Collection<Component> components;
-
-  // zde může být kód pro správu vnořených objektů
-  // add(Component c)
-  // remove(Component c)
-
-  @Override
-  public void doSomething() {
-    // projít vnořené objekty a něco udělat
-
-    for (Component component : this.components) {
-      component.doSomething();
-    }
-  }
-}
+```include:java
+gof/composite/Composite.java
 ```
 
 ### Reference
