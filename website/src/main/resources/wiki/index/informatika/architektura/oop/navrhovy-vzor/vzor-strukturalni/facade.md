@@ -111,110 +111,26 @@ Client -> Facade
 
 Nejprve vytvoříme třídy, které zajistí elementární výpočty. Bude to sčítačka a násobička.
 
-```java
-public class Adder {
-  /**
-   * Vrátí součet dvou čísel.
-   * @param a sčítanec
-   * @param b sčítanec
-   * @return součet
-   */
-  public double add(final double a, final double b) {
-    return a + b;
-  }
-
-  /**
-   * Vrátí rozdíl dvou čísel.
-   * @param a menšenec
-   * @param b menšitel
-   * @return rozdíl
-   */
-  public double subtract(final double a, final double b) {
-    return a - b;
-  }
-}
+```include:java
+gof/facade/Adder.java
 ```
 
-```java
-public class Multiplier {
-  /**
-   * Vrátí činitel dvou čísel.
-   * @param a činitel
-   * @param b činitel
-   * @return součin
-   */
-  public double multiply(final double a, final double b) {
-    return a * b;
-  }
-
-  /**
-   * Vrátí podíl dvou čísel.
-   * @param a dělenec
-   * @param b dělitel
-   * @return podíl
-   */
-  public double divide(final double a, final double b) {
-    return a / b;
-  }
-}
+```include:java
+gof/facade/Multiplier.java
 ```
 
 #### Fasáda
 
 Z elementárních výpočtů vytvoříme kompozici, kterou rozšíříme o několik metod. Vzniklá třída bude naší novou fasádou.
 
-```java
-public class Facade {
-  /**
-   * sčítačka
-   */
-  private final Adder adder = new Adder();
-  /**
-   * násobička
-   */
-  private final Multiplier multiplier = new Multiplier();
-
-  /**
-   * Vrátí číslo opačné.
-   * @param a číslo A
-   * @return číslo opačné k číslu A
-   */
-  public double negative(final double a) {
-    return this.adder.subtract(0, a);
-  }
-
-  /**
-   * Vrátí aritmetický průměr dvou čísel.
-   * @param a první číslo
-   * @param b druhé číslo
-   * @return průměr obou čísel
-   */
-  public double mean(final double a, final double b) {
-    return this.multiplier.divide(this.adder.add(a, b), 2.0);
-  }
-
-  /**
-   * Vrátí druhou mocninu (čtverec) čísla.
-   * @param a číslo A
-   * @return druhá mocnina čísla A
-   */
-  public double square(final double a) {
-    return this.multiplier.multiply(a, a);
-  }
-}
+```include:java
+gof/facade/Facade.java
 ```
 
 #### Použití
 
-```java
-final Facade facade = new Facade();
-
-// = 5
-System.out.println(facade.negative(-5));
-// = 15
-System.out.println(facade.mean(10, 20));
-// = 25
-System.out.println(facade.square(5));
+```include:java
+gof/facade/Example.java
 ```
 
 ### Reference
