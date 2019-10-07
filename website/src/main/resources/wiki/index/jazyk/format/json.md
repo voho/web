@@ -7,7 +7,7 @@ JSON (JavaScript Object Notation) je univerzální textový formát pro výměnu
 
 ### Syntaxe
 
-Syntaxe jazyka JSON je podmnožinou jazyka Javascript. Takto vypadá jeho popis v Backus-Naurově formě:
+Syntaxe jazyka JSON je podmnožinou jazyka Javascript. Takto vypadá jeho popis v [Backus-Naurově formě](wiki/backus-naur):
 
 ```bnf
 <objekt> ::= {} | { <páry> }
@@ -20,15 +20,15 @@ Syntaxe jazyka JSON je podmnožinou jazyka Javascript. Takto vypadá jeho popis 
 
 ### Příklady
 
-```javascript
+```json
 13
 ```
 
-```javascript
+```json
 [1, 2, 3, 5, 7, 13]
 ```
 
-```javascript
+```json
 {
   "název" : "Legrační video",
   "vložil" : "Jan Novotný",
@@ -47,7 +47,7 @@ Syntaxe jazyka JSON je podmnožinou jazyka Javascript. Takto vypadá jeho popis 
 }
 ```
 
-```javascript
+```json
 {
   "prvočísla" : [1, 2, 3, 5, 7, 13],
   "číslo 4 je prvočíslo" : false,
@@ -57,7 +57,7 @@ Syntaxe jazyka JSON je podmnožinou jazyka Javascript. Takto vypadá jeho popis 
 }
 ```
 
-```javascript
+```json
 {
   "jméno" : "Karel",
   "příjmení" : "Novák",
