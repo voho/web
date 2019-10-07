@@ -5,6 +5,7 @@
 
     <groupId>cz.voho.web</groupId>
     <artifactId>reactor</artifactId>
+    <name>Reactor</name>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
