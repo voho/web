@@ -49,98 +49,40 @@ Vytvoříme rozhraní loggeru a dvě jeho implementace: standardní logger, kter
 
 #### Rozhraní loggeru
 
-```java
-/**
- * Společné rozhraní loggerů.
- * @author Vojtěch Hordějčuk
- */
-public interface Logger {
-  /**
-   * Zaloguje informaci.
-   * @param message zpráva
-   */
-  void info(String message);
-  
-  /**
-   * Zaloguje chybu.
-   * @param message zpráva
-   */
-  void error(String message);
-}
+```include:java
+gof/nullobject/Logger.java
 ```
 
 #### Standardní logger
 
-```java
-public class PrintLogger implements Logger {
-  @Override
-  public void info(final String message) {
-    System.out.println("INFO: " + message);
-  }
-  
-  @Override
-  public void error(final String message) {
-    System.out.println("ERROR: " + message);
-  }
-}
+```include:java
+gof/nullobject/PrintLogger.java
 ```
 
 #### Neaktivní logger (prázdný objekt)
 
-```java
-public class NullLogger implements Logger {
-  @Override
-  public void info(final String message) {
-    // NOP
-  }
-  
-  @Override
-  public void error(final String message) {
-    // NOP
-  }
-}
+```include:java
+gof/nullobject/NullLogger.java
 ```
 
 #### Logování PŘED použitím vzoru
 
-```java
-// nechci logovat - nastavím NULL
-// poté musím všude počítat s hodnotou NULL
-final Logger logger = null;
-
-if (logger != null) {
-  logger.info("Starting...");
-}
-// ...
-if (logger != null) {
-  logger.info("Finished.");
-}
+```include:java
+gof/nullobject/ExampleBefore.java
 ```
 
 #### Logování PO použití vzoru
 
-```java
-// nechci logovat - použiju Null Object
-// dále už nemusím počítat s hodnotou NULL
-final Logger logger = new NullLogger();
-
-logger.info("Starting...");
-// ...
-logger.info("Finished.");
+```include:java
+gof/nullobject/ExampleAfter.java
 ```
 
 ### Příklad - nikdo (pomocí podtřídy)
 
 #### Standardní třída
 
-```java
-public class Person {
-  private String name;
-  private String phone;
-  
-  // ... getters
-  // ... setters
-}
+```include:java
+gof/nullobject/Person.java
 ```
 
 #### Nikdo (prázdný objekt)
@@ -153,26 +95,8 @@ Prázdný objekt v tomto případě dědí ze standardního objektu. Je několik
 1. v konstruktoru pomocí setterů rodiče inicializovat atributy na výchozí hodnoty
 1. použít jednoduchou variantu návrhového vzoru [Singleton](wiki/singleton) a k dispozici dát pouze jednu instanci této třídy
 
-```java
-public class NullPerson extends Person {
-  public static final Person INSTANCE = new NullPerson();
-  
-  private NullPerson() {
-    super();
-    super.setName("(žádné jméno)");
-    super.setPhone("(žádné telefonní číslo)");
-  }
-  
-  @Override
-  public void setName(final String name) {
-    // NOP
-  }
-  
-  @Override
-  public void setPhone(final String phone) {
-    // NOP
-  }
-}
+```include:java
+gof/nullobject/NullPerson.java
 ```
 
 ### Reference
