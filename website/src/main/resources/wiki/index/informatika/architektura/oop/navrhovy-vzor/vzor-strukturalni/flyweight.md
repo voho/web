@@ -51,61 +51,12 @@ Náš příklad bude představovat jednoduchou herní mapu (dvojrozměrné pole)
 
 První verze třídy pro reprezentaci políček bude všechny tyto hodnoty obsahovat přímo jako své proměnné. Již teď je jasné, že v případě malého množství druhů políček bude v paměti neefektivně uloženo příliš mnoho duplicitních informací. Například všechna políčka typu řeka budou mít nastavený příznak vodní plochy a stejnou rychlost pohybu.
 
-```java
-public class Tile {
-    private String imageName;
-    private double moveSpeed;
-    private boolean isWater;
-    private boolean isOccupied;
-
-    // ...
-}
+```include:java
+gof/flyweight/Tile.java
 ```
 
-```java
-public class Map {
-    private final Tile[] tiles;
-
-    public Map(final int size) {
-        tiles = new Tile[size * size];
-    }
-
-    public void clear() {
-        for (int i = 0; i < tiles.length; i++) {
-            tiles[i] = createGrassTile();
-        }
-    }
-
-    public void addSomeRivers(double p) {
-        for (int i = 0; i < tiles.length; i++) {
-            if (Math.random() < p) {
-                tiles[i] = createRiverTile();
-            }
-        }
-    }
-
-    public void addSomeHills(double p) {
-        for (int i = 0; i < tiles.length; i++) {
-            if (Math.random() < p) {
-                tiles[i] = createHillTile();
-            }
-        }
-    }
-
-    private static Tile createGrassTile() {
-        return new Tile("grass.png", 1.0, false);
-    }
-
-    private static Tile createRiverTile() {
-        return new Tile("river.png", 0.0, true);
-    }
-
-    private static Tile createHillTile() {
-        return new Tile("hill.png", 0.5, false);
-    }
-
-    // ...
-}
+```include:java
+gof/flyweight/Map.java
 ```
 
 #### Po použití vzoru
@@ -114,213 +65,21 @@ Klíčem k redukci velikosti políček v paměti je identifikace vlastností, kt
 
 V našem případě lze extrahovat všechny proměnné až na příznak *isOccupied*, protože ten není dán druhem políčka a opravdu je nutné, aby si tento příznak drželo každé jedno políčko zvlášť.
 
-```java
-public class TileType {
-    private String imageName;
-    private double moveSpeed;
-    private boolean isWater;
-
-    // ...
-}
+```include:java
+gof/flyweight/FlyweightTileType.java
 ```
 
 Informace vázané ke druhu políčka lze z políčka vyjmout a nahradit je pouze odkazem na druh políčka. Množství informací v políčku se tedy nezmění, pouze budou lépe distribuované a nebudou se zbytečně duplikovat.
 
-```java
-public class Tile {
-    private TileType type;
-    private boolean isOccupied;
-
-    public Tile(TileType type) {
-        this.type = type;
-    }
-
-    // ...
-}
+```include:java
+gof/flyweight/FlyweightTile.java
 ```
 
 Předem si připravíme tři instance typů políček: louku, řeku a kopec. Tyto tři instance budou obsahovat údaje společné pro všechna políčka daných typů. Každé políčko potom dostane referenci na nějaký typ.
 
-```java
-public class Map {
-    private static final TileType GRASS = new TileType("grass.png", 1.0, false);
-    private static final TileType RIVER = new TileType("river.png", 0.0, true);
-    private static final TileType HILL = new TileType("hill.png", 0.5, false);
-    
-    private final Tile[] tiles;
-
-    public Map(final int size) {
-        tiles = new Tile[size * size];
-    }
-
-    public void clear() {
-        for (int i = 0; i < tiles.length; i++) {
-            tiles[i] = new Tile(GRASS);
-        }
-    }
-
-    public void addSomeRivers(double p) {
-        for (int i = 0; i < tiles.length; i++) {
-            if (Math.random() < p) {
-                tiles[i] = new Tile(RIVER);
-            }
-        }
-    }
-
-    public void addSomeHills(double p) {
-        for (int i = 0; i < tiles.length; i++) {
-            if (Math.random() < p) {
-                tiles[i] = new Tile(HILL);
-            }
-        }
-    }
-
-    // ...
-}
+```include:java
+gof/flyweight/FlyweightMap.java
 ```
-
-
-### Reference
-
-- https://sourcemaking.com/design_patterns/flyweight
-- http://gameprogrammingpatterns.com/flyweight.html
-- http://www.tutorialspoint.com/design_pattern/flyweight_pattern.htm
-- http://www.oodesign.com/flyweight-pattern-wargame-example-java-sourcecode.html)
-
-### Příklad
-
-Náš příklad bude představovat jednoduchou herní mapu (dvojrozměrné pole). Na každém políčku se může nacházet cesta, louka, kopec nebo řeka. Zajímá nás, jak snadné je projet přes určité pole - po cestě se jede nejrycheji a přes řeku nejpomaleji. Tyto obtížnosti budeme reprezentovat desetinným číslem.
-
-#### Před použitím vzoru
-
-U každého políčka budeme evidovat cestu k jeho textuře, rychlost pohybu po něm a příznaky, zda se jedná o vodu a zda je políčko právě obsazeno nějakou herní postavou. Již teď je jasné, že v případě malého množství druhů políček bude v paměti neefektivně uloženo příliš mnoho duplicitních informací.
-
-```java
-public class Tile {
-    private String imageName;
-    private double moveSpeed;
-    private boolean isWater;
-    private boolean isOccupied;
-
-    // ...
-}
-```
-
-```java
-public class Map {
-    private final Tile[] tiles;
-
-    public Map(final int size) {
-        tiles = new Tile[size * size];
-    }
-
-    public void clear() {
-        for (int i = 0; i < tiles.length; i++) {
-            tiles[i] = createGrassTile();
-        }
-    }
-
-    public void addSomeRivers(double p) {
-        for (int i = 0; i < tiles.length; i++) {
-            if (Math.random() < p) {
-                tiles[i] = createRiverTile();
-            }
-        }
-    }
-
-    public void addSomeHills(double p) {
-        for (int i = 0; i < tiles.length; i++) {
-            if (Math.random() < p) {
-                tiles[i] = createHillTile();
-            }
-        }
-    }
-
-    private static Tile createGrassTile() {
-        return new Tile("grass.png", 1.0, false);
-    }
-
-    private static Tile createRiverTile() {
-        return new Tile("river.png", 0.0, true);
-    }
-
-    private static Tile createHillTile() {
-        return new Tile("hill.png", 0.5, false);
-    }
-
-    // ...
-}
-```
-
-Vidíme, že existuje jen malý počet různých druhů políček a proto lze každý takový druh extrahovat do samostatné třídy a u políčka si pouze evidovat odkaz na tento druh.
-
-#### Po použití vzoru
-
-Vznikne nová třída reprezentující druh políčka.
-
-```java
-public class TileType {
-    private String imageName;
-    private double moveSpeed;
-    private boolean isWater;
-
-    // ...
-}
-```
-
-Informace vázané ke druhu políčka lze z políčka vyjmout a nahradit je pouze odkazem na druh políčka. Množství informací v políčku se tedy nezmění, pouze budou lépe distribuované a nebudou se zbytečně duplikovat.
-
-```java
-public class Tile {
-    private TileType type;
-    private boolean isOccupied;
-
-    public Tile(TileType type) {
-        this.type = type;
-    }
-
-    // ...
-}
-```
-
-```java
-public class Map {
-    private static final TileType GRASS = new TileType("grass.png", 1.0, false);
-    private static final TileType RIVER = new TileType("river.png", 0.0, true);
-    private static final TileType HILL = new TileType("hill.png", 0.5, false);
-    
-    private final Tile[] tiles;
-
-    public Map(final int size) {
-        tiles = new Tile[size * size];
-    }
-
-    public void clear() {
-        for (int i = 0; i < tiles.length; i++) {
-            tiles[i] = new Tile(GRASS);
-        }
-    }
-
-    public void addSomeRivers(double p) {
-        for (int i = 0; i < tiles.length; i++) {
-            if (Math.random() < p) {
-                tiles[i] = new Tile(RIVER);
-            }
-        }
-    }
-
-    public void addSomeHills(double p) {
-        for (int i = 0; i < tiles.length; i++) {
-            if (Math.random() < p) {
-                tiles[i] = new Tile(HILL);
-            }
-        }
-    }
-
-    // ...
-}
-```
-
 
 ### Reference
 
