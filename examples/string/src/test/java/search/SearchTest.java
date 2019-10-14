@@ -22,5 +22,6 @@ public class SearchTest {
     private void assertUsingAllMethods(final int expectedIndex, final String haystack, final String needle) {
         assertEquals(expectedIndex, KarpRabin.find(haystack.toCharArray(), needle.toCharArray()));
         assertEquals(expectedIndex, Bitap.find(haystack.toCharArray(), needle.toCharArray()));
+        assertEquals(expectedIndex, BoyerMooreHorspool.find(haystack.toCharArray(), needle.toCharArray()));
     }
 }

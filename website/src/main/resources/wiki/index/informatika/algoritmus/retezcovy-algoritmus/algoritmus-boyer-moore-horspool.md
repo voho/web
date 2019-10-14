@@ -32,51 +32,12 @@ Pokud například vyhledáváme v dekadickém čísle posloupnost *01214*, bude 
 | 8 | 5 | číslo "8" se ve vyhledávaném řetězci nevyskytuje
 | 9 | 5 | číslo "9" se ve vyhledávaném řetězci nevyskytuje
 
-```java
-private static int[] createJumpTable(final char[] needle) {
-    final int alphabetSize = Character.MAX_VALUE - Character.MIN_VALUE + 1;
-    final int[] jumpTable = new int[alphabetSize];
-
-    for (int iJumpTable = 0; iJumpTable < jumpTable.length; iJumpTable++) {
-        // for characters not in needle
-        jumpTable[iJumpTable] = needle.length;
-    }
-
-    for (int iNeedle = 0; iNeedle < needle.length; iNeedle++) {
-        // for characters in needle
-        final int iTableForNeedleCharacter = (int) needle[iNeedle];
-        jumpTable[iTableForNeedleCharacter] = needle.length - 1 - iNeedle;
-    }
-
-    return jumpTable;
-}
-```
-
-#### Vyhledávání s použitím tabulky
+#### Vyhledávání s tabulkou
 
 Sestavená tabulka se potom využije pro posun pozice v hlavním cyklu algoritmu:
 
-```java
-private static int strpos(final char[] needle, final char[] haystack) {
-    final int[] jumpTable = createJumpTable(needle);
-    int iHaystack = 0;
-    while (haystack.length - iHaystack >= needle.length) {
-        // start comparing haystack piece with the needle right-to-left
-        int iNeedle = needle.length - 1;
-        while (haystack[iHaystack + iNeedle] == needle[iNeedle]) {
-            if (iNeedle == 0) {
-                // FOUND
-                return iHaystack;
-            }
-            iNeedle--;
-        }
-        // move position in haystack
-        final int iHaystackForNeedleEnd = iHaystack + needle.length - 1;
-        iHaystack += jumpTable[haystack[iHaystackForNeedleEnd]];
-    }
-    // NOT FOUND
-    return -1;
-}
+```include:java
+search/BoyerMooreHorspool.java
 ```
 
 ### Složitost
