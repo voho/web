@@ -69,94 +69,28 @@ deactivate Observable
 
 Nejprve vytvoříme rozhraní pozorovatelů a posléze i dvě jeho konkrétní implementace.
 
-```java
-interface Observer {
-  void onEvent1();
-  void onEvent2();
-  void onEvent3();
-}
+```include:java
+gof/observer/Observer.java
 ```
 
 Jedna implementace bude vypisovat událost do konzole:
 
-```java
-class VisualObserver implements Observer {
-  private final Display display = new Display();
-
-  @Override
-  public void onEvent1() {
-    display.message("Event 1 detected!");
-  }
-
-  @Override
-  public void onEvent2() {
-    display.message("Event 2 detected!");
-  }
-
-  @Override
-  public void onEvent3() {
-    display.message("Event 3 detected!");
-  }
-}
+```include:java
+gof/observer/VisualObserver.java
 ```
 
 Druhá implementace bude přehrávat zvuky:
 
-```java
-class AcousticObserver implements Observer {
-  private final SoundPlayer play = new SoundPlayer();
-
-  @Override
-  public void onEvent1() {
-    play.soundForEvent1();
-  }
-
-  @Override
-  public void onEvent2() {
-    play.soundForEvent2();
-  }
-
-  @Override
-  public void onEvent3() {
-    play.soundForEvent3();
-  }
-}
+```include:java
+gof/observer/AcousticObserver.java
 ```
 
 Nyní vytvoříme pozorovaný objekt, který bude udržovat seznam zaregistrovaných pozorovatelů a umožní uživatelům snadné odesílání událostí.
 Pozorovatele je doporučeno volat v deterministickém pořadí.
 Typicky se setkáme s tím, že budou pozorovatelské objekty voláni v tom pořadí, v jakém byly jako pozorovatelé zaregistrovány.
 
-```java
-class Observable {
-  private final Collection<Observer> observers = new LinkedHashSet<>();
-
-  public void attach(Observer o) {
-    observers.add(o);
-  }
-
-  public void detach(Observer o) {
-    observers.remove(o);
-  }
-
-  public void doOperation1() {
-    // ... EXECUTE OPERATION 1
-    // notify all listeners about event 1
-    observers.forEach(o -> o.onEvent1());
-  }
-
-  public void doOperation2() {
-    // ... EXECUTE OPERATION 2
-    // notify all listeners about event 2
-    observers.forEach(o -> o.onEvent2());
-  }
-
-  public void doOperation3() {
-    // ... EXECUTE OPERATION 3
-    // notify all listeners about event 3
-    observers.forEach(o -> o.onEvent3());
-  }
-}
+```include:java
+gof/observer/Observable.java
 ```
 
 ### Reference
