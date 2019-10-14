@@ -7,7 +7,7 @@ public class Example {
     public void test() {
         // vytvořit kontext
 
-        Context context = new Context();
+        final Context context = new Context();
 
         // nastavit první stav (štěstí)
 

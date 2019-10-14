@@ -1,11 +1,11 @@
 package gof.flyweight;
 
 public class FlyweightTileType {
-    private String imageName;
-    private double moveSpeed;
-    private boolean isWater;
+    private final String imageName;
+    private final double moveSpeed;
+    private final boolean isWater;
 
-    public FlyweightTileType(String imageName, double moveSpeed, boolean isWater) {
+    public FlyweightTileType(final String imageName, final double moveSpeed, final boolean isWater) {
         this.imageName = imageName;
         this.moveSpeed = moveSpeed;
         this.isWater = isWater;

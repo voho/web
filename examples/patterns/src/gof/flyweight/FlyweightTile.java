@@ -1,9 +1,9 @@
 package gof.flyweight;
 
 public class FlyweightTile {
-    private FlyweightTileType type;
+    private final FlyweightTileType type;
 
-    public FlyweightTile(FlyweightTileType type) {
+    public FlyweightTile(final FlyweightTileType type) {
         this.type = type;
     }
 

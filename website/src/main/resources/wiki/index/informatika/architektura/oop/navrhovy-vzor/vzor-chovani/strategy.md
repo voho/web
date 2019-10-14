@@ -46,128 +46,32 @@ note right on link: client chooses strategy
 
 Násobení dvou čísel lze implementovat různě. V příkladu jsou to způsoby dva: standardní násobení a postupné sčítání. Oba způsoby výpočtu implementují stejné rozhraní, protože jsou volně zaměnitelné.
 
-```java
-/**
- * Strategie pro násobení dvou čísel.
- * 
- * @author Vojtěch Hordějčuk
- */
-public interface Strategy
-{
-  /**
-   * Vynásobí dvě čísla.
-   * 
-   * @param a
-   * činitel
-   * @param b
-   * činitel
-   * @return součin
-   */
-  public int multiply(int a, int b);
-}
+```include:java
+gof/strategy/Strategy.java
 ```
 
-```java
-/**
- * Standardní implementace násobení.
- * 
- * @author Vojtěch Hordějčuk
- */
-public class TimesStrategy implements Strategy
-{
-  @Override
-  public int multiply(int a, int b)
-  {
-    return a * b;
-  }
-}
+```include:java
+gof/strategy/TimesStrategy.java
 ```
 
-```java
-/**
- * Implementace násobení pomocí sčítání.
- * 
- * @author Vojtěch Hordějčuk
- */
-public class PlusStrategy implements Strategy
-{
-  @Override
-  public int multiply(int a, int b)
-  {
-    int i = Math.abs(b);
-    int r = a;
-    
-    while (i > 1)
-    {
-      r += a;
-      i--;
-    }
-    
-    return (b < 0) ? -r : r;
-  }
-}
+```include:java
+gof/strategy/PlusStrategy.java
 ```
 
 ##### Kontext
 
 Kontext uchovává zvolenou strategii.
 
-```java
-/**
- * Kontext obsahující strategii.
- * 
- * @author Vojtěch Hordějčuk
- */
-public class Context
-{
-  /**
-   * aktivní strategie
-   */
-  private Strategy strategy;
-  
-  /**
-   * Vytvoří novou instanci.
-   * 
-   * @param strategy
-   * zvolená strategie
-   */
-  public Context(Strategy strategy)
-  {
-    this.strategy = strategy;
-  }
-  
-  /**
-   * Vynásobí dvě čísla.
-   * 
-   * @param a
-   * činitel
-   * @param b
-   * činitel
-   * @return součin
-   */
-  public int multiply(int a, int b)
-  {
-    return strategy.multiply(a, b);
-  }
-}
+```include:java
+gof/strategy/Context.java
 ```
 
 ##### Test
 
 Násobení dvou čísel se provede dvakrát, pokaždé s jinou strategií. V obou případech by měl být výsledek stejný, a to i přesto, že byly použité dva naprost odlišné algoritmy. Klient nemusí vědět o tom, jak algoritmy pracují.
 
-```java
-// test první strategie
-
-Context context1 = new Context(new TimesStrategy());
-int r1 = context1.multiply(3, 5);
-System.out.println(r1); // 3*5 = 15
-
-// test druhé strategie
-
-Context context2 = new Context(new PlusStrategy());
-int r2 = context2.multiply(3, 5);
-System.out.println(r2); // 3*5 = 3+3+3+3+3 = 15
+```include:java
+gof/strategy/Example.java
 ```
 
 ### Reference

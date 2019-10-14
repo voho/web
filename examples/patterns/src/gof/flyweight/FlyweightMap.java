@@ -17,7 +17,7 @@ public class FlyweightMap {
         }
     }
 
-    public void addSomeRivers(double p) {
+    public void addSomeRivers(final double p) {
         for (int i = 0; i < tiles.length; i++) {
             if (Math.random() < p) {
                 tiles[i] = new FlyweightTile(RIVER);
@@ -25,7 +25,7 @@ public class FlyweightMap {
         }
     }
 
-    public void addSomeHills(double p) {
+    public void addSomeHills(final double p) {
         for (int i = 0; i < tiles.length; i++) {
             if (Math.random() < p) {
                 tiles[i] = new FlyweightTile(HILL);
