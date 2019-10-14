@@ -17,8 +17,12 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <sourceDirectory>src/</sourceDirectory>
+        <testSourceDirectory>src/</testSourceDirectory>
+    </build>
 
 </project>

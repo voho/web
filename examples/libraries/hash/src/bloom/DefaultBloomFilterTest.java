@@ -1,4 +1,4 @@
-package hash.bloom;
+package bloom;
 
 import org.junit.Before;
 import org.junit.Test;

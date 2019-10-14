@@ -93,24 +93,19 @@ Odhad pravděpodobnosti falešného pozitiva na základě počtu hashovacích fu
 #### Rozhraní filtru
 
 ```include:java
-BloomFilter.java
+bloom/BloomFilter.java
 ```
 
 #### Implementace filtru
 
 ```include:java
-DefaultBloomFilter.java
+bloom/DefaultBloomFilter.java
 ```
 
 #### Použití
 
-```java
-final Function<String, Integer> hash1 = s -> s.toLowerCase().hashCode();
-final Function<String, Integer> hash2 = s -> s.toUpperCase().hashCode();
-final BloomFilter<String> filter = new SimpleBloomFilter<>(10, hash1, hash2);
-
-filter.add("Hello");
-filter.add("World");
+```include:java
+bloom/Example.java
 ```
 
 ### Reference

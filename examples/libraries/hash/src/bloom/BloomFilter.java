@@ -1,4 +1,4 @@
-package hash.bloom;
+package bloom;
 
 /**
  * Simple Bloom filter.

@@ -1,4 +1,4 @@
-package hash.bloom;
+package bloom;
 
 import java.util.BitSet;
 import java.util.function.Function;
