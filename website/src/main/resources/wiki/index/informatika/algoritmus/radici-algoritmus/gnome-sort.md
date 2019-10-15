@@ -1,17 +1,18 @@
 ## Gnome Sort (řazení trpaslíkem)
 
-Gnome sort je řadící algoritmus, který si zakládá na své jednoduchosti. Základní princip algoritmu je podobný [insertion sort](wiki/insertion-sort), ale gnome sort je navržený spíše pro pobavení.
+Gnome sort je řadící algoritmus podobný [insertion sort](wiki/insertion-sort), ale určený spíše pro pobavení.
 
 Algoritmus je **přirozený**, **stabilní** a jeho [asymptotická složitost](wiki/asymptoticka-slozitost) je € O(n^2) €.
 
 Nyní si zkusme představit, jak zahradní trpaslíci řadí květináče podle velikosti. 
 
 Trpaslík stojí mezi dvěma květináči a kontroluje, zda jsou správně seřazeny. 
-Pokud ano, posune se o jednu pozici dopředu.
-Pokud ne, květináče prohodí, a vrátí se o jednu pozici zpět.
-Poté se celý postup opakuje od začátku.
+Pokud ano, posune se o jednu pozici vpřed.
+Pokud ne, květináče prohodí, a vrátí se o jednu pozici nazpět.
+Poté trpaslík celý postup opakuje, dokud není řazení dokončeno.
 
-Pokud se trpaslík dostane před první květináč, musí se logicky posunout o jednu pozici dopředu, aby vůbec měl co porovnávat.
+Jaké jsou krajní podmínky?
+Pokud se trpaslík dostane před první květináč, musí se ihned posunout o jednu pozici vpřed, aby vůbec měl co porovnávat.
 A jestliže dorazí za květináč poslední, řazení je dokončeno.
 
 > Gnome Sort is based on the technique used by the standard Dutch Garden Gnome (tuinkabouter). 
