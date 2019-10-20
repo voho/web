@@ -7,7 +7,7 @@ Tento seznam není úplný, protože [změn je opět mnoho](https://www.jcp.org/
 #### Stream, Optional, Collectors
 
 Nejprve několik nových metod pro [proudy](wiki/java-stream). 
-Pozor na metody *takeWhile* a *dropWhile*, které se chovají odlišně pro proudy [s definovaným pořadím](https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html#Ordering) (ordered) a bez tohoto pořadí (unordered).
+Pozor na metody *takeWhile* a *dropWhile*, které se chovají odlišně pro [řazené proudy](https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html#Ordering) (ordered) a pro proudy neřazené (unordered).
 Pro proudy bez pořadí není jejich chování definováno.
 
 ```java
@@ -54,7 +54,7 @@ bais.transferTo(someOutputStream);
 
 #### Nové tovární metody pro kolekce
 
-Pro množinu (*javadoc:java.util.Set*), seznam (*javadoc:java.util.List) a mapu (*javadoc:java.util.Map*) byly přidány statické [tovární metody](wiki/factory-method) pro vytváření nemodifikovatelných instancí těchto objektů.
+Pro množinu (*javadoc:java.util.Set*), seznam (*javadoc:java.util.List*) a mapu (*javadoc:java.util.Map*) byly přidány statické [tovární metody](wiki/factory-method) pro vytváření nemodifikovatelných instancí těchto objektů.
 
 ```java
 // množina
