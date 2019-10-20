@@ -1,4 +1,4 @@
-## Jazyk ANSI C
+## ANSI C
 
 > A C program is like a fast dance on a newly waxed dance floor by people carrying razors. *Waldi Ravens*
 
