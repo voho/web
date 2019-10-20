@@ -1,4 +1,4 @@
-## Jazyk Brainfuck
+## Brainfuck
 
 Programovací jazyk Brainfuck patří mezi ezoterické jazyky, určené k pobavení a zamyšlení programátorů. Navrhl jej v roce 1993 švýcarský programátor **Urban Müller** a obsahuje pouze osm příkazů. Každý příkaz je reprezentován právě jedním znakem a neznámé znaky jsou ignorovány. Brainfuck je Turingovsky úplný a formálně je tedy stejně silný jako obyčejné programovací jazyky.
 

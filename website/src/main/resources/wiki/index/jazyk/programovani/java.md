@@ -1,4 +1,4 @@
-## Jazyk Java 8
+## Java 8
 
 Java je objektově orientovaný jazyk, takže se program skládá ze vzájemně komunikujících objektů. Objekty spolu komunikují pouze přes své veřejné rozhraní - jeden objekt může využívat veřejného rozhraní objektu druhého. Programátor v jazyce Java definuje strukturu a chování těchto objektů. 
 
