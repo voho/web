@@ -1,2 +1,2 @@
-<li><a href="${social_profile_github}" class="button"><@icons.add "github"/> Open Source Projects</a></li>
-<li><a href="${social_profile_linkedin}" class="button"><@icons.add "linkedin"/> Curriculum Vitae</a></li>
+<li><a href="${social_profile_github}" class="button">Open Source Projects</a></li>
+<li><a href="${social_profile_linkedin}" class="button">Curriculum Vitae</a></li>

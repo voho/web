@@ -50,7 +50,7 @@ public class IncludeSourceCodePreprocessor implements CodeProcessor {
                 } else {
                     throw new IllegalStateException("ZIP entry was not found: " + codeSource);
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 throw new IllegalStateException("Error while loading contents from ZIP.", e);
             }
 
@@ -81,9 +81,9 @@ public class IncludeSourceCodePreprocessor implements CodeProcessor {
         html.line();
         html.raw("<p class='code-included-disclaimer'>");
 
-        html.raw("<span class='fa fa-github'></span> <a href='").text(githubUrl).raw("' onclick='return !window.open(this.href);'>Zdrojový kód</a>");
+        html.raw("<a href='").text(githubUrl).raw("' onclick='return !window.open(this.href);'>Zdrojový kód</a>");
         html.raw(" ");
-        html.raw("<span class='fa fa-check'></span> <a href='").text(codecovUrl).raw("' onclick='return !window.open(this.href);'>Pokrytí testy</a>");
+        html.raw("<a href='").text(codecovUrl).raw("' onclick='return !window.open(this.href);'>Pokrytí testy</a>");
         html.raw(" ");
         html.raw("<a href='" + TRAVIS_BUILD_URL + "' onclick='return !window.open(this.href);'><img src='" + TRAVIS_ICON_URL + "' alt='' /></a>");
 
@@ -107,7 +107,7 @@ public class IncludeSourceCodePreprocessor implements CodeProcessor {
                             result.zipEntryContents = extractZipEntry(zipFile, f);
                             return result;
                         });
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 final String error = String.format("ERROR: Cannot load the file: %s", path.toAbsolutePath());
                 throw new IOException(error);
             }
@@ -134,7 +134,7 @@ public class IncludeSourceCodePreprocessor implements CodeProcessor {
     private String extractZipEntry(final ZipFile zipFile, final ZipEntry zipEntry) {
         try (final InputStreamReader reader = new InputStreamReader(zipFile.getInputStream(zipEntry), StandardCharsets.UTF_8)) {
             return CharStreams.toString(reader);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             throw new RuntimeException(e);
         }
     }

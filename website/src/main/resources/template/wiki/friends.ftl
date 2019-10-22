@@ -1,5 +1,3 @@
-<#import "../macro/icons.ftl" as icons/>
-
 <#if active_wiki_page_incoming_links??>
     <#if active_wiki_page_incoming_links.items?has_content>
     <section class="wiki-related-pages incoming">
@@ -9,7 +7,7 @@
             </header>
             <ul>
                 <#list active_wiki_page_incoming_links.items as ref>
-                    <li><@icons.add "arrow-left"/> <a href="/wiki/${ref.id}/">${ref.title}</a></li>
+                    <li><a href="/wiki/${ref.id}/">${ref.title}</a></li>
                 </#list>
             </ul>
         </div>
@@ -26,7 +24,7 @@
             </header>
             <ul>
                 <#list active_wiki_page_outgoing_links.items as ref>
-                    <li><@icons.add "arrow-right"/> <a href="/wiki/${ref.id}/">${ref.title}</a></li>
+                    <li><a href="/wiki/${ref.id}/">${ref.title}</a></li>
                 </#list>
             </ul>
         </div>
