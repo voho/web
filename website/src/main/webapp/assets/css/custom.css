@@ -132,7 +132,7 @@ a.logo:hover {
 
 #search-query {
     border: 2px solid #ddd;
-    border-radius: 2px;
+    border-radius: 3pt;
     color: black;
     font-size: 12pt;
     margin: 0 1ex;
@@ -402,6 +402,7 @@ ul.copyright li {
 .wiki-related-pages.incoming ul li a, .wiki-related-pages.outgoing ul li a, .wiki-related-pages.siblings ul li a {
     background-color: #eeeeee;
     border: 0;
+    border-radius: 6pt;
     padding: 0.5ex 1em;
     display: inline-block;
     font-weight: bold;
@@ -495,17 +496,12 @@ a.logo:hover strong {
     background: #f6eb61 linear-gradient(-170deg, #f6eb61 0%, #fcf05f 90%);
     border: 1px solid #fcf05f;
     color: #111111;
-    border-radius: 3pt;
+    border-radius: 6pt;
 }
 
 .button:hover {
     background: #6af660;
     border: 1px solid #6af660;
-}
-
-#tree p:last-child {
-    border-bottom: 2px solid #eeeeee;
-    padding-bottom: 1em;
 }
 
 #wiki-content em {
@@ -526,10 +522,6 @@ a.logo:hover strong {
     border-radius: 6pt;
 }
 
-.wiki-related-pages.incoming, .wiki-related-pages.outgoing {
-    border-top: 2px solid #eeeeee;
-}
-
 .wiki-related-pages h4 {
     margin: 0 0 1ex 0;
     padding: 0;
@@ -547,6 +539,7 @@ a.logo:hover strong {
 
 .hljs {
     border: 2px solid #eeeeee;
+    border-radius: 6pt;
 }
 
 #wiki-content dt {
