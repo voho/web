@@ -50,10 +50,73 @@ const [a, b, c, d] = ["The", "Answer", "is", 42];
 const rating = string | null
 ```
 
+### Funkce
 
-never  /* unreachable */
-enum Color {Red, Green, Blue = 4}
-let c: Color = Color.Green
+```typescript
+// klasický zápis
+function sum(a: number, b: number): number {
+  return a + b;
+}
+
+// funkcionální zápis
+const sum = (a: number, b: number): number => {
+  return a + b;
+}
+
+// funknční výraz
+const sum = function (a: number, b: number): number {
+  return a + b;
+}
+```
+
+### Řídící konstrukce
+
+```typescript
+if (a < 5) { /* ... */ } else { /* ... */ }
+switch (a) { case 1: /* todo */ break; default: /* todo */ break; }
+while (a < 5) { /* ... */ }
+do { /* ... */ } while (a < 5)
+```
+
+### Typy a rozhraní
+
+```typescript
+// TODO
+```
+
+#### Průnik typů
+
+```typescript
+interface Bird {
+    fly();
+    layEggs();
+}
+
+interface Fish {
+    swim();
+    layEggs();
+}
+
+function getSmallPet(): Fish | Bird {
+    // ...
+}
+
+let pet = getSmallPet();
+pet.layEggs(); // okay
+pet.swim();    // errors
+```
+
+#### Sjednocení typů
+
+!TODO!
+
+#### Typ funkce
+
+```typescript
+interface SearchFunc {
+    (source: string, subString: string): boolean;
+}
+```
 
 ## Reference
 
