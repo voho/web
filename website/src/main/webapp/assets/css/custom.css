@@ -154,6 +154,10 @@ a.logo:hover {
     flex-direction: row;
 }
 
+#breadcrumbs .inner {
+    padding: 5pt 0;
+}
+
 /* footer */
 
 .icons {
@@ -472,7 +476,9 @@ a {
 }
 
 #breadcrumbs {
-    color: #666666;
+    border-bottom: 2px solid #eeeeee;
+    color: #dddddd;
+    font-size: 90%;
 }
 
 #breadcrumbs a {
