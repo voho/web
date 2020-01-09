@@ -27,10 +27,10 @@ public class RecentBackend {
     private final AtomicReference<List<Spotify.SpotifySong>> recentSongsCache;
 
     RecentBackend(final HttpClient httpClient, final Configuration configuration) {
-        this.instagram = new Instagram(httpClient, configuration);
-        this.spotify = new Spotify(httpClient, configuration);
-        this.recentPhotosCache = new AtomicReference<>(null);
-        this.recentSongsCache = new AtomicReference<>(null);
+        instagram = configuration.isOffline() ? null : new Instagram(httpClient, configuration);
+        spotify = configuration.isOffline() ? null : new Spotify(httpClient, configuration);
+        recentPhotosCache = new AtomicReference<>(null);
+        recentSongsCache = new AtomicReference<>(null);
 
         ExecutorProvider.RECENT_ITEMS_UPDATER_EXECUTOR.scheduleWithFixedDelay(
                 this::update,
@@ -48,6 +48,11 @@ public class RecentBackend {
     }
 
     private void updateRecentSongs() {
+        if (spotify == null) {
+            // short circuit
+            return;
+        }
+
         LOG.info("Updating song cache.");
 
         try {
@@ -59,6 +64,11 @@ public class RecentBackend {
     }
 
     private void updateRecentPhotos() {
+        if (instagram == null) {
+            // short circuit
+            return;
+        }
+
         LOG.info("Updating photo cache.");
 
         try {

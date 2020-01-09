@@ -30,7 +30,7 @@ public class Backend {
     private final Configuration configuration = new Configuration(dynamoDB);
     private final LambdaClient lambdaClient = new LambdaClient(lambda);
     private final LambdaWikiImageRepository wikiImageRepositoryDelegate = new LambdaWikiImageRepository(lambdaClient);
-    private final WikiImageRepository wikiImageRepository = new CachingWikiImageRepository(wikiImageRepositoryDelegate);
+    private final WikiImageRepository wikiImageRepository = new CachingWikiImageRepository(configuration, wikiImageRepositoryDelegate);
     private final WikiParser wikiParser = new CustomWikiParser(wikiImageRepository);
     private final WikiPageSourceRepository wikiPageSourceRepository = new DefaultWikiPageSourceRepository();
     private final ParsedWikiPageRepository parsedWikiPageRepository = new DefaultParsedWikiPageRepository(wikiPageSourceRepository, wikiParser);

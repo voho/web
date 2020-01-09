@@ -5,6 +5,7 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.io.Resources;
 import cz.voho.common.exception.InitializationException;
 import cz.voho.common.utility.ExecutorProvider;
+import cz.voho.external.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,12 +20,14 @@ public class CachingWikiImageRepository implements WikiImageRepository {
     private static final byte[] DUMMY_IMAGE = loadDummyImage();
     private static final MessageDigest SHA_256 = getMessageDigest();
 
+    private final Configuration configuration;
     private final WikiImageRepository primaryDelegate;
     private final Cache<String, byte[]> cache;
 
-    public CachingWikiImageRepository(final WikiImageRepository primaryDelegate) {
+    public CachingWikiImageRepository(final Configuration configuration, final WikiImageRepository primaryDelegate) {
+        this.configuration = configuration;
         this.primaryDelegate = primaryDelegate;
-        this.cache = CacheBuilder.newBuilder().build();
+        cache = CacheBuilder.newBuilder().build();
     }
 
     @Override
@@ -38,6 +41,10 @@ public class CachingWikiImageRepository implements WikiImageRepository {
     }
 
     private byte[] generateImage(final String source, final ImageGenerator primaryGenerator) {
+        if (configuration.isOffline()) {
+            return DUMMY_IMAGE;
+        }
+
         final String hash = hash(source);
         final byte[] loaded = cache.getIfPresent(hash);
 

@@ -22,6 +22,10 @@ public class Configuration {
     }
 
     String getValue(final String key) {
+        if (isOffline()) {
+            throw new IllegalStateException("Cannot get configuration in Offline mode.");
+        }
+
         LOG.info("Loading configuration {}...", key);
 
         final GetItemRequest request = new GetItemRequest();
@@ -31,5 +35,9 @@ public class Configuration {
         final GetItemResult response = dynamoDB.getItem(request);
 
         return response.getItem().get(VALUE_COLUMN).getS();
+    }
+
+    public boolean isOffline() {
+        return false;
     }
 }
