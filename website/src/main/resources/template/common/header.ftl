@@ -6,7 +6,7 @@
                 <input id="search-query" name="q" type="text" size="30" placeholder=""/>
                 <input name="hl" type="hidden" value="cs"/>
                 <input name="sitesearch" type="hidden" value="voho.eu"/>
-                <input class="button" type="submit" value="Hledat"/>
+                <input class="button" type="submit" value="🔍"/>
             </form>
         </span>
     </div>

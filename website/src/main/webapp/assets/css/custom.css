@@ -1,9 +1,13 @@
 /* typography */
 @import url('normalize.css');
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700&display=swap&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono|Roboto+Slab:400,700&display=swap&subset=latin-ext');
 
 body, h1, h2, h3, h4, h5, h6, option, select, button, input {
-    font-family: "Source Sans Pro", sans-serif;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto Slab', serif;
 }
 
 body {
@@ -142,6 +146,11 @@ a.logo:hover {
     flex-direction: row;
 }
 
+#heading .inner {
+    padding: 0 0 1em 0;
+    position: relative;
+}
+
 #heading.wiki-cover .wiki-related-pages.siblings {
     font-size: 110%;
     font-weight: bold;
@@ -151,8 +160,20 @@ a.logo:hover {
     display: block;
 }
 
+/* breadcrumbs */
+
+#breadcrumbs {
+    color: #cccccc;
+    font-size: 90%;
+    margin-top: 2em;
+}
+
+#breadcrumbs a {
+    color: #999999;
+}
+
 #breadcrumbs .inner {
-    padding: 5pt 0;
+    padding: 0;
 }
 
 /* footer */
@@ -269,16 +290,6 @@ ul.copyright li {
     font-weight: bold;
 }
 
-#latest {
-    font-size: 90%;
-}
-
-#latest strong {
-    font-size: 90%;
-    font-weight: normal;
-    color: #999999;
-}
-
 /* wiki */
 
 #wiki-content h1 {
@@ -327,7 +338,7 @@ ul.copyright li {
 
 #wiki-content em {
     border-radius: 3pt;
-    font-family: monospace;
+    font-family: 'Roboto Mono', monospace;
     font-style: normal;
     font-size: 90%;
     padding: 1pt 5pt;
@@ -396,9 +407,9 @@ ul.copyright li {
 }
 
 .wiki-related-pages.incoming ul li a, .wiki-related-pages.outgoing ul li a, .wiki-related-pages.siblings ul li a {
-    background-color: #4294c1;
+    background-color: #dddddd;
     border-radius: 5pt;
-    color: white;
+    color: #000000;
     padding: 0.7ex 1em;
     display: inline-block;
     margin: 0 0.4ex 1ex 0;
@@ -416,7 +427,7 @@ ul.copyright li {
 }
 
 .hljs {
-    font-family: Menlo, monospace;
+    font-family: 'Roboto Mono', monospace;
     font-size: 80%;
 }
 
@@ -455,50 +466,35 @@ COLORS
 
 body {
     background-color: #f6f6f6;
-    color: #111111;
+    color: #333333;
 }
 
 a {
-    color: #4294c1;
-}
-
-#header {
-    background-color: #f6f6f6;
-}
-
-#breadcrumbs {
-    background-color: #f6f6f6;
-    color: #dddddd;
-    font-size: 90%;
-}
-
-#breadcrumbs a {
-    color: #999999;
+    color: #3D8497;
 }
 
 a.logo {
-    color: #666;
+    color: #666666;
 }
 
 a.logo strong {
-    background-color: #4294c1;
-    color: #fff;
+    background-color: #5BB6C4;
+    color: #ffffff;
 }
 
 .button {
-    background: #fff462 linear-gradient(-170deg, #f6eb61 0%, #fcf05f 90%);
-    border: 1px solid rgba(204, 192, 85, 0.59);
+    background: #A8F6CF;
+    border: 0;
     color: #111111;
     border-radius: 6pt;
 }
 
 .button:hover {
-    background: #4294c1;
-    border: 1px solid rgba(51, 110, 148, 0.55);
+    background: #6DE2C7;
 }
 
 #wiki-content em {
-    background-color: rgba(73, 177, 222, 0.3);
+    background-color: rgba(176, 245, 207, 0.47);
     margin-left: 3pt;
     margin-right: 3pt;
 }
@@ -518,24 +514,20 @@ a.logo strong {
     font-size: 80%;
 }
 
-#wiki-content td {
-}
-
 .box {
     border: 2px solid #eeeeee;
     border-radius: 6pt;
-}
-
-.wiki-related-pages h4 {
-    margin: 0 0 1ex 0;
-    padding: 0;
-    color: gray;
 }
 
 #search-query {
     background: rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(0, 0, 0, 0.2);
     color: white;
+}
+
+#search .button {
+    background: none transparent;
+    border: 0;
 }
 
 .icons li a {
@@ -562,50 +554,6 @@ dl {
 
 dl dd {
     margin-left: 2em;
-}
-
-/* search */
-
-#wiki-content .search-result {
-    margin: 1em 0;
-    padding: 1em;
-}
-
-#wiki-content .search-result h3 {
-    font-size: 1em;
-    margin-top: 0;
-}
-
-#wiki-content .search-result-fragment {
-    font-size: 10pt;
-    color: #666;
-    margin-top: 3pt;
-    padding: 2pt 5pt;
-    background: #fafafa;
-    line-height: 1.3;
-}
-
-#wiki-content .search-result-fragment b {
-    background-color: #f6eb61;
-    padding: 1px 5pt;
-    font-weight: bold;
-    color: black;
-}
-
-#wiki-content .code-included-disclaimer {
-    color: #666;
-    text-align: right;
-    margin: -1ex 0 2em 0;
-}
-
-#wiki-content .code-included-disclaimer a {
-    color: #999;
-    font-size: 70%;
-    padding: 0 1em;
-}
-
-#wiki-content .code-included-disclaimer img {
-    vertical-align: middle;
 }
 
 ul.copyright li {
