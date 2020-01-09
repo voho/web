@@ -86,10 +86,6 @@ iframe {
     padding: 0;
 }
 
-#universe {
-    margin-top: 5em;
-}
-
 .inner {
     margin: 0 auto;
     max-width: 1000pt;
@@ -100,13 +96,7 @@ iframe {
 /* header */
 
 #header {
-    height: 5em;
-    line-height: 5em;
-    position: fixed;
-    left: 0;
-    top: 0;
     width: 100%;
-    z-index: 9999;
 }
 
 #header .inner {
@@ -497,26 +487,26 @@ a.logo strong {
 }
 
 .button {
-    background: #f6eb61 linear-gradient(-170deg, #f6eb61 0%, #fcf05f 90%);
-    border: 1px solid #e4d85b;
+    background: #fff462 linear-gradient(-170deg, #f6eb61 0%, #fcf05f 90%);
+    border: 1px solid rgba(204, 192, 85, 0.59);
     color: #111111;
     border-radius: 6pt;
 }
 
 .button:hover {
-    background: #6af660;
-    border: 1px solid #6af660;
+    background: #4294c1;
+    border: 1px solid rgba(51, 110, 148, 0.55);
 }
 
 #wiki-content em {
-    background-color: rgba(106, 246, 96, 0.3);
+    background-color: rgba(73, 177, 222, 0.3);
     margin-left: 3pt;
     margin-right: 3pt;
 }
 
 #wiki-content .inner {
     background-color: #ffffff;
-    padding: 1ex 2em;
+    padding: 1ex 2em 2em 2em;
 }
 
 #wiki-content th, #wiki-content td {
