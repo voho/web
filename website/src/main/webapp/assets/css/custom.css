@@ -134,7 +134,6 @@ a.logo:hover {
 }
 
 #header .inner {
-    padding: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
