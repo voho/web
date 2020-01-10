@@ -1,6 +1,6 @@
 /* typography */
 @import url('normalize.css');
-@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono|Roboto+Slab:400,700&display=swap&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,500|Roboto+Slab:400,700|Roboto:400,700&display=swap&subset=latin-ext');
 
 body, h1, h2, h3, h4, h5, h6, option, select, button, input {
     font-family: 'Roboto', sans-serif;
@@ -121,6 +121,10 @@ a.logo:hover {
     opacity: 1;
 }
 
+a.logo h1 {
+    font-size: 1em;
+}
+
 #search {
     margin-left: 3em;
 }
@@ -131,6 +135,16 @@ a.logo:hover {
     margin: 0 1ex;
     padding: 2pt 5pt;
     width: 10em;
+}
+
+#search-query {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+#search .button {
+    background: none transparent;
+    border: 0;
 }
 
 #header form {
@@ -426,11 +440,6 @@ ul.copyright li {
     padding: 0;
 }
 
-.hljs {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 80%;
-}
-
 .image.left, .image.right {
     max-width: 25%;
 }
@@ -458,6 +467,13 @@ ul.copyright li {
 
 .image.left img, .image.right img {
     width: 100%;
+}
+
+.hljs {
+    border-radius: 6pt;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 80%;
+    padding: 2em;
 }
 
 /*******************************************************************************
@@ -502,6 +518,7 @@ a.logo strong {
 #wiki-content .inner {
     background-color: #ffffff;
     padding: 1ex 2em 2em 2em;
+    border-radius: 6pt;
 }
 
 #wiki-content th, #wiki-content td {
@@ -514,29 +531,29 @@ a.logo strong {
     font-size: 80%;
 }
 
+#wiki-content .code-included-disclaimer {
+    color: #666;
+    text-align: right;
+    margin: -1ex 0 2em 0;
+}
+
+#wiki-content .code-included-disclaimer a {
+    color: #999;
+    font-size: 70%;
+    padding: 0 1em;
+}
+
+#wiki-content .code-included-disclaimer img {
+    vertical-align: middle;
+}
+
 .box {
     border: 2px solid #eeeeee;
     border-radius: 6pt;
 }
 
-#search-query {
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    color: white;
-}
-
-#search .button {
-    background: none transparent;
-    border: 0;
-}
-
 .icons li a {
     color: #666666;
-}
-
-.hljs {
-    border: 2px solid #eeeeee;
-    border-radius: 6pt;
 }
 
 #wiki-content dt {
