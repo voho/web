@@ -1,7 +1,5 @@
 ## Systémová architektura
 
-> Good design adds value faster than it adds cost. *Thomas C. Gale*
-
 Co je softwarová architektura a jaká je její úloha?
 
 > Architecture is about the important stuff. Whatever that is *R. Johnson*
@@ -24,15 +22,18 @@ K jeho stavbě není potřeba žádný materiál, pouze čas.
 
 Architekt vyvažuje mezi náklady a přidanou hodnotu a snaží se navrhnout takovou architekturu, která skvěle vyřeší ty nejdůležitější požadavky a bude alespoň uspokojivě řešit požadavky méně důležité.
 
+> Good design adds value faster than it adds cost. *Thomas C. Gale*
+
 Kvalitní architektura se projeví v čase. Čím je původní architektura kvalitnější, tím méně času a nákladů je potřeba k implementaci dalšího požadavku. Za cenu pomalejšího rozjezdu projektu získáme rychlejší růst přidané hodnoty později.
 
 ![Vliv kvality software na růst přidané hodnoty](https://martinfowler.com/articles/is-quality-worth-cost/both.png)
 
 Jako v každém oboru lidské činnosti, i pro softwarovou architekturu existují určité šablony a vzory, které lze s určitou dávkou kreativity přepoužít. 
 U ustálených vzorů již známe jejich výhody a nevýhody v praxi, a můžeme se tedy vyhnout některým chybám.
- Zároveň se můžeme inspirovat myšlenkami někoho, kdo již podobný problém řešil, a ušetřit si čas.
+Zároveň se můžeme inspirovat myšlenkami někoho, kdo již podobný problém řešil, a ušetřit si čas.
+Vzory se samozřejmě i různě kombinovat a prolínat.
  
- Několik z těchto vzorů naleznete i zde na dalších podstránkách.
+Několik z těchto vzorů naleznete i zde na dalších podstránkách.
 
 > There are two ways of constructing a software design. One way is to make it so simple that there are obviously no deficiencies. And the other way is to make it so complicated that there are no obvious deficiencies. *C. A. R. Hoare*
 
