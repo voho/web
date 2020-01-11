@@ -2,29 +2,34 @@
 
 Klient-server (client-server) je architektura distribuované aplikace, která se skládá ze dvou základních komponent: **klient** a **server**.
 
-* Server je komponenta, která poskytuje určitou službu. Službou zde rozumíme například data nebo provedení nějakého výpočtu.
+* Server je komponenta, která poskytuje určitou službu. Službou zde rozumíme například data nebo provedení nějakého výpočtu. K jednomu serveru může být připojen libovolný počet klientů.
 * Klient je komponenta, která se k serveru připojuje, aby této služby využila.
 
 Komunikaci zahajuje klient, který k serveru naváže stabilní spojení a odešle svůj první požadavek.
 Následně může stejné spojení využít i pro požadavky následující.
+Server pro každého nového klienta vytvoří nový vnitřní stav, který se označuje jako **relace** (session).
+Tento stav k němu přiřadí až do doby, než se klient odpojí.
+Relace primárně slouží k omezení síťové komunikace - klient se může například přihlásit jen na začátku relace a pak už se na existující přihlášení pouze odvolávat.
 
 ```uml:class
 actor Client1
 actor Client2
+actor Client3
 storage Server
-Client1 -up-> Server
-Client2 -up-> Server
+Client1 -up-> Server: session 1
+Client2 -up-> Server: session 2
+Client3 -up-> Server: session 3
 ```
 
 ### Výhody
 
-* kapacita klientů a serverů je plně nezávislá; obě komponenty lze libovolně škálovat
-* díky tomu, že jeden server obsluhuje větší počet klientů, bývá tato architektura poměrně levná
+* kapacita klientů a serverů je plně nezávislá
+* kód klienta i serveru lze nezávisle aktualizovat (omezeno kompatibilitou rozhraní)
 
 ### Nevýhody
 
-* protože je klientů řádově víc než serverů, server musí umět pracovat s více klienty najednou, nějak je rozlišovat, a stíhat jim odpovídat
-* bezpečnost a dobré úmysly klientů nelze nijak zajistit (mohou být napadeni např. i viry), a proto by měl server zajistit autentikaci a autorizaci klientů
+* protože je klientů řádově víc než serverů, server musí umět pracovat s mnoha klienty najednou a udržovat relaci pro každého z nich
+* bezpečnost a dobré úmysly klientů nelze nijak zajistit (mohou být třeba napadeni viry), a proto musí server zajistit autentikaci a autorizaci klientů
 * jako centrální místo může být server cílem útoků, například DDOS (distribuované přetížení serveru)
 
 ### Reference
