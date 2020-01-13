@@ -22,19 +22,15 @@ public class Person {
             WebsiteConstants.PROFILE_GITHUB,
             WebsiteConstants.PROFILE_TWITTER,
             WebsiteConstants.PROFILE_INSTAGRAM,
-            WebsiteConstants.PROFILE_FLICKR,
             WebsiteConstants.PROFILE_SPOTIFY,
-            WebsiteConstants.PROFILE_ITUNES,
-            WebsiteConstants.PROFILE_YOUTUBE,
-            WebsiteConstants.PROFILE_AMAZON,
-            WebsiteConstants.PROFILE_GOOGLE_MUSIC
+            WebsiteConstants.PROFILE_ITUNES
     };
 
     public String getContext() {
         return context;
     }
 
-    public void setContext(String context) {
+    public void setContext(final String context) {
         this.context = context;
     }
 
@@ -42,7 +38,7 @@ public class Person {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(final String type) {
         this.type = type;
     }
 
@@ -50,7 +46,7 @@ public class Person {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -58,7 +54,7 @@ public class Person {
         return url;
     }
 
-    public void setUrl(String url) {
+    public void setUrl(final String url) {
         this.url = url;
     }
 
@@ -66,7 +62,7 @@ public class Person {
         return honorificPrefix;
     }
 
-    public void setHonorificPrefix(String honorificPrefix) {
+    public void setHonorificPrefix(final String honorificPrefix) {
         this.honorificPrefix = honorificPrefix;
     }
 
@@ -74,7 +70,7 @@ public class Person {
         return givenName;
     }
 
-    public void setGivenName(String givenName) {
+    public void setGivenName(final String givenName) {
         this.givenName = givenName;
     }
 
@@ -82,7 +78,7 @@ public class Person {
         return familyName;
     }
 
-    public void setFamilyName(String familyName) {
+    public void setFamilyName(final String familyName) {
         this.familyName = familyName;
     }
 
@@ -90,7 +86,7 @@ public class Person {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(final String gender) {
         this.gender = gender;
     }
 
@@ -98,7 +94,7 @@ public class Person {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
@@ -106,7 +102,7 @@ public class Person {
         return homeLocation;
     }
 
-    public void setHomeLocation(String homeLocation) {
+    public void setHomeLocation(final String homeLocation) {
         this.homeLocation = homeLocation;
     }
 
@@ -114,7 +110,7 @@ public class Person {
         return sameAs;
     }
 
-    public void setSameAs(String[] sameAs) {
+    public void setSameAs(final String[] sameAs) {
         this.sameAs = sameAs;
     }
 
@@ -122,7 +118,7 @@ public class Person {
         return jobTitle;
     }
 
-    public void setJobTitle(String jobTitle) {
+    public void setJobTitle(final String jobTitle) {
         this.jobTitle = jobTitle;
     }
 }

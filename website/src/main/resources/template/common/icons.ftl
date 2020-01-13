@@ -12,21 +12,9 @@
         <a href="${social_profile_instagram}"><span class="label">Instagram</span></a>
     </li>
     <li>
-        <a href="${social_profile_flickr}"><span class="label">Flickr</span></a>
-    </li>
-    <li>
         <a href="${social_profile_spotify}"><span class="label">Spotify</span></a>
     </li>
     <li>
         <a href="${social_profile_itunes}"><span class="label">iTunes</span></a>
-    </li>
-    <li>
-        <a href="${social_profile_youtube}"><span class="label">YouTube</span></a>
-    </li>
-    <li>
-        <a href="${social_profile_amazon}"><span class="label">Amazon Music</span></a>
-    </li>
-    <li>
-        <a href="${social_profile_google}"><span class="label">Google Music</span></a>
     </li>
 </ul>

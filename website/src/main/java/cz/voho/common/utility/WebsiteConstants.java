@@ -22,14 +22,8 @@ public class WebsiteConstants {
     public static final String PROFILE_GITHUB = "https://github.com/voho";
     public static final String PROFILE_TWITTER = "http://twitter.com/vohooo";
     public static final String PROFILE_INSTAGRAM = "https://www.instagram.com/vohocz/";
-    public static final String PROFILE_FLICKR = "https://www.dropbox.com/sh/yjlrw3845e0cu8y/AADJehOxQz8bdbK9LxcIXmpqa?dl=0";
     public static final String PROFILE_ITUNES = "https://itunes.apple.com/us/artist/voho/id1213510083";
-    public static final String PROFILE_AMAZON = "https://music.amazon.com/artists/B076MM3JFF?tab=CATALOG";
-    public static final String PROFILE_GOOGLE_MUSIC = "https://play.google.com/store/music/artist/voho?id=Aprz5lawb7xu3s2nfeqpqudxdzm";
     public static final String PROFILE_SPOTIFY = "https://open.spotify.com/artist/4OaWtKAgl8oGU9QTa4wXu4";
-    public static final String PROFILE_YOUTUBE = "https://www.youtube.com/channel/UCmhcw6dUD3J7dQz17l2KmCg";
     public static final String PROFILE_PAYPAL = "https://www.paypal.me/vojtisek";
     public static final Locale CZECH_LOCALE = new Locale("cs", "CZ");
-    public static final String DEFAULT_LIGHT_COLOR = "9bf1ff";
-    public static final String DEFAULT_DARK_COLOR = "242943";
 }

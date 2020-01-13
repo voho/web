@@ -28,7 +28,7 @@ public class RecentBackend {
 
     RecentBackend(final HttpClient httpClient, final Configuration configuration) {
         instagram = configuration.isOffline() ? null : new Instagram(httpClient, configuration);
-        soundcloud = new SoundCloud();
+        soundcloud = configuration.isOffline() ? null : new SoundCloud();
         recentPhotosCache = new AtomicReference<>(null);
         recentSongsCache = new AtomicReference<>(null);
 

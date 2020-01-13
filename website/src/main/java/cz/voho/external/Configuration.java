@@ -38,6 +38,6 @@ public class Configuration {
     }
 
     public boolean isOffline() {
-        return false;
+        return true;
     }
 }

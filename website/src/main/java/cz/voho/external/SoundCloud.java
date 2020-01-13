@@ -27,11 +27,6 @@ public class SoundCloud {
             "&visual=false" +
             "&start_track=0";
 
-    public static void main(final String[] args) throws IOException {
-        final List<SoundCloudSong> songs = new SoundCloud().getLatestSongs(10);
-        System.out.println(songs);
-    }
-
     public List<SoundCloudSong> getLatestSongs(final int limit) throws IOException {
         final Document rssParsed = Jsoup.parse(new URL("http://feeds.soundcloud.com/users/soundcloud:users:764886559/sounds.rss"), 10000);
         final Elements songLinks = rssParsed.select("item link");
