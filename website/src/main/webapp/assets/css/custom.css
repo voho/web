@@ -486,7 +486,7 @@ body {
 }
 
 a {
-    color: #3D8497;
+    color: #1499ff;
 }
 
 a.logo {
@@ -494,23 +494,23 @@ a.logo {
 }
 
 a.logo strong {
-    background-color: #5BB6C4;
+    background-color: #1499ff;
     color: #ffffff;
 }
 
 .button {
-    background: #A8F6CF;
+    background: #1499ff;
     border: 0;
     color: #111111;
     border-radius: 6pt;
 }
 
 .button:hover {
-    background: #6DE2C7;
+    background: #1475c8;
 }
 
 #wiki-content em {
-    background-color: rgba(176, 245, 207, 0.47);
+    background-color: rgba(215, 236, 252, 0.3);
     margin-left: 3pt;
     margin-right: 3pt;
 }

@@ -14,7 +14,7 @@ import java.util.List;
 public class SoundCloud {
     private static final String WIDGET_URL_FORMAT = "https://w.soundcloud.com/player/" +
             "?url=%s" +
-            "&color=3D8497" +
+            "&color=1499ff" +
             "&auto_play=false" +
             "&buying=true&liking=false" +
             "&download=false" +
