@@ -3,7 +3,7 @@ package cz.voho.facade;
 import cz.voho.common.utility.ExecutorProvider;
 import cz.voho.external.Configuration;
 import cz.voho.external.Instagram;
-import cz.voho.external.Spotify;
+import cz.voho.external.SoundCloud;
 import org.apache.http.client.HttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,13 +22,13 @@ public class RecentBackend {
     private static final int UPDATE_INTERVAL_SECONDS = 3600;
 
     private final Instagram instagram;
-    private final Spotify spotify;
+    private final SoundCloud soundcloud;
     private final AtomicReference<List<Instagram.InstagramImage>> recentPhotosCache;
-    private final AtomicReference<List<Spotify.SpotifySong>> recentSongsCache;
+    private final AtomicReference<List<SoundCloud.SoundCloudSong>> recentSongsCache;
 
     RecentBackend(final HttpClient httpClient, final Configuration configuration) {
         instagram = configuration.isOffline() ? null : new Instagram(httpClient, configuration);
-        spotify = configuration.isOffline() ? null : new Spotify(httpClient, configuration);
+        soundcloud = new SoundCloud();
         recentPhotosCache = new AtomicReference<>(null);
         recentSongsCache = new AtomicReference<>(null);
 
@@ -48,7 +48,7 @@ public class RecentBackend {
     }
 
     private void updateRecentSongs() {
-        if (spotify == null) {
+        if (soundcloud == null) {
             // short circuit
             return;
         }
@@ -56,7 +56,7 @@ public class RecentBackend {
         LOG.info("Updating song cache.");
 
         try {
-            final List<Spotify.SpotifySong> response = spotify.getLatestSongs(RECENT_SONGS_COUNT);
+            final List<SoundCloud.SoundCloudSong> response = soundcloud.getLatestSongs(RECENT_SONGS_COUNT);
             recentSongsCache.set(response);
         } catch (final IOException e) {
             LOG.warn("Could not upgrade song cache.", e);
@@ -83,7 +83,7 @@ public class RecentBackend {
         return Optional.ofNullable(recentPhotosCache.get()).orElse(Collections.emptyList());
     }
 
-    public List<Spotify.SpotifySong> getRecentTracks() {
+    public List<SoundCloud.SoundCloudSong> getRecentTracks() {
         return Optional.ofNullable(recentSongsCache.get()).orElse(Collections.emptyList());
     }
 }
