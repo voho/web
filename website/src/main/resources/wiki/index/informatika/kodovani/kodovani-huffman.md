@@ -8,9 +8,9 @@ Komprese spočívá v tom, že se častěji používané znaky zakódují menš�
 
 - Vytvoř [graf](wiki/graf), který se skládá z €n€ kořenových stromů. Každý strom €T_i€ se skládá z jednoho kořenového uzlu reprezentujícího jeden symbol €S_i€. Váha stromu €w(T_i)€ je rovna četnosti použití daného symbolu €S_i€ ve zprávě.
 - Dokud není graf souvislý, opakuj:
- - Najdi dva různé stromy €T_1€ a €T_2€ s minimální váhou.
- - Vytvoř nový kořenový strom €T_3€ s novým kořenem, jehož levý potomek je €T_1€ a pravý potomek €T_2€. Váha tohoto nového stromu je rovna součtu vah stromů €T_1€ a €T_2€, tedy €w(T_3)=w(T_1)+w(T_2)€.
- - Odeber oba dva stromy €T_1€, €T_2€ z grafu.
+  - Najdi dva různé stromy €T_1€ a €T_2€ s minimální váhou.
+  - Vytvoř nový kořenový strom €T_3€ s novým kořenem, jehož levý potomek je €T_1€ a pravý potomek €T_2€. Váha tohoto nového stromu je rovna součtu vah stromů €T_1€ a €T_2€, tedy €w(T_3)=w(T_1)+w(T_2)€.
+  - Odeber oba dva stromy €T_1€, €T_2€ z grafu.
 - Výsledný binární kořenový strom se nazývá **Huffmanův strom**. Každou jeho levou hranu označ nulou a pravou hranu jedničkou. Kód pro každý znak je dán cestou z kořene do odpovídajícího listu tak, že se postupně zapisují binární čísla u navštívených hran.
 
 Stejné znaky se stejnými četnostmi mohou díky rozdílné implementaci vytvořit i několik rozdílných Huffmanových stromů - délka kódových slov pro stejné symboly je však shodná.
