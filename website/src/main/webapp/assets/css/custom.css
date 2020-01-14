@@ -108,39 +108,37 @@ iframe {
     width: 100%;
 }
 
-#header .inner {
-    position: relative;
-}
-
-a.logo {
+.logo {
     font-size: 150%;
     font-weight: bold;
     opacity: 0.9;
 }
 
-a.logo strong {
+.logo strong {
     padding: 5pt 10pt;
+    margin-right: 1ex;
 }
 
-a.logo:hover {
+.logo a:hover {
     opacity: 1;
 }
 
-a.logo h1 {
+h1.logo {
+    margin: 0;
+    padding: 0;
     font-size: 1em;
 }
 
 #search {
-    margin-left: 3em;
+    margin-left: 2em;
     white-space: nowrap;
 }
 
 #search-query {
     border-radius: 3pt;
     font-size: 12pt;
-    margin: 0 1ex;
-    padding: 2pt 5pt;
-    width: 10em;
+    padding: 1ex;
+    width: 8em;
 }
 
 #search-query {
@@ -167,7 +165,7 @@ a.logo h1 {
 }
 
 #heading .inner {
-    padding: 0 0 1em 0;
+    padding: 0 0 2em 0;
     position: relative;
 }
 
@@ -185,7 +183,6 @@ a.logo h1 {
 #breadcrumbs {
     color: #cccccc;
     font-size: 90%;
-    margin-top: 2em;
 }
 
 #breadcrumbs a {
@@ -482,11 +479,11 @@ a {
     color: rgba(25, 155, 255, 255);
 }
 
-a.logo {
+.logo {
     color: #666666;
 }
 
-a.logo strong {
+.logo strong {
     background-color: rgba(25, 155, 255, 200);
     color: #ffffff;
 }

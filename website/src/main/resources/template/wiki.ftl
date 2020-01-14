@@ -9,7 +9,6 @@
 <div id="universe">
 
 <#include "wiki/toc-wrapper.ftl"/>
-<#include "wiki/breadcrumbs.ftl"/>
 <#include "macro/children_pages.ftl"/>
 
 <#if active_wiki_page_id == 'index'>
