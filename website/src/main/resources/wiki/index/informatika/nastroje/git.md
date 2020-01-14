@@ -13,21 +13,6 @@ Vynikající online tutoriály naleznete zde:
 
 ### Konfigurace GIT
 
-#### Generování SSH klíčů
-
-Příkaz pro vygenerování výchozího SSH klíče s bitovou délkou 4096:
-
-```bash
-ssh-keygen -b 4096
-```
-
-Po spuštění vygeneruje privátní a veřejný klíč v adresáři *HOME/.ssh/*. Ve výchozím nastavení vzniknou tyto dva soubory:
-
-- *id_rsa* = privátní klíč (ten nikdy nesmíte nikomu dát)
-- *id_rsa.pub* = veřejný klíč (ten si můžete klidně umístit na web)
-
-Váš veřejný klíč je **celý obsah** souboru *id_rsa.pub*.
-
 #### Nastavení jména a hesla
 
 ```bash
@@ -45,12 +30,12 @@ git config --global merge.tool vimdiff
 #### Výpis nastavení
 
 ```bash
-git config --listbash
+git config --list
 ```
 
 ### Práce s lokálním repositářem
 
-#### Vytvoření repositáře
+#### Založení repositáře
 
 Založení nového repositáře v aktuálním adresáři (adresář nemusí být prázdný):
 
@@ -66,8 +51,10 @@ git clone URL
 
 Příklady URL:
 
-- **HTTPS**: https://github.com/COMPANY/PROJECT.git
-- **SSH**: git@github.com:COMPANY/PROJECT.git
+```bash
+git clone https://github.com/COMPANY/PROJECT.git
+git clone git@github.com:COMPANY/PROJECT.git
+```
 
 #### Přidávání změn do commitů
 
@@ -116,9 +103,13 @@ git reset --hard REVISION
 
 !TODO!
 
+![git merge](https://cms-assets.tutsplus.com/uploads/users/585/posts/23191/image/merge.png)
+
 #### Rebase
 
 !TODO!
+
+![git rebase](https://cms-assets.tutsplus.com/uploads/users/585/posts/23191/image/rebase.png)
 
 Existuje i tzv. **interaktivní rebase**, který umožní pomocí textového editoru upravit pořadí commitů, jejich commit message, případně některé commity "splácnout" do jednoho většího. Spouští se parametrem *-i*.
 
@@ -173,62 +164,15 @@ git reflog
 - do zprávy se nepíšou informace, které lze snadno zjistit z logu - například názvy změněných souborů, jméno člověka provádějícího změny, atd.
 - někteří lidé preferují použití rozkazujícího způsobu
 
-### Způsob práce
+### Standardní pracovní procesy
 
 #### Centralizované úložiště
 
-- detaily: https://www.atlassian.com/git/tutorials/comparing-workflows/centralized-workflow
+Nejjednodušší proces. Všichni vývojáři neustále vyvíjejí nad hlavní větví.
 
 #### Gitflow
 
-- detaily: https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
-
-Připojení vzdáleného repositáře na adrese *URL* a jeho pojmenování jako **upstream**:
-
-```bash
-git remote add upstream URI
-```
-
-Přepnutí do větve **develop**:
-
-```bash
-# pokud větev neexistuje
-git checkout -b develop
-
-# pokud větev již existuje
-git checkout develop
-```
-
-Načtení změn ze vzdáleného repositáře:
-
-```bash
-git fetch upstream
-```
-
-Provedení změn v lokálním repositáři:
-
-```bash
-git rebase upstream/develop
-```
-
-Propagace lokálních úpravy zpět do vzdáleného repositáře:
-
-```bash
-git push origin develop
-```
-
-Pokud byla změněna lokální historie commitů (např. interaktivní rebase), je nutné přidat parametr *-f* (ale pozor, tato operace může vést k velkým problémům, pokud nevíte, co děláte):
-
-```bash
-git push origin develop -f
-```
-
-Při release se požadované změny z větve **develop** zamergují do větve **master** a z větve **master** se provede release:
-
-```bash
-git checkout master
-git merge develop
-```
+Proces, ve kterém se každá nová funkce (feature) nebo oprava chyby vyvíjí v oddělené větvi. Po dokončení a otestování změny se tato větev zamerguje zpět do hlavní větve.
 
 ### Reference
 
