@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.zip.ZipEntry;
@@ -100,7 +101,7 @@ public class IncludeSourceCodePreprocessor implements CodeProcessor {
                         .stream()
                         .filter(f -> f.getName().endsWith(sourcePath))
                         .map(ZipEntry.class::cast)
-                        .findFirst()
+                        .min(Comparator.comparing(ZipEntry::getName))
                         .map(f -> {
                             final IncludeSourceCodePreprocessor.ZipEntryResult result = new IncludeSourceCodePreprocessor.ZipEntryResult();
                             result.zipEntryName = f.getName();
