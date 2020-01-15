@@ -30,7 +30,7 @@ table:h->pop
 #### Rozhraní
 
 ```include:java
-Stack.java
+stack/Stack.java
 ```
 
 #### Pomocí spojového seznamu
@@ -38,7 +38,7 @@ Stack.java
 Implementace využívající [spojový seznam](wiki/datova-struktura-seznam) má teoreticky neomezenou kapacitu, ale prvky zabírají více paměti, než by mohly (ke každému prvku totiž náleží ukazatel na prvek následující).
 
 ```include:java
-LinkedStack.java
+stack/LinkedStack.java
 ```
 
 #### Pomocí pole
@@ -46,7 +46,7 @@ LinkedStack.java
 Implementace využívající [pole](wiki/datova-struktura-pole) má kapacitu omezenou shora velikostí pole.
 
 ```include:java
-ArrayStack.java
+stack/ArrayStack.java
 ```
 
 ### Reference
