@@ -92,7 +92,7 @@ public class IncludeSourceCodePreprocessor implements CodeProcessor {
         html.line();
     }
 
-    private Optional<IncludeSourceCodePreprocessor.ZipEntryResult> findZipEntry(final String sourcePath) throws IOException {
+    private static Optional<IncludeSourceCodePreprocessor.ZipEntryResult> findZipEntry(final String sourcePath) throws IOException {
         final Path path = findZip();
 
         if (Files.exists(path)) {
@@ -108,7 +108,7 @@ public class IncludeSourceCodePreprocessor implements CodeProcessor {
         }
     }
 
-    private <T> Optional<T> firstPresentOptional(final Optional<T>... optionals) {
+    private static <T> Optional<T> firstPresentOptional(final Optional<T>... optionals) {
         for (final Optional<T> optional : optionals) {
             if (optional.isPresent()) {
                 return optional;
@@ -117,35 +117,25 @@ public class IncludeSourceCodePreprocessor implements CodeProcessor {
         return Optional.empty();
     }
 
-    private Optional<ZipEntryResult> findAsExact(final String sourcePath, final ZipFile zipFile) {
+    private static Optional<ZipEntryResult> findAsExact(final String sourcePath, final ZipFile zipFile) {
         return zipFile
                 .stream()
                 .filter(f -> f.getName().equalsIgnoreCase(sourcePath))
                 .map(ZipEntry.class::cast)
                 .min(Comparator.comparing(ZipEntry::getName))
-                .map(f -> {
-                    final ZipEntryResult result = new ZipEntryResult();
-                    result.zipEntryName = f.getName();
-                    result.zipEntryContents = extractZipEntry(zipFile, f);
-                    return result;
-                });
+                .map(f -> toZipEntryResult(zipFile, f));
     }
 
-    private Optional<ZipEntryResult> findAsSuffix(final String sourcePath, final ZipFile zipFile) {
+    private static Optional<ZipEntryResult> findAsSuffix(final String sourcePath, final ZipFile zipFile) {
         return zipFile
                 .stream()
                 .filter(f -> f.getName().endsWith(sourcePath))
                 .map(ZipEntry.class::cast)
                 .min(Comparator.comparing(ZipEntry::getName))
-                .map(f -> {
-                    final ZipEntryResult result = new ZipEntryResult();
-                    result.zipEntryName = f.getName();
-                    result.zipEntryContents = extractZipEntry(zipFile, f);
-                    return result;
-                });
+                .map(f -> toZipEntryResult(zipFile, f));
     }
 
-    private Path findZip() {
+    private static Path findZip() {
         for (final Path path : EXAMPLES_ZIP_LOOKUP_LOCATIONS) {
             LOG.info("Trying to locate ZIP file: {}", path.toAbsolutePath());
 
@@ -159,7 +149,14 @@ public class IncludeSourceCodePreprocessor implements CodeProcessor {
         throw new IllegalStateException("ZIP file with examples was not found :(");
     }
 
-    private String extractZipEntry(final ZipFile zipFile, final ZipEntry zipEntry) {
+    private static ZipEntryResult toZipEntryResult(final ZipFile zipFile, final ZipEntry f) {
+        final ZipEntryResult result = new ZipEntryResult();
+        result.zipEntryName = f.getName();
+        result.zipEntryContents = extractZipEntry(zipFile, f);
+        return result;
+    }
+
+    private static String extractZipEntry(final ZipFile zipFile, final ZipEntry zipEntry) {
         try (final InputStreamReader reader = new InputStreamReader(zipFile.getInputStream(zipEntry), StandardCharsets.UTF_8)) {
             return CharStreams.toString(reader);
         } catch (final IOException e) {
