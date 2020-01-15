@@ -14,7 +14,7 @@ public class JavadocPreprocessor implements Preprocessor {
         final String sourceUpdated = rp.replace(context.getSource().getMarkdownSource(), matchResult -> {
             final String className = matchResult.group(1);
             final String classNameFormatted = processClassName(className);
-            final String classNameJavadocUrl = String.format("http://grepcode.com/search?query=%s", UrlEscapers.urlFragmentEscaper().escape(className));
+            final String classNameJavadocUrl = String.format("https://github.com/search?l=Java&q=%s&type=Code", UrlEscapers.urlFragmentEscaper().escape(className));
             return String.format("[%s](%s)", classNameFormatted, classNameJavadocUrl);
         });
         context.getSource().setMarkdownSource(sourceUpdated);
