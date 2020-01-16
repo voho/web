@@ -110,8 +110,8 @@ bloom/Example.java
 
 ### Reference
 
-- https://www.cs.dal.ca/sites/default/files/technical_reports/CS-2002-10.pdf
-- http://maciejczyzewski.me/2014/10/18/bloom-filters-fast-and-simple.html
+- https://cdn.dal.ca/content/dam/dalhousie/pdf/faculty/computerscience/technical-reports/CS-2002-10.pdf
+- https://dl.acm.org/doi/10.1145/362686.362692
 - http://billmill.org/bloomfilter-tutorial/
 - http://hur.st/bloomfilter?n=1000000&p=0.1
 - http://corte.si/posts/code/bloom-filter-rules-of-thumb/
