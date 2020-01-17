@@ -12,11 +12,6 @@
                 </div>
             </#list>
         </div>
-        <div class="row uniform">
-            <ul class="actions">
-                <#include "../common/menu/actions-music.ftl"/>
-            </ul>
-        </div>
     </div>
 </section>
 </#if>
