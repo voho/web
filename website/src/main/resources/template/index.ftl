@@ -4,8 +4,6 @@
 <#include "html/html-head.ftl"/>
 <body>
 
-<#include "common/header.ftl"/>
-
 <div id="universe">
 
     <section id="banner">
