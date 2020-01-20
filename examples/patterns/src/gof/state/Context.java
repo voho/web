@@ -26,18 +26,15 @@ public class Context {
     }
 
     /**
-     * Nastaví první stav.
+     * Nastaví náhodný pocit.
      */
-    public void beHappy() {
-        System.out.println("Teď budu veselý.");
-        this.state = new HappyState();
-    }
-
-    /**
-     * Nastaví druhý stav.
-     */
-    public void beSad() {
-        System.out.println("Teď budu smutný.");
-        this.state = new SadState();
+    public void changeYourMood() {
+        if (Math.random() < 0.7) {
+            System.out.println("Teď budu veselý.");
+            this.state = new HappyState();
+        } else {
+            System.out.println("Teď budu smutný.");
+            this.state = new SadState();
+        }
     }
 }

@@ -2,23 +2,29 @@
 
 ### Situace
 
-V systému se nachází třída, jejíž chování je velmi silně závislé na jejím vnitřním stavu. Zbytek systému má být od tohoto stavu odstíněn. V podstatě se jedná o objektově-orientovanou implementaci [konečného automatu](wiki/konecny-automat).
+V systému se nachází třída, jejíž chování je velmi silně závislé na jejím vnitřním stavu. Zbytek systému má být od tohoto stavu odstíněn. 
+V podstatě se jedná o objektově-orientovanou implementaci [konečného automatu](wiki/konecny-automat).
 
 ### Problém
 
-Typická špatná implementace tohoto chování se opírá o množství stavových proměnných a podmínek, na jejichž základě se provádí změna chování třídy nebo změna výstupů. Údržba takového kódu je obtížná. Všechny stavy třídy jsou vlastně smíchané dohromady v jedné třídě, i když by správně měly být odděleny stav po stavu.
+Typická špatná implementace tohoto chování se opírá o množství stavových proměnných a podmínek, na jejichž základě se provádí změna chování třídy nebo změna výstupů. 
+Údržba takového kódu je obtížná. 
+Všechny stavy třídy jsou vlastně smíchané dohromady v jedné instanci, i když by správně měly být odděleny stav po stavu.
+Z množství stavových proměnných nemusí být jasné, které z nich spolu souvisí, a co jejich vzájemné kombinace znamenají.
 
 ### Řešení
 
-Na základě vnitřních stavů se vytvoří hierarchie tříd, které implementují společné rozhraní. Každá třída musí zcela implementovat chování odvozené od tohoto stavu. Do třídy, která je tímto vnitřním stavem řízena, bude obsahovat právě jednu instanci třídy z této hierarchie, tedy jeden z vnitřních stavů. Všechny metody, které závisí na vnitřním stavu, mají být na tento stav delegovány. 
+Na základě vnitřních stavů se vytvoří hierarchie tříd, které implementují společné rozhraní. 
+Třídy, která je tímto vnitřním stavem řízena, bude obsahovat právě jednu instanci třídy z této hierarchie, tedy jeden z vnitřních stavů. 
+Všechny metody, které závisí na vnitřním stavu, by měly být na tento stav delegovány. 
 
-Změna vnitřního stavu se provádí výměnou objektu, který představuje vnitřní stav. 
+Změna vnitřního stavu se provádí výměnou objektu, který představuje vnitřní stav.
+Za tuto výměnu je zodpovědna třída, které je stavem řízena.
 
 #### Varianty
 
-- změny vnitřního stavu provádí ostatní třídy přímo
 - vnitřní stav mění třída sama
-- změnu stavu provádí sám stav (např. tak, že vrátí instanci jiného stavu a třída jej nastaví)
+- změnu stavu provádí sám stav (například tak, že vrátí instanci jiného stavu a třída jej převezme)
 
 #### UML diagramy
 

@@ -6,17 +6,12 @@ public class Example {
     @Test
     public void test() {
         // vytvořit kontext
-
         final Context context = new Context();
 
-        // nastavit první stav (štěstí)
+        // nastavit náhodný stav
+        context.changeYourMood();
 
-        context.beHappy();
-        context.express();
-
-        // nastavit druhý stav (smutek)
-
-        context.beSad();
+        // vypíše stav
         context.express();
     }
 }
