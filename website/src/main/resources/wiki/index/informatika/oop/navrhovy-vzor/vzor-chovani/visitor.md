@@ -140,171 +140,40 @@ Place1 --> Client
 
 Cíle návštěv budou dva. První z nich bude kino, druhé muzeum. Oba cíle budou implementovat společné rozhraní.
 
-```java
-/**
- * Nějaké zajímavé místo.
- * 
- * @author Vojtěch Hordějčuk
- */
-public interface Place
-{
-  /**
-   * Přišel návštěvník.
-   * 
-   * @param visitor
-   * návštěvník
-   */
-  public void accept(Visitor visitor);
-}
+```include:java
+gof/visitor/Place.java
 ```
 
-```java
-/**
- * Kino.
- * 
- * @author Vojtěch Hordějčuk
- */
-public class Cinema implements Place
-{
-  @Override
-  public void accept(Visitor visitor)
-  {
-    System.out.println("do kina přišel " + visitor.toString());
-    visitor.visit(this);
-  }
-}
+```include:java
+gof/visitor/Cinema.java
 ```
 
-```java
-/**
- * Muzeum.
- * 
- * @author Vojtěch Hordějčuk
- */
-public class Museum implements Place
-{
-  @Override
-  public void accept(Visitor visitor)
-  {
-    System.out.println("do muzea přišel " + visitor.toString());
-    visitor.visit(this);
-  }
-}
+```include:java
+gof/visitor/Museum.java
 ```
 
 #### Návštěvníci
 
 Návštěvníci budou dva. První z nich bude představovat hodného návštěvníka, druhý zlého. Oba budou implementovat společné rozhraní.
 
-```java
-/**
- * Obecný návštěvník.
- * 
- * @author Vojtěch Hordějčuk
- */
-public interface Visitor
-{
-  /**
-   * Navštíví zadaný koncert.
-   * 
-   * @param concert
-   * cílový koncert
-   */
-  public void visit(Museum concert);
-  
-  /**
-   * Navštíví zadané kino.
-   * 
-   * @param cinema
-   * cílové kino
-   */
-  public void visit(Cinema cinema);
-}
+```include:java
+gof/visitor/Visitor.java
 ```
 
-```java
-/**
- * Hodný návštěvník.
- * 
- * @author Vojtěch Hordějčuk
- */
-public class GoodVisitor implements Visitor
-{
-  @Override
-  public void visit(Museum museum)
-  {
-    System.out.println(this.toString() + " je v muzeu");
-  }
-  
-  @Override
-  public void visit(Cinema cinema)
-  {
-    System.out.println(this.toString() + " je v kině");
-  }
-  
-  @Override
-  public String toString()
-  {
-    return "pan Hodný";
-  }
-}
+```include:java
+gof/visitor/GoodVisitor.java
 ```
 
-```java
-/**
- * Zlý návštěvník.
- * 
- * @author Vojtěch Hordějčuk
- */
-public class EvilVisitor implements Visitor
-{
-  @Override
-  public void visit(Museum museum)
-  {
-    System.out.println(this.toString() + " vykradl muzeum.");
-  }
-  
-  @Override
-  public void visit(Cinema cinema)
-  {
-    System.out.println(this.toString() + " udělal nepořádek v kině.");
-  }
-  
-  @Override
-  public String toString()
-  {
-    return "pan Zlý";
-  }
-}
+```include:java
+gof/visitor/EvilVisitor.java
 ```
 
 #### Test
 
 Vytvoří se oba druhy návštěvníků. Poté se vytvoří i obě cílová místa. Nakonec se návštěvníci pošlou do obou cílů.
 
-```java
-public static void main(String[] args)
-{
-  // vytvořit návštěvníky
-    
-  Visitor good = new GoodVisitor();
-  Visitor evil = new EvilVisitor();
-    
-  // vytvořit cíle
-   
-  Place cinema = new Cinema();
-  Place museum = new Museum();
-    
-  // hodný návštěvník
-    
-  cinema.accept(good);
-  museum.accept(good);
-    
-  // zlý návštěvník
-    
-  cinema.accept(evil);
-  museum.accept(evil);
-}
+```include:java
+gof/visitor/Example.java
 ```
 
 ### Reference
@@ -313,3 +182,4 @@ public static void main(String[] args)
 - předmět X36OBP na FEL ČVUT
 - http://www.oodesign.com/visitor-pattern.html
 - http://sourcemaking.com/design_patterns/visitor
+- http://www.blackwasp.co.uk/Visitor.aspx
