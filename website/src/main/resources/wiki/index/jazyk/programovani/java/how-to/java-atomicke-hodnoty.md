@@ -1,20 +1,16 @@
 ## Atomické hodnoty
 
-Atomickou hodnotou zde označuje vláknově bezpečný kontejner pro určitý typ hodnot.
-Pro každý typ atomické hodnoty a pro referenční typ existuje odpovídající atomická třída.
-Pro *Integer* je to *AtomicInteger*, pro *boolean* je to *AtomicBoolean*, a podobně. 
-Pro referenční typ (libovolný objekt) je to *AtomicReference*. 
+Jazyk Java obsahuje speciální kontejnery, které lze použít jako vláknově bezpečné proměnné pro určitý typ hodnot. Hodnotu kontejneru lze bezpečně číst a přepisovat z více vláken, přičemž pro aktualizaci jsou k dispozici i další užitečné metody, jako je **přečti a přepiš** (getAndSet), **porovnej a přepiš** (compareAndSet), **inkrementace/dekrementace** (getAndIncrement(), getAndDecrement()), a další.
 
-Nejběžnější metodou pro čtení je *get()* a pro zápis *set()*.
+Kontejnery jsou definovány pro tři primitivní typy a referenční typ:
 
-```java
-AtomicInteger i = new AtomicInteger(42);
-i.set(100);
-int result = i.get();
-```
+- *javadoc:java.util.concurrent.atomic.AtomicBoolean* - pro primitivní hodnotu typu *boolean*
+- *javadoc:java.util.concurrent.atomic.AtomicInteger* - pro primitivní hodnotu typu *int*
+- *javadoc:java.util.concurrent.atomic.AtomicLong* - pro primitivní hodnotu typu *long*
+- *javadoc:java.util.concurrent.atomic.AtomicReference* - pro libovolný typ
 
-```java
-AtomicReference<URL> r = new AtomicReference<URL>();
-r.set(new URL("http://google.com"));
-URL result = r.get();
-```
+Pro některé z nich existují i varianty pro [pole](wiki/pole):
+
+- *javadoc:java.util.concurrent.atomic.AtomicIntegerArray* - pro pole primitivních hodnot typu *int*
+- *javadoc:java.util.concurrent.atomic.AtomicLongArray* - pro pole primitivních hodnot typu *long*
+- *javadoc:java.util.concurrent.atomic.AtomicReferenceArray* - pro pole libovolného typu
