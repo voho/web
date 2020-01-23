@@ -9,8 +9,12 @@ Kontejnery jsou definovány pro tři primitivní typy a referenční typ:
 - *javadoc:java.util.concurrent.atomic.AtomicLong* - pro primitivní hodnotu typu *long*
 - *javadoc:java.util.concurrent.atomic.AtomicReference* - pro libovolný typ
 
-Pro některé z nich existují i varianty pro [pole](wiki/pole):
+Pro některé z nich existují i varianty pro [pole](wiki/datova-struktura-pole):
 
 - *javadoc:java.util.concurrent.atomic.AtomicIntegerArray* - pro pole primitivních hodnot typu *int*
 - *javadoc:java.util.concurrent.atomic.AtomicLongArray* - pro pole primitivních hodnot typu *long*
 - *javadoc:java.util.concurrent.atomic.AtomicReferenceArray* - pro pole libovolného typu
+
+```include:java
+atomic/AtomicCounterTest.java
+```

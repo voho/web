@@ -30,8 +30,8 @@ public class LargeSumProblem {
         protected Long compute() {
             if (input.size() > 10) {
                 // create sub-tasks
-                final List<Integer> leftSubList = this.input.subList(0, input.size() / 2);
-                final List<Integer> rightSubList = this.input.subList(input.size() / 2, input.size());
+                final List<Integer> leftSubList = input.subList(0, input.size() / 2);
+                final List<Integer> rightSubList = input.subList(input.size() / 2, input.size());
                 final RecursiveSumTask leftHalf = new RecursiveSumTask(leftSubList);
                 final RecursiveSumTask rightHalf = new RecursiveSumTask(rightSubList);
 

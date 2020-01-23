@@ -12,6 +12,6 @@ public class LargeSumProblemTest {
     public void test() {
         final int length = 100;
         final List<Integer> input = Collections.nCopies(length, 1);
-        assertEquals((long) length, (long) LargeSumProblem.solve(input));
+        assertEquals(length, (long) LargeSumProblem.solve(input));
     }
 }
