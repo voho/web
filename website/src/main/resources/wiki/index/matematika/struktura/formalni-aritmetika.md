@@ -8,7 +8,7 @@ Jedním z nejdůležitějších výsledků jsou tzv. **Gödelovy věty o neúpln
 
 ![Mojżesz Presburger](presburger.jpg){.right}
 
-Presburgerova aritmetika (**Mojżesz Presburger**, 1929 - 1943) je formální systém prvního řádu umožňující definovat přirozená čísla a jejich součet. Je dokázáno, že je tato aritmetika **konzistentní** (v Presburgerově aritmetice neexistuje výrok, který by byl odvoditelný z axiomů společně se svou negací), **úplná** (každý výrok Presburgerovy aritmetiky, nebo jeho negaci je možné odvodit z axiomů) a **rozhodnutelná** (existuje algoritmus, který jednoznačně rozhodne, zda je daný výrok Presburgerovy aritmetiky pravdivý či nikoliv).
+Presburgerova aritmetika (**Mojżesz Presburger**, 1929) je formální systém prvního řádu umožňující definovat přirozená čísla a jejich součet. Je dokázáno, že je tato aritmetika **konzistentní** (v Presburgerově aritmetice neexistuje výrok, který by byl odvoditelný z axiomů společně se svou negací), **úplná** (každý výrok Presburgerovy aritmetiky, nebo jeho negaci je možné odvodit z axiomů) a **rozhodnutelná** (existuje algoritmus, který jednoznačně rozhodne, zda je daný výrok Presburgerovy aritmetiky pravdivý či nikoliv).
 
 #### Axiomy
 
@@ -34,7 +34,7 @@ x + S(y) &= S(x+y) \\
 
 ![Raphael Mitchel Robinson](robinson.jpg){.right}
 
-Robinsonova aritmetika (**Raphael Mitchel Robinson**, 1950 - 1995) je formální systém prvního řádu umožňující definovat přirozená čísla, jejich součet a násobení. Tato aritmetika je **neúplná** (existují výroky, které jsou v ní nedokazatelné) a **nerozhodnutelná** (neexistuje algoritmus, který by pro každý výrok určil, zda je v Robinsonově aritmetice pravdivý či nikoliv).
+Robinsonova aritmetika (**Raphael Mitchel Robinson**, 1950) je formální systém prvního řádu umožňující definovat přirozená čísla, jejich součet a násobení. Tato aritmetika je **neúplná** (existují výroky, které jsou v ní nedokazatelné) a **nerozhodnutelná** (neexistuje algoritmus, který by pro každý výrok určil, zda je v Robinsonově aritmetice pravdivý či nikoliv).
 
 #### Axiomy
 
