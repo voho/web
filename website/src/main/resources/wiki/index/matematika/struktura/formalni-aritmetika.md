@@ -1,8 +1,14 @@
 ## Formální aritmetika
 
+Formální aritmetika leží na pomezí matematiky, logiky a filozofie a používá se pro studium hranic axiomatické metody v matematice.
+Jedním z cílů bylo například najít nejmenší množinu předpokladů (axiomů), ze kterých bude možné odvodit aritmetiku přirozených čísel. 
+Jedním z nejdůležitějších výsledků jsou tzv. **Gödelovy věty o neúplnosti**.  
+
 ### Presburgerova aritmetika
 
-Presburgerova aritmetika (**Mojżesz Presburger**, 1929) je formální systém prvního řádu umožňující definovat přirozená čísla a jejich součet. Je dokázáno, že je tato aritmetika **konzistentní** (v Presburgerově aritmetice neexistuje výrok, který by byl odvoditelný z axiomů společně se svou negací), **úplná** (každý výrok Presburgerovy aritmetiky, nebo jeho negaci je možné odvodit z axiomů) a **rozhodnutelná** (existuje algoritmus, který jednoznačně rozhodne, zda je daný výrok Presburgerovy aritmetiky pravdivý či nikoliv).
+![Mojżesz Presburger](presburger.jpg){.right}
+
+Presburgerova aritmetika (**Mojżesz Presburger**, 1929 - 1943) je formální systém prvního řádu umožňující definovat přirozená čísla a jejich součet. Je dokázáno, že je tato aritmetika **konzistentní** (v Presburgerově aritmetice neexistuje výrok, který by byl odvoditelný z axiomů společně se svou negací), **úplná** (každý výrok Presburgerovy aritmetiky, nebo jeho negaci je možné odvodit z axiomů) a **rozhodnutelná** (existuje algoritmus, který jednoznačně rozhodne, zda je daný výrok Presburgerovy aritmetiky pravdivý či nikoliv).
 
 #### Axiomy
 
@@ -26,7 +32,9 @@ x + S(y) &= S(x+y) \\
 
 ### Robinsonova aritmetika
 
-Robinsonova aritmetika (**Raphael Mitchel Robinson**, 1950) je formální systém prvního řádu umožňující definovat přirozená čísla, jejich součet a násobení. Tato aritmetika je **neúplná** (existují výroky, které jsou v ní nedokazatelné) a **nerozhodnutelná** (neexistuje algoritmus, který by pro každý výrok určil, zda je v Robinsonově aritmetice pravdivý či nikoliv).
+![Raphael Mitchel Robinson](robinson.jpg){.right}
+
+Robinsonova aritmetika (**Raphael Mitchel Robinson**, 1950 - 1995) je formální systém prvního řádu umožňující definovat přirozená čísla, jejich součet a násobení. Tato aritmetika je **neúplná** (existují výroky, které jsou v ní nedokazatelné) a **nerozhodnutelná** (neexistuje algoritmus, který by pro každý výrok určil, zda je v Robinsonově aritmetice pravdivý či nikoliv).
 
 #### Axiomy
 
@@ -55,3 +63,4 @@ x \cdot S(y) &=(x \cdot y) + x \\
 ### Reference
 
 - http://mathworld.wolfram.com/PresburgerArithmetic.html
+- https://en.wikipedia.org/wiki/G%C3%B6del%27s_incompleteness_theorems
