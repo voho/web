@@ -1,6 +1,6 @@
 ## Základní kombinatorické vzorce
 
-Základními pojmy kombinatoriky jsou **variace** (výběr uspořádané k-tice z množiny) a **kombinace** (výběr podmožiny). Speciální případ kombinace se nazývá **permutace**. Kombinace se od variací liší tím, že nezáleží na pořadí vybraných prvků.
+Základními pojmy kombinatoriky jsou **variace** (výběr uspořádané k-tice z [množiny](wiki/mnozina)) a **kombinace** (výběr podmožiny). Speciální případ variace se nazývá **permutace**. Kombinace se od variací liší tím, že nezáleží na pořadí vybraných prvků.
 
 ### Přehled
 
