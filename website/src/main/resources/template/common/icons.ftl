@@ -6,9 +6,6 @@
         <a href="${social_profile_github}"><span class="label">GitHub</span></a>
     </li>
     <li>
-        <a href="${social_profile_twitter}"><span class="label">Twitter</span></a>
-    </li>
-    <li>
         <a href="${social_profile_instagram}"><span class="label">Instagram</span></a>
     </li>
     <li>
