@@ -23,12 +23,12 @@
 <header id="header">
     <div class="inner">
         <h1 class="logo">
-            <a href="/"><strong>${website_short_name}</strong><span class="explain">${website_extended_name}</span></a>
+            <a href="/" title="${website_extended_name}"><strong>${website_short_name}</strong></a>
             <#include "../wiki/breadcrumbs.ftl"/>
         </h1>
         <span id="search">
             <form action="http://google.cz/search" method="get">
-                <input id="search-query" name="q" type="text" size="15" placeholder="🔍"/>
+                <input id="search-query" name="q" type="text" size="15" placeholder="Hledat"/>
                 <input name="hl" type="hidden" value="cs"/>
                 <input name="sitesearch" type="hidden" value="voho.eu"/>
             </form>
