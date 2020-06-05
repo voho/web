@@ -408,13 +408,16 @@ ul.copyright li {
 }
 
 .wiki-related-pages.incoming ul li a, .wiki-related-pages.outgoing ul li a, .wiki-related-pages.siblings ul li a {
-    background-color: #dddddd;
-    border-radius: 5pt;
+    background-color: #fff;
+    border-radius: 2px;
     color: rgba(0, 0, 0, 200);
-    padding: 0.7ex 1em;
+    padding: 0.5ex 1em;
     display: inline-block;
     margin: 0 0.4ex 1ex 0;
     white-space: nowrap;
+    border: 1px solid #333;
+    font-weight: bold;
+    box-shadow: 0px 1px 2px #ccc;
 }
 
 .wiki-related-pages.incoming ul li a:hover, .wiki-related-pages.outgoing ul li a:hover, .wiki-related-pages.siblings ul li a:hover {
@@ -489,9 +492,10 @@ a {
 
 .button {
     background: rgba(25, 155, 255, 0.2);
-    border: 0;
+    border: 1px solid black;
     color: rgba(0, 0, 0, 200);
-    border-radius: 6pt;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px #ccc;
 }
 
 .button:hover {
