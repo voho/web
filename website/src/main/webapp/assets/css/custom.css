@@ -422,6 +422,7 @@ ul.copyright li {
 
 .wiki-related-pages.incoming ul li a:hover, .wiki-related-pages.outgoing ul li a:hover, .wiki-related-pages.siblings ul li a:hover {
     background: rgba(25, 155, 255, 0.2);
+    border-color: rgba(25, 155, 255, 200);
     color: rgba(0, 0, 0, 255);
     text-decoration: none;
 }
@@ -500,6 +501,7 @@ a {
 
 .button:hover {
     background: rgba(25, 155, 255, 0.3);
+    border-color: rgba(25, 155, 255, 200);
     color: rgba(0, 0, 0, 255);
 }
 
