@@ -519,6 +519,7 @@ a {
 
 #wiki-content .inner {
     background-color: #ffffff;
+    box-shadow: 0 1pt 2pt #ddd;
     padding: 2em 3em;
     border-radius: 6pt;
 }
