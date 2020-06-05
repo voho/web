@@ -29,12 +29,3 @@
     ga('send', 'pageview');
 
 </script>
-
-<!-- Coil (#xrpthestandard) -->
-<script src="https://polyfill.webmonetization.org/polyfill.js"></script>
-<script src="https://cdn.coil.com/donate.js"></script>
-<script>
-    window.WebMonetizationScripts.donate({
-        paymentPointer: '$twitter.xrptipbot.com/vohooo'
-    })
-</script>
