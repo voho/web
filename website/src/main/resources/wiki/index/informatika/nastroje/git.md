@@ -155,7 +155,7 @@ git log --pretty=format:"%h %s" --graph
 git reflog
 ```
 
-#### Tipy a triky pro commit message
+#### Tipy pro commit message
 
 - zpráva v commitu by měl být stručná zhruba v délce jedné věty
 - zpráva v commitu může mít nějaký pevný formát, například obsahující číslo lístku nebo bugu, který commit řeší
@@ -164,15 +164,15 @@ git reflog
 - do zprávy se nepíšou informace, které lze snadno zjistit z logu - například názvy změněných souborů, jméno člověka provádějícího změny, atd.
 - někteří lidé preferují použití rozkazujícího způsobu
 
-### Standardní pracovní procesy
+### Obvyklé pracovní procesy
 
 #### Centralizované úložiště
 
-Nejjednodušší proces. Všichni vývojáři neustále vyvíjejí nad hlavní větví.
+Nejjednodušší proces, kdy všichni vývojáři vyvíjejí nad hlavní větví.
 
 #### Gitflow
 
-Proces, ve kterém se každá nová funkce (feature) nebo oprava chyby vyvíjí v oddělené větvi. Po dokončení a otestování změny se tato větev zamerguje zpět do hlavní větve.
+Proces, ve kterém se každá nová funkcionalita nebo oprava chyby vyvíjí v oddělené větvi. Po dokončení a otestování změny se tato větev sloučí zpět do hlavní větve.
 
 ### Reference
 
