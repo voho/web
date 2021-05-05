@@ -107,3 +107,14 @@ white_cars -up-|> cars
 Historie objektově orientovaného programování začala v šedesátých letech 20. století. Prvním programovacím jazykem s třídami a objekty byla **Simula 67**, za jejímž vznikem stáli dva norští vědci (Kristen Nygaard, Ole-Johan Dahl). Tento jazyk byl původně určen k simulaci interakcí několika lodí.
 
 Simula 67 inspirovala několik vědců z firmy XEROX, kteří následně vytvořili vlastní jazyk Smalltalk a začali jako první používat termín „objektově orientované programování“. Simula 67 silně ovlivnila i Bjarne Stroustrupa při návrhu jazyka C++.
+
+#### Principy Alana Kaye
+
+Původní principy objektově-orientovaného programování, jak je představil Alan Kay, vynálezce jazyka Smalltalk.
+
+1. Všechno je objekt.
+2. Komunikace mezi objekty probíhá pomocí zpráv. Zpráva je požadavek na provedení nějaké akce společně s objekty, které jsou k jejímu provedení potřebné.
+3. Objekty mají svou vlastní paměť, která obsahuje další objekty.
+4. Každý objekt je instancí nějaké třídy, která je také objektem. Třída reprezentuje seskupení spolu souvisejících objektů.
+5. Třída je úložištěm chování objektu. Takto všechny instance třídy sdílí chování.
+6. Třídy jsou uspořádány v hierarchii dědičnosti. Paměť a chování instance je dostupné i všem jejím potomkům v stromu dědičnosti.
