@@ -27,7 +27,7 @@ table:t->take
 #### Rozhraní
 
 ```include:java
-Queue.java
+queue/Queue.java
 ```
 
 #### Implementace pomocí spojového seznamu
@@ -35,7 +35,7 @@ Queue.java
 Implementace využívající [spojový seznam](wiki/datova-struktura-seznam) má teoreticky neomezenou kapacitu, ale prvky zabírají více paměti, než by mohly (ke každému prvku totiž náleží ukazatel na prvek následující).
 
 ```include:java
-LinkedQueue.java
+queue/LinkedQueue.java
 ```
 
 #### Implementace pomocí pole
@@ -43,7 +43,7 @@ LinkedQueue.java
 Implementace fronty pomocí [pole](wiki/datova-struktura-pole) je zajímavá tím, že se pro dosažení maximálního využití paměti musí ukazatele po přejetí konce pole vrátit zpět na jeho začátek.
 
 ```include:java
-ArrayQueue.java
+queue/ArrayQueue.java
 ```
 
 ### Reference
