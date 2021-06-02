@@ -140,12 +140,14 @@ h1.logo {
     border-radius: 3pt;
     font-size: 12pt;
     padding: 1ex;
-    width: 8em;
+    width: 10em;
 }
 
 #search-query {
     background: rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(0, 0, 0, 0.2);
+    color: white;
+    font-weight: bold;
 }
 
 #search .button {
@@ -515,8 +517,11 @@ a {
 #wiki-content .inner {
     background-color: #ffffff;
     box-shadow: 0 1pt 2pt #ddd;
-    padding: 2em 3em;
     border-radius: 6pt;
+}
+
+#wiki-content .inner .wrapper {
+    padding: 0 2em;
 }
 
 #wiki-content th, #wiki-content td {

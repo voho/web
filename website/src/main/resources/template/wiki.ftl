@@ -49,7 +49,9 @@
         <#else>
             <section id="wiki-content" class="wiki">
                 <div class="inner">
-                ${active_wiki_page_content}
+                    <div class="wrapper">
+                    ${active_wiki_page_content}
+                    </div>
                 </div>
             </section>
         </#if>
