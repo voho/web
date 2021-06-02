@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -49,7 +50,7 @@ public class IncludeSourceCodePreprocessor implements CodeProcessor {
                 if (zipEntry.isPresent()) {
                     sourceCodeUsingString(html, zipEntry.get().zipEntryName, langWithoutPrefix, zipEntry.get().zipEntryContents);
                 } else {
-                    throw new IllegalStateException("ZIP entry was not found: " + codeSource);
+                    throw new IllegalStateException("ZIP entry could not be determined: " + codeSource);
                 }
             } catch (final Exception e) {
                 throw new IllegalStateException("Error while loading contents from ZIP.", e);
@@ -97,7 +98,12 @@ public class IncludeSourceCodePreprocessor implements CodeProcessor {
 
         if (Files.exists(path)) {
             try (final ZipFile zipFile = new ZipFile(path.toFile())) {
-                return firstPresentOptional(findAsExact(sourcePath, zipFile), findAsSuffix(sourcePath, zipFile));
+                return firstPresentOptional(
+                        findAsExact(sourcePath, zipFile),
+                        findAsExact("/" + sourcePath, zipFile),
+                        findAsSuffix(sourcePath, zipFile),
+                        findAsSuffix("/" + sourcePath, zipFile)
+                );
             } catch (final Exception e) {
                 final String error = String.format("ERROR: Cannot load the file: %s", path.toAbsolutePath());
                 throw new IOException(error);
@@ -127,12 +133,19 @@ public class IncludeSourceCodePreprocessor implements CodeProcessor {
     }
 
     private static Optional<ZipEntryResult> findAsSuffix(final String sourcePath, final ZipFile zipFile) {
-        return zipFile
+        final List<ZipEntry> candidates = zipFile
                 .stream()
                 .filter(f -> f.getName().endsWith(sourcePath))
                 .map(ZipEntry.class::cast)
-                .min(Comparator.comparing(ZipEntry::getName))
-                .map(f -> toZipEntryResult(zipFile, f));
+                .collect(Collectors.toList());
+
+        if (candidates.size() != 1) {
+            final String candidatesAsString = candidates.stream().map(ZipEntry::getName).collect(Collectors.joining(", "));
+            LOG.error("Too many candidates for {}: {}", sourcePath, candidatesAsString);
+            return Optional.empty();
+        }
+
+        return Optional.of(toZipEntryResult(zipFile, candidates.iterator().next()));
     }
 
     private static Path findZip() {
