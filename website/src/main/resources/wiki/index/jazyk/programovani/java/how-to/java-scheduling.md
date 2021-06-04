@@ -49,6 +49,8 @@ executor.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
 
 Opakování s pevným intervalem (*fixed delay*) znamená, že interval mezi dokončením jednoho opakování a začátkem dalšího by měl být stále stejný, a to nezávisle na tom, jak dlouho úloha trvá. Pokud je tedy například interval nastaven na deset sekund a první opakování úlohy trvá dvě sekundy, nebude to mít žádný vliv na délku pauzy před druhým opakováním a ta bude stále deset sekund. Stejně tak se délka pauzy nezmění, bude-li některé z opakování trvat delší dobu, než jeden interval. Teoreticky jsou všechna opakování (kromě prvního) čím dál tím více zpožděná, protože každé opakování zabere nenulový čas.
 
+Tato metoda z principu zabraňuje tomu, aby bylo spuštěno více úloh najednou, i když se některá z nich zpozdí. Je tedy vhodná pro úlohy, které by se neměly překrývat.
+
 Takto naplánujeme výpis "Hello!" každou sekundu po dobu jedné minuty:
 
 ```java
@@ -68,6 +70,8 @@ executor.shutdown();
 ### Pravidelné opakování s pevnou frekvencí
 
 Opakování s pevnou frekvencí (*fixed rate*) znamená, že interval mezi začátky dvou opakování téže úlohy by měl být stále stejný, a to nezávisle na tom, jak dlouho úloha trvá. Pokud je tedy například interval nastaven na deset sekund a první opakování úlohy trvá dvě sekundy, bude pauza mezi prvním a druhým opakováním trvat osm sekund. Pokud některé z opakování trvá delší dobu, než jeden interval, dojde ke zpoždění všech následujících úloh.
+
+Tato metoda zajistí pevný a předvídatelný rozvrh úloh, ale může docházet k jejich překrývání. Pokud úlohy pravidelně trvají déle, než je zadaný interval, může v extrémním případě dojít až k vyčerpání veškeré volné paměti.
 
 Takto naplánujeme výpis "Hello!" každou sekundu po dobu jedné minuty:
 
