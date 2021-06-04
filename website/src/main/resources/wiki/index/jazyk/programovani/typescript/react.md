@@ -4,7 +4,7 @@
 
 ### Deklarace komponenty
 
-```include:typescript
+```include:typescript jsx
 react/src/components/VariousComponentTypes.tsx
 ```
 
