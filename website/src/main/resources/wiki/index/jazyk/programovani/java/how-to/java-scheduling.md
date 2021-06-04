@@ -63,9 +63,11 @@ executor.awaitTermination(1, TimeUnit.MINUTES);
 executor.shutdown();
 ```
 
+![pevný interval - fixed delay](https://javahowtos.com/images/article_images/spring/fixed%20delay.png)
+
 ### Pravidelné opakování s pevnou frekvencí
 
-Opakování s pevnou frekvencí (*fixedRate*) znamená, že interval mezi začátky dvou opakování téže úlohy by měl být stále stejný, a to nezávisle na tom, jak dlouho úloha trvá. Pokud je tedy například interval nastaven na deset sekund a první opakování úlohy trvá dvě sekundy, bude pauza mezi prvním a druhým opakováním trvat osm sekund. Pokud některé z opakování trvá delší dobu, než jeden interval, dojde ke zpoždění všech následujících úloh.
+Opakování s pevnou frekvencí (*fixed rate*) znamená, že interval mezi začátky dvou opakování téže úlohy by měl být stále stejný, a to nezávisle na tom, jak dlouho úloha trvá. Pokud je tedy například interval nastaven na deset sekund a první opakování úlohy trvá dvě sekundy, bude pauza mezi prvním a druhým opakováním trvat osm sekund. Pokud některé z opakování trvá delší dobu, než jeden interval, dojde ke zpoždění všech následujících úloh.
 
 Takto naplánujeme výpis "Hello!" každou sekundu po dobu jedné minuty:
 
@@ -80,6 +82,8 @@ executor.scheduleAtFixedRate(task, 0, 1, TimeUnit.SECONDS);
 executor.awaitTermination(1, TimeUnit.MINUTES);
 executor.shutdown();
 ```
+
+![pevná frekvence - fixed rate](https://javahowtos.com/images/article_images/spring/fixed%20rate.png)
 
 ### Zrušení úlohy
 
