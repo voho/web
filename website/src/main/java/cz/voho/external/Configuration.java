@@ -37,6 +37,10 @@ public class Configuration {
         return response.getItem().get(VALUE_COLUMN).getS();
     }
 
+    public boolean isImageOffline() {
+        return false;
+    }
+
     public boolean isOffline() {
         return true;
     }

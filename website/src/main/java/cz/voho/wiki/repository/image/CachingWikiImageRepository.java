@@ -41,7 +41,7 @@ public class CachingWikiImageRepository implements WikiImageRepository {
     }
 
     private byte[] generateImage(final String source, final ImageGenerator primaryGenerator) {
-        if (configuration.isOffline()) {
+        if (configuration.isImageOffline()) {
             return DUMMY_IMAGE;
         }
 
