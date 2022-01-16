@@ -24,9 +24,8 @@ public class Backend {
     public static final Backend SINGLETON = new Backend();
 
     private final CloseableHttpClient httpClient = HttpClientBuilder.create().build();
-    private final DefaultAWSCredentialsProviderChain awsCredentials = new DefaultAWSCredentialsProviderChain();
-    private final AmazonDynamoDB dynamoDB = AmazonDynamoDBClientBuilder.standard().withCredentials(awsCredentials).withRegion(Regions.EU_WEST_1).build();
-    private final AWSLambda lambda = AWSLambdaClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).withRegion(Regions.EU_WEST_1).build();
+    private final AmazonDynamoDB dynamoDB = AmazonDynamoDBClientBuilder.defaultClient();
+    private final AWSLambda lambda = AWSLambdaClientBuilder.defaultClient();
     private final Configuration configuration = new Configuration(dynamoDB);
     private final LambdaClient lambdaClient = new LambdaClient(lambda);
     private final LambdaWikiImageRepository wikiImageRepositoryDelegate = new LambdaWikiImageRepository(lambdaClient);
