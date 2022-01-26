@@ -10,6 +10,7 @@ import cz.voho.common.utility.LambdaClient;
 import cz.voho.external.Configuration;
 import cz.voho.wiki.parser.CustomWikiParser;
 import cz.voho.wiki.parser.WikiParser;
+import cz.voho.wiki.repository.image.ApiGatewayImageRepository;
 import cz.voho.wiki.repository.image.CachingWikiImageRepository;
 import cz.voho.wiki.repository.image.LambdaWikiImageRepository;
 import cz.voho.wiki.repository.image.WikiImageRepository;
@@ -28,7 +29,7 @@ public class Backend {
     private final AWSLambda lambda = AWSLambdaClientBuilder.standard().withRegion(Regions.EU_WEST_1).build();
     private final Configuration configuration = new Configuration(dynamoDB);
     private final LambdaClient lambdaClient = new LambdaClient(lambda);
-    private final LambdaWikiImageRepository wikiImageRepositoryDelegate = new LambdaWikiImageRepository(lambdaClient);
+    private final WikiImageRepository wikiImageRepositoryDelegate = new ApiGatewayImageRepository();
     private final WikiImageRepository wikiImageRepository = new CachingWikiImageRepository(configuration, wikiImageRepositoryDelegate);
     private final WikiParser wikiParser = new CustomWikiParser(wikiImageRepository);
     private final WikiPageSourceRepository wikiPageSourceRepository = new DefaultWikiPageSourceRepository();
