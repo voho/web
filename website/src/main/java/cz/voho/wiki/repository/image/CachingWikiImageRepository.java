@@ -17,6 +17,7 @@ import java.util.Base64;
 
 public class CachingWikiImageRepository implements WikiImageRepository {
     private static final Logger LOG = LoggerFactory.getLogger(CachingWikiImageRepository.class);
+    private static final int NUM_RETRIES = 3;
     private static final byte[] DUMMY_IMAGE = loadDummyImage();
     private static final MessageDigest SHA_256 = getMessageDigest();
 
@@ -58,18 +59,25 @@ public class CachingWikiImageRepository implements WikiImageRepository {
 
     private void generateImageInBackground(final String source, final ImageGenerator primaryGenerator, final String hash) {
         ExecutorProvider.IMAGE_GENERATOR_EXECUTOR.submit(() -> {
-            try {
-                final byte[] generated = primaryGenerator.generate(source);
+            int attemptsLeft = NUM_RETRIES;
 
-                if (generated != null && generated.length > 0) {
-                    LOG.debug("Generated image put into the cache: {}", hash);
-                    cache.put(hash, generated);
-                } else {
-                    // the delegate has generated some bullshit
-                    LOG.warn("Invalid image returned from the delegate.");
+            while (attemptsLeft > 0) {
+                try {
+                    final byte[] generated = primaryGenerator.generate(source);
+
+                    if (generated != null && generated.length > 0) {
+                        LOG.debug("Generated image put into the cache: {}", hash);
+                        cache.put(hash, generated);
+                        attemptsLeft = 0;
+                    } else {
+                        // the delegate has generated some bullshit
+                        LOG.warn("Invalid image returned from the delegate.");
+                        attemptsLeft = 0;
+                    }
+                } catch (Exception e) {
+                    LOG.warn("Error while loading image: " + source, e);
+                    attemptsLeft--;
                 }
-            } catch (Exception e) {
-                LOG.warn("Error while loading image: " + source, e);
             }
         });
     }
