@@ -29,13 +29,17 @@ public class GenerateServlet extends HttpServlet {
                 final String dataEnc = request.getParameter("data");
                 Objects.requireNonNull(dataEnc);
                 final String dataDec = new String(Base64.getUrlDecoder().decode(dataEnc));
+                LOG.info("Generating SVG Graph: {}", dataDec);
                 final byte[] data = wikiBackend.generateDotSvg(dataDec);
+                LOG.info("Got Graph output: {}", new String(data, StandardCharsets.UTF_8));
                 writeSvgOutput(response, data);
             } else if (path.contains("generate/svg/uml")) {
                 final String dataEnc = request.getParameter("data");
                 Objects.requireNonNull(dataEnc);
                 final String dataDec = new String(Base64.getUrlDecoder().decode(dataEnc));
+                LOG.info("Generating SVG UML: {}", dataDec);
                 final byte[] data = wikiBackend.generatePlantUmlSvg(dataDec);
+                LOG.info("Got UML output: {}", new String(data, StandardCharsets.UTF_8));
                 writeSvgOutput(response, data);
             } else {
                 throw new IllegalStateException("Unsupported generator.");
@@ -45,6 +49,9 @@ public class GenerateServlet extends HttpServlet {
             response.setHeader("Content-Type", "text/plain");
             response.setStatus(500);
             e.printStackTrace(response.getWriter());
+        } finally {
+            response.getWriter().flush();
+            response.flushBuffer();
         }
     }
 

@@ -43,6 +43,7 @@ public class CachingWikiImageRepository implements WikiImageRepository {
 
     private byte[] generateImage(final String source, final ImageGenerator primaryGenerator) {
         if (configuration.isImageOffline()) {
+            LOG.warn("Image offline, returning a dummy image.");
             return DUMMY_IMAGE;
         }
 
@@ -50,6 +51,7 @@ public class CachingWikiImageRepository implements WikiImageRepository {
         final byte[] loaded = cache.getIfPresent(hash);
 
         if (loaded == null) {
+            LOG.warn("Image being generated in background, returning a dummy image.");
             generateImageInBackground(source, primaryGenerator, hash);
             return DUMMY_IMAGE;
         }

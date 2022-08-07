@@ -20,6 +20,7 @@ public class LambdaWikiImageRepository implements WikiImageRepository {
         request.setFormat(GenerateImageRequest.FORMAT_SVG);
         request.setSource(source);
 
+        LOG.info("Calling DOT lambda...");
         return lambdaClient.callDotLambda(request);
     }
 
@@ -29,6 +30,7 @@ public class LambdaWikiImageRepository implements WikiImageRepository {
         request.setFormat(GenerateImageRequest.FORMAT_SVG);
         request.setSource(source);
 
+        LOG.info("Calling Plant UML lambda...");
         return lambdaClient.callPlantUmlLambda(request);
     }
 
